@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {  TouchableHighlight,Image ,TouchableOpacity,StyleSheet, Text, View } from 'react-native';
 import { Button, TextInput  } from 'react-native-paper';
 import { create } from 'react-test-renderer';
@@ -6,11 +6,17 @@ import Logo from './src/components/logo';
 import custombutn from './src/components/custombutn';
 import Panel from './src/components/Panel';
 import { Icon } from 'react-native-elements';
+import SplashScreen from 'react-native-splash-screen';
+
 // import Icon from 'react-native-vector-icons'
 export default function App() {
   const [Number, setNumber] = useState(' ');
   const [Password, setPassword] = useState(' ');
 
+  useEffect(()=>{
+    SplashScreen.hide();   ///////this will run only first time when app started
+  },[])
+  
 
   const onButtonPressed = () => {
     //////body//////
