@@ -1,8 +1,10 @@
 import React from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 
 export default function Panel() {
-    return <Image source={require('./Panel')} style={styles.image} />
+    return (
+        <View></View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -10,6 +12,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         marginBottom: 8,
-        top:200
+        top: 200
     },
 })
