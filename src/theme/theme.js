@@ -7,13 +7,13 @@ const fontConfig = {
 
     ios: {
         regular: {
-            fontFamily: 'Roboto Bold Italic',
+            fontFamily: 'Lato Light',
             fontWeight: 'normal',
         }
     },
     android: {
         regular: {
-            fontFamily: 'sans-serif',
+            fontFamily: 'LatoRegular',
             fontWeight: 'normal',
         },
     }
@@ -21,14 +21,14 @@ const fontConfig = {
 
 
 const theme = {
-    // ...DefaultTheme,
-    // colors: {
-    //     ...DefaultTheme.colors,
-    //     primary: '#B6EDF9',       ///// primary
-    //     accent: '#f1c40f',
-    //     surface: '#618CEF'    //////containertype
-    // },
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: '#CC1414',       ///// primary
+        accent: '#f1c40f',
+        surface: '#618CEF'    //////containertype
+    },
     fonts: configureFonts(fontConfig)
 };
 
-export default theme
+export default theme 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppNavigator from './src/navigation/rootnavigator';
 import {
   Provider as PaperProvider, 
@@ -9,9 +9,13 @@ import theme from './src/theme/theme';
 
  function App() {
   return(
-    <PaperProvider>
+    <PaperProvider theme = {theme} >
       <AppNavigator />
     </PaperProvider>
+
+      
+     
+    
   )
 }
 

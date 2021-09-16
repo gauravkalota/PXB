@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity,View,Text } from 'react-native'
+import { color } from 'react-native-elements/dist/helpers';
 
-const AppButton = ({onpress,title}) => {
+const AppButton = ({onpress,title, disabled, style}) => {
     return (
-        <TouchableOpacity onPress={onpress} style={styles.appButtonContainer} >
+        <TouchableOpacity  disabled={disabled}  onPress={onpress} style={style}  >
             <Text style={styles.appButtonText}>{title}</Text>
         </TouchableOpacity>
     );

@@ -8,11 +8,16 @@ import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import Icon from 'react-native-vector-icons'
 // import { Button } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Input from '../components/Input';
+import { color } from 'react-native-elements/dist/helpers';
+import { colors } from 'react-native-elements';
 export default function register({navigation}) {
     const [Number, setNumber] = useState(' ');
     const [Password, setPassword] = useState(' ');
+    const [hidePass, setHidePass] = useState(true);
+
 
     useEffect(() => {
         //  if(SplashScreen){
@@ -24,19 +29,29 @@ export default function register({navigation}) {
 
 
     const onButtonPressed = () => {
+        // if(Number===''|| Password===''){
+        //     setbutton(true)
+        // }
+        // else
+        // setbutton(false)
+
         //////body//////
     }
     return (
         <View style={styles.container}>
             <Logo />
             <View style={styles.inputViewnew1} >
-                <Button color="black" mode="outlined" style={styles.combtn} >
-                    <Text>+1</Text>
-                </Button>
-                {/* <Input
-          style={styles.inpuTextsymbol}
-          label="+1↓"
-        /> */}
+                {/* <Button color="black" mode="outlined" style={styles.combtn} >
+                    <Text style={styles.combtn1}>+1</Text>
+                    <Text style={styles.combtn2}>↓</Text>
+                </Button> */}
+                <TouchableOpacity onPress={()=>navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}   >
+                  <View>
+                        <Text style={styles.combtn1} >+1</Text>
+                        <Text style={styles.combtn2} >ˇ</Text>
+                  </View>
+                </TouchableOpacity>
+                
             </View>
             <View style={styles.inputViewnew}>
                 <Input
@@ -45,20 +60,34 @@ export default function register({navigation}) {
                     label="Mobile Number"
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
+                    // outlineColor="#CC1414"
                     onChangeText={val => { setNumber(val) }}
                 />
             </View>
             <View style={styles.inputView}>
-                <Input
+                <Input 
                     style={styles.inpuText}
-                    secureTextEntry={true}
+                    secureTextEntry={hidePass ? true : false}
                     mode="outlined"
-                    label="Password"
+                    label="Password"  
                     keyboardType="default"
-                    right={<TextInput.Icon name="eye" />}
+                    // outlineColor="#CC1414"
+                    right={<TextInput.Icon style={{top:5}}  name={() => <Icon
+                        name={hidePass ? 'eye-off' : 'eye'}
+                        size={19}
+                        
+                        color="#8e9493"
+                        onPress={() => setHidePass(!hidePass)}
+                    />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
                     onChangeText={val => { setPassword(val) }}
                 />
+                {/* <Icon
+                    name={hidePass ? 'eye-off' : 'eye'}
+                    size={15}
+                    color="gray"
+                    onPress={() => setHidePass(!hidePass)}
+                /> */}
             </View>
             <Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text>
             <View style={styles.forgotPassword}>
@@ -66,10 +95,7 @@ export default function register({navigation}) {
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-            <AppButton onpress={console.log()} title="Log In" />
-            {/* <TouchableOpacity style= {styles.button}>
-          <Text style={styles.text}>Log In</Text>
-      </TouchableOpacity> */}
+            <AppButton title="Log In"/>
             <View style={styles.orlineR}>
 
             </View>
@@ -90,12 +116,14 @@ export default function register({navigation}) {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconButton}>
-                    <Icon
-                        name='google'
+                    <Image source={require('../assets/images/googleLogo.png')} style={styles.combtn3}/>
+                    {/* <Ionicons
+                        name='logo-google'
                         type='font-awesome'
-                        size={47}
-                        color='#EB4335'
-                    />
+                        size={50}
+                        color='inherited' ////why no colour? 
+                        
+                    /> */}
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconButton}>
                     <Icon
@@ -108,7 +136,6 @@ export default function register({navigation}) {
             <Text style={styles.fb} >Facebook</Text>
             <Text style={styles.go} >Google</Text>
             <Text style={styles.ap} >Apple</Text>
-            {/* <Text style={styles.iconline}>–––––––––––––––––––––––––––––––––––––––––––––––––––</Text> */}
             <View style={styles.line}>
                 <View>
                 </View>
@@ -154,22 +181,28 @@ const styles = StyleSheet.create({
         left: 40
     },
     inputViewnew1: {
-        right: 123,
-        top: 1,
-        width: '12%'
+        right: 111,
+        width: '16%',
+        backgroundColor:'#F9F9F9',
+        top:1,
+        
 
 
     },
     combtn: {
-        borderWidth: 1.2,
+        borderWidth: 0.8,
         height: 50,
+        position: 'relative',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius:2
     },
     inpuText: {
         height: 50,
         color: "white"
 
-
     },
+    
     forgotPassword: {
         left: 60,
         bottom: 60
@@ -211,7 +244,8 @@ const styles = StyleSheet.create({
         padding: 15,
         marginHorizontal: 15,
         borderRadius: 100,
-        top: 70
+        top: 60,
+        left:4
     },
     iconline: {
         top: 90,
@@ -219,15 +253,15 @@ const styles = StyleSheet.create({
 
     },
     lastline1: {
-        top: 97,
+        top: 80,
         left: 59,
         fontSize: 12
     },
     lastline2: {
-        left: 169,
-        top: 80,
-        fontSize: 15,
-        fontWeight: 'bold',
+        left: 163,
+        top: 65,
+        fontSize: 12,
+        fontWeight: '600',
         color: '#5382F6'
     },
     incorrectText: {
@@ -238,20 +272,21 @@ const styles = StyleSheet.create({
     },
     fb: {
         right: 110,
-        top: 60
+        top: 53
     },
     go: {
-        top: 42
+        top: 36,
+        left:6
     },
     ap: {
-        left: 110,
-        top: 27
+        left: 123,
+        top: 18
     },
     line: {
         borderBottomColor: 'black',
         borderBottomWidth: 0.2,
         width: '80%',
-        top: 10
+        top: 25
     },
     orlineR: {
         borderBottomColor: 'black',
@@ -266,6 +301,38 @@ const styles = StyleSheet.create({
         width: '23%',
         right: 110,
         top: 80
+    },
+    combtn1:{
+        right:14,
+        top:16
+
+    },
+    combtn2:{
+        left:20,
+        bottom:1,
+        fontSize:27
+
+    },
+    combtn3:{
+        resizeMode:'contain',
+        height:42,
+        top:8
+
+    },
+    appButtonContainer: {
+        top: 15,
+        backgroundColor: "#5382F6",
+        borderRadius: 4,
+        paddingVertical: 13,
+        paddingHorizontal: 123
+    },
+    disable:{
+        top: 15,
+        backgroundColor: "#E6E6E6",
+        borderRadius: 4,
+        paddingVertical: 13,
+        paddingHorizontal: 123
     }
+    
 
 })
