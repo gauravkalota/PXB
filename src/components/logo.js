@@ -5,7 +5,7 @@ export default function Logo() {
     return(
     <Image
     resizeMode="contain"
-    source={require('../assets/images/logo.png')} 
+    source={require('../../assets/images/logo.png')} 
     style={styles.image} />
     );
 }

@@ -7,13 +7,13 @@ const fontConfig = {
 
     ios: {
         regular: {
-            fontFamily: 'Lato Light',
+            fontFamily: 'Lato Regular',
             fontWeight: 'normal',
         }
     },
     android: {
         regular: {
-            fontFamily: 'LatoRegular',
+            fontFamily: 'Lato-Regular',
             fontWeight: 'normal',
         },
     }
@@ -24,9 +24,10 @@ const theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        primary: '#CC1414',       ///// primary
+        primary: '#5382F6',       ///// primary
         accent: '#f1c40f',
-        surface: '#618CEF'    //////containertype
+        surface: '#618CEF',    //////containertype
+        error: '#CC1414'
     },
     fonts: configureFonts(fontConfig)
 };

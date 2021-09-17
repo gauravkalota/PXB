@@ -1,57 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableHighlight, Image, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-import Logo from '../components/Logo';
+import {  Image, TouchableOpacity, StyleSheet, Text, View, Alert } from 'react-native';
+import { TextInput, Button, DefaultTheme, Colors } from 'react-native-paper';
+import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
-// import { Icon } from 'react-native-elements';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import Icon from 'react-native-vector-icons'
-// import { Button } from 'react-native-elements';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { withTheme } from 'react-native-paper';
 import Input from '../components/Input';
-import { color } from 'react-native-elements/dist/helpers';
-import { colors } from 'react-native-elements';
+import theme from '../theme/theme';
+
 export default function register({navigation}) {
     const [Number, setNumber] = useState(' ');
     const [Password, setPassword] = useState(' ');
     const [hidePass, setHidePass] = useState(true);
 
+    const [disable, setDisable] = useState(true);
+    const [redenable, setRedenable]= useState(false)
+
+    const [isValidUser, setisValidUser] = useState(false);
+
+    console.log('X', disable)   //////for check
+
+
 
     useEffect(() => {
+        
         //  if(SplashScreen){
         //    SplashScreen.hide();
         //  } 
-        SplashScreen && SplashScreen.hide()
+        // SplashScreen && SplashScreen.hide()
         ///////this will run only first time when app started
-    }, [])
+        (Number && Password) ? setDisable(false) : setDisable(true);
+    }, [Number, Password])
+
+   
+    const Valid_User = () => {
+        if(Number==="1234567890" && Password==="admin"){
+            setisValidUser(false)
+            Alert.alert("Button Clicked")
+            setRedenable(false)
+            
+        }
+        else{
+            setisValidUser(true)
+            setRedenable(true)
+                }
+           
+        }
 
 
-    const onButtonPressed = () => {
-        // if(Number===''|| Password===''){
-        //     setbutton(true)
-        // }
-        // else
-        // setbutton(false)
-
-        //////body//////
-    }
     return (
         <View style={styles.container}>
-            <Logo />
+            <Logo  />
             <View style={styles.inputViewnew1} >
-                {/* <Button color="black" mode="outlined" style={styles.combtn} >
-                    <Text style={styles.combtn1}>+1</Text>
-                    <Text style={styles.combtn2}>↓</Text>
-                </Button> */}
                 <TouchableOpacity onPress={()=>navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}   >
                   <View>
                         <Text style={styles.combtn1} >+1</Text>
                         <Text style={styles.combtn2} >ˇ</Text>
                   </View>
-                </TouchableOpacity>
-                
+                </TouchableOpacity> 
             </View>
             <View style={styles.inputViewnew}>
                 <Input
@@ -62,6 +69,7 @@ export default function register({navigation}) {
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
                     onChangeText={val => { setNumber(val) }}
+                    error={redenable}
                 />
             </View>
             <View style={styles.inputView}>
@@ -81,6 +89,7 @@ export default function register({navigation}) {
                     />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
                     onChangeText={val => { setPassword(val) }}
+                    error={redenable}
                 />
                 {/* <Icon
                     name={hidePass ? 'eye-off' : 'eye'}
@@ -89,13 +98,13 @@ export default function register({navigation}) {
                     onPress={() => setHidePass(!hidePass)}
                 /> */}
             </View>
-            <Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text>
+            { isValidUser ?  (<Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text> ) : null }
             <View style={styles.forgotPassword}>
                 <TouchableOpacity>
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-            <AppButton title="Log In"/>
+            <AppButton disabled={disable} onpress={Valid_User}   title="Log In" style={ disable ? styles.disablebtn : styles.appButtonContainer} />
             <View style={styles.orlineR}>
 
             </View>
@@ -116,14 +125,7 @@ export default function register({navigation}) {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconButton}>
-                    <Image source={require('../assets/images/googleLogo.png')} style={styles.combtn3}/>
-                    {/* <Ionicons
-                        name='logo-google'
-                        type='font-awesome'
-                        size={50}
-                        color='inherited' ////why no colour? 
-                        
-                    /> */}
+                    <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconButton}>
                     <Icon
@@ -326,7 +328,7 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
         paddingHorizontal: 123
     },
-    disable:{
+    disablebtn:{
         top: 15,
         backgroundColor: "#E6E6E6",
         borderRadius: 4,
