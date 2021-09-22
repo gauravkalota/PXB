@@ -5,9 +5,8 @@ import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withTheme } from 'react-native-paper';
 import Input from '../components/Input';
-import theme from '../theme/theme';
+import forgot from './forgot';
 
 export default function register({navigation}) {
     const [Number, setNumber] = useState(' ');
@@ -15,45 +14,57 @@ export default function register({navigation}) {
     const [hidePass, setHidePass] = useState(true);
 
     const [disable, setDisable] = useState(true);
-    const [redenable, setRedenable]= useState(false)
+    const [redenable, setRedEnable]= useState(false)
 
     const [isValidUser, setisValidUser] = useState(false);
 
-    console.log('X', disable)   //////for check
 
+    
 
 
     useEffect(() => {
         
-        //  if(SplashScreen){
-        //    SplashScreen.hide();
-        //  } 
+         if(SplashScreen){
+           SplashScreen.hide();
+         } 
         // SplashScreen && SplashScreen.hide()
         ///////this will run only first time when app started
-        (Number && Password) ? setDisable(false) : setDisable(true);
-    }, [Number, Password])
 
+        (Number && Password) ? setDisable(false) : setDisable(true);
+    }, [Number,Password])
+    // const button_pressed= () => {
+    //    if(!Number.trim() || !Password.trim()) {
+    //        setDisable(true)
+    //    }  
+    //    if (Number==="1234567890" && Password==="admin") {
+    //        setisValidUser(false)
+    //        Alert.alert("Button CLICKED")
+    //        setRedEnable(false)
+    //    }
+    //    else{
+    //        setisValidUser(true)
+    //        setRedEnable(true)
+    //    }
+       
+    // }
    
     const Valid_User = () => {
         if(Number==="1234567890" && Password==="admin"){
             setisValidUser(false)
             Alert.alert("Button Clicked")
-            setRedenable(false)
-            
-        }
+            setRedEnable(false)  
+        } 
         else{
             setisValidUser(true)
-            setRedenable(true)
-                }
-           
+            setRedEnable(true)
         }
-
+ }
 
     return (
         <View style={styles.container}>
             <Logo  />
             <View style={styles.inputViewnew1} >
-                <TouchableOpacity onPress={()=>navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}   >
+                <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
                   <View>
                         <Text style={styles.combtn1} >+1</Text>
                         <Text style={styles.combtn2} >ˇ</Text>
@@ -100,7 +111,7 @@ export default function register({navigation}) {
             </View>
             { isValidUser ?  (<Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text> ) : null }
             <View style={styles.forgotPassword}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('forgot')} >
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 

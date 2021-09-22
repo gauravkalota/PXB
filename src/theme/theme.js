@@ -7,7 +7,7 @@ const fontConfig = {
 
     ios: {
         regular: {
-            fontFamily: 'Lato Regular',
+            fontFamily: 'Lato-Regular',
             fontWeight: 'normal',
         }
     },
