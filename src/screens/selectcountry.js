@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { SafeAreaView,View,ScrollView, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity } from 'react-native';
+import {SectionList ,SafeAreaView,View,ScrollView, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { Button , Appbar, Modal,Text, Searchbar, StatusBar } from 'react-native-paper';
 
 import AlphabetList from "react-native-flatlist-alphabet";
@@ -17,15 +17,13 @@ function selectcountry({navigation})  {
 
     const [searchData, setSearchData] = useState(Country);
 
-    // const [filterData, setfilterData] = useState([]);
-
     useEffect (()=> {
-
-
+   
+    
     },[])
     
 /////////Render for List///////////////////
-    const renderCountries = (item) => {
+    const renderCountries = ({item}) => {
         return(
             <TouchableOpacity>
                 <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
@@ -38,7 +36,7 @@ function selectcountry({navigation})  {
     }
 
 ///////////section header for alphabetic diversions/////////
-    const renderSectionHeader = (section) => {
+    const renderSectionHeader = ({section}) => {
         return (  
             <View style={styles.sectionHeaderContainer}>
                 <Text style={styles.sectionHeaderLabel}>{section.title}</Text>
@@ -46,26 +44,38 @@ function selectcountry({navigation})  {
         );
     };
 
- ////////search function////////////////////   
+          
+ ////////////search function////////////////////   
     const filter = (text) => {
         if (text) {
-            const newData = Country.filter(
-                (item) => {
-                    const itemData = item.value
+            let newData = [];
+            for(var i = 0; i<Country.length; i++) {
+                const dataItem = Country[i];
+                const filterItem = dataItem.data.filter(
+                    (item)=> {
+                        const itemData = item.value 
                         ? item.value.toLowerCase()
                         : ''.toLowerCase();
+                    
                     const textData = text.toLowerCase();
-                    return itemData.indexOf(textData) > -1;
-                });
-            console.log("Search result => " + JSON.stringify(newData));
-            setSearchData(newData);
-        } else {
-            setSearchData(Country);
+                    return itemData.indexOf(textData) > -1 ;
+                    });
+                    console.log('whichData', dataItem )
+                    if(filterItem.length > 0 ) {
+                        const obj ={
+                            title : dataItem.title,
+                            data: filterItem
+                        }
+                        newData.push(obj)
+                       }    
+                    }
+                console.log("Search result => " + JSON.stringify(newData));
+                setSearchData(newData);
+            }  else {
+                setSearchData(Country);
+            }
         }
-    }
-        
-
-
+    
     return (
         <Fragment>
             <SafeAreaView style={{ flex: 0, backgroundColor: "#034C81" }} /> 
@@ -81,8 +91,8 @@ function selectcountry({navigation})  {
                 // icon={() => <Icons name="search" size={25} style={styles.searchButton} />}  
             />
                 {/* <IconsS name="search" size={20} style={styles.searchButton} onPress={()=> console.log()} /> */}
-            <AlphabetList
-                data={searchData}
+            <SectionList
+                sections={searchData}
                 renderItem={renderCountries}
                 renderSectionHeader={renderSectionHeader}
                 indexLetterColor={'white'}

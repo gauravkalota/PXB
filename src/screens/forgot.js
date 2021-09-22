@@ -20,7 +20,7 @@ function forgot ({navigation}) {
     return(
         <View>
             <View >
-                <Appbar style={styles.appheader}/>
+                <View style={styles.appheader}></View>
                 <Text style={styles.text1}  >Trouble Logging In?</Text>
                 <Text style={styles.text2}  >Enter your mobile number and we will send reset code to get back into your account.</Text>
                 <AppButton style={styles.Button} title="Send Reset Code" onpress={()=> navigation.navigate('register')} />
@@ -34,8 +34,7 @@ export default forgot;
 
 const styles = StyleSheet.create({
     appheader:{
-        height:100,
-        color:'#034C81'
+    
               
 
     },
@@ -46,7 +45,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 110,
         width:'80%',
         top:270,
-        left:70
+        left:70,
+        height:70
         
         
     },
