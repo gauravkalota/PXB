@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SectionList ,SafeAreaView,View,ScrollView, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity } from 'react-native';
-import { Button , Appbar, Modal,Text, Searchbar, StatusBar } from 'react-native-paper';
+import { Button , Appbar, Modal,Text, Searchbar, StatusBar, TextInput } from 'react-native-paper';
 
-import AlphabetList from "react-native-flatlist-alphabet";
 
 import Country from '../../countries.json';
 import Icons from 'react-native-vector-icons/Feather'
@@ -13,9 +12,11 @@ import filter  from 'lodash.filter';
 
 
 
-function selectcountry({navigation})  {
+function selectcountry({navigation, route})  {
 
     const [searchData, setSearchData] = useState(Country);
+    const [loggedIn, setLoggedIn] = useState(true);
+    const [hidecross, setHideCross] = useState(false)
 
     useEffect (()=> {
    
@@ -25,7 +26,14 @@ function selectcountry({navigation})  {
 /////////Render for List///////////////////
     const renderCountries = ({item}) => {
         return(
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+                navigation.navigate({
+                    name:"register",
+                    params : {item : item.dial_code}
+                })
+            }
+                
+            } >
                 <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
                 <View style={{height:50,paddingLeft:22 , paddingVertical:10}}>
                     <Text style={{ fontSize: 16, justifyContent: 'center', alignSelf: 'flex-start', color:'#050505'}} >{item.flag}     {item.value} ({item.dial_code})</Text>
@@ -48,6 +56,7 @@ function selectcountry({navigation})  {
  ////////////search function////////////////////   
     const filter = (text) => {
         if (text) {
+            setHideCross(true);
             let newData = [];
             for(var i = 0; i<Country.length; i++) {
                 const dataItem = Country[i];
@@ -75,22 +84,37 @@ function selectcountry({navigation})  {
                 setSearchData(Country);
             }
         }
+
+        const buttpress = ()=> {
+            setLoggedIn(false)
+        }
     
     return (
         <Fragment>
             <SafeAreaView style={{ flex: 0, backgroundColor: "#034C81" }} /> 
             {/* Used for area above SafeAreaView styling */}
-            
             <SafeAreaView>
-              <Searchbar
-                style={styles.barS}
-                placeholder="Search countries"
-                onChangeText={(text) =>  filter(text) }
-                autoCorrect={false}
-                icon={() => <Icons name="arrow-left" size={25} style={styles.customicon1} onPress={() => navigation.navigate('register')} /> }
-                // icon={() => <Icons name="search" size={25} style={styles.searchButton} />}  
-            />
-                {/* <IconsS name="search" size={20} style={styles.searchButton} onPress={()=> console.log()} /> */}
+               <View>
+                   {loggedIn ? (
+                        <View style={{ backgroundColor: '#034C81', height: 40, width: '100%', flexDirection: 'row' }} >
+                            <Text style={{ color: 'white', left: 110, top: 7, fontSize: 20, fontWeight: 'bold' }} >Select a Country</Text>
+                            <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('register')}  />
+                            <IconsS name="search" color="white" size={22} style={{ left:186, top: 9 }} onPress={buttpress}  />
+                        </View>
+                   ) :  (
+                            <TextInput
+                                style={styles.barS}
+                                placeholder="   Search countries"
+                                onChangeText={(text) => filter(text)}
+                                autoCorrect={false}
+                                placeholderTextColor="#bfbfbf"
+                                left={<TextInput.Icon name="arrow-left" color="white" />}
+                                right={<TextInput.Icon name= {() => <IconsS name="close-a" color="white" style={{top:4}} />}/>}
+                            />
+                   )
+                   }
+
+            </View>
             <SectionList
                 sections={searchData}
                 renderItem={renderCountries}
@@ -130,7 +154,7 @@ const styles = StyleSheet.create({
     },
     customicon1:{
         color:'white',
-        left:10
+        left:5
 
 
 
@@ -143,13 +167,20 @@ const styles = StyleSheet.create({
     },
     barS: {
         backgroundColor: '#034C81',
-        fontWeight: "bold",
-        borderRadius:0,
+        width:'100%',
+        height:55,
+        borderBottomRightRadius:-10,
+        borderBottomLeftRadius:-10,
+        borderTopLeftRadius:-10,
+        borderTopRightRadius:-10,
+        paddingBottom:0,
+        color:'white'
+        
     },
     searchButton:{
-        color:'white',
-        bottom:30,
-        left:350,
+        color:'black',
+        top:100,
+        left:100,
         
     
     }

@@ -7,8 +7,9 @@ import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Input from '../components/Input';
 import forgot from './forgot';
+import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 
-export default function register({navigation}) {
+export default function register({navigation, route}) {
     const [Number, setNumber] = useState(' ');
     const [Password, setPassword] = useState(' ');
     const [hidePass, setHidePass] = useState(true);
@@ -19,7 +20,8 @@ export default function register({navigation}) {
     const [isValidUser, setisValidUser] = useState(false);
 
 
-    
+    ////////for dialcode//
+
 
 
     useEffect(() => {
@@ -47,6 +49,12 @@ export default function register({navigation}) {
     //    }
        
     // }
+
+    useEffect (()=> {
+        if(route.params?.item) {
+
+        }
+    },[route.params?.item])
    
     const Valid_User = () => {
         if(Number==="1234567890" && Password==="admin"){
@@ -66,7 +74,7 @@ export default function register({navigation}) {
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
                   <View>
-                        <Text style={styles.combtn1} >+1</Text>
+                        <Text style={styles.combtn1} >{route.params?.item}</Text> 
                         <Text style={styles.combtn2} >ˇ</Text>
                   </View>
                 </TouchableOpacity> 

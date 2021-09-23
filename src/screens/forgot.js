@@ -3,6 +3,7 @@ import { Image,SafeAreaView, View, ScrollView, StyleSheet, FlatList, TouchableHi
 import { color } from 'react-native-elements/dist/helpers';
 import {   Button, Appbar, Modal, Text, Searchbar, StatusBar } from 'react-native-paper';
 import AppButton from '../components/AppButton';
+import Input from '../components/Input';
 
 
 
@@ -19,10 +20,15 @@ function forgot ({navigation}) {
     
     return(
         <View>
-            <View >
+            <View  >
                 <View style={styles.appheader}></View>
-                <Text style={styles.text1}  >Trouble Logging In?</Text>
-                <Text style={styles.text2}  >Enter your mobile number and we will send reset code to get back into your account.</Text>
+                <Text style={styles.text1} >Trouble Logging In?</Text>
+                <Text style={styles.text2} >Enter your mobile number and we will send</Text>
+                <Text style={styles.text3} >reset to get back into your account.</Text>
+                <Text style={styles.text4} >New to PX Boost?</Text>
+                <TouchableOpacity style={styles.btntext5} >
+                    <Text style={styles.text5} >Register</Text>
+                </TouchableOpacity>
                 <AppButton style={styles.Button} title="Send Reset Code" onpress={()=> navigation.navigate('register')} />
             </View>
            <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 110,
-        width:'80%',
+        width:'70%',
         top:270,
         left:70,
         height:70
@@ -59,15 +65,36 @@ const styles = StyleSheet.create({
     text1:{
         fontSize:24,
         fontWeight:"700",
-        top:80,
+        top:150,
         left:50
 
     },
     text2:{
         fontSize:16,
         fontWeight:'400',
-        top:80,
+        top:180,
         left:50
 
-    }
+    },
+    text3:{
+        fontSize: 16,
+        fontWeight: '400',
+        top: 180,
+        left: 50
+    },
+    text4:{
+        top:700,
+        left:200
+
+    },
+    text5:{
+        color:'blue'
+
+    },
+    btntext5:{
+        top:700,
+        left:170
+
+    },
+    
 })
