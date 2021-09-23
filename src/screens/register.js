@@ -19,6 +19,8 @@ export default function register({navigation, route}) {
 
     const [isValidUser, setisValidUser] = useState(false);
 
+    const [Code, setCode] = useState('+1')
+
 
     ////////for dialcode//
 
@@ -52,7 +54,7 @@ export default function register({navigation, route}) {
 
     useEffect (()=> {
         if(route.params?.item) {
-
+           setCode(route.params.item)
         }
     },[route.params?.item])
    
@@ -74,7 +76,7 @@ export default function register({navigation, route}) {
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
                   <View>
-                        <Text style={styles.combtn1} >{route.params?.item}</Text> 
+                        <Text style={styles.combtn1} >{ Code }</Text>
                         <Text style={styles.combtn2} >ˇ</Text>
                   </View>
                 </TouchableOpacity> 
@@ -202,10 +204,11 @@ const styles = StyleSheet.create({
         left: 40
     },
     inputViewnew1: {
-        right: 111,
-        width: '16%',
+        right: 106,
+        width: '19%',
         backgroundColor:'#F9F9F9',
-        top:1,
+        top:1.5,
+    
         
 
 
@@ -324,12 +327,12 @@ const styles = StyleSheet.create({
         top: 80
     },
     combtn1:{
-        right:14,
+        right:12,
         top:16
 
     },
     combtn2:{
-        left:20,
+        left:26,
         bottom:1,
         fontSize:27
 
