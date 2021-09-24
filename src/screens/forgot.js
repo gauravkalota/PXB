@@ -1,10 +1,7 @@
-import { set } from 'lodash';
 import React, { useState, useEffect } from 'react';
-import { Image,SafeAreaView, View, ScrollView, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { Image,View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { color } from 'react-native-elements/dist/helpers';
-import {   Button, Appbar, Modal, Text, Searchbar, StatusBar, TextInput } from 'react-native-paper';
-import Input from '../components/Input';
-
+import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
 
 
@@ -15,25 +12,58 @@ function forgot ({navigation}) {
     const [redenable, setRedEnable] = useState(false);
     const [Error1, setError1] = useState(false);
     const [Error2, setError2] = useState(false);
+    const [btnstatus, Setbtnstatus] = useState(false);
+
+    useEffect(()=>{
+       
+    },[])
 
 
     const User = () => {
-        if(Number < 10) {
-            setError1(true)
-            setRedEnable(true) 
-            setError2(false) 
+        
+        if(Number ==="1234567890") {
+            navigation.navigate('resetpassword')
+            setError1(false);
+            setError2(false);
+            setRedEnable(false);
         }
         else {
-            setError2(true)
+            setError1(true)
+            setError2(false);
             setRedEnable(true)
-            setError1(false)
         }
-
-        
     }
 
 
-    
+    const textInputChange = (val) => {
+
+        if(val.trim().length=== 0) {
+            setError1(false);
+            setError2(false);
+            setRedEnable(false);
+            Setbtnstatus(true);
+        } else  
+        if (val.trim().length > 1 && val.trim().length < 10){
+            setNumber(val);
+            setError1(true);
+            setError2(false);
+            setRedEnable(true);
+            Setbtnstatus(false);
+
+        } else 
+        if (val.trim().length>=10) {
+            setNumber(val);
+            setError1(false);
+            setError2(true);
+            setRedEnable(true);
+            Setbtnstatus(false);
+
+        } 
+        
+
+    }
+
+       
     return(
         <View style={{flex:1}}>
             <View>
@@ -45,33 +75,29 @@ function forgot ({navigation}) {
                     </Appbar.Header>
                 </View>
 
-
-
-
-
-                <View style={styles.appheader}></View>
+                {/* <View style={styles.appheader}></View> */}
                 <Text style={styles.text1} >Trouble Logging In?</Text>
                 <Text style={styles.text2} >Enter your mobile number and we will send</Text>
                 <Text style={styles.text3} >reset to get back into your account.</Text>
-                <TextInput 
+                <View>
+                <TextInput
                    style={styles.textinput} 
                    mode="outlined" 
                    placeholder="Mobile Number" 
                    label="Mobile Number"
                    keyboardType="numeric"
-                   onChangeText={val => { setNumber(val) }}
+                   onChangeText={val => textInputChange(val) }
                    error={redenable}
-
                 />
+                </View>
                 <View style={styles.inputViewnew1} >
-                    <TouchableOpacity style={styles.combtn} >
+                    <TouchableOpacity style={styles.combtn} onPress = {console.log()} >
                         <View style={styles.textv}  >
                             <Text style={styles.text6}>+1</Text>
                             <Text style={styles.text7}>ˇ</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.text4} >New to PX Boost?</Text>
 
                 {Error1 ? (
                     <Text style={styles.error1} >Phone number invalid</Text>
@@ -81,19 +107,24 @@ function forgot ({navigation}) {
                     <Text style={styles.error2}  >This account does not exist.Register {"\n"} to create account</Text>
                 ) : null }
 
-
-                 <TouchableOpacity style={styles.resetbtn} onPress={User} > 
+                <View>
+                 <TouchableOpacity disabled={btnstatus}  style={ btnstatus ? styles.resetbtndis :  styles.resetbtn} onPress={User} > 
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
-                 
+                </View>
+
+                <View style={styles.baseline} >
+                    <Text>New to PX Boost?</Text>
+                    <TouchableOpacity style={styles.btntext5} >
+                        <Text style={styles.text5} >Register</Text>
+                    </TouchableOpacity>
+                </View>
 
 
 
 
 
-                <TouchableOpacity style={styles.btntext5} >
-                    <Text style={styles.text5} >Register</Text>
-                </TouchableOpacity>
+               
             </View>
         </View>
     )
@@ -128,48 +159,44 @@ const styles = StyleSheet.create({
     text1:{
         fontSize:24,
         fontWeight:"700",
-        top:80,
+        top:45,
         left:38
 
     },
     text2:{
         fontSize:16,
         fontWeight:'400',
-        top:95,
+        top:53,
         left:38
 
     },
     text3:{
         fontSize: 16,
         fontWeight: '400',
-        top: 95,
+        top: 55,
         left: 38
     },
-    text4:{
-        top:505,
-        left:105
-
-    },
-    text5:{
-        color:'blue'
-
-    },
-    btntext5:{
-        top:394,
-        left:220
-
-    },
+    
     resetbtn:{
-        width:'80%',
-        height:60,
-        top:150,
-        left:34,
+        width:'77%',
+        height:53,
+        top:75,
+        left:41,
         backgroundColor: "#5382F6",
         borderRadius: 4,
         paddingVertical: 5,
         paddingHorizontal:10
         
-        
+    },
+    resetbtndis:{
+        width: '78%',
+        height: 53,
+        top: 75,
+        left: 38,
+        borderRadius: 4,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: "#DDDD",
 
     },
     resettext:{
@@ -177,7 +204,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:16,
         fontWeight:'700',
-        top:15,
+        top:10,
         left:85
 
             
@@ -185,12 +212,12 @@ const styles = StyleSheet.create({
     textinput:{
         width:'57%',
         height:50,
-        top:150,
+        top:100,
         left:120
     },
     inputViewnew1:{
         width:'18%',
-        top:100,
+        top:50,
         left:39,
     
         
@@ -222,15 +249,30 @@ const styles = StyleSheet.create({
        fontSize:14,
        fontWeight:'500',
        color:'#CC1414',
-       top:85,
+       top:54,
        left:120
     },
     error2:{
         fontSize: 14,
         fontWeight: '500',
         color: '#CC1414',
-        top:85,
+        top:54,
         left:120
+    },
+    baseline:{
+        flexDirection:'row',
+        justifyContent:'center',
+        top:435
+        
+    },
+    btntext5:{
+        position:'relative'
+    },
+    text5:{
+        color:'#5382F6',
+        fontSize:14,
+        fontWeight:'600'
     }
+
     
 })

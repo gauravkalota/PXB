@@ -70,6 +70,20 @@ export default function register({navigation, route}) {
         }
  }
 
+////////////Dynamic error Validation////////////
+    const textInputChange = (val) => {
+        if (val !=="1234567890") {
+            setPassword(val);
+            setisValidUser(true);
+            setRedEnable(true)
+        } else {
+            setPassword(val);
+            setisValidUser(false);
+            setRedEnable(false);
+        }
+    }
+
+
     return (
         <View style={styles.container}>
             <Logo  />
@@ -89,8 +103,9 @@ export default function register({navigation, route}) {
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
-                    onChangeText={val => { setNumber(val) }}
+                    onChangeText={val => { setNumber(val)}}
                     error={redenable}
+                    
                 />
             </View>
             <View style={styles.inputView}>
@@ -109,7 +124,7 @@ export default function register({navigation, route}) {
                         onPress={() => setHidePass(!hidePass)}
                     />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
-                    onChangeText={val => { setPassword(val) }}
+                    onChangeText={val => { textInputChange(val) }}
                     error={redenable}
                 />
                 {/* <Icon
@@ -162,10 +177,12 @@ export default function register({navigation, route}) {
             <View style={styles.line}>
                 <View>
                 </View>
-                <Text style={styles.lastline1}>New to PX Boost?</Text>
-                <TouchableOpacity>
-                    <Text style={styles.lastline2}>Register</Text>
-                </TouchableOpacity>
+                <View style={styles.baseline} >
+                    <Text>New to PX Boost?</Text>
+                    <TouchableOpacity style={styles.btntext5} >
+                        <Text style={styles.text5} >Register</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -205,21 +222,19 @@ const styles = StyleSheet.create({
     },
     inputViewnew1: {
         right: 106,
-        width: '19%',
+        width: '18%',
         backgroundColor:'#F9F9F9',
-        top:1.5,
-    
+        top:2,
         
-
 
     },
     combtn: {
         borderWidth: 0.8,
-        height: 50,
+        height: 51,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius:2
+        borderRadius:4
     },
     inpuText: {
         height: 50,
@@ -356,6 +371,20 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingVertical: 13,
         paddingHorizontal: 123
+    },
+    baseline: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        top: 85
+
+    },
+    btntext5: {
+        position: 'relative'
+    },
+    text5: {
+        color: '#5382F6',
+        fontSize: 14,
+        fontWeight: '600'
     }
     
 

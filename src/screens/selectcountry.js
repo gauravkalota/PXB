@@ -52,6 +52,11 @@ function selectcountry({navigation, route})  {
         );
     };
 
+// cross_icon....................
+    const crossfn = () => {
+        setLoggedIn(true)
+    }
+
           
  ////////////search function////////////////////   
     const filter = (text) => {
@@ -104,12 +109,15 @@ function selectcountry({navigation, route})  {
                    ) :  (
                             <TextInput
                                 style={styles.barS}
-                                placeholder="   Search countries"
+                                placeholder="Search countries"
                                 onChangeText={(text) => filter(text)}
                                 autoCorrect={false}
+                                selectionColor="white"
+                                theme={{colors:{text:'white'}}}
+                                // theme change for specific component
                                 placeholderTextColor="#bfbfbf"
-                                left={<TextInput.Icon name="arrow-left" color="white" />}
-                                right={<TextInput.Icon name= {() => <IconsS name="close-a" color="white" style={{top:4}} />}/>}
+                                left={<TextInput.Icon name="arrow-left" color="white" onPress={()=>navigation.navigate('register')} />}
+                                right={<TextInput.Icon name= {() => <IconsS name="close-a" onPress={crossfn} color="white" style={{top:4}} />}/>}
                             />
                    )
                    }
