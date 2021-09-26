@@ -191,7 +191,7 @@ export default function register({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
     },

@@ -7,6 +7,8 @@ import register from '../screens/register';
 import selectcountry from '../screens/selectcountry';
 import forgot from '../screens/forgot';
 import resetpassword from '../screens/resetpassword';
+import passwordset from '../screens/passwordset';
+
 const Stack = createNativeStackNavigator();
 
 function rootnavigator() {
@@ -21,6 +23,8 @@ function rootnavigator() {
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="forgot" component={forgot} />
                 <Stack.Screen name="resetpassword" component={resetpassword} />
+                <Stack.Screen name="passwordset" component={passwordset} />
+
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -14,6 +14,7 @@ function forgot ({navigation}) {
     const [Error2, setError2] = useState(false);
     const [btnstatus, Setbtnstatus] = useState(false);
 
+
     useEffect(()=>{
        
     },[])
@@ -90,14 +91,12 @@ function forgot ({navigation}) {
                    error={redenable}
                 />
                 </View>
-                <View style={styles.inputViewnew1} >
-                    <TouchableOpacity style={styles.combtn} onPress = {console.log()} >
+                    <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('country')} >
                         <View style={styles.textv}  >
                             <Text style={styles.text6}>+1</Text>
                             <Text style={styles.text7}>ˇ</Text>
                         </View>
                     </TouchableOpacity>
-                </View>
 
                 {Error1 ? (
                     <Text style={styles.error1} >Phone number invalid</Text>
@@ -228,7 +227,10 @@ const styles = StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 4
+        borderRadius: 4,
+        width:70,
+        left:43,
+        top:50
     },
     text6:{
         right:15,

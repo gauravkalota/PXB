@@ -7,6 +7,12 @@ function resetpassword({ navigation }) {
 
     const [redenable, setRedEnable] = useState(false);
 
+    const [isValidPass, setisValidPass] = useState(true);
+    const [isValidPass1, setisValidPass1] = useState(true);
+    const [isValidPass2, setisValidPass2] = useState(true);
+    const [isValidPass3, setisValidPass3] = useState(true);
+    const [isValidPass4, setisValidPass4] = useState(true);
+
 
 
    const Valid = () => {
@@ -14,14 +20,9 @@ function resetpassword({ navigation }) {
    }
 
 
-
-
-
-
-
     return (
         
-        <View style={{flex:1}} >
+        <View style={{ flex: 1, backgroundColor:'#fff'}} >
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
@@ -56,10 +57,28 @@ function resetpassword({ navigation }) {
                           placeholder="New Password"
                           label="New Password"
                           error={redenable}
-
-
-
                           />
+
+                        {isValidPass ? (
+                            <Text style={styles.ErrorPass} >The password will need to have atleast:</Text>)
+                            : null}
+
+                        { isValidPass1 ? ( 
+                            <Text style={styles.ErrorPass1}   >✓  10 characters</Text>
+                        ) : null }   
+
+                        { isValidPass2 ? (
+                            <Text style={styles.ErrorPass2}   >✓ 1 Upper case character</Text>
+                        ) : null }
+
+                        { isValidPass3 ? (
+                            <Text style={styles.ErrorPass3}   >✓ 1  lower case character</Text>
+                        ) : null }
+
+                        {isValidPass4 ? (
+                            <Text style={styles.ErrorPass4}   >✓  special character</Text>
+                        ) : null }
+
                         <TextInput 
                           mode="outlined" 
                           style={styles.textin3} 
@@ -70,7 +89,7 @@ function resetpassword({ navigation }) {
                           
                           />
 
-                        <TouchableOpacity  style={styles.resetbtn} onPress={Valid}  >
+                        <TouchableOpacity  style={styles.resetbtn} onPress={()=> navigation.navigate('passwordset')}  >
                             <Text style={styles.resettext}>Reset</Text>
                         </TouchableOpacity>
 
@@ -97,60 +116,66 @@ const styles = StyleSheet.create({
             fontSize:24,
             fontWeight:'700',
             top:35,
-            left:40
+            left:44,
+            
 
         },
         text2:{
             fontSize: 16,
             fontWeight: '400',
             top:45,
-            left:40
+            left:44
 
         },
         text3:{
             fontSize: 14,
             fontWeight: '400',
-            top:80,
-            left:40
+            top:50,
+            left:44
         },
         text4:{
             color:'#5382F6',
             fontSize: 14,
             fontWeight: '700',
-            top:63,
+            top:34,
             left:180
         },
         text5:{
             fontSize:16,
             fontWeight:'700',
             top:26,
-            left:40
+            left:44
 
         },
         textin1:{
-            top:100,
+            top:60,
             width:'77%',
-            left:40
+            left:40,
+            backgroundColor:'#fff'
         
 
         },
         textin2:{
-            top:110,
+            top:70,
             width: '77%',
-            left: 40
+            left: 40,
+            backgroundColor: '#fff'
+
 
         },
         textin3:{
-            top:120,
+            top:90,
             width: '77%',
-            left: 40
+            left: 40,
+            backgroundColor: '#fff'
+
 
         },
         resetbtn: {
-        width: '77%',
+        width: '78%',
         height: 53,
-        top: 139,
-        left: 40,
+        top: 109,
+        left: 38,
         backgroundColor: "#5382F6",
         borderRadius: 4,
         paddingVertical: 5,
@@ -163,9 +188,51 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         top: 10,
-        left: 110
+        left: 120
 
 
+    },
+    ErrorPass:{
+        fontSize:14,
+        fontWeight:'400',
+        alignSelf:'center',
+        top:75,
+        right:35
+        
+    },
+    ErrorPass1:{
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top:79,
+        right:100,
+        color:'#268E6C'
+
+
+    },
+    ErrorPass2: {
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 80,
+        right: 72,
+        color:'#268E6C'
+    },
+    ErrorPass3: {
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 83,
+        right: 74,
+        color:'#268E6C'
+    },
+    ErrorPass4: {
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 85,
+        right: 90,
+        color:'#268E6C'
     },
     
 
