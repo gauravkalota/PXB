@@ -54,7 +54,9 @@ function selectcountry({navigation, route})  {
 
 // cross_icon....................
     const crossfn = () => {
-        setLoggedIn(true)
+        // setLoggedIn(true)
+        setSearchData(Country);
+
     }
 
           

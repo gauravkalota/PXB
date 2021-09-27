@@ -5,7 +5,7 @@ import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
 
 
-function forgot ({navigation}) {
+function forgot ({navigation, route}) {
 
     const [Number, setNumber] = useState(' ');
 
@@ -13,11 +13,14 @@ function forgot ({navigation}) {
     const [Error1, setError1] = useState(false);
     const [Error2, setError2] = useState(false);
     const [btnstatus, Setbtnstatus] = useState(false);
+    const [Code, setCode] = useState('+1');
 
 
-    useEffect(()=>{
-       
-    },[])
+useEffect (()=> {
+        if(route.params?.item) {
+           setCode(route.params.item)
+        }
+    },[route.params?.item])
 
 
     const User = () => {
@@ -90,13 +93,13 @@ function forgot ({navigation}) {
                    onChangeText={val => textInputChange(val) }
                    error={redenable}
                 />
-                </View>
-                    <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('country')} >
+                    <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.textv}  >
-                            <Text style={styles.text6}>+1</Text>
+                            <Text style={styles.text6}>{ Code }</Text>
                             <Text style={styles.text7}>ˇ</Text>
                         </View>
                     </TouchableOpacity>
+                </View>
 
                 {Error1 ? (
                     <Text style={styles.error1} >Phone number invalid</Text>
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
     resetbtn:{
         width:'77%',
         height:53,
-        top:75,
+        top:50,
         left:41,
         backgroundColor: "#5382F6",
         borderRadius: 4,
@@ -211,7 +214,7 @@ const styles = StyleSheet.create({
     textinput:{
         width:'57%',
         height:50,
-        top:100,
+        top:80,
         left:120
     },
     inputViewnew1:{
@@ -230,16 +233,16 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         width:70,
         left:43,
-        top:50
+        top:30
     },
     text6:{
-        right:15,
+        right:10,
         top:5
 
     },
     text7:{
         fontSize:24,
-        right:-15,
+        right:-10,
         top:5
 
     },
@@ -251,14 +254,14 @@ const styles = StyleSheet.create({
        fontSize:14,
        fontWeight:'500',
        color:'#CC1414',
-       top:54,
+       top:34,
        left:120
     },
     error2:{
         fontSize: 14,
         fontWeight: '500',
         color: '#CC1414',
-        top:54,
+        top:34,
         left:120
     },
     baseline:{

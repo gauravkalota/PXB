@@ -13,6 +13,11 @@ function resetpassword({ navigation }) {
     const [isValidPass3, setisValidPass3] = useState(true);
     const [isValidPass4, setisValidPass4] = useState(true);
 
+    const[isValidPassone, setisValidPassone] = useState(true);
+    const [isValidPasstwo, setisValidPasstwo] = useState(true);
+
+
+
 
 
    const Valid = () => {
@@ -46,11 +51,15 @@ function resetpassword({ navigation }) {
                           placeholder="Password Reset Code"
                           label="Password Reset Code"
                           error={redenable}
-                          
-
-
-
                           />
+                        {isValidPassone ? (
+                            <Text style={styles.ErrorPassone} >Incorrect code</Text>)
+                            : null}
+
+
+
+
+
                         <TextInput 
                           mode="outlined"  
                           style={styles.textin2} 
@@ -68,15 +77,15 @@ function resetpassword({ navigation }) {
                         ) : null }   
 
                         { isValidPass2 ? (
-                            <Text style={styles.ErrorPass2}   >✓ 1 Upper case character</Text>
+                            <Text style={styles.ErrorPass2}   >✓  1 Upper case character</Text>
                         ) : null }
 
                         { isValidPass3 ? (
-                            <Text style={styles.ErrorPass3}   >✓ 1  lower case character</Text>
+                            <Text style={styles.ErrorPass3}   >✓  1  lower case character</Text>
                         ) : null }
 
                         {isValidPass4 ? (
-                            <Text style={styles.ErrorPass4}   >✓  special character</Text>
+                            <Text style={styles.ErrorPass4}   >✓   special character</Text>
                         ) : null }
 
                         <TextInput 
@@ -85,9 +94,11 @@ function resetpassword({ navigation }) {
                           placeholder="Confirm Password"
                           label= "Confirm Password"
                           error={redenable}
-
-                          
                           />
+
+                        {isValidPasstwo ? (
+                            <Text style={styles.ErrorPasstwo} >Passwords do not match</Text>)
+                            : null}
 
                         <TouchableOpacity  style={styles.resetbtn} onPress={()=> navigation.navigate('passwordset')}  >
                             <Text style={styles.resettext}>Reset</Text>
@@ -115,7 +126,7 @@ const styles = StyleSheet.create({
         text1:{
             fontSize:24,
             fontWeight:'700',
-            top:35,
+            top:25,
             left:44,
             
 
@@ -123,32 +134,32 @@ const styles = StyleSheet.create({
         text2:{
             fontSize: 16,
             fontWeight: '400',
-            top:45,
+            top:34,
             left:44
 
         },
         text3:{
             fontSize: 14,
             fontWeight: '400',
-            top:50,
+            top:37,
             left:44
         },
         text4:{
             color:'#5382F6',
             fontSize: 14,
             fontWeight: '700',
-            top:34,
+            top:20,
             left:180
         },
         text5:{
             fontSize:16,
             fontWeight:'700',
-            top:26,
+            top:15,
             left:44
 
         },
         textin1:{
-            top:60,
+            top:45,
             width:'77%',
             left:40,
             backgroundColor:'#fff'
@@ -156,7 +167,7 @@ const styles = StyleSheet.create({
 
         },
         textin2:{
-            top:70,
+            top:55,
             width: '77%',
             left: 40,
             backgroundColor: '#fff'
@@ -164,7 +175,7 @@ const styles = StyleSheet.create({
 
         },
         textin3:{
-            top:90,
+            top:70,
             width: '77%',
             left: 40,
             backgroundColor: '#fff'
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
         resetbtn: {
         width: '78%',
         height: 53,
-        top: 109,
+        top: 104,
         left: 38,
         backgroundColor: "#5382F6",
         borderRadius: 4,
@@ -196,16 +207,16 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontWeight:'400',
         alignSelf:'center',
-        top:75,
-        right:35
+        top:65,
+        right:20
         
     },
     ErrorPass1:{
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top:79,
-        right:100,
+        top:69,
+        right:80,
         color:'#268E6C'
 
 
@@ -214,26 +225,41 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 80,
-        right: 72,
+        top: 70,
+        right: 52,
         color:'#268E6C'
     },
     ErrorPass3: {
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 83,
-        right: 74,
+        top: 71,
+        right: 52,
         color:'#268E6C'
     },
     ErrorPass4: {
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 85,
-        right: 90,
+        top: 72,
+        right: 68,
         color:'#268E6C'
     },
+    ErrorPassone:{
+        fontSize:14,
+        fontWeight:'400',
+        color:'#CC1414',
+        top:50,
+        left:42
+    },
+    ErrorPasstwo:{
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#CC1414',
+        top:75,
+        left:42
+
+    }
     
 
 })

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         right:-30
     },
     text1:{
-        top:50,
+        top:44,
         left:125,
         fontSize:18,
         fontWeight:'700'
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         top:55,
         left:48,
         fontSize:16,
-        fontWeight:'400'
+        fontWeight:'400',
+        color:'#828282'
 
     },
     resetbtn: {
