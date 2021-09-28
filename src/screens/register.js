@@ -179,7 +179,7 @@ export default function register({navigation, route}) {
                 </View>
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
-                    <TouchableOpacity style={styles.btntext5} >
+                    <TouchableOpacity style={styles.btntext5} onPress={()=> navigation.navigate('signup')} >
                         <Text style={styles.text5} >Register</Text>
                     </TouchableOpacity>
                 </View>

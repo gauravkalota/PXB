@@ -54,6 +54,7 @@ function dailcode({ navigation, route }) {
 
     // cross_icon....................
     const crossfn = () => {
+        setLoggedIn(true)
         setSearchData(Country);
         
     }

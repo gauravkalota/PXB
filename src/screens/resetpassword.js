@@ -1,29 +1,173 @@
-import  React, {useState} from 'react';
+import  React, {useState, useEffect} from 'react';
 import { Button, View, StyleSheet ,Image, TouchableOpacity, Alert} from 'react-native';
 import { Appbar, Text, TextInput } from 'react-native-paper';
 
+import { useFormik } from 'formik';
+
+import * as Yup from 'yup';
+
 
 function resetpassword({ navigation }) {
+    const [resetcode, setrestCode] = useState('');
+    const [newpass, setnewPass] = useState('');
+    const [confirmpass, setconfirmPass] = useState('');
 
-    const [redenable, setRedEnable] = useState(false);
 
-    const [isValidPass, setisValidPass] = useState(true);
-    const [isValidPass1, setisValidPass1] = useState(true);
-    const [isValidPass2, setisValidPass2] = useState(true);
-    const [isValidPass3, setisValidPass3] = useState(true);
-    const [isValidPass4, setisValidPass4] = useState(true);
-
-    const[isValidPassone, setisValidPassone] = useState(true);
-    const [isValidPasstwo, setisValidPasstwo] = useState(true);
+    const [redenable1, setRedEnable1] = useState(false);
+    const [redenable2, setRedEnable2] = useState(false);
+    const [redenable3, setRedEnable3] = useState(false);
 
 
 
+    const [isValidPass, setisValidPass] = useState(false);
+    const [isValidPass1, setisValidPass1] = useState(false);
+    const [isValidPass2, setisValidPass2] = useState(false);
+    const [isValidPass3, setisValidPass3] = useState(false);
+    const [isValidPass4, setisValidPass4] = useState(false);
+
+    const [isValidPassone, setisValidPassone] = useState(false);
+    const [isValidPasstwo, setisValidPasstwo] = useState(false);
+
+    const [style1, setstyle1] = useState(false);
+    const [style2, setstyle2] = useState(false);
+    const [style3, setstyle3] = useState(false);
+    const [style4, setstyle4] = useState(false);
 
 
-   const Valid = () => {
-       setRedEnable(true)
-   }
+useEffect (()=>{
+    const handleconfirm = (val) => {
+        if (!val) {
+            setRedEnable3(false);
+            setisValidPasstwo(false)
+        }
+        if (val === newpass) {
+            setisValidPasstwo(false);
+            setRedEnable3(false);
+        }
+        if (val !== newpass) {
+            setisValidPasstwo(true);
+            setRedEnable3(true);
+        }
+    }
+},[newpass,confirmpass])
 
+  
+
+   
+//////////Validation using YUP/////////////////////////////
+//    const validationSchema = Yup.object({
+//        resetcode: Yup.string().trim().min(4, 'Incorrect code' ).required('Incorrect code'),
+//        newcode: Yup.string().trim().min(10,'Password is too short!').required('Password is required'),
+//        confirmcode : Yup.string().equals(Yup.ref('password'),'Password does not match')
+
+//    })
+
+    const handlecode = (val) => {
+        if(val === "12345") {
+         setisValidPassone(false);
+         setRedEnable1(false);
+        } 
+        if(val !== "12345") {
+          setisValidPassone(true);
+          setRedEnable1(true)
+        }
+        if(val === ''){
+            setisValidPassone(false);
+            setRedEnable1(false);
+        }
+
+    }
+    
+    const handleconfirm = (val) => {
+        if(val) {
+            setRedEnable3(false);
+            setisValidPasstwo(false)
+        }
+        if(val === newpass){
+           setisValidPasstwo(false);
+           setRedEnable3(false);
+        } 
+        if (val !== newpass){
+            setisValidPasstwo(true);
+            setRedEnable3(true);
+        }
+        
+
+    }
+
+
+
+///////ON_FOCUS_NEWPASSWORD//////////
+    const fistvalid = () => {
+        
+        setisValidPass(true);
+        setisValidPass1(true);
+        setisValidPass2(true);
+        setisValidPass3(true);
+        setisValidPass4(true)
+    }
+
+    const fistvalid2 = () => {
+
+        setisValidPass(false);
+        setisValidPass1(false);
+        setisValidPass2(false);
+        setisValidPass3(false);
+        setisValidPass4(false)
+    }
+    const fistvalid3 = () => {
+
+        setisValidPass(false);
+        setisValidPass1(false);
+        setisValidPass2(false);
+        setisValidPass3(false);
+        setisValidPass4(false)
+    }
+
+
+
+///////////newPasswordvalidation/////////////
+ const handlepass = (val) => {
+
+     const exp = /[~!@#$%^&*]/;
+     const alpha = /[A-Z]/;
+     const gamma = /[a-z]/;
+
+     if(val.trim().length >= 10 ) {
+         setnewPass(val);
+         setstyle1(true);
+     }
+     if (val.trim().length < 10 ) {
+         setnewPass(val);
+         setstyle1(false);
+     }
+     if (alpha.test(val) ){
+         setnewPass(val);
+         setstyle2(true);
+     }
+     if (!alpha.test(val)){
+         setnewPass(val);
+         setstyle2(false);
+     }
+     if (gamma.test(val)) {
+         setnewPass(val);
+         setstyle3(true);
+     }
+     if (!gamma.test(val)) {
+         setnewPass(val);
+         setstyle3(false);
+     }
+     if (exp.test(val)) {
+         setnewPass(val);
+         setstyle4(true);
+     }
+     if (!exp.test(val)) {
+         setnewPass(val);
+         setstyle4(false);
+     }
+     
+
+ }
 
     return (
         
@@ -50,7 +194,10 @@ function resetpassword({ navigation }) {
                           style={styles.textin1}
                           placeholder="Password Reset Code"
                           label="Password Reset Code"
-                          error={redenable}
+                          error={redenable1}
+                          onFocus={() => fistvalid2()}
+                          onChangeText={val => handlecode(val)}
+                          
                           />
                         {isValidPassone ? (
                             <Text style={styles.ErrorPassone} >Incorrect code</Text>)
@@ -65,7 +212,10 @@ function resetpassword({ navigation }) {
                           style={styles.textin2} 
                           placeholder="New Password"
                           label="New Password"
-                          error={redenable}
+                          error={redenable2}
+                          secureTextEntry={true}
+                          onFocus={()=> fistvalid()}
+                          onChangeText={val => handlepass(val)}
                           />
 
                         {isValidPass ? (
@@ -73,19 +223,19 @@ function resetpassword({ navigation }) {
                             : null}
 
                         { isValidPass1 ? ( 
-                            <Text style={styles.ErrorPass1}   >✓  10 characters</Text>
+                            <Text style={ style1 ? styles.ErrorPass1G : styles.ErrorPass1}   >✓  10 characters</Text>
                         ) : null }   
 
                         { isValidPass2 ? (
-                            <Text style={styles.ErrorPass2}   >✓  1 Upper case character</Text>
+                            <Text style={ style2 ? styles.ErrorPass2G : styles.ErrorPass2}   >✓  1 upper case character</Text>
                         ) : null }
 
                         { isValidPass3 ? (
-                            <Text style={styles.ErrorPass3}   >✓  1  lower case character</Text>
+                            <Text style={ style3 ? styles.ErrorPass3G : styles.ErrorPass3}   >✓  1  lower case character</Text>
                         ) : null }
 
                         {isValidPass4 ? (
-                            <Text style={styles.ErrorPass4}   >✓   special character</Text>
+                            <Text style={ style4 ? styles.ErrorPass4G : styles.ErrorPass4}   >✓  special character</Text>
                         ) : null }
 
                         <TextInput 
@@ -93,7 +243,10 @@ function resetpassword({ navigation }) {
                           style={styles.textin3} 
                           placeholder="Confirm Password"
                           label= "Confirm Password"
-                          error={redenable}
+                          secureTextEntry={true}
+                          error={redenable3}
+                          onFocus={() => fistvalid3()}
+                          onChangeText={val => handleconfirm(val)}
                           />
 
                         {isValidPasstwo ? (
@@ -185,7 +338,7 @@ const styles = StyleSheet.create({
         resetbtn: {
         width: '78%',
         height: 53,
-        top: 104,
+        top: 90,
         left: 38,
         backgroundColor: "#5382F6",
         borderRadius: 4,
@@ -217,9 +370,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         top:69,
         right:80,
-        color:'#268E6C'
-
-
+        color:'#050505CC'
+    },
+    ErrorPass1G:{
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 69,
+        right: 80,
+        color: '#268E6C'
     },
     ErrorPass2: {
         fontSize: 14,
@@ -227,7 +386,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         top: 70,
         right: 52,
-        color:'#268E6C'
+        color: '#050505CC'
+    },
+    ErrorPass2G: {
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 70,
+        right: 52,
+        color: '#268E6C'
     },
     ErrorPass3: {
         fontSize: 14,
@@ -235,7 +402,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         top: 71,
         right: 52,
-        color:'#268E6C'
+        color: '#050505CC'
+    },
+    ErrorPass3G: {
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 71,
+        right: 52,
+        color: '#268E6C'
     },
     ErrorPass4: {
         fontSize: 14,
@@ -243,7 +418,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         top: 72,
         right: 68,
-        color:'#268E6C'
+        color: '#050505CC'
+    },
+    ErrorPass4G:{
+        fontSize: 14,
+        fontWeight: '400',
+        alignSelf: 'center',
+        top: 71,
+        right: 68,
+        color: '#268E6C'
     },
     ErrorPassone:{
         fontSize:14,

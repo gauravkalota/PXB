@@ -52,9 +52,9 @@ function selectcountry({navigation, route})  {
         );
     };
 
-// cross_icon....................
+// cross_icon............
     const crossfn = () => {
-        // setLoggedIn(true)
+        setLoggedIn(true)
         setSearchData(Country);
 
     }
