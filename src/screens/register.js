@@ -9,6 +9,10 @@ import Input from '../components/Input';
 import forgot from './forgot';
 import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 
+import { ErrorMessage, Formik } from 'formik'
+import * as yup from 'yup'
+
+
 export default function register({navigation, route}) {
     const [Number, setNumber] = useState(' ');
     const [Password, setPassword] = useState(' ');
@@ -17,7 +21,7 @@ export default function register({navigation, route}) {
     const [disable, setDisable] = useState(true);
     const [redenable, setRedEnable]= useState(false)
 
-    const [isValidUser, setisValidUser] = useState(false);
+    const [isValidUser, setisValidUser] = useState(true);
 
     const [Code, setCode] = useState('+1')
 
@@ -83,9 +87,29 @@ export default function register({navigation, route}) {
         }
     }
 
+////////////////LOGIN_VALIDATION_SCHEMA//////////////////
+
+    const loginValidationSchema = yup.object().shape({
+        Number: yup
+            .string()
+            .max(10, 'Incorrect Mobile Number/Password.Try again')
+            .min(10, 'Incorrect Mobile Number/Password.Try again')
+            .required('Incorrect Mobile Number/Password.Try again'),
+        Password: yup
+            .string()
+            .required('Incorrect Mobile Number/Password.Try again'),
+    })
+
 
     return (
-        <View style={styles.container}>
+    <View style={styles.container}>
+            <Formik
+                initialValues={{ Number: '', Password: '' }}
+                onSubmit={values => console.log(values)}
+                validationSchema={loginValidationSchema}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors , isValid }) => (
+                    <>
             <Logo  />
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
@@ -103,8 +127,12 @@ export default function register({navigation, route}) {
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
-                    onChangeText={val => { setNumber(val)}}
-                    error={redenable}
+                    // onChangeText={val => { setNumber(val)}}
+                    onChangeText={handleChange('Number')}
+                    onBlur = {handleBlur('Number')}
+                    value={values.Number}
+                    // error={redenable}
+                    error={errors.Number}
                     
                 />
             </View>
@@ -124,8 +152,13 @@ export default function register({navigation, route}) {
                         onPress={() => setHidePass(!hidePass)}
                     />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
-                    onChangeText={val => { textInputChange(val) }}
-                    error={redenable}
+                    // onChangeText={val => { textInputChange(val) }}
+                    onChangeText={handleChange('Password')}
+                    onBlur={handleBlur('Password')}
+                    value={values.Password}
+                    error={errors.Password}
+
+                    // error={redenable}
                 />
                 {/* <Icon
                     name={hidePass ? 'eye-off' : 'eye'}
@@ -134,13 +167,23 @@ export default function register({navigation, route}) {
                     onPress={() => setHidePass(!hidePass)}
                 /> */}
             </View>
-            { isValidUser ?  (<Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text> ) : null }
+            {/* { isValidUser ?  (<Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text> ) : null } */}
+            {/* {errors.Number && 
+                <Text style={styles.incorrectText}>{errors.Number}</Text> 
+            } */}
+
+            {errors.Password &&
+                <Text style={styles.incorrectText}>{errors.Password}</Text>
+            }
             <View style={styles.forgotPassword}>
                 <TouchableOpacity onPress={()=> navigation.navigate('forgot')} >
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-            <AppButton disabled={disable} onpress={Valid_User}   title="Log In" style={ disable ? styles.disablebtn : styles.appButtonContainer} />
+            <AppButton disabled={!isValid} onpress={handleSubmit}   title="Log In" style={ !isValid ? styles.disablebtn : styles.appButtonContainer} />
+                    </>
+                )}
+            </Formik>
             <View style={styles.orlineR}>
 
             </View>
@@ -184,7 +227,7 @@ export default function register({navigation, route}) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+    </View>
     );
 }
 
@@ -306,8 +349,9 @@ const styles = StyleSheet.create({
     incorrectText: {
         color: '#CC1414',
         bottom: 55,
-        fontSize: 12,
-        right: 20
+        fontSize: 14,
+        fontWeight:'500',
+        right: 0,
     },
     fb: {
         right: 110,

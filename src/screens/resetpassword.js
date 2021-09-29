@@ -1,10 +1,9 @@
 import  React, {useState, useEffect} from 'react';
-import { Button, View, StyleSheet ,Image, TouchableOpacity, Alert} from 'react-native';
+import { Button, View, StyleSheet ,Image, TouchableOpacity, Alert, TouchableHighlight} from 'react-native';
 import { Appbar, Text, TextInput } from 'react-native-paper';
 
-import { useFormik } from 'formik';
-
-import * as Yup from 'yup';
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
 
 function resetpassword({ navigation }) {
@@ -35,32 +34,25 @@ function resetpassword({ navigation }) {
 
 
 useEffect (()=>{
-    const handleconfirm = (val) => {
-        if (!val) {
-            setRedEnable3(false);
-            setisValidPasstwo(false)
-        }
-        if (val === newpass) {
-            setisValidPasstwo(false);
-            setRedEnable3(false);
-        }
-        if (val !== newpass) {
-            setisValidPasstwo(true);
-            setRedEnable3(true);
-        }
-    }
+ handleconfirm()
 },[newpass,confirmpass])
 
   
 
    
 //////////Validation using YUP/////////////////////////////
-//    const validationSchema = Yup.object({
-//        resetcode: Yup.string().trim().min(4, 'Incorrect code' ).required('Incorrect code'),
-//        newcode: Yup.string().trim().min(10,'Password is too short!').required('Password is required'),
-//        confirmcode : Yup.string().equals(Yup.ref('password'),'Password does not match')
+    const loginValidationSchema = yup.object().shape({
+        resetcode: yup
+            .string()
+            .min(5, ({ min }) => `Reset Code must be at least ${min} characters`)
+            .required('Reset Code is Required'),
+        confirmpass: yup
+            .string()
+            .matches(newpass, 'Password does not match') 
+            ///////////important for matching direct string
+            // .required('Confirm password is required'),
+    })
 
-//    })
 
     const handlecode = (val) => {
         if(val === "12345") {
@@ -171,7 +163,15 @@ useEffect (()=>{
 
     return (
         
-        <View style={{ flex: 1, backgroundColor:'#fff'}} >
+     <View style={{ flex: 1, backgroundColor:'#fff'}} >
+        <Formik
+            validationSchema={loginValidationSchema}
+            initialValues={{ resetcode: '',confirmpass: '' }}
+        >
+
+            {({ handleChange, handleBlur, handleSubmit, values, errors, isValid})=>(
+                <>
+            
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
@@ -185,23 +185,33 @@ useEffect (()=>{
                     <Text style={styles.text2} >A password reset code has been sent on{'\n'}                                        on SMS</Text>
                     <Text style={styles.text5} >+1  2025550143</Text>
                     <Text style={styles.text3} >Did not receive Code?</Text>
-                    <TouchableOpacity onPress={()=> Alert.alert('Resend SMS')} >
+
+                 <View>
+                    <TouchableOpacity style={styles.sms} onPress={()=> Alert.alert('Resend SMS')} >
                          <Text style={styles.text4}>Resend SMS</Text>
                     </TouchableOpacity>
+                 </View>
                     <View>
                         <TextInput 
                           mode="outlined" 
                           style={styles.textin1}
                           placeholder="Password Reset Code"
                           label="Password Reset Code"
-                          error={redenable1}
+                        //   error={redenable1}
                           onFocus={() => fistvalid2()}
-                          onChangeText={val => handlecode(val)}
-                          
+                        //   onChangeText={val => handlecode(val)}
+                        onChangeText={handleChange('resetcode')}
+                        onBlur={handleBlur('resetcode')}
+                        value={values.resetcode}
+                        error={errors.resetcode}
                           />
-                        {isValidPassone ? (
+                        {/* {isValidPassone ? (
                             <Text style={styles.ErrorPassone} >Incorrect code</Text>)
-                            : null}
+                            : null} */}
+
+                        { errors.resetcode &&
+                            <Text style={styles.ErrorPassone} >{errors.resetcode}</Text>
+                        }
 
 
 
@@ -244,25 +254,35 @@ useEffect (()=>{
                           placeholder="Confirm Password"
                           label= "Confirm Password"
                           secureTextEntry={true}
-                          error={redenable3}
+                        //   error={redenable3}
                           onFocus={() => fistvalid3()}
-                          onChangeText={val => handleconfirm(val)}
+                        //   onChangeText={val => handleconfirm(val)}
+                            onChangeText={handleChange('confirmpass')}
+                            onBlur={handleBlur('confirmpass')}
+                            value={values.confirmpass}
+                            error={errors.confirmpass}
+
                           />
 
-                        {isValidPasstwo ? (
+                        {/* {isValidPasstwo ? (
                             <Text style={styles.ErrorPasstwo} >Passwords do not match</Text>)
-                            : null}
+                            : null} */}
 
-                        <TouchableOpacity  style={styles.resetbtn} onPress={()=> navigation.navigate('passwordset')}  >
+                        {errors.confirmpass &&
+                            <Text style={styles.ErrorPasstwo} >{errors.confirmpass}</Text>
+                        }
+
+                        <TouchableHighlight disabled={!isValid}  style={ !isValid   ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit}  >
                             <Text style={styles.resettext}>Reset</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
 
                     </View>
                 </View>
-            </View>
-            
-            
-        </View>
+            </View>  
+            </>
+                )}
+        </Formik>
+    </View>
     );
 }
 
@@ -346,6 +366,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
 
         },
+    resetbtndis: {
+        width: '78%',
+        height: 53,
+        top: 90,
+        left: 38,
+        backgroundColor: "#DDDD",
+        borderRadius: 4,
+        paddingVertical: 5,
+        paddingHorizontal: 10
+
+    },
         resettext: {
         color: 'white',
         fontWeight: 'bold',
@@ -442,6 +473,10 @@ const styles = StyleSheet.create({
         top:75,
         left:42
 
+    },
+    sms:{
+        top:0,
+        right:-5
     }
     
 

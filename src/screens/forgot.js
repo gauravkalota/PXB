@@ -3,6 +3,12 @@ import { Image,View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
+import { ErrorMessage, Formik } from 'formik'
+import * as yup from 'yup'
+
+
+
+
 
 
 function forgot ({navigation, route}) {
@@ -66,10 +72,31 @@ useEffect (()=> {
         
 
     }
+///////Validtion_schema_YUP///////////
+
+    const loginValidationSchema = yup.object().shape({
+        Number: yup
+            .string()
+            .min(10, ({ min }) => `Number must be  ${min} digits`)
+            .matches(/(01)(\d){8}\b/, `This account does not exist. Register\nto create account.`)
+
+            // .required('This account does not exist.Register to create account'),
+        
+    })
 
        
     return(
-        <View style={{flex:1}}>
+    <View style={{flex:1}}>
+        <Formik
+           validationSchema={loginValidationSchema}
+           initialValues={{Number:''}}
+           onSubmit={values=>console.log(values)}
+        >
+            
+        {({ handleChange, handleSubmit, values, errors, isValid, touched }) => (
+            <>
+            
+
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor:'#034C81'}} >
@@ -90,8 +117,11 @@ useEffect (()=> {
                    placeholder="Mobile Number" 
                    label="Mobile Number"
                    keyboardType="numeric"
-                   onChangeText={val => textInputChange(val) }
-                   error={redenable}
+                //    onChangeText={val => textInputChange(val) }
+                //    error={errors}
+                   onChangeText={handleChange('Number')}
+                   value={values.Number}
+                   error={errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.textv}  >
@@ -101,34 +131,40 @@ useEffect (()=> {
                     </TouchableOpacity>
                 </View>
 
-                {Error1 ? (
+                {/* {Error1 ? (
                     <Text style={styles.error1} >Phone number invalid</Text>
                 ) : null }
                  
                 {Error2 ? (
                     <Text style={styles.error2}  >This account does not exist.Register {"\n"} to create account</Text>
-                ) : null }
+                ) : null } */}
+
+                { errors.Number && 
+                   <Text style={styles.error1} >{errors.Number}</Text>
+                }
+
+                {/* {errors.Number &&
+                    <Text style={styles.error2}>{errors.Number}</Text>
+                } */}
 
                 <View>
-                 <TouchableOpacity disabled={btnstatus}  style={ btnstatus ? styles.resetbtndis :  styles.resetbtn} onPress={User} > 
+                 <TouchableOpacity disabled={isValid}   style={ isValid ? styles.resetbtndis :  styles.resetbtn} onPress={handleSubmit} > 
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>
 
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
-                    <TouchableOpacity style={styles.btntext5} >
+                    <TouchableOpacity style={styles.btntext5} onPress={()=> navigation.navigate('resetpassword')} >
                         <Text style={styles.text5} >Register</Text>
                     </TouchableOpacity>
                 </View>
-
-
-
-
-
-               
             </View>
-        </View>
+        </>
+        )}
+    </Formik>
+
+</View>
     )
 }
 
@@ -191,10 +227,10 @@ const styles = StyleSheet.create({
         
     },
     resetbtndis:{
-        width: '78%',
+        width: '77%',
         height: 53,
-        top: 75,
-        left: 38,
+        top: 60,
+        left: 41,
         borderRadius: 4,
         paddingVertical: 5,
         paddingHorizontal: 10,
