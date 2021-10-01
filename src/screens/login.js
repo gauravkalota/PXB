@@ -23,6 +23,8 @@ export default function login({navigation, route}) {
 
     const [Code, setCode] = useState('+1')
 
+    const [isSubmitting, isSetSubmitting] = useState(false);
+
 
     useEffect(() => {
         
@@ -34,21 +36,7 @@ export default function login({navigation, route}) {
 
         (Number && Password) ? setDisable(false) : setDisable(true);
     }, [Number,Password])
-    // const button_pressed= () => {
-    //    if(!Number.trim() || !Password.trim()) {
-    //        setDisable(true)
-    //    }  
-    //    if (Number==="1234567890" && Password==="admin") {
-    //        setisValidUser(false)
-    //        Alert.alert("Button CLICKED")
-    //        setRedEnable(false)
-    //    }
-    //    else{
-    //        setisValidUser(true)
-    //        setRedEnable(true)
-    //    }
-       
-    // }
+   
 
     useEffect (()=> {
         if(route.params?.item) {
@@ -56,21 +44,9 @@ export default function login({navigation, route}) {
         }
     },[route.params?.item])
    
-    const Valid_User = () => {
-        if(Number==="1234567890" && Password==="admin"){
-            setisValidUser(false)
-            Alert.alert("Button Clicked")
-            setRedEnable(false)  
-        } 
-        else{
-            setisValidUser(true)
-            setRedEnable(true)
-        }
- }
 
 
-
-////////////////LOGIN_VALIDATION_SCHEMA//////////////////
+////////////////LOGIN_YUP_VALIDATION_SCHEMA//////////////////
 
     const loginValidationSchema = yup.object().shape({
         Number: yup
@@ -80,7 +56,7 @@ export default function login({navigation, route}) {
             .required('Incorrect Mobile Number/Password.Try again'),
         Password: yup
             .string()
-            .required('Incorrect Mobile Number/Password.Try again')
+            .required(null)
     })
 
 
@@ -89,16 +65,18 @@ export default function login({navigation, route}) {
             <Formik
                 initialValues={{ Number: '', Password: '' }}
                 validationSchema={loginValidationSchema}
-                validateOnChange={false}
-                validateOnBlur={false}
-                onSubmit={values=>{
-                    handleSubmit(values)
+                validateOnChange={isSubmitting}
+
+                // validateOnChange={false}
+                // validateOnBlur={true}
+                onSubmit={values => { 
+                    isSetSubmitting(true);
                     //////do somethingg
                 }}
                 validationSchema={loginValidationSchema}
 
             >
-                {({ handleChange, handleBlur, handleSubmit, values, errors , touched ,isValid }) => (
+                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
             <Logo  />
             <View style={styles.inputViewnew1} >
@@ -120,7 +98,7 @@ export default function login({navigation, route}) {
                     onChangeText={handleChange('Number')}
                     // onBlur = {handleBlur('Number')}
                     value={values.Number}
-                    error={touched.Number && errors.Number}
+                    error={errors.Number}
                     
                 />
             </View>
@@ -143,7 +121,7 @@ export default function login({navigation, route}) {
                     onChangeText={handleChange('Password')}
                     // onBlur={handleBlur('Password')}
                     value={values.Password}
-                    error={ (touched.Password  && errors.Password) || (touched.Number && errors.Number)}
+                    error={  errors.Password || errors.Number}
 
                     // error={redenable}
                 />
@@ -167,7 +145,7 @@ export default function login({navigation, route}) {
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-            <AppButton  onpress={handleSubmit}   title="Log In" style={ !values.Number || !values.Password ? styles.disablebtn : styles.appButtonContainer} />
+                        <AppButton  onpress={handleSubmit} title="Log In" style={!values.Number || !values.Password  ? styles.disablebtn : styles.appButtonContainer} />
                     </>
                 )}
             </Formik>

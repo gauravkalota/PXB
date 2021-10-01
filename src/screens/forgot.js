@@ -19,6 +19,7 @@ function forgot ({navigation, route}) {
     const [btnstatus, Setbtnstatus] = useState(false);
     const [Code, setCode] = useState('+1');
 
+    const [isSubmitting, isSetSubmitting] = useState(false);
 
 useEffect (()=> {
         if(route.params?.item) {
@@ -41,30 +42,30 @@ useEffect (()=> {
         
     })
 
-   
-       
+    // handleSubmit = values => {
+    //     navigation.navigate({
+    //         name: "resetpassword",
+    //         params: { item: values.Number },
+    //     });
+
+    // }
+ 
     return(
     <View style={{flex:1}}>
         <Formik
            validationSchema={loginValidationSchema}
            initialValues={{Number:''}}
-           validateOnChange={false}
-           validateOnBlur={false}
+           validateOnMount={true}
+            validateOnChange={isSubmitting}
+        //    validateOnBlur={false}
            onSubmit={(values) => {
-            //    handleSubmit(values);
-
-               navigation.navigate({
-                   name: "resetpassword",
-                   params: { item: values.Number },
-               })
-            
+               isSetSubmitting(true)
            }}
         >
             
-        {({ handleChange, handleSubmit, values, errors, isValid, touched }) => (
+        {({ handleChange, handleSubmit, values, errors, isValid, touched}) => (
             <>
             
-
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor:'#034C81'}} >
@@ -85,11 +86,9 @@ useEffect (()=> {
                    placeholder="Mobile Number" 
                    label="Mobile Number"
                    keyboardType="numeric"
-                //    onChangeText={val => textInputChange(val) }
-                //    error={errors}
                    onChangeText={handleChange('Number')}
                    value={values.Number}
-                   error={touched.Number && errors.Number}
+                   error={ errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.textv}  >
@@ -107,7 +106,7 @@ useEffect (()=> {
 
 
                 <View>
-                 <TouchableOpacity disabled={!isValid}   style={ !values.Number ? styles.resetbtndis  : styles.resetbtn} onPress={handleSubmit} > 
+                <TouchableOpacity disabled={!values.Number}  style={ !values.Number ? styles.resetbtndis  : styles.resetbtn} onPress={handleSubmit} >
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>

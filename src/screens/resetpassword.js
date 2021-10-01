@@ -35,6 +35,9 @@ function resetpassword({ navigation, route }) {
     const [style3, setstyle3] = useState(false);
     const [style4, setstyle4] = useState(false);
 
+    const [isSubmitting, isSetSubmitting] = useState(false);
+
+
 
 useEffect (()=>{
  handleconfirm()
@@ -176,6 +179,12 @@ useEffect (()=>{
         <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ resetcode: '',confirmpass: '' }}
+            validateOnChange={isSubmitting}
+                onSubmit={values => {
+                    isSetSubmitting(true);
+                    //////do somethingg
+                }}
+
         >
 
             {({ handleChange, handleBlur, handleSubmit, values, errors, isValid})=>(
@@ -196,7 +205,7 @@ useEffect (()=>{
                     <Text style={styles.text3} >Did not receive Code?</Text>
 
                  <View>
-                    <TouchableOpacity style={styles.sms} onPress={()=> Alert.alert('Resend SMS')} >
+                    <TouchableOpacity style={styles.sms} onPress={() => navigation.navigate('passwordset')} >
                          <Text style={styles.text4}>Resend SMS</Text>
                     </TouchableOpacity>
                  </View>
@@ -210,13 +219,14 @@ useEffect (()=>{
                           onFocus={() => fistvalid2()}
                         //   onChangeText={val => handlecode(val)}
                         onChangeText={handleChange('resetcode')}
-                        onBlur={handleBlur('resetcode')}
+                        // onBlur={handleBlur('resetcode')}
                         value={values.resetcode}
                         error={errors.resetcode}
+                        va
                           />
-                        {/* {isValidPassone ? (
+                        {isValidPassone ? (
                             <Text style={styles.ErrorPassone} >Incorrect code</Text>)
-                            : null} */}
+                            : null}
 
                         { errors.resetcode &&
                             <Text style={styles.ErrorPassone} >{errors.resetcode}</Text>
@@ -267,9 +277,9 @@ useEffect (()=>{
                           onFocus={() => fistvalid3()}
                         //   onChangeText={val => handleconfirm(val)}
                             onChangeText={handleChange('confirmpass')}
-                            onBlur={handleBlur('confirmpass')}
+                            // onBlur={handleBlur('confirmpass')}
                             value={values.confirmpass}
-                            error={errors.confirmpass}
+                            error={errors.confirmpass || errors.resetcode}
 
                           />
 
@@ -281,7 +291,7 @@ useEffect (()=>{
                             <Text style={styles.ErrorPasstwo} >{errors.confirmpass}</Text>
                         }
 
-                        <TouchableHighlight disabled={!isValid}  style={ !isValid   ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit, ()=> navigation.navigate('passwordset')}  >
+                        <TouchableHighlight  style={ (!values.resetcode || !values.confirmpass )  ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit}  >
                             <Text style={styles.resettext}>Reset</Text>
                         </TouchableHighlight>
 
