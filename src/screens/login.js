@@ -6,14 +6,12 @@ import AppButton from '../components/AppButton';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Input from '../components/Input';
-import forgot from './forgot';
-import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 
-import { ErrorMessage, Formik } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
 
 
-export default function register({navigation, route}) {
+export default function login({navigation, route}) {
     const [Number, setNumber] = useState(' ');
     const [Password, setPassword] = useState(' ');
     const [hidePass, setHidePass] = useState(true);
@@ -24,10 +22,6 @@ export default function register({navigation, route}) {
     const [isValidUser, setisValidUser] = useState(true);
 
     const [Code, setCode] = useState('+1')
-
-
-    ////////for dialcode//
-
 
 
     useEffect(() => {
@@ -74,30 +68,19 @@ export default function register({navigation, route}) {
         }
  }
 
-////////////Dynamic error Validation////////////
-    const textInputChange = (val) => {
-        if (val !=="1234567890") {
-            setPassword(val);
-            setisValidUser(true);
-            setRedEnable(true)
-        } else {
-            setPassword(val);
-            setisValidUser(false);
-            setRedEnable(false);
-        }
-    }
+
 
 ////////////////LOGIN_VALIDATION_SCHEMA//////////////////
 
     const loginValidationSchema = yup.object().shape({
         Number: yup
             .string()
-            .max(10, 'Incorrect Mobile Number/Password.Try again')
+            // .max(10, 'Incorrect Mobile Number/Password.Try again')
             .min(10, 'Incorrect Mobile Number/Password.Try again')
             .required('Incorrect Mobile Number/Password.Try again'),
         Password: yup
             .string()
-            .required('Incorrect Mobile Number/Password.Try again'),
+            .required('Incorrect Mobile Number/Password.Try again')
     })
 
 
@@ -105,10 +88,17 @@ export default function register({navigation, route}) {
     <View style={styles.container}>
             <Formik
                 initialValues={{ Number: '', Password: '' }}
-                onSubmit={values => console.log(values)}
                 validationSchema={loginValidationSchema}
+                validateOnChange={false}
+                validateOnBlur={false}
+                onSubmit={values=>{
+                    handleSubmit(values)
+                    //////do somethingg
+                }}
+                validationSchema={loginValidationSchema}
+
             >
-                {({ handleChange, handleBlur, handleSubmit, values, errors , isValid }) => (
+                {({ handleChange, handleBlur, handleSubmit, values, errors , touched ,isValid }) => (
                     <>
             <Logo  />
             <View style={styles.inputViewnew1} >
@@ -127,12 +117,10 @@ export default function register({navigation, route}) {
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
-                    // onChangeText={val => { setNumber(val)}}
                     onChangeText={handleChange('Number')}
-                    onBlur = {handleBlur('Number')}
+                    // onBlur = {handleBlur('Number')}
                     value={values.Number}
-                    // error={redenable}
-                    error={errors.Number}
+                    error={touched.Number && errors.Number}
                     
                 />
             </View>
@@ -152,11 +140,10 @@ export default function register({navigation, route}) {
                         onPress={() => setHidePass(!hidePass)}
                     />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
-                    // onChangeText={val => { textInputChange(val) }}
                     onChangeText={handleChange('Password')}
-                    onBlur={handleBlur('Password')}
+                    // onBlur={handleBlur('Password')}
                     value={values.Password}
-                    error={errors.Password}
+                    error={ (touched.Password  && errors.Password) || (touched.Number && errors.Number)}
 
                     // error={redenable}
                 />
@@ -167,11 +154,11 @@ export default function register({navigation, route}) {
                     onPress={() => setHidePass(!hidePass)}
                 /> */}
             </View>
-            {/* { isValidUser ?  (<Text style={styles.incorrectText}>Incorrect Mobile Number/Password.Try again</Text> ) : null } */}
-            {/* {errors.Number && 
-                <Text style={styles.incorrectText}>{errors.Number}</Text> 
-            } */}
+         
 
+            {errors.Number &&
+                <Text style={styles.incorrectText}>{errors.Number}</Text>
+            }
             {errors.Password &&
                 <Text style={styles.incorrectText}>{errors.Password}</Text>
             }
@@ -180,7 +167,7 @@ export default function register({navigation, route}) {
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-            <AppButton disabled={!isValid} onpress={handleSubmit}   title="Log In" style={ !isValid ? styles.disablebtn : styles.appButtonContainer} />
+            <AppButton  onpress={handleSubmit}   title="Log In" style={ !values.Number || !values.Password ? styles.disablebtn : styles.appButtonContainer} />
                     </>
                 )}
             </Formik>
@@ -407,7 +394,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#5382F6",
         borderRadius: 4,
         paddingVertical: 13,
-        paddingHorizontal: 123
+        paddingHorizontal: 123,
+        height:53
     },
     disablebtn:{
         top: 15,

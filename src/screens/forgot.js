@@ -3,13 +3,11 @@ import { Image,View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
+
 import { ErrorMessage, Formik } from 'formik'
 import * as yup from 'yup'
-
-
-
-
-
+import CustomButton from '../components/CustomButton';
+import { values } from 'lodash';
 
 function forgot ({navigation, route}) {
 
@@ -29,68 +27,38 @@ useEffect (()=> {
     },[route.params?.item])
 
 
-    const User = () => {
-        
-        if(Number ==="1234567890") {
-            navigation.navigate('resetpassword')
-            setError1(false);
-            setError2(false);
-            setRedEnable(false);
-        }
-        else {
-            setError1(true)
-            setError2(false);
-            setRedEnable(true)
-        }
-    }
+   
 
-
-    const textInputChange = (val) => {
-
-        if(val.trim().length=== 0) {
-            setError1(false);
-            setError2(false);
-            setRedEnable(false);
-            Setbtnstatus(true);
-        } else  
-        if (val.trim().length > 1 && val.trim().length < 10){
-            setNumber(val);
-            setError1(true);
-            setError2(false);
-            setRedEnable(true);
-            Setbtnstatus(false);
-
-        } else 
-        if (val.trim().length>=10) {
-            setNumber(val);
-            setError1(false);
-            setError2(true);
-            setRedEnable(true);
-            Setbtnstatus(false);
-
-        } 
-        
-
-    }
+ 
 ///////Validtion_schema_YUP///////////
 
     const loginValidationSchema = yup.object().shape({
         Number: yup
             .string()
             .min(10, ({ min }) => `Number must be  ${min} digits`)
-            .matches(/(01)(\d){8}\b/, `This account does not exist. Register\nto create account.`)
 
             // .required('This account does not exist.Register to create account'),
         
     })
 
+   
        
     return(
     <View style={{flex:1}}>
         <Formik
            validationSchema={loginValidationSchema}
            initialValues={{Number:''}}
-           onSubmit={values=>console.log(values)}
+           validateOnChange={false}
+           validateOnBlur={false}
+           onSubmit={(values) => {
+            //    handleSubmit(values);
+
+               navigation.navigate({
+                   name: "resetpassword",
+                   params: { item: values.Number },
+               })
+            
+           }}
         >
             
         {({ handleChange, handleSubmit, values, errors, isValid, touched }) => (
@@ -100,7 +68,7 @@ useEffect (()=> {
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor:'#034C81'}} >
-                        <Appbar.Action color="white" icon="arrow-left" onPress={()=> navigation.navigate('register')} />
+                        <Appbar.Action color="white" icon="arrow-left" onPress={()=> navigation.navigate('login')} />
                         <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
 
                     </Appbar.Header>
@@ -121,7 +89,7 @@ useEffect (()=> {
                 //    error={errors}
                    onChangeText={handleChange('Number')}
                    value={values.Number}
-                   error={errors.Number}
+                   error={touched.Number && errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.textv}  >
@@ -131,27 +99,24 @@ useEffect (()=> {
                     </TouchableOpacity>
                 </View>
 
-                {/* {Error1 ? (
-                    <Text style={styles.error1} >Phone number invalid</Text>
-                ) : null }
-                 
-                {Error2 ? (
-                    <Text style={styles.error2}  >This account does not exist.Register {"\n"} to create account</Text>
-                ) : null } */}
+              
 
                 { errors.Number && 
                    <Text style={styles.error1} >{errors.Number}</Text>
                 }
 
-                {/* {errors.Number &&
-                    <Text style={styles.error2}>{errors.Number}</Text>
-                } */}
 
                 <View>
-                 <TouchableOpacity disabled={isValid}   style={ isValid ? styles.resetbtndis :  styles.resetbtn} onPress={handleSubmit} > 
+                 <TouchableOpacity disabled={!isValid}   style={ !values.Number ? styles.resetbtndis  : styles.resetbtn} onPress={handleSubmit} > 
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>
+
+                {/* <CustomButton
+                  onPress={handleSubmit}
+                  disabled={isValid}
+                  text="Send Reset Code"
+                /> */}
 
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>

@@ -12,11 +12,11 @@ function passwordset ({navigation}) {
                 style={styles.image}
                 
                 />
-                <TouchableOpacity  >
+            <TouchableOpacity onPress={() => navigation.navigate('resetpassword')}  >
                 <Text style={styles.text1} >Password Reset</Text>
                 </TouchableOpacity>
             <Text style={styles.text2}  >Your password has been reset successfully</Text>
-            <TouchableOpacity style={styles.resetbtn} onPress={() => navigation.navigate('resetpassword')} >
+            <TouchableOpacity style={styles.resetbtn} onPress={() => navigation.navigate('login')} >
                 <Text style={styles.resettext}>Log In</Text>
             </TouchableOpacity>
 

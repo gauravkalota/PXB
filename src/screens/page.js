@@ -10,7 +10,7 @@ import Logo from "../components/logo";
 
 function page({ navigation }) {
     return(
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 , backgroundColor:'#ffffff' }}>
             <View>
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
@@ -20,14 +20,13 @@ function page({ navigation }) {
                     </Appbar.Header>
                 </View>
                 <Text style={styles.text1} >Register</Text>
-                <TextInput placeholder="First Name" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Last Name" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Mobile Number" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="First Name" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Date of Birth " mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Email Address" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Password" mode="outlined" style={styles.textinput} />
-                <TextInput placeholder="Confirm Password" mode="outlined" style={styles.textinput} />
+                <TextInput placeholder="First Name" mode="outlined" style={styles.textinput1} />
+                <TextInput placeholder="Last Name" mode="outlined" style={styles.textinput2} />
+                <TextInput placeholder="Mobile Number" mode="outlined" style={styles.textinput3} />
+                <TextInput placeholder="Date of Birth " mode="outlined" style={styles.textinput4} />
+                <TextInput placeholder="Email Address" mode="outlined" style={styles.textinput5} />
+                <TextInput placeholder="Password" mode="outlined" style={styles.textinput6} />
+                <TextInput placeholder="Confirm Password" mode="outlined" style={styles.textinput7} />
 
                 <View>
                     <TouchableOpacity style={styles.resetbtn}  >
@@ -61,16 +60,16 @@ const styles = StyleSheet.create({
     text1: {
         fontSize: 24,
         fontWeight: "700",
-        top: 45,
-        left: 38
+        top: 30,
+        left: 40
 
     },
 
     resetbtn: {
-        width: '77%',
-        height: 53,
-        top: 120,
-        left: 41,
+        width: '80%',
+        height: 52,
+        top: 140,
+        left: 40,
         backgroundColor: "#5382F6",
         borderRadius: 4,
         paddingVertical: 5,
@@ -94,16 +93,68 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         top: 10,
-        left: 85
+        left: 108
 
 
     },
     textinput: {
-        width: '77%',
-        height: 55,
-        top: 80,
-        left: 40
+        
     },
+    textinput1:{
+        width: '80%',
+        height: 55,
+        top: 55,
+        left: 40,
+        backgroundColor:'#FFFFFF'
+    },
+    textinput2:{
+        width: '80%',
+        height: 55,
+        top: 65,
+        left: 40,
+        backgroundColor: '#FFFFFF'
+
+    },
+    textinput3:{
+        width: '58%',
+        height: 55,
+        top: 75,
+        left: 125,
+        backgroundColor: '#FFFFFF'
+
+    },
+    textinput4:{
+        width: '80%',
+        height: 55,
+        top: 85,
+        left: 40,
+        backgroundColor: '#FFFFFF'
+
+    },
+    textinput5: {
+        width: '80%',
+        height: 55,
+        top: 95,
+        left: 40,
+        backgroundColor: '#FFFFFF'
+
+    },
+    textinput6: {
+        width: '80%',
+        height: 55,
+        top: 105,
+        left: 40,
+        backgroundColor: '#FFFFFF'
+
+    },
+    textinput7: {
+        width: '80%',
+        height: 55,
+        top: 115,
+        left: 40,
+        backgroundColor: '#FFFFFF'
+
+    }
     
 })
 

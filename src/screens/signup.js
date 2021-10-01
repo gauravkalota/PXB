@@ -3,16 +3,26 @@ import { Image, TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomButton from "../components/CustomButton";
 
 import Logo from "../components/logo";
 
  function signup({navigation}) {
      return(
          <View style={styles.container}>
-           <Logo/>
+             <View style={styles.imageview}>
+                <Logo/>
+             </View>
+             
              <TouchableOpacity style={styles.resetbtn} onPress={() => navigation.navigate('page')} >
                  <Text style={styles.resettext}>Register with Mobile Number</Text>
              </TouchableOpacity>
+             {/* <CustomButton 
+                 onPress={() => navigation.navigate('page')}
+                 text="Register with Mobile Number"
+            
+             /> */}
+
 
              <View style={styles.orline} >
                  <Text >OR Register with</Text>
@@ -61,13 +71,11 @@ import Logo from "../components/logo";
                  </View>
                  <View style={styles.baseline} >
                      <Text>Already PX Boost?</Text>
-                     <TouchableOpacity style={styles.btntext5} onPress={() => navigation.navigate('register')} >
+                     <TouchableOpacity style={styles.btntext5} onPress={() => navigation.navigate('login')} >
                          <Text style={styles.text5} >Log In</Text>
                      </TouchableOpacity>
                  </View>
-             </View>
-             
-             
+             </View>   
          </View>
      );
 
@@ -89,6 +97,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         marginTop: 20,
+        top:-80
     },
     iconButton: {
         backgroundColor: 'white',
@@ -106,30 +115,32 @@ const styles = StyleSheet.create({
     },
     fb: {
         right: 110,
-        top: 53
+        top: -30
     },
     go: {
-        top: 36,
+        top: -45,
         left: 6
     },
     ap: {
         left: 123,
-        top: 18
+        top: -60
     },
     line: {
         borderBottomColor: 'black',
         borderBottomWidth: 0.2,
         width: '80%',
-        top: 25
+        top: -130
     },
     baseline: {
         flexDirection: 'row',
         justifyContent: 'center',
-        top: 85
+        top: 304
 
     },
     btntext5: {
-        position: 'relative'
+        position: 'relative',
+        right:-5,
+        top:-1
     },
     text5: {
         color: '#5382F6',
@@ -141,17 +152,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.3,
         width: '23%',
         left: 110,
-        top: 70
+        top: -20
     },
     orlineL: {
         borderBottomColor: 'black',
         borderBottomWidth: 0.3,
         width: '23%',
         right: 110,
-        top: 70
+        top: -20
     },
     orline:{
-        top:80
+        top:-10
     },
     appButtonContainer: {
         top: 15,
@@ -165,8 +176,8 @@ const styles = StyleSheet.create({
     resetbtn: {
         width: '77%',
         height: 53,
-        top: 10,
-        left: 5,
+        top: -50,
+        left: -1,
         backgroundColor: "#5382F6",
         borderRadius: 4,
         paddingVertical: 5,
@@ -182,23 +193,33 @@ const styles = StyleSheet.create({
         left: 55
     },
     text1:{
-        top:100
+        top:110,
+        left:-13,
+        fontSize:14
 
     },
     text2:{
-        top:83,
-        left:205,
-        color:'#5382F6'
+        top:94,
+        left:200,
+        color:'#5382F6',
+        fontSize: 14
+
 
     },
     text3:{
-        top:80
+        top:94,
+        right:-100,
+        fontSize: 14
+
 
     },
     text4:{
-        top:65,
-        left:29,
-        color:'#5382F6'
+        top:78,
+        left:130,
+        color:'#5382F6',
+        fontSize: 14
+
+
 
 
     },
@@ -206,6 +227,10 @@ const styles = StyleSheet.create({
 
     },
     texttwo:{
+
+    },
+    imageview:{
+        top:-35
 
     }
     

@@ -28,7 +28,7 @@ function selectcountry({navigation, route})  {
         return(
             <TouchableOpacity onPress={() => {
                 navigation.navigate({
-                    name:"register",
+                    name:"login",
                     params : {item : item.dial_code}
                 })
             }
@@ -105,7 +105,7 @@ function selectcountry({navigation, route})  {
                    {loggedIn ? (
                         <View style={{ backgroundColor: '#034C81', height: 40, width: '100%', flexDirection: 'row' }} >
                             <Text style={{ color: 'white', left: 110, top: 7, fontSize: 20, fontWeight: 'bold' }} >Select a Country</Text>
-                            <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('register')}  />
+                            <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('login')}  />
                             <IconsS name="search" color="white" size={22} style={{ left:186, top: 9 }} onPress={buttpress}  />
                         </View>
                    ) :  (
@@ -118,7 +118,7 @@ function selectcountry({navigation, route})  {
                                 theme={{colors:{text:'white'}}}
                                 // theme change for specific component
                                 placeholderTextColor="#bfbfbf"
-                                left={<TextInput.Icon name="arrow-left" color="white" onPress={()=>navigation.navigate('register')} />}
+                                left={<TextInput.Icon name="arrow-left" color="white" onPress={()=>navigation.navigate('login')} />}
                                 right={<TextInput.Icon name= {() => <IconsS name="close-a" onPress={crossfn} color="white" style={{top:4}} />}/>}
                             />
                    )

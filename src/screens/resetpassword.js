@@ -6,7 +6,10 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 
 
-function resetpassword({ navigation }) {
+function resetpassword({ navigation, route }) {
+
+    const [Code, setCode] = useState('+1')
+
     const [resetcode, setrestCode] = useState('');
     const [newpass, setnewPass] = useState('');
     const [confirmpass, setconfirmPass] = useState('');
@@ -36,6 +39,12 @@ function resetpassword({ navigation }) {
 useEffect (()=>{
  handleconfirm()
 },[newpass,confirmpass])
+
+    useEffect(() => {
+        if (route.params?.item) {
+            setCode(route.params.item)
+        }
+    }, [route.params?.item])
 
   
 
@@ -183,7 +192,7 @@ useEffect (()=>{
                 <View>
                     <Text style={styles.text1} >Reset Password</Text>
                     <Text style={styles.text2} >A password reset code has been sent on{'\n'}                                        on SMS</Text>
-                    <Text style={styles.text5} >+1  2025550143</Text>
+                    <Text style={styles.text5} >{Code}</Text>
                     <Text style={styles.text3} >Did not receive Code?</Text>
 
                  <View>
@@ -272,7 +281,7 @@ useEffect (()=>{
                             <Text style={styles.ErrorPasstwo} >{errors.confirmpass}</Text>
                         }
 
-                        <TouchableHighlight disabled={!isValid}  style={ !isValid   ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit}  >
+                        <TouchableHighlight disabled={!isValid}  style={ !isValid   ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit, ()=> navigation.navigate('passwordset')}  >
                             <Text style={styles.resettext}>Reset</Text>
                         </TouchableHighlight>
 
@@ -328,7 +337,7 @@ const styles = StyleSheet.create({
             fontSize:16,
             fontWeight:'700',
             top:15,
-            left:44
+            left:50,
 
         },
         textin1:{
