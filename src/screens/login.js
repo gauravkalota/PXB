@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Image, TouchableOpacity, StyleSheet, Text, View, Alert } from 'react-native';
+import {  Image, TouchableOpacity, StyleSheet, Text, View, Alert , Keyboard, TouchableWithoutFeedback} from 'react-native';
 import { TextInput, Button, DefaultTheme, Colors } from 'react-native-paper';
 import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
@@ -9,6 +9,8 @@ import Input from '../components/Input';
 
 import { Formik } from 'formik'
 import * as yup from 'yup'
+
+
 
 
 export default function login({navigation, route}) {
@@ -60,6 +62,8 @@ export default function login({navigation, route}) {
     })
 
 
+
+
     return (
     <View style={styles.container}>
             <Formik
@@ -87,7 +91,9 @@ export default function login({navigation, route}) {
                   </View>
                 </TouchableOpacity> 
             </View>
-            <View style={styles.inputViewnew}>
+
+
+            <View style={styles.inputViewnew}>   
                 <Input
                     style={styles.inpuText}
                     mode="outlined"
@@ -98,10 +104,10 @@ export default function login({navigation, route}) {
                     onChangeText={handleChange('Number')}
                     // onBlur = {handleBlur('Number')}
                     value={values.Number}
-                    error={errors.Number}
-                    
+                    error={errors.Number} 
                 />
             </View>
+
             <View style={styles.inputView}>
                 <Input 
                     style={styles.inpuText}

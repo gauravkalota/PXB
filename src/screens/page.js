@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert } from 'react-native';
+import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert, I18nManager } from 'react-native';
 import { TextInput, Button, Appbar } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,6 +36,8 @@ function page({ navigation, route }) {
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
 
+
+    const [DOB, SETDOB] = useState("Date of Birth")
 
 
 
@@ -158,17 +160,23 @@ function page({ navigation, route }) {
                    value={values.dob}
                    error={errors.dob}
                 />
+
+                {/* <View style={styles.box}>
+                    <Text style={styles.boxtext} >{DOB}</Text>
+                    <TouchableOpacity>
+                        <Icon name="calendar-account" style={styles.boxicon} size={30} onPress={()=>setOpen(true)} />
+                    </TouchableOpacity>
+                </View> */}
                 <DatePicker
                     modal
                     mode="date"
                     androidVariant="nativeAndroid"
-                    textColor="white"
+                    textColor="BLACK"
                     open={open}
                     date={date}
                     onConfirm={(date) => {
                         setOpen(false)
                         setDate(date)
-                        setdob(date)
                     }}
                     onCancel={() => {
                         setOpen(false)
@@ -367,6 +375,27 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         right: 0,
     },
+    box: {
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        height:55,
+        width:'80%',
+        right:-39,
+        top:35
+    },
+    boxtext:{
+        color: "#B3B6B7" ,
+        top:15,
+        right:-15,
+        fontSize:16
+    },
+    boxicon:{
+        right:-277,
+        top:-5,
+        color:'#B3B6B7'
+    }
     
 })
 
