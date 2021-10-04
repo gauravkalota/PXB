@@ -171,7 +171,7 @@ export default function login({navigation, route}) {
                 <TouchableOpacity style={styles.iconButton}>
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton}>
+                <TouchableOpacity onPress={() => navigation.navigate('page')} style={styles.iconButton}>
                     <Icon
                         name='apple'
                         type='font-awesome'
@@ -385,11 +385,12 @@ const styles = StyleSheet.create({
     baseline: {
         flexDirection: 'row',
         justifyContent: 'center',
-        top: 85
+        top: 65
 
     },
     btntext5: {
-        position: 'relative'
+        position: 'relative',
+        right:-10
     },
     text5: {
         color: '#5382F6',

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Image, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert } from 'react-native';
 import { TextInput, Button, Appbar } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +8,13 @@ import Logo from "../components/logo";
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
+
+
+
+import DatePicker from 'react-native-date-picker'
+
+
+
 
 
 
@@ -23,7 +30,14 @@ function page({ navigation, route }) {
     const [cpass, setcpass]= useState('');
 
     const [isSubmitting, isSetSubmitting] = useState(false);
-    const [Code, setCode] = useState('+1')
+    const [Code, setCode] = useState('+1');
+
+
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+
+
+
 
     useEffect(() => {
         if (route.params?.item) {
@@ -76,7 +90,7 @@ function page({ navigation, route }) {
 
     
     return(
-        <View style={{ flex: 1 , backgroundColor:'#ffffff' }}>
+        <ScrollView style={{ flex: 1 , backgroundColor:'#ffffff' }}>
             <Formik
                 initialValues={{ firstname: '',lastname:'',mobile:'',dob:'',email:'',pass:'',cpass:'' }}
                 validationSchema={loginValidationSchema}
@@ -138,11 +152,34 @@ function page({ navigation, route }) {
                    placeholderTextColor="#B3B6B7"  
                    placeholder="Date of Birth " 
                    mode="outlined" 
+                   right={<TextInput.Icon onPress={() => setOpen(true)} style={{top:4}} color="#808080"  name="calendar" />}
                    style={styles.textinput4} 
-                   onChangeText={handleChange('dob')}
+                //    onChangeText={handleChange('dob')}
                    value={values.dob}
                    error={errors.dob}
                 />
+                <DatePicker
+                    modal
+                    mode="date"
+                    androidVariant="nativeAndroid"
+                    textColor="white"
+                    open={open}
+                    date={date}
+                    onConfirm={(date) => {
+                        setOpen(false)
+                        setDate(date)
+                        setdob(date)
+                    }}
+                    onCancel={() => {
+                        setOpen(false)
+                    }}
+                />
+
+               
+               
+
+
+
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
                    placeholder="Email Address" 
@@ -180,13 +217,12 @@ function page({ navigation, route }) {
                         <Text style={styles.resettext}>Register</Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
 
                 </>
             )}
         </Formik>
-    </View>
+    </ScrollView>
     );
 }
 

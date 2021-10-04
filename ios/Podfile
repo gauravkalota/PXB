@@ -12,6 +12,8 @@ target 'PBX' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
+
   target 'PBXTests' do
     inherit! :complete
     # Pods for testing
