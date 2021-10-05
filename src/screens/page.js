@@ -12,6 +12,8 @@ import * as yup from 'yup';
 
 
 import DatePicker from 'react-native-date-picker'
+import moment from "moment";
+
 
 
 
@@ -81,17 +83,12 @@ function page({ navigation, route }) {
 
 
 
-
-
-
-
-
-
-
+ console.log('DATE=', date)
 
 
     
     return(
+
         <ScrollView style={{ flex: 1 , backgroundColor:'#ffffff' }}>
             <Formik
                 initialValues={{ firstname: '',lastname:'',mobile:'',dob:'',email:'',pass:'',cpass:'' }}
@@ -118,6 +115,7 @@ function page({ navigation, route }) {
                 <TextInput 
                    placeholderTextColor="#B3B6B7" 
                    placeholder="First Name" 
+                   label="First Name"
                    mode="outlined" 
                    style={styles.textinput1} 
                    onChangeText={handleChange('firstname')}
@@ -126,7 +124,8 @@ function page({ navigation, route }) {
                 />
                 <TextInput 
                    placeholderTextColor="#B3B6B7" 
-                   placeholder="Last Name" 
+                   placeholder="Last Name"
+                   label="Last Name"
                    mode="outlined" 
                    style={styles.textinput2} 
                    onChangeText={handleChange('lastname')}
@@ -136,7 +135,8 @@ function page({ navigation, route }) {
                 <View>
                     <TextInput 
                        placeholderTextColor="#B3B6B7"  
-                       placeholder="Mobile Number" 
+                       placeholder="Mobile Number"
+                       label="Mobile Number" 
                        mode="outlined" 
                        style={styles.textinput3} 
                        onChangeText={handleChange('mobile')}
@@ -152,54 +152,51 @@ function page({ navigation, route }) {
                 </View>
                 <TextInput 
                    placeholderTextColor="#B3B6B7"  
-                   placeholder="Date of Birth " 
+                   placeholder="Date of Birth"
+                   label="Date of Birth"
                    mode="outlined" 
-                   right={<TextInput.Icon onPress={() => setOpen(true)} style={{top:4}} color="#808080"  name="calendar" />}
+                   right={<TextInput.Icon onPress={() => setOpen(true)} style={{ top: 4 }} color="#808080" name="calendar-range" />}
                    style={styles.textinput4} 
                 //    onChangeText={handleChange('dob')}
-                   value={values.dob}
+                   value={date}
                    error={errors.dob}
+                   editable={false}
                 />
 
-                {/* <View style={styles.box}>
-                    <Text style={styles.boxtext} >{DOB}</Text>
-                    <TouchableOpacity>
-                        <Icon name="calendar-account" style={styles.boxicon} size={30} onPress={()=>setOpen(true)} />
-                    </TouchableOpacity>
-                </View> */}
-                <DatePicker
+                <DatePicker style={styles.calendarmodal} 
                     modal
                     mode="date"
                     androidVariant="nativeAndroid"
                     textColor="BLACK"
                     open={open}
-                    date={date}
+                    date={new Date()}
                     onConfirm={(date) => {
                         setOpen(false)
-                        setDate(date)
+                        setDate(date.toLocaleDateString())   /////DateString "DAY"_"Mon"_"Date"_"year"
+                        
                     }}
                     onCancel={() => {
                         setOpen(false)
-                    }}
+                    }}  
                 />
-
-               
-               
-
 
 
                 <TextInput 
+                
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Email Address" 
+                   placeholder="Email Address"
+                   label="Email Address" 
                    mode="outlined" 
                    style={styles.textinput5} 
                    onChangeText={handleChange('email')}
                    value={values.email}
                    error={errors.email}
+                   
                 />
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Password" 
+                   placeholder="Password"
+                   label="Password" 
                    mode="outlined" 
                    style={styles.textinput6} 
                    onChangeText={handleChange('pass')}
@@ -208,7 +205,8 @@ function page({ navigation, route }) {
                 />
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Confirm Password" 
+                   placeholder="Confirm Password"
+                   label="Confirm Password" 
                    mode="outlined" 
                    style={styles.textinput7} 
                     onChangeText={handleChange('cpass')}
@@ -216,7 +214,7 @@ function page({ navigation, route }) {
                     error={errors.cpass}
                 />
 
-                            {errors.Number &&
+                            {errors.firstname &&
                                 <Text style={styles.incorrectText}>{errors.firstname}</Text>
                             }
 
@@ -395,6 +393,9 @@ const styles = StyleSheet.create({
         right:-277,
         top:-5,
         color:'#B3B6B7'
+    },
+    calendarmodal:{
+    
     }
     
 })
