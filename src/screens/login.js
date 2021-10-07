@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Image, TouchableOpacity, StyleSheet, Text, View, Alert , Keyboard, TouchableWithoutFeedback} from 'react-native';
+import {  Image, TouchableOpacity, StyleSheet, Text,ScrollView, View, Alert , Keyboard, TouchableWithoutFeedback} from 'react-native';
 import { TextInput, Button, DefaultTheme, Colors } from 'react-native-paper';
 import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
@@ -65,6 +65,8 @@ export default function login({navigation, route}) {
 
 
     return (
+// {/* <ScrollView scrollEnabled={false}  > */}
+ <ScrollView contentContainerStyle={{flexGrow:1}} >
     <View style={styles.container}>
             <Formik
                 initialValues={{ Number: '', Password: '' }}
@@ -198,7 +200,11 @@ export default function login({navigation, route}) {
                     </TouchableOpacity>
                 </View>
             </View>
+    
     </View>
+
+</ScrollView>
+
     );
 }
 

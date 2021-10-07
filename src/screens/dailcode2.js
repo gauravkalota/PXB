@@ -105,7 +105,7 @@ function dailcode({ navigation, route }) {
                     {loggedIn ? (
                         <View style={{ backgroundColor: '#034C81', height: 40, width: '100%', flexDirection: 'row' }} >
                             <Text style={{ color: 'white', left: 110, top: 7, fontSize: 20, fontWeight: 'bold' }} >Select a Country</Text>
-                            <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('forgot')} />
+                            <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('page')} />
                             <IconsS name="search" color="white" size={22} style={{ left: 186, top: 9 }} onPress={buttpress} />
                         </View>
                     ) : (

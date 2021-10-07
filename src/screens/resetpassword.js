@@ -187,7 +187,7 @@ useEffect (()=>{
 
         >
 
-            {({ handleChange, handleBlur, handleSubmit, values, errors, isValid})=>(
+            {({ handleChange, handleSubmit, values, errors, isValid})=>(
                 <>
             
             <View>
@@ -222,7 +222,7 @@ useEffect (()=>{
                         // onBlur={handleBlur('resetcode')}
                         value={values.resetcode}
                         error={errors.resetcode}
-                        va
+                        
                           />
                         {isValidPassone ? (
                             <Text style={styles.ErrorPassone} >Incorrect code</Text>)
@@ -250,7 +250,7 @@ useEffect (()=>{
                         {isValidPass ? (
                             <Text style={styles.ErrorPass} >The password will need to have atleast:</Text>)
                             : null}
-
+                            
                         { isValidPass1 ? ( 
                             <Text style={ style1 ? styles.ErrorPass1G : styles.ErrorPass1}   >✓  10 characters</Text>
                         ) : null }   
