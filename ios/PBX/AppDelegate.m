@@ -36,11 +36,15 @@ static void InitializeFlipper(UIApplication *application) {
                                                    moduleName:@"PBX"
                                             initialProperties:nil];
 
-  if (@available(iOS 13.0, *)) {
-      rootView.backgroundColor = [UIColor systemBackgroundColor];
-  } else {
-      rootView.backgroundColor = [UIColor whiteColor];
-  }
+//  if (@available(iOS 13.0, *)) {
+//      rootView.backgroundColor = [UIColor systemBackgroundColor];
+//  } else {
+//      rootView.backgroundColor = [UIColor whiteColor];
+//  }
+  // force light theme to avoid white text in white background TextInput
+    if (@available(iOS 14.3, *)) {
+      rootView.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

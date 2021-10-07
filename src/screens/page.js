@@ -8,7 +8,7 @@ import Logo from "../components/logo";
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import DatePicker from 'react-native-date-picker'
-import { values } from "lodash";
+import { upperCase, values } from "lodash";
 
 
 
@@ -132,9 +132,9 @@ function page({ navigation, route }) {
 ///////////newPasswordvalidation/////////////
  const handlepass = (val) => {
 
-     const exp = /[~!@#$%^&*]/;
-     const alpha = /[A-Z]/;
-     const gamma = /[a-z]/;
+     const SpecialChar = /[~!@#$%^&*]/;
+     const UpperCase = /[A-Z]/;
+     const LowerCase = /[a-z]/;
 
      if(val.trim().length >= 10 ) {
         setisValidPass1Green(true);
@@ -144,32 +144,32 @@ function page({ navigation, route }) {
         setisValidPass1Green(false);
         setisValidPass1(true);
      }
-     if (alpha.test(val) ){
+     if (UpperCase.test(val) ){
         setisValidPass2Green(true);
         setisValidPass2(false);
          
      }
-     if (!alpha.test(val)){
+     if (!UpperCase.test(val)){
         setisValidPass2Green(false);
         setisValidPass2(true);
          
      }
-     if (gamma.test(val)) {
+     if (LowerCase.test(val)) {
         setisValidPass3Green(true);
         setisValidPass3(false);
       
      }
-     if (!gamma.test(val)) {
+     if (!LowerCase.test(val)) {
         setisValidPass3Green(false);
         setisValidPass3(true);
          
      }
-     if (exp.test(val)) {
+     if (SpecialChar.test(val)) {
         setisValidPass4Green(true);
         setisValidPass4(false);
         
      }
-     if (!exp.test(val)) {
+     if (!SpecialChar.test(val)) {
         setisValidPass4Green(false);
         setisValidPass4(true);
          
@@ -190,7 +190,7 @@ function page({ navigation, route }) {
         mobile: yup 
             .string()
             .required()
-            .min(10, ({ min }) => `Password must be at least ${min} characters`),
+            .min(10, ({ min }) => `Mobile must be at least ${min} characters`),
 
             // .matches("1234567890", "The account already exists.Login to\ncontinue"),
             
@@ -210,8 +210,7 @@ function page({ navigation, route }) {
 
     
     return(
-
-        <ScrollView style={{ flex: 1 , backgroundColor:'#ffffff' }}>
+<View>
             <Formik
                 initialValues={{firstname:'', lastname:'', mobile:'',dob:'',email:'',cpass:'' }}
                 validationSchema={loginValidationSchema}
@@ -225,7 +224,8 @@ function page({ navigation, route }) {
                 {({handleChange, handleSubmit, values, errors })=> (
                <>
                 
-            <View>
+    <View>
+
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
                         <Appbar.Action color="white" icon="arrow-left" onPress={() => navigation.navigate('signup')} />
@@ -236,6 +236,9 @@ function page({ navigation, route }) {
 
                     </Appbar.Header>
                 </View>
+  
+            <ScrollView style={{paddingBottom:70}}>
+
                 <Text style={styles.text1} >Register</Text>
                 <TextInput 
                    placeholderTextColor="#B3B6B7" 
@@ -314,9 +317,10 @@ function page({ navigation, route }) {
                     modal
                     mode="date"
                     androidVariant="nativeAndroid"
-                    textColor="BLACK"
+                    textColor="black"
                     open={open}
-                    date={new Date()}
+                    date={new Date(date)}
+                    maximumDate={new Date("2021-12-31")}  //////////maxdate_this_year
                     onConfirm={(date) => {
                         setOpen(false)
                         setDate(date.toLocaleDateString())   /////DateString "DAY"_"Mon"_"Date"_"year"
@@ -348,7 +352,7 @@ function page({ navigation, route }) {
 
                 {errors.email &&
                 <Text style={styles.incorrectemail}>{errors.email}</Text>
-            }
+                }
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
                    placeholder="Password"
@@ -435,12 +439,17 @@ function page({ navigation, route }) {
                         <Text style={styles.resettext}>Register</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+
+            </ScrollView>
+    </View>
+            
+
 
                 </>
             )}
         </Formik>
-    </ScrollView>
+</View>
+
     );
 }
 
@@ -717,6 +726,7 @@ const styles = StyleSheet.create({
         right: 78,
         color: '#268E6C'
     },
+    
     
 })
 
