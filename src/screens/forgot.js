@@ -4,10 +4,12 @@ import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
 
-import { ErrorMessage, Formik } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
-import CustomButton from '../components/CustomButton';
-import { values } from 'lodash';
+
+
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+
 
 function forgot ({navigation, route}) {
 
@@ -20,12 +22,30 @@ function forgot ({navigation, route}) {
     const [Code, setCode] = useState('+1');
 
     const [isSubmitting, isSetSubmitting] = useState(false);
+    const [countrycode, setCountryCode] = useState('')  
+
 
 useEffect (()=> {
         if(route.params?.item) {
            setCode(route.params.item)
         }
     },[route.params?.item])
+
+
+useEffect(() => {
+        if (route.params?.item2) {
+            setCountryCode(route.params.item2)
+        }
+    }, [route.params?.item2])
+
+
+    useEffect(()=> {
+        formatPhoneNumber
+    })
+
+
+
+    console.log('day', countrycode)
 
 
    
@@ -49,6 +69,25 @@ useEffect (()=> {
     //     });
 
     // }
+
+
+
+
+    const formatPhoneNumber = (val) => {
+          try 
+        { 
+            if (val.length !== 10 ) {
+                setNumber(number)
+        }   else {
+                const number = phoneUtil.parse(val , countrycode);
+                console.log(phoneUtil.formatInOriginalFormat(number, countrycode));
+                const R = phoneUtil.formatInOriginalFormat(number, countrycode);
+                setNumber(R)
+        }
+        } catch (error) {
+                console.log('error_number')  
+        }   
+    }
  
     return(
     <View style={{flex:1}}>
@@ -86,8 +125,11 @@ useEffect (()=> {
                    placeholder="Mobile Number" 
                    label="Mobile Number"
                    keyboardType="numeric"
-                   onChangeText={handleChange('Number')}
-                   value={values.Number}
+                //    onChangeText={handleChange('Number')}
+                //    value={values.Number}
+                   onChangeText={(val) => formatPhoneNumber(val)}
+                   value={Number}
+
                    error={ errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >

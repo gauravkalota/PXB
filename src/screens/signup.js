@@ -193,28 +193,28 @@ const styles = StyleSheet.create({
         left: 55
     },
     text1:{
-        top:110,
+        top:100,
         left:-13,
         fontSize:14
 
     },
     text2:{
-        top:94,
-        left:200,
+        top:83,
+        left:195,
         color:'#5382F6',
         fontSize: 14
 
 
     },
     text3:{
-        top:94,
+        top:87,
         right:-100,
         fontSize: 14
 
 
     },
     text4:{
-        top:78,
+        top:70,
         left:130,
         color:'#5382F6',
         fontSize: 14

@@ -8,7 +8,6 @@ import Icons from 'react-native-vector-icons/Feather'
 import IconsS from 'react-native-vector-icons/Fontisto'
 
 import { Fragment } from 'react';
-import filter from 'lodash.filter';
 
 
 
@@ -29,7 +28,7 @@ function dailcode({ navigation, route }) {
             <TouchableOpacity onPress={() => {
                 navigation.navigate({
                     name: "page",
-                    params: { item: item.dial_code }
+                    params: { item1: item.dial_code, item2: item.code}
                 })
             }
 
@@ -106,7 +105,7 @@ function dailcode({ navigation, route }) {
                         <View style={{ backgroundColor: '#034C81', height: 40, width: '100%', flexDirection: 'row' }} >
                             <Text style={{ color: 'white', left: 110, top: 7, fontSize: 20, fontWeight: 'bold' }} >Select a Country</Text>
                             <Icons name="arrow-left" size={25} color="white" style={{ right: 135, top: 7 }} onPress={() => navigation.navigate('page')} />
-                            <IconsS name="search" color="white" size={22} style={{ left: 186, top: 9 }} onPress={buttpress} />
+                            <IconsS name="search" color="white" size={20} style={{ left: 185, top: 12 }} onPress={buttpress} />
                         </View>
                     ) : (
                         <TextInput
@@ -118,7 +117,7 @@ function dailcode({ navigation, route }) {
                             theme={{ colors: { text: 'white' } }}
                             // theme change for specific component
                             placeholderTextColor="#bfbfbf"
-                            left={<TextInput.Icon name="arrow-left" color="white" onPress={() => navigation.navigate('forgot')} />}
+                            left={<TextInput.Icon name="arrow-left" color="white" onPress={() => navigation.navigate('page')} />}
                             right={<TextInput.Icon name={() => <IconsS name="close-a" onPress={crossfn} color="white" style={{ top: 4 }} />} />}
                         />
                     )

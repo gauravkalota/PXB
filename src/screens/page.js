@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from "react";
-import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert, I18nManager } from 'react-native';
+import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput, Button, Appbar } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Logo from "../components/logo";
-import { Formik } from 'formik';
+import { useFormik,  setFieldValue } from 'formik';
 import * as yup from 'yup';
 import DatePicker from 'react-native-date-picker'
-import { upperCase, values } from "lodash";
+
+// import PhoneInput from 'react-phone-number-input/react-native-input'
+// import { parsePhoneNumber } from 'react-phone-number-input'
 
 
 
@@ -16,6 +18,10 @@ import { upperCase, values } from "lodash";
 
 
 
+
+
+
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 
 function page({ navigation, route }) {
@@ -29,7 +35,11 @@ function page({ navigation, route }) {
     const [cpass, setcpass]= useState('');
 
     const [isSubmitting, isSetSubmitting] = useState(false);
-    const [Code, setCode] = useState('+1');
+
+    const [Code, setCode] = useState('+1');  ///////////////dail_code
+
+    const [countrycode, setCountryCode] = useState('US')  
+
 
 
     const [isValidPass, setisValidPass] = useState(false);
@@ -51,10 +61,29 @@ function page({ navigation, route }) {
 
 
     useEffect(() => {
-        if (route.params?.item) {
-            setCode(route.params.item)
+        if (route.params?.item1) {
+            setCode(route.params.item1)
         }
-    }, [route.params?.item])
+    }, [route.params?.item1])
+
+    // console.log('hi',Code)
+
+
+
+    useEffect(() => {
+        if (route.params?.item2) {
+            setCountryCode(route.params.item2)
+        }
+    }, [route.params?.item2])
+
+
+    // console.log('hello', countrycode)
+
+
+
+
+
+
 
 
 ///////ON_FOCUS_NEWPASSWORD//////////
@@ -179,6 +208,10 @@ function page({ navigation, route }) {
  }
 
 ///////////Validation_SChema_YUP////////
+
+    const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+
+
     const loginValidationSchema = yup.object().shape({
         firstname: yup
             .string()
@@ -190,9 +223,15 @@ function page({ navigation, route }) {
         mobile: yup 
             .string()
             .required()
-            .min(10, ({ min }) => `Mobile must be at least ${min} characters`),
+            .min(10 , "Invalid Number")
+            .matches(phoneRegExp, 'Phone number is not valid'),
+
+
+            // .min(10, ({ min }) => `Mobile must be at least ${min} characters`),
 
             // .matches("1234567890", "The account already exists.Login to\ncontinue"),
+
+
             
         dob: yup
             .string()
@@ -202,27 +241,102 @@ function page({ navigation, route }) {
  
         cpass: yup 
             .string()
-            .matches(pass, 'Password does not match') 
-
+            .required('Password does not match')
+            .matches( pass, 'Password does not match') 
     })
+//////////////Mobile_Number_Format////////////////
 
-      
 
-    
+
+
+//  const formatPhoneNumber = (phoneNumberString) => {
+//     //  let newText = '';
+//     //  let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+//     //  for(var i =0; i< cleaned.length; i++) {
+//     //      if(i == 0) {
+//     //          newText = '(';
+//     //      } else if (i==3) {
+//     //          newText =  newText + ')-';
+//     //      } 
+//     //     else if ( i == 6 ) {
+//     //          newText = newText + '-' ;
+//     //      }
+//     //     newText = newText + cleaned[i];
+//     //  }
+//     //  setmobile(newText);
+
+//  };
+
+ useEffect(()=> {
+    formatPhoneNumber(NumberWithouFormat)
+ },[countrycode])
+
+//  console.log('NEW',mobile.replace(/[^0-9]/g,''))
+
+ NumberWithouFormat = mobile.replace(/[^0-9]/g,'')
+
+//  console.log('bYE', NumberWithouFormat)
+
+
+    const formatPhoneNumber = (val, setFieldValue ) => {
+          try { 
+            if (val.length !== 10 ) {
+                setmobile(val)
+                formik.setFieldValue('mobile', val)
+                console.log('WIERD', setFieldValue())
+            
+            }   else {
+                const number = phoneUtil.parse(val , countrycode);
+                console.log(phoneUtil.formatInOriginalFormat(number, countrycode));
+                const FormattedNumber = phoneUtil.formatInOriginalFormat(number, countrycode);
+                setmobile(FormattedNumber)
+                formik.setFieldValue('mobile', FormattedNumber)
+                
+            }    
+        } catch (error) {
+            
+                 
+        }   
+    }
+
+
+////////////////useFormik//////
+
+const formik = useFormik({
+    initialValues:{firstname:'', lastname:'', mobile:'' ,dob:'',email:'',cpass:'' },
+                validationSchema:loginValidationSchema,
+                validateOnChange:isSubmitting,
+                // enableReinitialize={true}
+                onSubmit: values => {
+                    isSetSubmitting(true);
+                }
+
+})
+   
+  
     return(
 <View>
-            <Formik
-                initialValues={{firstname:'', lastname:'', mobile:'',dob:'',email:'',cpass:'' }}
+            {/* <Formik
+
+                initialValues={{firstname:'', lastname:'', mobile:'' ,dob:'',email:'',cpass:'' }}
                 validationSchema={loginValidationSchema}
                 validateOnChange={isSubmitting}
+                // enableReinitialize={true}
                 onSubmit={values => {
                     isSetSubmitting(true);
                 }}
 
+                onSubmit={(values, actions ) => {
+                    alert(JSON.stringify(values));
+                    setTimeout(()=> {
+                        actions.setSubmitting(true);
+                    },1000);
+                }}
+
             >
 
-                {({handleChange, handleSubmit, values, errors })=> (
-               <>
+                {({handleChange, handleSubmit, values, errors, setFieldValue})=> (
+               <> */}
                 
     <View>
 
@@ -236,8 +350,12 @@ function page({ navigation, route }) {
 
                     </Appbar.Header>
                 </View>
-  
-            <ScrollView style={{paddingBottom:70}}>
+
+            <KeyboardAvoidingView 
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+
+            >
+            <ScrollView style={{paddingBottom:160,}}>
 
                 <Text style={styles.text1} >Register</Text>
                 <TextInput 
@@ -247,13 +365,13 @@ function page({ navigation, route }) {
                    mode="outlined"
                    onFocus={()=>Ffocus()} 
                    style={styles.textinput1} 
-                   onChangeText={handleChange('firstname')}
-                   value={values.firstname}
-                   error={errors.firstname}
+                   onChangeText={formik.handleChange('firstname')}
+                   value={formik.values.firstname}
+                   error={formik.errors.firstname}
                 />
 
-                {errors.firstname &&
-                   <Text style={styles.incorrectfirst}>{errors.firstname}</Text>
+                {formik.errors.firstname &&
+                   <Text style={styles.incorrectfirst}>{formik.errors.firstname}</Text>
                 }
 
                 <View >
@@ -264,15 +382,15 @@ function page({ navigation, route }) {
                    mode="outlined"
                    onFocus={()=>Lfocus()}  
                    style={styles.textinput2} 
-                   onChangeText={handleChange('lastname')}
-                   value={values.lastname}
-                   error={errors.lastname}
+                   onChangeText={formik.handleChange('lastname')}
+                   value={formik.values.lastname}
+                   error={formik.errors.lastname}
                 />
                 </View>
                 
 
-                {errors.lastname &&
-                   <Text style={styles.incorrectlast}>{errors.lastname}</Text>
+                {formik.errors.lastname &&
+                   <Text style={styles.incorrectlast}>{formik.errors.lastname}</Text>
                 }
 
                 <View>
@@ -282,10 +400,14 @@ function page({ navigation, route }) {
                        label="Mobile Number"
                        onFocus={()=>Mfocus()}  
                        mode="outlined" 
-                       style={styles.textinput3} 
-                       onChangeText={handleChange('mobile')}
-                       value={values.mobile}
-                       error={errors.mobile}
+                       style={styles.textinput3}
+                       keyboardType="numeric" 
+                       onChangeText={(val) => formatPhoneNumber(val, setFieldValue)}
+                    //    value={mobile}
+                    //    onChangeText={handleChange('mobile')}
+                    //    onChangeText={mobileNumberParaser}
+                       value={formik.values.mobile}
+                       error={formik.errors.mobile}
                     />
                     <TouchableOpacity style={styles.code1} onPress={() => navigation.navigate('dailcode2')}    >
                         <View style={styles.code2} >
@@ -295,8 +417,8 @@ function page({ navigation, route }) {
                     </TouchableOpacity>
                 </View>
 
-                {errors.mobile &&
-                <Text style={styles.incorrectmobile}>{errors.mobile}</Text>
+                {formik.errors.mobile &&
+                <Text style={styles.incorrectmobile}>{formik.errors.mobile}</Text>
                 }
 
 
@@ -342,16 +464,17 @@ function page({ navigation, route }) {
                    placeholder="Email Address"
                    label="Email Address"
                    onFocus={()=>Efocus()} 
-                   mode="outlined" 
+                   mode="outlined"
+                   autoCapitalize="none" 
                    style={styles.textinput5} 
-                   onChangeText={handleChange('email')}
-                   value={values.email}
-                   error={errors.email}
+                   onChangeText={formik.handleChange('email')}
+                   value={formik.values.email}
+                   error={formik.errors.email}
                    
                 />
 
-                {errors.email &&
-                <Text style={styles.incorrectemail}>{errors.email}</Text>
+                {formik.errors.email &&
+                <Text style={styles.incorrectemail}>{formik.errors.email}</Text>
                 }
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
@@ -421,33 +544,34 @@ function page({ navigation, route }) {
                    secureTextEntry={true}
                    mode="outlined" 
                    style={styles.textinput7} 
-                   onChangeText={handleChange('cpass')}
-                   value={values.cpass}
-                   error={errors.cpass}
+                   onChangeText={formik.handleChange('cpass')}
+                   value={formik.values.cpass}
+                   error={formik.errors.cpass}
                 />
 
                             
-                {errors.cpass &&
-                <Text style={styles.incorrectcpass}>{errors.cpass}</Text>
+                {formik.errors.cpass &&
+                <Text style={styles.incorrectcpass}>{formik.errors.cpass}</Text>
                 }
 
 
                 
 
                 <View>
-                    <TouchableOpacity style={!values.firstname || !values.lastname || !values.email || !values.mobile || !values.cpass  ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit}  >
+                    <TouchableOpacity style={ !formik.values.firstname || !formik.values.lastname || !formik.values.email || !formik.values.cpass  ? styles.resetbtndis :   styles.resetbtn} onPress={formik.handleSubmit} disabled={(!formik.values.firstname || !formik.values.lastname || !formik.values.email || !formik.values.cpass)}  >
                         <Text style={styles.resettext}>Register</Text>
                     </TouchableOpacity>
                 </View>
 
             </ScrollView>
+            </KeyboardAvoidingView>
     </View>
             
 
-
+{/* 
                 </>
             )}
-        </Formik>
+        </Formik> */}
 </View>
 
     );
@@ -572,6 +696,8 @@ const styles = StyleSheet.create({
         width: 75,
         left: 35,
         top: 19,
+        backgroundColor: '#FFFFFF'
+
     },
     code2:{
         flexDirection: 'row',
@@ -624,6 +750,11 @@ const styles = StyleSheet.create({
 
     },
     incorrectcpass:{
+        top:40,
+        right:-35,
+        color: '#CC1414',
+        fontSize:14,
+        fontWeight:'400'
         
     },
     incorrectmobile:{
