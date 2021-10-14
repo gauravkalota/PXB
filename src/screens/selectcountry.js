@@ -29,7 +29,7 @@ function selectcountry({navigation, route})  {
             <TouchableOpacity onPress={() => {
                 navigation.navigate({
                     name:"login",
-                    params : {item : item.dial_code, item2: item.code}
+                    params: { item1: item.dial_code, item2: item.code}
                 })
             }
                 

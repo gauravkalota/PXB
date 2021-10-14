@@ -283,7 +283,7 @@ function page({ navigation, route }) {
             if (val.length !== 10 ) {
                 setmobile(val)
                 formik.setFieldValue('mobile', val)
-                console.log('WIERD', setFieldValue())
+                // console.log('WIERD', formik.setFieldValue())
             
             }   else {
                 const number = phoneUtil.parse(val , countrycode);
@@ -301,17 +301,20 @@ function page({ navigation, route }) {
 
 
 ////////////////useFormik//////
-
-const formik = useFormik({
+const formik = useFormik({ 
     initialValues:{firstname:'', lastname:'', mobile:'' ,dob:'',email:'',cpass:'' },
-                validationSchema:loginValidationSchema,
-                validateOnChange:isSubmitting,
-                // enableReinitialize={true}
-                onSubmit: values => {
-                    isSetSubmitting(true);
-                }
-
+    validationSchema:loginValidationSchema,
+    validateOnChange:isSubmitting,
+ // enableReinitialize={true}
+    onSubmit: values => {
+            isSetSubmitting(true);  
+            navigation.navigate({
+            name: "resetpassword",
+            params: { item: values.mobile },
+        });
+    }  
 })
+
    
   
     return(
@@ -408,6 +411,7 @@ const formik = useFormik({
                     //    onChangeText={mobileNumberParaser}
                        value={formik.values.mobile}
                        error={formik.errors.mobile}
+                    
                     />
                     <TouchableOpacity style={styles.code1} onPress={() => navigation.navigate('dailcode2')}    >
                         <View style={styles.code2} >
@@ -465,11 +469,12 @@ const formik = useFormik({
                    label="Email Address"
                    onFocus={()=>Efocus()} 
                    mode="outlined"
-                   autoCapitalize="none" 
+                   autoCapitalize={true}
                    style={styles.textinput5} 
                    onChangeText={formik.handleChange('email')}
                    value={formik.values.email}
                    error={formik.errors.email}
+                   
                    
                 />
 
@@ -667,7 +672,10 @@ const styles = StyleSheet.create({
         height: 55,
         top: 30,
         left: 35,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        padding: 0,
+        
+        
 
     },
     textinput6: {

@@ -4,8 +4,9 @@ import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
 
-import { Formik } from 'formik'
+import { Formik, useFormik } from 'formik'
 import * as yup from 'yup'
+import { ScrollView } from 'react-native';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -22,14 +23,14 @@ function forgot ({navigation, route}) {
     const [Code, setCode] = useState('+1');
 
     const [isSubmitting, isSetSubmitting] = useState(false);
-    const [countrycode, setCountryCode] = useState('')  
+    const [countrycode, setCountryCode] = useState('US')  
 
 
 useEffect (()=> {
-        if(route.params?.item) {
-           setCode(route.params.item)
+        if(route.params?.item1) {
+           setCode(route.params.item1)
         }
-    },[route.params?.item])
+    },[route.params?.item1])
 
 
 useEffect(() => {
@@ -39,9 +40,7 @@ useEffect(() => {
     }, [route.params?.item2])
 
 
-    useEffect(()=> {
-        formatPhoneNumber
-    })
+   
 
 
 
@@ -53,14 +52,23 @@ useEffect(() => {
  
 ///////Validtion_schema_YUP///////////
 
+    const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+
+
     const loginValidationSchema = yup.object().shape({
         Number: yup
             .string()
+            
             .min(10, ({ min }) => `Number must be  ${min} digits`)
+            .matches(phoneRegExp, 'Phone number is not valid')
 
             // .required('This account does not exist.Register to create account'),
         
     })
+
+
+
+
 
     // handleSubmit = values => {
     //     navigation.navigate({
@@ -69,29 +77,63 @@ useEffect(() => {
     //     });
 
     // }
+////////////UseFormik///////////
+    const formik = useFormik({
+    initialValues:{Number:'' },
+    validationSchema:loginValidationSchema,
+    validateOnChange:isSubmitting,
+                // enableReinitialize={true}
+        onSubmit: values => {
+        isSetSubmitting(true);
+        navigation.navigate({
+            name: "resetpassword",
+            params: { item: values.Number },
+        });
+
+        }
+})
 
 
 
+////////Dynamic_Format_For_Country_code/////
 
-    const formatPhoneNumber = (val) => {
-          try 
-        { 
+ useEffect(()=> {
+    formatPhoneNumber(NumberWithouFormat)
+ },[countrycode])
+
+//  console.log('NEW',mobile.replace(/[^0-9]/g,''))
+
+ NumberWithouFormat = Number.replace(/[^0-9]/g,'')
+
+//  console.log('bYE', NumberWithouFormat)
+
+////////Format_Number/////////
+const formatPhoneNumber = (val ) => {
+          try { 
             if (val.length !== 10 ) {
-                setNumber(number)
-        }   else {
+                setNumber(val)
+                formik.setFieldValue('Number', val)
+                // console.log('WIERD', formik.setFieldValue())
+            
+            }   else {
                 const number = phoneUtil.parse(val , countrycode);
                 console.log(phoneUtil.formatInOriginalFormat(number, countrycode));
-                const R = phoneUtil.formatInOriginalFormat(number, countrycode);
-                setNumber(R)
-        }
+                const FormattedNumber = phoneUtil.formatInOriginalFormat(number, countrycode);
+                setNumber(FormattedNumber)
+                formik.setFieldValue('Number', FormattedNumber)
+                
+            }    
         } catch (error) {
-                console.log('error_number')  
+            
+                 
         }   
     }
+
+
  
     return(
     <View style={{flex:1}}>
-        <Formik
+        {/* <Formik
            validationSchema={loginValidationSchema}
            initialValues={{Number:''}}
            validateOnMount={true}
@@ -103,9 +145,9 @@ useEffect(() => {
         >
             
         {({ handleChange, handleSubmit, values, errors, isValid, touched}) => (
-            <>
+            <> */}
             
-            <View>
+            <ScrollView scrollEnabled={true} >
                 <View>
                     <Appbar.Header style={{ backgroundColor:'#034C81'}} >
                         <Appbar.Action color="white" icon="arrow-left" onPress={()=> navigation.navigate('login')} />
@@ -126,11 +168,13 @@ useEffect(() => {
                    label="Mobile Number"
                    keyboardType="numeric"
                 //    onChangeText={handleChange('Number')}
-                //    value={values.Number}
-                   onChangeText={(val) => formatPhoneNumber(val)}
-                   value={Number}
+                   value={formik.values.Number}
+                //    onChangeText={formik.handleChange('Number')}
+                    onChangeText={(val) => formatPhoneNumber(val)}
 
-                   error={ errors.Number}
+                //    value={Number}
+
+                   error={ formik.errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.textv}  >
@@ -142,13 +186,13 @@ useEffect(() => {
 
               
 
-                { errors.Number && 
-                   <Text style={styles.error1} >{errors.Number}</Text>
+                { formik.errors.Number && 
+                   <Text style={styles.error1} >{formik.errors.Number}</Text>
                 }
 
 
                 <View>
-                <TouchableOpacity disabled={!values.Number}  style={ !values.Number ? styles.resetbtndis  : styles.resetbtn} onPress={handleSubmit} >
+                <TouchableOpacity disabled={!formik.values.Number}  style={ !formik.values.Number ? styles.resetbtndis  : styles.resetbtn} onPress={formik.handleSubmit} >
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>
@@ -165,10 +209,10 @@ useEffect(() => {
                         <Text style={styles.text5} >Register</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-        </>
+            </ScrollView>
+        {/* </>
         )}
-    </Formik>
+    </Formik> */}
 
 </View>
     )

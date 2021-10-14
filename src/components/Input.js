@@ -3,7 +3,7 @@ import React from "react";
 import {View, Text, StyleSheet} from "react-native";
 import { TextInput } from "react-native-paper"
 
-const Input = ({error,outlineColor,label,right,secureTextEntry,mode,placeholder,placeholderTextColor,keyboardType,onChangeText}) => {
+const Input = ({error,outlineColor,label,right,secureTextEntry,mode,placeholder,placeholderTextColor,keyboardType,onChangeText,value}) => {
     return(
         <View>
             <TextInput
@@ -16,6 +16,7 @@ const Input = ({error,outlineColor,label,right,secureTextEntry,mode,placeholder,
             keyboardType={keyboardType}
             onChangeText={onChangeText}
             mode={mode}
+            value={value}
             outlineColor={outlineColor}
             error={error}
             />

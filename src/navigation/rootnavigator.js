@@ -13,6 +13,9 @@ import signup from '../screens/signup';
 import page from '../screens/page';
 import dailcode2 from '../screens/dailcode2';
 import mobileverification from '../screens/mobileverification';
+import optionalverification from '../screens/optionalverification';
+import verificationsuccessful from '../screens/verificationsuccessful';
+import profilepicture from '../screens/profilepicture';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,13 +31,17 @@ function rootnavigator() {
                 <Stack.Screen name="login" component={login} />
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="signup" component={signup} />
-                <Stack.Screen name="mobile" component={mobileverification} />
                 <Stack.Screen name="dailcode" component={dailcode} />
                 <Stack.Screen name="dailcode2" component={dailcode2} />
                 <Stack.Screen name="forgot" component={forgot} />
                 <Stack.Screen name="page" component={page} />
                 <Stack.Screen name="resetpassword" component={resetpassword} />
+                <Stack.Screen name="mobile" component={mobileverification} />
+                <Stack.Screen name="optional" component={optionalverification} />
                 <Stack.Screen name="passwordset" component={passwordset} />
+                <Stack.Screen name="verification" component={verificationsuccessful} />
+                <Stack.Screen name="profilepicture" component={profilepicture} />
+
 
             </Stack.Navigator>
         </NavigationContainer>

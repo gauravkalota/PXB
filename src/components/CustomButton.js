@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native'
 
-const CustomButton = ({ disabled , text , onPress}) => {
+const CustomButton = ({ disabled , text , onPress, style}) => {
     return (
-        <View>
+        <View style={style}>
             <TouchableOpacity disabled={disabled} onPress={onPress}  style={disabled ? styles.resetbtn : styles.resetbtn} >
                 <Text style={styles.resettext}>{text}</Text>
             </TouchableOpacity>

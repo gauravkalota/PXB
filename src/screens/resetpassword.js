@@ -2,7 +2,7 @@ import  React, {useState, useEffect} from 'react';
 import { Button, View, StyleSheet ,Image, TouchableOpacity, Alert, TouchableHighlight} from 'react-native';
 import { Appbar, Text, TextInput } from 'react-native-paper';
 
-import { Formik } from 'formik'
+import { Formik, useFormik } from 'formik'
 import * as yup from 'yup'
 
 
@@ -173,10 +173,27 @@ useEffect (()=>{
 
  }
 
+
+
+
+
+ ////////////////useFormik//////
+
+const formik = useFormik({
+    initialValues:{resetcode:'', confirmpass:''},
+                validationSchema:loginValidationSchema,
+                validateOnChange:isSubmitting,
+                // enableReinitialize={true}
+                onSubmit: values => {
+                    isSetSubmitting(true);
+                }
+
+})
+
     return (
         
      <View style={{ flex: 1, backgroundColor:'#fff'}} >
-        <Formik
+        {/* <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ resetcode: '',confirmpass: '' }}
             validateOnChange={isSubmitting}
@@ -188,7 +205,7 @@ useEffect (()=>{
         >
 
             {({ handleChange, handleSubmit, values, errors, isValid})=>(
-                <>
+                <> */}
             
             <View>
                 <View>
@@ -218,18 +235,18 @@ useEffect (()=>{
                         //   error={redenable1}
                           onFocus={() => fistvalid2()}
                         //   onChangeText={val => handlecode(val)}
-                        onChangeText={handleChange('resetcode')}
+                        onChangeText={formik.handleChange('resetcode')}
                         // onBlur={handleBlur('resetcode')}
-                        value={values.resetcode}
-                        error={errors.resetcode}
+                        value={formik.values.resetcode}
+                        error={formik.errors.resetcode}
                         
                           />
                         {isValidPassone ? (
                             <Text style={styles.ErrorPassone} >Incorrect code</Text>)
                             : null}
 
-                        { errors.resetcode &&
-                            <Text style={styles.ErrorPassone} >{errors.resetcode}</Text>
+                        { formik.errors.resetcode &&
+                            <Text style={styles.ErrorPassone} >{formik.errors.resetcode}</Text>
                         }
 
 
@@ -276,10 +293,11 @@ useEffect (()=>{
                         //   error={redenable3}
                           onFocus={() => fistvalid3()}
                         //   onChangeText={val => handleconfirm(val)}
-                            onChangeText={handleChange('confirmpass')}
+                            onChangeText={formik.handleChange('confirmpass')}
                             // onBlur={handleBlur('confirmpass')}
-                            value={values.confirmpass}
-                            error={errors.confirmpass || errors.resetcode}
+                            value={formik.values.confirmpass}
+                            error={formik.errors.confirmpass}
+                            // error={formik.errors.confirmpass || formik.errors.resetcode}
 
                           />
 
@@ -287,20 +305,20 @@ useEffect (()=>{
                             <Text style={styles.ErrorPasstwo} >Passwords do not match</Text>)
                             : null} */}
 
-                        {errors.confirmpass &&
-                            <Text style={styles.ErrorPasstwo} >{errors.confirmpass}</Text>
+                        {formik.errors.confirmpass &&
+                            <Text style={styles.ErrorPasstwo} >{formik.errors.confirmpass}</Text>
                         }
 
-                        <TouchableHighlight  style={ (!values.resetcode || !values.confirmpass )  ? styles.resetbtndis   : styles.resetbtn} onPress={handleSubmit}  >
+                        <TouchableHighlight  style={ (!formik.values.resetcode || !formik.values.confirmpass )  ? styles.resetbtndis   : styles.resetbtn} onPress={formik.handleSubmit}  >
                             <Text style={styles.resettext}>Reset</Text>
                         </TouchableHighlight>
 
                     </View>
                 </View>
             </View>  
-            </>
+            {/* </>
                 )}
-        </Formik>
+        </Formik> */}
     </View>
     );
 }

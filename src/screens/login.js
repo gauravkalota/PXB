@@ -5,13 +5,14 @@ import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Input from '../components/Input';
+// import Input from '../components/Input';
 
-import { Formik } from 'formik'
+import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
 
 
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 export default function login({navigation, route}) {
     const [Number, setNumber] = useState(' ');
@@ -24,6 +25,8 @@ export default function login({navigation, route}) {
     const [isValidUser, setisValidUser] = useState(true);
 
     const [Code, setCode] = useState('+1')
+    const [countrycode, setCountryCode] = useState('US')  
+
 
     const [isSubmitting, isSetSubmitting] = useState(false);
 
@@ -41,10 +44,19 @@ export default function login({navigation, route}) {
    
 
     useEffect (()=> {
-        if(route.params?.item) {
-           setCode(route.params.item)
+        if(route.params?.item1) {
+           setCode(route.params.item1)
         }
-    },[route.params?.item])
+    },[route.params?.item1])
+
+        useEffect(() => {
+        if (route.params?.item2) {
+            setCountryCode(route.params.item2)
+        }
+    }, [route.params?.item2])
+
+
+    // console.log('hello', countrycode)
    
 
 
@@ -62,13 +74,90 @@ export default function login({navigation, route}) {
     })
 
 
+///////////////USE_FORMIK////////////
+   const Formik = useFormik({
+                initialValues:{Number:'', Password:''},
+                validationSchema:loginValidationSchema,
+                validateOnChange:isSubmitting,
+                // enableReinitialize={true}
+                onSubmit: values => {
+                    isSetSubmitting(true);
+                    Alert.alert('Logged In')
+                }
+
+}) 
+
+
+////////////FORMAT_NUMBER////////////
+
+//  const formatPhoneNumber = (phoneNumberString) => {
+//      let newText = '';
+//      let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+//      for(var i =0; i< cleaned.length; i++) {
+//          if(i == 0) {
+//              newText = '(';
+//          } else if (i==3) {
+//              newText =  newText + ')-';
+//          } 
+//         else if ( i == 6 ) {
+//              newText = newText + '-' ;
+//          }
+//         newText = newText + cleaned[i];
+//      }
+//      setNumber(newText);
+
+//  };
+
+//////////////Mobile_Number_Format////////
+
+ useEffect(()=> {
+    formatPhoneNumber(NumberWithouFormat)
+ },[countrycode])
+
+//  console.log('NEW',mobile.replace(/[^0-9]/g,''))
+
+ NumberWithouFormat = Number.replace(/[^0-9]/g,'')
+
+//  console.log('bYE', NumberWithouFormat)
+
+
+
+    const formatPhoneNumber = (val, setFieldValue ) => {
+          try { 
+            if (val.length !== 10 ) {
+                setNumber(val)
+                                Formik.setFieldValue('Number', val)
+
+                // console.log('WIERD', formik.setFieldValue())
+            
+            }   else {
+                const number = phoneUtil.parse(val , countrycode);
+                console.log(phoneUtil.formatInOriginalFormat(number, countrycode));
+                const FormattedNumber = phoneUtil.formatInOriginalFormat(number, countrycode);
+                setNumber(FormattedNumber)
+                                Formik.setFieldValue('Number', FormattedNumber)
+
+                console.log('he', FormattedNumber)
+                console.log('be', Number)
+                
+            }    
+        } catch (error) {
+            
+                 
+        }   
+    }
+
+
+    
+
+
 
 
     return (
 // {/* <ScrollView scrollEnabled={false}  > */}
  <ScrollView contentContainerStyle={{flexGrow:1}} >
     <View style={styles.container}>
-            <Formik
+            {/* <Formik
                 initialValues={{ Number: '', Password: '' }}
                 validationSchema={loginValidationSchema}
                 validateOnChange={isSubmitting}
@@ -83,7 +172,7 @@ export default function login({navigation, route}) {
 
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-                    <>
+                    <> */}
             <Logo  />
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
@@ -96,22 +185,26 @@ export default function login({navigation, route}) {
 
 
             <View style={styles.inputViewnew}>   
-                <Input
+                <TextInput
                     style={styles.inpuText}
                     mode="outlined"
                     label="Mobile Number"
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
-                    onChangeText={handleChange('Number')}
+                    // onChangeText={Formik.handleChange('Number')}
+                    onChangeText={(val) => formatPhoneNumber(val, setFieldValue)}
+
+                    // onChangeText={(phoneNumberString)=>formatPhoneNumber(phoneNumberString)}
                     // onBlur = {handleBlur('Number')}
-                    value={values.Number}
-                    error={errors.Number} 
+                    value={Number}
+                    // value={Formik.values.Number}
+                    error={Formik.errors.Number} 
                 />
             </View>
 
             <View style={styles.inputView}>
-                <Input 
+                <TextInput 
                     style={styles.inpuText}
                     secureTextEntry={hidePass ? true : false}
                     mode="outlined"
@@ -126,10 +219,10 @@ export default function login({navigation, route}) {
                         onPress={() => setHidePass(!hidePass)}
                     />  }  onPress={() => setHidePass(!hidePass)} /> }
                     placeholderTextColor="#848484"
-                    onChangeText={handleChange('Password')}
+                    onChangeText={Formik.handleChange('Password')}
                     // onBlur={handleBlur('Password')}
-                    value={values.Password}
-                    error={  errors.Password || errors.Number}
+                    value={Formik.values.Password}
+                    error={  Formik.errors.Password || Formik.errors.Number}
 
                     // error={redenable}
                 />
@@ -142,21 +235,21 @@ export default function login({navigation, route}) {
             </View>
          
 
-            {errors.Number &&
-                <Text style={styles.incorrectText}>{errors.Number}</Text>
+            {Formik.errors.Number &&
+                <Text style={styles.incorrectText}>{Formik.errors.Number}</Text>
             }
-            {errors.Password &&
-                <Text style={styles.incorrectText}>{errors.Password}</Text>
+            {Formik.errors.Password &&
+                <Text style={styles.incorrectText}>{Formik.errors.Password}</Text>
             }
             <View style={styles.forgotPassword}>
                 <TouchableOpacity onPress={()=> navigation.navigate('forgot')} >
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-                        <AppButton  onpress={handleSubmit} title="Log In" style={!values.Number || !values.Password  ? styles.disablebtn : styles.appButtonContainer} />
-                    </>
+                        <AppButton  onpress={Formik.handleSubmit} title="Log In" style={!Formik.values.Number || !Formik.values.Password  ? styles.disablebtn : styles.appButtonContainer} />
+                    {/* </>
                 )}
-            </Formik>
+            </Formik> */}
             <View style={styles.orlineR}>
 
             </View>
@@ -392,7 +485,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#E6E6E6",
         borderRadius: 4,
         paddingVertical: 13,
-        paddingHorizontal: 123
+        paddingHorizontal: 123,
+        height:53
     },
     baseline: {
         flexDirection: 'row',
