@@ -32,6 +32,8 @@ function profilepicture ({navigation, route}) {
             <ScrollView scrollEnabled={false} >
                 
                     <Appbar.Header style={{ backgroundColor:'#034C81'}} >
+                        {/* <Appbar.Action color="white" icon="arrow-left" onPress={()=> navigation.navigate('verification')} /> */}
+
                         <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
                         <TouchableOpacity style={styles.skipbtn} onPress={()=>Alert.alert('SKIP')} >
                             <Text style={styles.skiptext} >SKIP</Text>

@@ -12,7 +12,7 @@ function verificationsuccessful ({navigation}) {
                 style={styles.image}
                 
                 />
-            <TouchableOpacity onPress={() => navigation.navigate('resetpassword')}  >
+            <TouchableOpacity onPress={() => navigation.navigate('mobile')}  >
                 <Text style={styles.text1} >Verification Successfully</Text>
                 </TouchableOpacity>
             <Text style={styles.text2}  >You have successfully verified your account.</Text>

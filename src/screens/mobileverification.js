@@ -1,5 +1,6 @@
-import React, { useState, useEffect} from 'react';
-import { Image,View, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import React, { useState, useEffect, useRef, useContext} from 'react';
+import { Image,View, StyleSheet, TouchableOpacity, Alert, ScrollView, RefreshControlBase } from 'react-native';
+import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput} from 'react-native-paper';
 
 
@@ -10,8 +11,14 @@ function mobileverification ({navigation, route}) {
     const [Number3, setNumber3] = useState(' ');
     const [Number4, setNumber4] = useState(' ');
 
-    const [Code, setCode] = useState('+1')
 
+    const [Pin1valid , setPin1Valid] = useState(false);
+    const [Pin2valid , setPin2Valid] = useState(false);
+    const [Pin3valid , setPin3Valid] = useState(false);
+    const [Pin4valid , setPin4Valid] = useState(false);
+
+    const [Code, setCode] = useState('')
+    const [Errors, SetErrors] = useState(false)
     useEffect(() => {
         if (route.params?.item) {
             setCode(route.params.item)
@@ -20,8 +27,20 @@ function mobileverification ({navigation, route}) {
 
     console.log('g',Code)
 
+//////////////////Automatic-enter-to-next-textbox///////////////////
+
+const Pin1Ref = React.createRef();
+const Pin2Ref = React.createRef();
+const Pin3Ref = React.createRef();
+const Pin4Ref = React.createRef();
 
 
+///////FOR_ERRORS/////////////
+
+const submitPin = () => {
+    SetErrors(true)
+    
+}
    
 
 
@@ -55,9 +74,32 @@ function mobileverification ({navigation, route}) {
                            keyboardType={'numeric'} 
                            maxLength={1} 
                            mode={'outlined'} 
-                           style={styles.otpinput}
-                           onChangeText={val => setNumber1(val)}
-                        //    value={Number1} 
+                           theme={{colors:{text:'white'}}}
+                           style={ Pin1valid ? styles.otpinputvalid :  styles.otpinput}
+                           ref={Pin1Ref}
+                        //    onChangeText={()=> Pin2Ref.current.focus() }
+                           onChangeText={val =>{ 
+                               if(val){
+                                   setNumber1(val);
+                                   Pin2Ref.current.focus();
+                               } else {
+                                   setNumber1(val)
+                               }
+                              }  }
+                              
+                           onKeyPress={({nativeEvent})=> { console.log('Number1',Number1);
+                               if(nativeEvent.key === 'Backspace'){
+                                   SetErrors(false)
+                                   setPin1Valid(false);
+                               }
+                               else {
+                                   setPin1Valid(true);
+                               }
+
+                           }}
+                           
+                           
+                           
                         //    onEndEditing={()=> Alert.alert('ENDS')}
                            
                            
@@ -66,9 +108,27 @@ function mobileverification ({navigation, route}) {
                            keyboardType={'numeric'} 
                            maxLength={1} 
                            mode={'outlined'} 
-                           style={styles.otpinput}
-                           onChangeText={val => setNumber2(val)}
-                        //    value={Number2} 
+                           theme={{colors:{text:'white'}}}
+                           style={ Pin2valid ? styles.otpinputvalid :  styles.otpinput}
+                        //    onChangeText={()=> Pin3Ref.current.focus() }
+                           ref={Pin2Ref}
+                           onChangeText={val =>{ 
+                               if(val){
+                                   setNumber2(val);
+                                   Pin3Ref.current.focus();
+                               } else {
+                                   setNumber2(val)
+                               }
+                              }  }
+                           onKeyPress={({nativeEvent})=> { console.log('Number2',Number2);
+                               if(nativeEvent.key === 'Backspace'){
+                                   Pin1Ref.current.focus()
+                                   setPin2Valid(false);
+                               }
+                               else {
+                                   setPin2Valid(true);
+                               }
+                           }}
 
  
 
@@ -76,26 +136,68 @@ function mobileverification ({navigation, route}) {
                         />
                         <TextInput 
                            keyboardType={'numeric'} 
-                           maxLength={1} mode={'outlined'} 
-                           style={styles.otpinput}
-                           onChangeText={val => setNumber3(val)} 
-                        //    value={Number3} 
-
+                           maxLength={1} 
+                           mode={'outlined'}
+                           theme={{colors:{text:'white'}}} 
+                           style={ Pin3valid ? styles.otpinputvalid :  styles.otpinput}
+                        //    onChangeText={()=> Pin4Ref.current.focus() }
+                           ref={Pin3Ref}
+                           onChangeText={val =>{ 
+                               if(val){
+                                   setNumber3(val);
+                                   Pin4Ref.current.focus();
+                               } else {
+                                   setNumber3(val)
+                               }
+                              }  }
+                           onKeyPress={({nativeEvent})=> { console.log('Number3',Number3);
+                               if(nativeEvent.key === 'Backspace'){
+                                   Pin2Ref.current.focus()
+                                   setPin3Valid(false);
+                               }
+                               else {
+                                   setPin3Valid(true);
+                               }
+                           }}
 
                         />
                         <TextInput 
                            keyboardType={'numeric'} 
                            maxLength={1} 
                            mode={'outlined'} 
-                           style={styles.otpinput}
-                           onChangeText={val => setNumber4(val)} 
-                        //    value={Number4} 
+                           theme={{colors:{text:'white'}}}
+                           style={ Pin4valid ? styles.otpinputvalid :  styles.otpinput}
+                        //    onChangeText={ () => submitPin()} 
+                           ref={Pin4Ref}
+                           onChangeText={val =>{ 
+                               if(val){
+                                   setNumber4(val);
+                                   submitPin();
+                               } else {
+                                   setNumber4(val)
+                               }
+                              }  }
+                           onKeyPress={({nativeEvent})=> {  console.log('Number4',Number4);
+                               if(nativeEvent.key === 'Backspace'){
+                                   Pin3Ref.current.focus()
+                                   setPin4Valid(false);
+                               }
+                               else {
+                                   setPin4Valid(true);
+                               }
+                           }}
+
 
 
                         />
 
-                    </View>   
-                    <Text style={styles.error}>Code Invalid/Expired</Text> 
+                    </View>
+                    {
+                        Errors ? (
+                           <Text style={styles.error}>Code Invalid/Expired</Text>
+                        ) : null
+                    }   
+                     
                 </View>
                 
                 <View style={styles.baseline} >
@@ -162,92 +264,6 @@ const styles = StyleSheet.create({
         fontWeight:'700'
 
     },
-    
-    resetbtn:{
-        width:'77%',
-        height:53,
-        top:50,
-        left:41,
-        backgroundColor: "#5382F6",
-        borderRadius: 4,
-        paddingVertical: 5,
-        paddingHorizontal:10
-        
-    },
-    resetbtndis:{
-        width: '77%',
-        height: 53,
-        top: 60,
-        left: 41,
-        borderRadius: 4,
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        backgroundColor: "#DDDD",
-
-    },
-    resettext:{
-        color:'white',
-        fontWeight:'bold',
-        fontSize:16,
-        fontWeight:'700',
-        top:10,
-        left:85
-
-            
-    },
-    textinput:{
-        width:'57%',
-        height:50,
-        top:80,
-        left:120
-    },
-    inputViewnew1:{
-        width:'18%',
-        top:50,
-        left:39,
-    
-        
-    },
-    combtn: {
-        borderWidth: 0.8,
-        height: 50,
-        position: 'relative',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 4,
-        width:70,
-        left:43,
-        top:30
-    },
-    text6:{
-        right:10,
-        top:5
-
-    },
-    text7:{
-        fontSize:24,
-        right:-10,
-        top:5
-
-    },
-    textv:{
-        flexDirection:'row'
-
-    },
-    error1:{
-       fontSize:14,
-       fontWeight:'500',
-       color:'#CC1414',
-       top:34,
-       left:120
-    },
-    error2:{
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#CC1414',
-        top:34,
-        left:120
-    },
     baseline:{
         flexDirection:'row',
         justifyContent:'center',
@@ -290,10 +306,19 @@ const styles = StyleSheet.create({
         width:60,
         height:60,
         top:70,
-        textAlign:'center'
+        textAlign:'center',
+        
          ////////////enter-text=center-for-textinput
         // backgroundColor:'#69E2B3'
     
+    },
+    otpinputvalid:{
+        width:60,
+        height:60,
+        top:70,
+        textAlign:'center',
+        backgroundColor:'#69E2B3'
+
     },
     verifybtn:{
         width: '83%',

@@ -61,13 +61,17 @@ export default function login({navigation, route}) {
 
 
 ////////////////LOGIN_YUP_VALIDATION_SCHEMA//////////////////
+    const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+
 
     const loginValidationSchema = yup.object().shape({
         Number: yup
             .string()
             // .max(10, 'Incorrect Mobile Number/Password.Try again')
             .min(10, 'Incorrect Mobile Number/Password.Try again')
-            .required('Incorrect Mobile Number/Password.Try again'),
+            .required('Incorrect Mobile Number/Password.Try again')
+            .matches(phoneRegExp, 'Incorrect Mobile Number/Password.Try again'),
+
         Password: yup
             .string()
             .required(null)
