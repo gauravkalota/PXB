@@ -230,8 +230,9 @@ const formik = useFormik({
                         <TextInput 
                           mode="outlined" 
                           style={styles.textin1}
-                          placeholder="Password Reset Code"
+                        //   placeholder="Password Reset Code"
                           label="Password Reset Code"
+                          keyboardType="numeric"
                         //   error={redenable1}
                           onFocus={() => fistvalid2()}
                         //   onChangeText={val => handlecode(val)}

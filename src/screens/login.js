@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -151,6 +153,26 @@ export default function login({navigation, route}) {
         }   
     }
 
+//////////////Facebook_login////////////////////////
+
+const loginWithFacebook = () => {
+  LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+    function(result) {
+      if (result.isCancelled) {
+        console.log("==> Login cancelled");
+      } else {
+        console.log(
+          "==> Login success with permissions: " +
+            result.grantedPermissions.toString()
+        );
+      }
+     },
+     function(error) {
+      console.log("==> Login fail with error: " + error);
+     }
+   );
+}    
+
 
     
 
@@ -193,6 +215,7 @@ export default function login({navigation, route}) {
                     style={styles.inpuText}
                     mode="outlined"
                     label="Mobile Number"
+                    // placeholder="Mobile Number" //////onFocusPlaceholder_disable////// 
                     placeholderTextColor="#848484"
                     keyboardType="numeric"
                     // outlineColor="#CC1414"
@@ -271,12 +294,13 @@ export default function login({navigation, route}) {
                         type='font-awesome'
                         size={50}
                         color='#1877F2'
+                        onPress={() => loginWithFacebook()}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton}>
+                <TouchableOpacity style={styles.iconButton} onPress={()=> Alert.alert('Google LogIn')}  >
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('page')} style={styles.iconButton}>
+                <TouchableOpacity onPress={()=>Alert.alert('Apple LogIn')} style={styles.iconButton}>
                     <Icon
                         name='apple'
                         type='font-awesome'
@@ -338,24 +362,26 @@ const styles = StyleSheet.create({
         left: 40
     },
     inputViewnew1: {
-        right: 106,
+        right: 109,
         width: '18%',
         backgroundColor:'#F9F9F9',
-        top:2,
+        top:4,
+        
         
 
     },
     combtn: {
         borderWidth: 0.8,
-        height: 51,
+        height: 56,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius:4
     },
     inpuText: {
-        height: 50,
-        color: "white"
+        height: 56,
+        color: "white",
+        
 
     },
     
@@ -482,7 +508,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingVertical: 13,
         paddingHorizontal: 123,
-        height:53
+        height:56
     },
     disablebtn:{
         top: 15,
@@ -490,7 +516,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingVertical: 13,
         paddingHorizontal: 123,
-        height:53
+        height:56
     },
     baseline: {
         flexDirection: 'row',
@@ -500,7 +526,9 @@ const styles = StyleSheet.create({
     },
     btntext5: {
         position: 'relative',
-        right:-10
+        right:-4,
+        
+        
     },
     text5: {
         color: '#5382F6',

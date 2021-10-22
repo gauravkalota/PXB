@@ -3,6 +3,8 @@ import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Text , Button } from "react-native-paper";
 
 
+
+
 function verificationsuccessful ({navigation}) {
     return(
         <View style={{flex:1, backgroundColor:'#fff'}} >
@@ -20,6 +22,8 @@ function verificationsuccessful ({navigation}) {
                 <Text style={styles.resettext}>Log In</Text>
             </TouchableOpacity>
 
+            
+
         </View>
     )
 }
@@ -31,12 +35,12 @@ const styles = StyleSheet.create({
         width: 300,
         height: 400,
         marginBottom: 8,
-        top: 150,
+        top: 140,
         right:-45
     },
     text1:{
         top:35,
-        left:93,
+        left:100,
         fontSize:18,
         fontWeight:'700'
 
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     },
     text2:{
         top:45,
-        left:48,
+        left:46,
         fontSize:16,
         fontWeight:'400',
         color:'#828282'

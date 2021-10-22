@@ -209,8 +209,10 @@ function page({ navigation, route }) {
 
 ///////////Validation_SChema_YUP////////
 
-    const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+    const phoneRegExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/
+                        // /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
+    const reg = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
 
     const loginValidationSchema = yup.object().shape({
         firstname: yup
@@ -234,8 +236,9 @@ function page({ navigation, route }) {
 
             
         dob: yup
-            .string()
-            .required(),
+            .string(),
+            // .required(),
+            // .matches(reg,'required!'),
 
         email: yup.string().email('This email is Invalid').required(),
  
@@ -299,21 +302,25 @@ function page({ navigation, route }) {
         }   
     }
 
-
 ////////////////useFormik//////
-const formik = useFormik({ 
-    initialValues:{firstname:'', lastname:'', mobile:'' ,dob:'',email:'',cpass:'' },
+const formik = useFormik({  
+    initialValues:{firstname:'', lastname:'', mobile:'',dob:'' ,email:'',cpass:'' },
     validationSchema:loginValidationSchema,
     validateOnChange:isSubmitting,
- // enableReinitialize={true}
-    onSubmit: values => {
-            isSetSubmitting(true);  
+    onSubmit: values => {   
+            console.log('ABC', values.mobile)
+            isSetSubmitting(true); 
             navigation.navigate({
-            name: "resetpassword",
+            name: "mobile",
             params: { item: values.mobile },
-        });
-    }  
-})
+        });  
+    }
+
+        
+    
+})             
+console.log('whatelse', mobile)
+
 
    
   
@@ -346,10 +353,7 @@ const formik = useFormik({
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
                         <Appbar.Action color="white" icon="arrow-left" onPress={() => navigation.navigate('signup')} />
-                        <TouchableOpacity  onPress={() => navigation.navigate('mobile')}    >
-                            <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
-                        </TouchableOpacity>
-                        {/* <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} /> */}
+                        <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
 
                     </Appbar.Header>
                 </View>
@@ -359,11 +363,10 @@ const formik = useFormik({
 
             >
             <ScrollView style={{paddingBottom:160,}}>
-
-                <Text style={styles.text1} >Register</Text>
+                    <Text style={styles.text1} >Register</Text>
                 <TextInput 
                    placeholderTextColor="#B3B6B7" 
-                   placeholder="First Name" 
+                //    placeholder="First Name" 
                    label="First Name"
                    mode="outlined"
                    onFocus={()=>Ffocus()} 
@@ -376,11 +379,20 @@ const formik = useFormik({
                 {formik.errors.firstname &&
                    <Text style={styles.incorrectfirst}>{formik.errors.firstname}</Text>
                 }
+                    
+                {/* <View style={{backgroundColor:'yellow', top:2}} >
+                   <TextInput
+                    style={styles.textinput2}
+                    label="Last Name"
+                    mode="outlined"
+                />     
+                </View>     */}
+                
 
                 <View >
                     <TextInput 
                    placeholderTextColor="#B3B6B7" 
-                   placeholder="Last Name"
+                //    placeholder="Last Name"
                    label="Last Name"
                    mode="outlined"
                    onFocus={()=>Lfocus()}  
@@ -399,7 +411,7 @@ const formik = useFormik({
                 <View>
                     <TextInput 
                        placeholderTextColor="#B3B6B7"  
-                       placeholder="Mobile Number"
+                    //    placeholder="Mobile Number"
                        label="Mobile Number"
                        onFocus={()=>Mfocus()}  
                        mode="outlined" 
@@ -428,14 +440,14 @@ const formik = useFormik({
 
                 <TextInput 
                    placeholderTextColor="#B3B6B7" 
-                   placeholder="Date of Birth"
+                //    placeholder="Date of Birth"
                    label="Date of Birth" 
                    mode="outlined" 
                    right={<TextInput.Icon onPress={() => setOpen(true)} style={{ top: 4 }} color="#808080" name="calendar-range" />}
                    style={styles.textinput4} 
                 //    onChangeText={handleChange('dob')}
                    value={date}
-                //    error={errors.dob}
+                   error={formik.errors.dob}
                    editable={false}
                 />
 
@@ -465,7 +477,7 @@ const formik = useFormik({
                 <TextInput 
                 
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Email Address"
+                //    placeholder="Email Address"
                    label="Email Address"
                    onFocus={()=>Efocus()} 
                    mode="outlined"
@@ -483,7 +495,7 @@ const formik = useFormik({
                 }
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Password"
+                //    placeholder="Password"
                    label="Password" 
                    mode="outlined" 
                    onFocus={()=> Pfocus()}
@@ -543,7 +555,7 @@ const formik = useFormik({
                
                 <TextInput 
                    placeholderTextColor="#B3B6B7"   
-                   placeholder="Confirm Password"
+                //    placeholder="Confirm Password"
                    label="Confirm Password"
                    onFocus={()=>CPfocus()} 
                    secureTextEntry={true}
@@ -568,7 +580,7 @@ const formik = useFormik({
                     </TouchableOpacity>
                 </View>
 
-            </ScrollView>
+        </ScrollView>
             </KeyboardAvoidingView>
     </View>
             

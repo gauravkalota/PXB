@@ -16,6 +16,8 @@ import mobileverification from '../screens/mobileverification';
 import optionalverification from '../screens/optionalverification';
 import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
+import FaceBook from '../screens/FaceBook';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +31,8 @@ function rootnavigator() {
               }} 
               >
                 <Stack.Screen name="login" component={login} />
+                <Stack.Screen name="facebook" component={FaceBook} />
+
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="signup" component={signup} />
                 <Stack.Screen name="dailcode" component={dailcode} />

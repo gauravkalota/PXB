@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext} from 'react';
 import { Image,View, StyleSheet, TouchableOpacity, Alert, ScrollView, RefreshControlBase } from 'react-native';
-import { color } from 'react-native-elements/dist/helpers';
-import {  Appbar, Text,  TextInput} from 'react-native-paper';
+import {  Appbar, Text,  TextInput, ActivityIndicator} from 'react-native-paper';
 
 
 function mobileverification ({navigation, route}) {
@@ -17,13 +16,20 @@ function mobileverification ({navigation, route}) {
     const [Pin3valid , setPin3Valid] = useState(false);
     const [Pin4valid , setPin4Valid] = useState(false);
 
-    const [Code, setCode] = useState('')
+    const [Code, setCode] = useState('+1')
     const [Errors, SetErrors] = useState(false)
+
+    const[ loading, setLoading] = useState(false);
+    const[ stoping, setStoping] = useState(false);
+
+
     useEffect(() => {
         if (route.params?.item) {
             setCode(route.params.item)
         }
     }, [route.params?.item])
+
+
 
     console.log('g',Code)
 
@@ -41,7 +47,27 @@ const submitPin = () => {
     SetErrors(true)
     
 }
-   
+
+
+console.log('Numbers', Number1)
+console.log('Numbers', Number2)
+console.log('Numbers', Number3)
+console.log('Numbers', Number4)
+
+///////////Validation_On_OTP//////////////
+
+const SubmitOTP = () => {
+    
+    if(Number1 === "1" &&  Number2 === "1" && Number3 === "1" && Number4 === "1") {
+        navigation.navigate('verification');
+    } 
+    else {
+        SetErrors(true)
+        // Alert.alert('Invalid OTP')
+    }
+}
+
+
 
 
 
@@ -63,7 +89,8 @@ const submitPin = () => {
                 <Text style={styles.text3} >mobile number</Text>
                 <Text style={styles.text4} >{Code}</Text>
                 <View style={styles.btn}>   
-                    <TouchableOpacity onPress={()=> navigation.navigate('verification')} disabled={!Number1 || !Number2 || !Number3 || !Number4} style={ !Number1 || !Number2 || !Number3 || !Number4  ? styles.verifybtndis  : styles.verifybtn}>
+                    {/* <TouchableOpacity onPress={()=> navigation.navigate('verification')} disabled={!Number1 || !Number2 || !Number3 || !Number4} style={ !Number1 || !Number2 || !Number3 || !Number4  ? styles.verifybtndis  : styles.verifybtn}> */}
+                     <TouchableOpacity onPress={SubmitOTP} disabled={!Number1 || !Number2 || !Number3 || !Number4} style={ !Number1 || !Number2 || !Number3 || !Number4  ? styles.verifybtndis  : styles.verifybtn}>
                         <Text style={styles.verifybtntext} >Verify</Text>
                     </TouchableOpacity> 
                 </View>
@@ -78,17 +105,26 @@ const submitPin = () => {
                            style={ Pin1valid ? styles.otpinputvalid :  styles.otpinput}
                            ref={Pin1Ref}
                         //    onChangeText={()=> Pin2Ref.current.focus() }
-                           onChangeText={val =>{ 
-                               if(val){
+                        //    onChangeText={val =>{ 
+                        //        if(val){
+                        //            setNumber1(val);
+                        //            Pin2Ref.current.focus();
+                        //        } else {
+                        //            setNumber1(val)
+                        //        }
+                        //       }  }
+                        onChangeText={val =>{ 
+                               if(val !== ''){
                                    setNumber1(val);
                                    Pin2Ref.current.focus();
                                } else {
-                                   setNumber1(val)
+                                   setNumber1(val);
+                                   Pin2Ref.current.focus();
                                }
                               }  }
                               
-                           onKeyPress={({nativeEvent})=> { console.log('Number1',Number1);
-                               if(nativeEvent.key === 'Backspace'){
+                           onKeyPress={({nativeEvent})=> { 
+                               if(nativeEvent.key === 'Backspace'  ){
                                    SetErrors(false)
                                    setPin1Valid(false);
                                }
@@ -120,8 +156,8 @@ const submitPin = () => {
                                    setNumber2(val)
                                }
                               }  }
-                           onKeyPress={({nativeEvent})=> { console.log('Number2',Number2);
-                               if(nativeEvent.key === 'Backspace'){
+                           onKeyPress={({nativeEvent})=> { 
+                               if(nativeEvent.key === 'Backspace' ){
                                    Pin1Ref.current.focus()
                                    setPin2Valid(false);
                                }
@@ -150,8 +186,8 @@ const submitPin = () => {
                                    setNumber3(val)
                                }
                               }  }
-                           onKeyPress={({nativeEvent})=> { console.log('Number3',Number3);
-                               if(nativeEvent.key === 'Backspace'){
+                           onKeyPress={({nativeEvent})=> { 
+                               if(nativeEvent.key === 'Backspace' ){
                                    Pin2Ref.current.focus()
                                    setPin3Valid(false);
                                }
@@ -172,13 +208,13 @@ const submitPin = () => {
                            onChangeText={val =>{ 
                                if(val){
                                    setNumber4(val);
-                                   submitPin();
+                                //    submitPin();
                                } else {
                                    setNumber4(val)
                                }
                               }  }
-                           onKeyPress={({nativeEvent})=> {  console.log('Number4',Number4);
-                               if(nativeEvent.key === 'Backspace'){
+                           onKeyPress={({nativeEvent})=> {  
+                               if(nativeEvent.key === 'Backspace' ){
                                    Pin3Ref.current.focus()
                                    setPin4Valid(false);
                                }
@@ -206,6 +242,7 @@ const submitPin = () => {
                         <Text style={styles.text5} >Resend SMS</Text>
                     </TouchableOpacity>
                 </View>
+                
          </ScrollView>
     </View>
     )
@@ -354,6 +391,10 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontWeight:'500',
         color:'#CC1414'
+    },
+    ActivityIndicator:{
+        top:350,
+        left:-10
     }
 
 

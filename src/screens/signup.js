@@ -60,14 +60,15 @@ import Logo from "../components/logo";
                  <View>
                  </View>
                  <View>
-                     <Text style={styles.text1}>By Continuing, you agree to the</Text>
-                     <TouchableOpacity style={styles.textone} >
-                         <Text style={styles.text2} >Terms & Conditions</Text>
-                     </TouchableOpacity>
-                     <Text style={styles.text3}  >and</Text>
+                        <Text style={styles.text1}>By Continuing, you agree to the</Text>
+                        <TouchableOpacity style={styles.textone} >
+                        <Text style={styles.text2} >Terms & Conditions</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.text3}  >and</Text>
                      <TouchableOpacity style={styles.texttwo} >
                          <Text style={styles.text4} >Privacy Policy</Text>
                      </TouchableOpacity>
+                     
                  </View>
                  <View style={styles.baseline} >
                      <Text>Already PX Boost?</Text>
@@ -114,16 +115,16 @@ const styles = StyleSheet.create({
 
     },
     fb: {
-        right: 110,
-        top: -30
+        right: 115,
+        top: -23,
     },
     go: {
-        top: -45,
-        left: 6
+        top: -40,
+        left: 3
     },
     ap: {
-        left: 123,
-        top: -60
+        left: 120,
+        top: -56,
     },
     line: {
         borderBottomColor: 'black',
@@ -152,14 +153,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.3,
         width: '23%',
         left: 110,
-        top: -20
+        top: -18
     },
     orlineL: {
         borderBottomColor: 'black',
         borderBottomWidth: 0.3,
         width: '23%',
         right: 110,
-        top: -20
+        top: -18
     },
     orline:{
         top:-10

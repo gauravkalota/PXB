@@ -7,6 +7,13 @@ import {  Appbar, Text,  TextInput } from 'react-native-paper';
 import { Formik, useFormik } from 'formik'
 import * as yup from 'yup'
 import { ScrollView } from 'react-native';
+import { isValidNumber } from 'react-native-phone-number-input';
+
+
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+
+  
+
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -60,14 +67,17 @@ useEffect(() => {
             .string()
             
             .min(10, ({ min }) => `Number must be  ${min} digits`)
-            .matches(phoneRegExp, 'Phone number is not valid')
+            .test('Number' , 'Invalid Number!' , (val) => isValidNumber(val, countrycode)) 
+            // .test(isValidNumber)            
+            // .matches(phoneRegExp, 'Phone number is not valid')
+            
 
             // .required('This account does not exist.Register to create account'),
         
     })
 
 
-
+    console.log('validation', isValidNumber(Number , countrycode)  ) 
 
 
     // handleSubmit = values => {
@@ -164,7 +174,7 @@ const formatPhoneNumber = (val ) => {
                 <TextInput
                    style={styles.textinput} 
                    mode="outlined" 
-                   placeholder="Mobile Number" 
+                //    placeholder="Mobile Number" 
                    label="Mobile Number"
                    keyboardType="numeric"
                 //    onChangeText={handleChange('Number')}
@@ -202,6 +212,8 @@ const formatPhoneNumber = (val ) => {
                   disabled={isValid}
                   text="Send Reset Code"
                 /> */}
+
+                
 
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
