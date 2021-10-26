@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 
 
@@ -155,23 +155,69 @@ export default function login({navigation, route}) {
 
 //////////////Facebook_login////////////////////////
 
-const loginWithFacebook = () => {
-  LoginManager.logInWithPermissions(["public_profile", "email"]).then(
-    function(result) {
-      if (result.isCancelled) {
-        console.log("==> Login cancelled");
-      } else {
-        console.log(
-          "==> Login success with permissions: " +
-            result.grantedPermissions.toString()
-        );
+// const loginWithFacebook = () => {
+//   LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+//     function(result) {
+//       if (result.isCancelled) {
+//         console.log("==> Login cancelled");
+//       } else {
+//         console.log(
+//           "==> Login success with permissions: " +
+//             result.grantedPermissions.toString()
+//         );
+//       }
+//      },
+//      function(error) {
+//       console.log("==> Login fail with error: " + error);
+//      }
+//    );
+// }  
+
+const fblogin = (resCallback) => {
+  LoginManager.logOut();
+  return LoginManager.logInWithPermissions(['email','public_profile']).then(
+    result => {
+      console.log("fb result====>", result);
+      if (result.declinedPermissions && result.declinedPermissions.includes("email")){
+        resCallback({message: "Email is Required"})
       }
-     },
-     function(error) {
-      console.log("==> Login fail with error: " + error);
-     }
-   );
-}    
+      if(result.isCancelled){
+        console.log("error")
+      } else {
+        const infoRequest = new GraphRequest(
+          '/me?fields=email,name',
+          null,
+          resCallback
+        );
+        new GraphRequestManager().addRequest(infoRequest).start()
+      }
+    },
+    function(error) {
+      console.log("Login fail with error:" + error)
+    }
+  )
+}
+
+const onFbLogin = async()=>{
+  try {
+    await fblogin(_responseInfoCallBack)
+  } catch (error) {
+    
+console.log("error raised" , error)  
+}
+}
+
+_responseInfoCallBack = async(error, result) => {
+  if(error){
+    console.log("error top", error)
+    return;
+  }
+  else{
+    const userData = result 
+    console.log("fb data +++++++", userData )
+  }
+
+}
 
 
     
@@ -294,10 +340,10 @@ const loginWithFacebook = () => {
                         type='font-awesome'
                         size={50}
                         color='#1877F2'
-                        onPress={() => loginWithFacebook()}
+                        onPress={() => onFbLogin()}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton} onPress={()=> Alert.alert('Google LogIn')}  >
+                <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('facebook')}  >
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>Alert.alert('Apple LogIn')} style={styles.iconButton}>
