@@ -281,7 +281,7 @@ _responseInfoCallBack = async(error, result) => {
             <View style={styles.loginWithBar}>
                 <TouchableOpacity style={styles.iconButton}>
                     <Icon
-                        name='facebook'
+                        name='fb'
                         type='font-awesome'
                         size={50}
                         color='#1877F2'
