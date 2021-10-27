@@ -1,5 +1,5 @@
 import  React, {useState, useEffect} from 'react';
-import { Button, View, StyleSheet ,Image, TouchableOpacity, Alert, TouchableHighlight} from 'react-native';
+import { ScrollView ,Button, View, StyleSheet ,Image, TouchableOpacity, Alert, TouchableHighlight} from 'react-native';
 import { Appbar, Text, TextInput } from 'react-native-paper';
 
 import { Formik, useFormik } from 'formik'
@@ -186,6 +186,9 @@ const formik = useFormik({
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
+                    navigation.navigate({
+                        name: "passwordset",
+                    });
                 }
 
 })
@@ -193,21 +196,9 @@ const formik = useFormik({
     return (
         
      <View style={{ flex: 1, backgroundColor:'#fff'}} >
-        {/* <Formik
-            validationSchema={loginValidationSchema}
-            initialValues={{ resetcode: '',confirmpass: '' }}
-            validateOnChange={isSubmitting}
-                onSubmit={values => {
-                    isSetSubmitting(true);
-                    //////do somethingg
-                }}
-
-        >
-
-            {({ handleChange, handleSubmit, values, errors, isValid})=>(
-                <> */}
+       
             
-            <View>
+            <ScrollView  scrollEnabled={true} >
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#034C81' }} >
                         <Appbar.Action color="white" icon="arrow-left" onPress={() => navigation.navigate('forgot')} />
@@ -222,7 +213,8 @@ const formik = useFormik({
                     <Text style={styles.text3} >Did not receive Code?</Text>
 
                  <View>
-                    <TouchableOpacity style={styles.sms} onPress={() => navigation.navigate('passwordset')} >
+                    {/* <TouchableOpacity style={styles.sms} onPress={() => navigation.navigate('passwordset')} > */}
+                    <TouchableOpacity style={styles.sms} onPress={() => Alert.alert('Message Sent')} >
                          <Text style={styles.text4}>Resend SMS</Text>
                     </TouchableOpacity>
                  </View>
@@ -249,10 +241,6 @@ const formik = useFormik({
                         { formik.errors.resetcode &&
                             <Text style={styles.ErrorPassone} >{formik.errors.resetcode}</Text>
                         }
-
-
-
-
 
                         <TextInput 
                           mode="outlined"  
@@ -316,10 +304,8 @@ const formik = useFormik({
 
                     </View>
                 </View>
-            </View>  
-            {/* </>
-                )}
-        </Formik> */}
+            </ScrollView>  
+        
     </View>
     );
 }

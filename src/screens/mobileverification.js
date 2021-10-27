@@ -48,7 +48,6 @@ const submitPin = () => {
     
 }
 
-
 console.log('Numbers', Number1)
 console.log('Numbers', Number2)
 console.log('Numbers', Number3)
@@ -67,11 +66,6 @@ const SubmitOTP = () => {
     }
 }
 
-
-
-
-
- 
     return(
     <View style={{flex:1}}>    
             <ScrollView scrollEnabled={false} >
@@ -132,13 +126,7 @@ const SubmitOTP = () => {
                                    setPin1Valid(true);
                                }
 
-                           }}
-                           
-                           
-                           
-                        //    onEndEditing={()=> Alert.alert('ENDS')}
-                           
-                           
+                           }} 
                         />
                         <TextInput 
                            keyboardType={'numeric'} 
@@ -165,10 +153,6 @@ const SubmitOTP = () => {
                                    setPin2Valid(true);
                                }
                            }}
-
- 
-
-
                         />
                         <TextInput 
                            keyboardType={'numeric'} 
@@ -222,9 +206,6 @@ const SubmitOTP = () => {
                                    setPin4Valid(true);
                                }
                            }}
-
-
-
                         />
 
                     </View>

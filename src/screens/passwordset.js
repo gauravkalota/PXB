@@ -28,15 +28,15 @@ export default passwordset;
 
 const styles = StyleSheet.create({
     image: {
-        width: 300,
-        height: 400,
+        width: 200,
+        height: 300,
         marginBottom: 8,
         top: 100,
-        right:-30
+        right:-84
     },
     text1:{
         top:44,
-        left:125,
+        left:132,
         fontSize:18,
         fontWeight:'700'
 

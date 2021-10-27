@@ -325,38 +325,14 @@ console.log('whatelse', mobile)
    
   
     return(
-<View>
-            {/* <Formik
-
-                initialValues={{firstname:'', lastname:'', mobile:'' ,dob:'',email:'',cpass:'' }}
-                validationSchema={loginValidationSchema}
-                validateOnChange={isSubmitting}
-                // enableReinitialize={true}
-                onSubmit={values => {
-                    isSetSubmitting(true);
-                }}
-
-                onSubmit={(values, actions ) => {
-                    alert(JSON.stringify(values));
-                    setTimeout(()=> {
-                        actions.setSubmitting(true);
-                    },1000);
-                }}
-
-            >
-
-                {({handleChange, handleSubmit, values, errors, setFieldValue})=> (
-               <> */}
-                
-    <View>
-
-                <View>
-                    <Appbar.Header style={{ backgroundColor: '#034C81' }} >
-                        <Appbar.Action color="white" icon="arrow-left" onPress={() => navigation.navigate('signup')} />
-                        <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
-
-                    </Appbar.Header>
-                </View>
+    <View>             
+        <View>
+             <View>
+                <Appbar.Header style={{ backgroundColor: '#034C81' }} >
+                <Appbar.Action color="white" icon="arrow-left" onPress={() => navigation.navigate('signup')} />
+                <Image source={require('../../assets/images/headerimage.png')} style={styles.headerimage} />
+                </Appbar.Header>
+            </View>
 
             <KeyboardAvoidingView 
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -658,7 +634,7 @@ const styles = StyleSheet.create({
     textinput2:{
         width: '80%',
         height: 55,
-        top: 60,
+        top: 55,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -666,7 +642,7 @@ const styles = StyleSheet.create({
     textinput3:{
         width: '58%',
         height: 55,
-        top: 75,
+        top: 62,
         left: 120,
         backgroundColor: '#FFFFFF'
 
@@ -674,7 +650,7 @@ const styles = StyleSheet.create({
     textinput4:{
         width: '80%',
         height: 55,
-        top: 25,
+        top: 20,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -682,7 +658,7 @@ const styles = StyleSheet.create({
     textinput5: {
         width: '80%',
         height: 55,
-        top: 30,
+        top: 25,
         left: 35,
         backgroundColor: '#FFFFFF',
         padding: 0,
@@ -693,7 +669,7 @@ const styles = StyleSheet.create({
     textinput6: {
         width: '80%',
         height: 55,
-        top: 35,
+        top: 30,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -701,7 +677,7 @@ const styles = StyleSheet.create({
     textinput7: {
         width: '80%',
         height: 55,
-        top: 40,
+        top: 35,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -715,7 +691,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         width: 75,
         left: 35,
-        top: 19,
+        top: 6,
         backgroundColor: '#FFFFFF'
 
     },

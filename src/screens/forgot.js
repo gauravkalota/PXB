@@ -10,7 +10,6 @@ import { ScrollView } from 'react-native';
 import { isValidNumber } from 'react-native-phone-number-input';
 
 
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
   
 
@@ -80,13 +79,7 @@ useEffect(() => {
     console.log('validation', isValidNumber(Number , countrycode)  ) 
 
 
-    // handleSubmit = values => {
-    //     navigation.navigate({
-    //         name: "resetpassword",
-    //         params: { item: values.Number },
-    //     });
-
-    // }
+   
 ////////////UseFormik///////////
     const formik = useFormik({
     initialValues:{Number:'' },
@@ -143,19 +136,7 @@ const formatPhoneNumber = (val ) => {
  
     return(
     <View style={{flex:1}}>
-        {/* <Formik
-           validationSchema={loginValidationSchema}
-           initialValues={{Number:''}}
-           validateOnMount={true}
-            validateOnChange={isSubmitting}
-        //    validateOnBlur={false}
-           onSubmit={(values) => {
-               isSetSubmitting(true)
-           }}
-        >
-            
-        {({ handleChange, handleSubmit, values, errors, isValid, touched}) => (
-            <> */}
+       
             
             <ScrollView scrollEnabled={true} >
                 <View>
@@ -206,15 +187,6 @@ const formatPhoneNumber = (val ) => {
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>
-
-                {/* <CustomButton
-                  onPress={handleSubmit}
-                  disabled={isValid}
-                  text="Send Reset Code"
-                /> */}
-
-                
-
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
                     <TouchableOpacity style={styles.btntext5} onPress={()=> navigation.navigate('resetpassword')} >
@@ -222,10 +194,6 @@ const formatPhoneNumber = (val ) => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-        {/* </>
-        )}
-    </Formik> */}
-
 </View>
     )
 }
@@ -233,11 +201,6 @@ const formatPhoneNumber = (val ) => {
 export default forgot;
 
 const styles = StyleSheet.create({
-    appheader:{
-    
-              
-
-    },
     Button:{
         backgroundColor: "#5382F6",
         borderRadius: 5,

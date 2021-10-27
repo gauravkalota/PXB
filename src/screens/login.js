@@ -56,8 +56,6 @@ export default function login({navigation, route}) {
             setCountryCode(route.params.item2)
         }
     }, [route.params?.item2])
-
-
     // console.log('hello', countrycode)
    
 
@@ -93,26 +91,6 @@ export default function login({navigation, route}) {
 
 }) 
 
-
-////////////FORMAT_NUMBER////////////
-
-//  const formatPhoneNumber = (phoneNumberString) => {
-//      let newText = '';
-//      let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-//      for(var i =0; i< cleaned.length; i++) {
-//          if(i == 0) {
-//              newText = '(';
-//          } else if (i==3) {
-//              newText =  newText + ')-';
-//          } 
-//         else if ( i == 6 ) {
-//              newText = newText + '-' ;
-//          }
-//         newText = newText + cleaned[i];
-//      }
-//      setNumber(newText);
-
-//  };
 
 //////////////Mobile_Number_Format////////
 
@@ -153,25 +131,7 @@ export default function login({navigation, route}) {
         }   
     }
 
-//////////////Facebook_login////////////////////////
-
-// const loginWithFacebook = () => {
-//   LoginManager.logInWithPermissions(["public_profile", "email"]).then(
-//     function(result) {
-//       if (result.isCancelled) {
-//         console.log("==> Login cancelled");
-//       } else {
-//         console.log(
-//           "==> Login success with permissions: " +
-//             result.grantedPermissions.toString()
-//         );
-//       }
-//      },
-//      function(error) {
-//       console.log("==> Login fail with error: " + error);
-//      }
-//    );
-// }  
+////////////FACEBOOK_LOGIN///////////////////
 
 const fblogin = (resCallback) => {
   LoginManager.logOut();
@@ -229,22 +189,7 @@ _responseInfoCallBack = async(error, result) => {
 // {/* <ScrollView scrollEnabled={false}  > */}
  <ScrollView contentContainerStyle={{flexGrow:1}} >
     <View style={styles.container}>
-            {/* <Formik
-                initialValues={{ Number: '', Password: '' }}
-                validationSchema={loginValidationSchema}
-                validateOnChange={isSubmitting}
-
-                // validateOnChange={false}
-                // validateOnBlur={true}
-                onSubmit={values => { 
-                    isSetSubmitting(true);
-                    //////do somethingg
-                }}
-                validationSchema={loginValidationSchema}
-
-            >
-                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-                    <> */}
+            
             <Logo  />
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
