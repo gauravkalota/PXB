@@ -1,11 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import { Button } from "react-native-paper";
 
 
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+
+
 
 export default function FaceBook({navigation}) {
+
+
+
+ //////////////GOOGLE_LOGIN//////////////
+
+ useEffect(()=>{
+   GoogleSignin.configure()
+ },[])
+
+
+ const googleLogin = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    console.log("User Info",userInfo)
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      // user cancelled the login flow
+      console.log(error)
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      // operation (e.g. sign in) is in progress already
+      console.log(error)
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      // play services not available or outdated
+      console.log(error)
+    } else {
+      // some other error happened
+      console.log(error)
+    }
+  }
+};
+ 
+ 
 
 
 // const loginWithFacebook = () => {
@@ -109,7 +145,10 @@ _responseInfoCallBack = async(error, result) => {
 
           <TouchableOpacity style={{top:190, right:-176}} onPress={()=>navigation.navigate('login')}>
               <Text>BACK</Text>
-        </TouchableOpacity> 
+          </TouchableOpacity> 
+          <TouchableOpacity style={{top:290, right:-146}} onPress={googleLogin} >
+            <Text style={{color:'red'}} >GOOGLE LOGIN</Text>
+          </TouchableOpacity>
 
 
 
