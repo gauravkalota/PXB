@@ -27,7 +27,8 @@ export default function login({navigation, route}) {
     const [isValidUser, setisValidUser] = useState(true);
 
     const [Code, setCode] = useState('+1')
-    const [countrycode, setCountryCode] = useState('US')  
+    const [countrycode, setCountryCode] = useState('US') 
+    const [flag , setFlag]= useState('🇺🇸') 
 
 
     const [isSubmitting, isSetSubmitting] = useState(false);
@@ -56,7 +57,17 @@ export default function login({navigation, route}) {
             setCountryCode(route.params.item2)
         }
     }, [route.params?.item2])
-    // console.log('hello', countrycode)
+
+    useEffect(() => {
+        if (route.params?.item3) {
+            setFlag(route.params.item3)
+        }
+    }, [route.params?.item3])
+        
+    console.log('Country', countrycode)
+    console.log('DailCode', Code)
+    console.log('Flag', flag)
+
    
 
 
@@ -193,10 +204,18 @@ _responseInfoCallBack = async(error, result) => {
             <Logo  />
             <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
-                  <View>
-                        <Text style={styles.combtn1} >{ Code }</Text>
+                  {/* <View> */}
+                  <View style={styles.combtn1view}>
+                        <Text style={styles.combtn1} >{ flag }</Text>
+                  </View>
+                  <View style={styles.combtn2view} > 
                         <Text style={styles.combtn2} >ˇ</Text>
                   </View>
+                  <View style={styles.combtnnewview}>
+                      <Text style={styles.combtnnew}>{Code}</Text>
+                  </View>
+
+                  {/* </View> */}
                 </TouchableOpacity> 
             </View>
 
@@ -343,17 +362,17 @@ const styles = StyleSheet.create({
     },
     inputViewnew: {
 
-        width: "65%",
+        width: "61%",
 
         height: 45,
         marginBottom: 20,
         justifyContent: "center",
         padding: 20,
         top: -50,
-        left: 40
+        left: 46
     },
     inputViewnew1: {
-        right: 109,
+        right: 105,
         width: '18%',
         backgroundColor:'#F9F9F9',
         top:4,
@@ -361,14 +380,7 @@ const styles = StyleSheet.create({
         
 
     },
-    combtn: {
-        borderWidth: 0.8,
-        height: 56,
-        position: 'relative',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius:4
-    },
+    
     inpuText: {
         height: 56,
         color: "white",
@@ -476,15 +488,47 @@ const styles = StyleSheet.create({
         right: 110,
         top: 80
     },
+    combtn: {
+        borderWidth: 0.8,
+        height: 57,
+        width:86 ,
+        left:-5,
+        top:1,
+        // position: 'relative',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        borderRadius:4
+    },
     combtn1:{
-        right:12,
-        top:16
+        right:-29,
+        top:17,
+        fontSize:22
 
     },
     combtn2:{
-        left:26,
-        bottom:1,
-        fontSize:27
+        left:38,
+        bottom:-5,
+        fontSize:25
+
+    },
+    combtn1view:{
+        top:-3,
+        right:-18
+
+    },
+    combtn2view:{
+        position:'relative',
+        top:-12,
+        left:33
+
+    },
+    combtnnewview:{
+        top:-37, 
+        left:5
+
+    },
+    combtnnew:{
+        fontSize:14
 
     },
     combtn3:{

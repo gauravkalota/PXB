@@ -29,7 +29,7 @@ function selectcountry({navigation, route})  {
             <TouchableOpacity onPress={() => {
                 navigation.navigate({
                     name:"login",
-                    params: { item1: item.dial_code, item2: item.code}
+                    params: { item1: item.dial_code, item2: item.code, item3: item.flag}
                 })
             }
                 
@@ -59,7 +59,7 @@ function selectcountry({navigation, route})  {
 
     }
 
-          
+       
  ////////////search function////////////////////   
     const filter = (text) => {
         if (text) {
@@ -70,7 +70,7 @@ function selectcountry({navigation, route})  {
                 const filterItem = dataItem.data.filter(
                     (item)=> {
                         const itemData = item.value 
-                        ? item.value.toLowerCase()
+                        ? item.value.toLowerCase() && item.dial_code
                         : ''.toLowerCase();
                     
                     const textData = text.toLowerCase();

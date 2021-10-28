@@ -28,7 +28,7 @@ function dailcode({ navigation, route }) {
             <TouchableOpacity onPress={() => {
                 navigation.navigate({
                     name: "page",
-                    params: { item1: item.dial_code, item2: item.code}
+                    params: { item1: item.dial_code, item2: item.code, item3: item.flag}
                 })
             }
 

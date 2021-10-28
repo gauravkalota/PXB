@@ -26,10 +26,14 @@ function forgot ({navigation, route}) {
     const [Error1, setError1] = useState(false);
     const [Error2, setError2] = useState(false);
     const [btnstatus, Setbtnstatus] = useState(false);
-    const [Code, setCode] = useState('+1');
 
     const [isSubmitting, isSetSubmitting] = useState(false);
+
+
+    const [Code, setCode] = useState('+1');
     const [countrycode, setCountryCode] = useState('US')  
+    const [flag , setFlag]= useState('🇺🇸') 
+
 
 
 useEffect (()=> {
@@ -44,6 +48,12 @@ useEffect(() => {
             setCountryCode(route.params.item2)
         }
     }, [route.params?.item2])
+
+    useEffect(() => {
+        if (route.params?.item3) {
+            setFlag(route.params.item3)
+        }
+    }, [route.params?.item3])
 
 
    
@@ -168,10 +178,20 @@ const formatPhoneNumber = (val ) => {
                    error={ formik.errors.Number}
                 />
                     <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
-                        <View style={styles.textv}  >
+                        <View style={styles.combtn1view}>
+                        <Text style={styles.combtn1} >{ flag }</Text>
+                  </View>
+                  <View style={styles.combtn2view} > 
+                        <Text style={styles.combtn2} >ˇ</Text>
+                  </View>
+                  <View style={styles.combtnnewview}>
+                      <Text style={styles.combtnnew}>{Code}</Text>
+                  </View>
+                        {/* <View style={styles.textv}  >
                             <Text style={styles.text6}>{ Code }</Text>
                             <Text style={styles.text7}>ˇ</Text>
-                        </View>
+                            <Text style={styles.text8} >{flag}</Text>
+                        </View> */}
                     </TouchableOpacity>
                 </View>
 
@@ -273,10 +293,10 @@ const styles = StyleSheet.create({
             
     },
     textinput:{
-        width:'57%',
-        height:50,
+        width:'54%',
+        height:57,
         top:80,
-        left:120
+        left:130
     },
     inputViewnew1:{
         width:'18%',
@@ -287,26 +307,67 @@ const styles = StyleSheet.create({
     },
     combtn: {
         borderWidth: 0.8,
-        height: 50,
-        position: 'relative',
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: 59,
+        width:81 ,
+        // position: 'relative',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         borderRadius: 4,
-        width:70,
         left:43,
-        top:30
+        top:21
     },
     text6:{
-        right:10,
-        top:5
+        left:18,
+        top:13,
+
 
     },
     text7:{
         fontSize:24,
-        right:-10,
-        top:5
+        right:-48,
+        top:15
 
     },
+    text8:{
+        fontSize:22,
+        top:8,
+        left:15
+
+    },
+
+    combtn1:{
+        right:-25,
+        top:17,
+        fontSize:22
+
+    },
+    combtn2:{
+        left:38,
+        bottom:-5,
+        fontSize:25
+
+    },
+    combtn1view:{
+        top:-5,
+        right:-17
+
+    },
+    combtn2view:{
+        position:'relative',
+        top:-17,
+        left:30
+
+    },
+    combtnnewview:{
+        top:-42, 
+        left:4
+
+    },
+    combtnnew:{
+        fontSize:13
+
+    },
+    
     textv:{
         flexDirection:'row'
 

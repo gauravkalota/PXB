@@ -36,8 +36,9 @@ function page({ navigation, route }) {
 
     const [isSubmitting, isSetSubmitting] = useState(false);
 
-    const [Code, setCode] = useState('+1');  ///////////////dail_code
 
+    const [flag , setFlag]= useState('🇺🇸') 
+    const [Code, setCode] = useState('+1');  ///////////////dail_code
     const [countrycode, setCountryCode] = useState('US')  
 
 
@@ -75,6 +76,12 @@ function page({ navigation, route }) {
             setCountryCode(route.params.item2)
         }
     }, [route.params?.item2])
+
+    useEffect(() => {
+        if (route.params?.item3) {
+            setFlag(route.params.item3)
+        }
+    }, [route.params?.item3])
 
 
     // console.log('hello', countrycode)
@@ -402,10 +409,19 @@ console.log('whatelse', mobile)
                     
                     />
                     <TouchableOpacity style={styles.code1} onPress={() => navigation.navigate('dailcode2')}    >
-                        <View style={styles.code2} >
+                        {/* <View style={styles.code2} >
                             <Text style={styles.code3} >{Code}</Text>
                             <Text style={styles.code4} >ˇ</Text>
-                        </View>
+                        </View> */}
+                            <View style={styles.combtn1view}>
+                        <Text style={styles.combtn1} >{ flag }</Text>
+                  </View>
+                  <View style={styles.combtn2view} > 
+                        <Text style={styles.combtn2} >ˇ</Text>
+                  </View>
+                  <View style={styles.combtnnewview}>
+                      <Text style={styles.combtnnew}>{Code}</Text>
+                  </View>
                     </TouchableOpacity>
                 </View>
 
@@ -689,7 +705,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 4,
-        width: 75,
+        width: 82,
         left: 35,
         top: 6,
         backgroundColor: '#FFFFFF'
@@ -785,7 +801,7 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontWeight:'400',
         alignSelf:'center',
-        top:38,
+        top:34,
         right:30
         
     },
@@ -793,7 +809,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top:40,
+        top:35,
         right:90,
         color:'#050505CC'
     },
@@ -801,7 +817,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 40,
+        top: 35,
         right: 90,
         color: '#268E6C'
     },
@@ -809,7 +825,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 42,
+        top: 36,
         right: 62,
         color: '#050505CC'
     },
@@ -817,7 +833,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 42,
+        top: 36,
         right: 62,
         color: '#268E6C'
     },
@@ -825,7 +841,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 44,
+        top: 38,
         right: 62,
         color: '#050505CC'
     },
@@ -833,7 +849,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 44,
+        top: 38,
         right: 62,
         color: '#268E6C'
     },
@@ -841,7 +857,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 46,
+        top: 39,
         right: 78,
         color: '#050505CC'
     },
@@ -849,9 +865,42 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         alignSelf: 'center',
-        top: 46,
+        top: 39,
         right: 78,
         color: '#268E6C'
+    },
+
+    combtn1:{
+        right:-25,
+        top:17,
+        fontSize:22
+
+    },
+    combtn2:{
+        left:38,
+        bottom:-5,
+        fontSize:25
+
+    },
+    combtn1view:{
+        top:6,
+        right:12
+
+    },
+    combtn2view:{
+        position:'relative',
+        top:-3,
+        right:4
+
+    },
+    combtnnewview:{
+        top:-28, 
+        left:-20
+
+    },
+    combtnnew:{
+        fontSize:13
+
     },
     
     
