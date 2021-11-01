@@ -8,8 +8,8 @@ import Icons from 'react-native-vector-icons/Feather'
 import IconsS from 'react-native-vector-icons/Fontisto'
 
 import { Fragment } from 'react';
-import filter  from 'lodash.filter';
 
+import * as RNLocalize from "react-native-localize";
 
 
 function selectcountry({navigation, route})  {
@@ -17,6 +17,11 @@ function selectcountry({navigation, route})  {
     const [searchData, setSearchData] = useState(Country);
     const [loggedIn, setLoggedIn] = useState(true);
     const [hidecross, setHideCross] = useState(false)
+
+
+     const [Code, setCode] = useState('+1')
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
+    const [flag , setFlag]= useState('🇺🇸')
 
     useEffect (()=> {
    
@@ -69,12 +74,12 @@ function selectcountry({navigation, route})  {
                 const dataItem = Country[i];
                 const filterItem = dataItem.data.filter(
                     (item)=> {
-                        const itemData = item.value 
-                        ? item.value.toLowerCase() && item.dial_code
+                        const itemData = (item.value )
+                        ? item.value.toLowerCase() 
                         : ''.toLowerCase();
                     
                     const textData = text.toLowerCase();
-                    return itemData.indexOf(textData) > -1 ;
+                    return (itemData.indexOf(textData) > -1 || item.dial_code.indexOf(textData) > -1 )
                     });
                     console.log('whichData', dataItem )
                     if(filterItem.length > 0 ) {
@@ -91,6 +96,20 @@ function selectcountry({navigation, route})  {
                 setSearchData(Country);
             }
         }
+
+
+//////////LOCATION////////////////
+
+console.log("getLocales",RNLocalize.getLocales());
+console.log("getCurrencies",RNLocalize.getCurrencies());
+console.log("getCalender",RNLocalize.getCalendar());
+console.log("getTemperatureUnit",RNLocalize.getTemperatureUnit());
+console.log("TimeZone",RNLocalize.getTimeZone());
+console.log("24HourClock",RNLocalize.uses24HourClock());
+console.log("dialcode",RNLocalize )
+console.log("NUmberSettings", RNLocalize.getNumberFormatSettings())
+
+console.log("getCountry",RNLocalize.getCountry());        
 
         const buttpress = ()=> {
             setLoggedIn(false)
@@ -124,6 +143,26 @@ function selectcountry({navigation, route})  {
                    )
                    }
 
+            </View>
+
+            <View>
+               <View style={styles.sectionHeaderContainer}>
+                  <Text style={styles.sectionHeaderLabel}>Current Location</Text>
+               </View>
+               <TouchableOpacity onPress={() => {
+                navigation.navigate({
+                    name:"login",
+                    params: { item1: item.dial_code, item2: item.code, item3: item.flag}
+                    })
+                }
+                
+                } >
+                  <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
+                      <View style={{height:50,paddingLeft:22 , paddingVertical:10}}>
+                          <Text style={{ fontSize: 16, justifyContent: 'center', alignSelf: 'flex-start', color:'#050505'}} >{flag}     {RNLocalize.getCountry()} ({Code})</Text>
+                       </View>
+                  <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
+                </TouchableOpacity>
             </View>
             <SectionList
                 sections={searchData}

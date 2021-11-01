@@ -14,7 +14,8 @@ import DatePicker from 'react-native-date-picker'
 
 
 
-
+ import * as RNLocalize from "react-native-localize";
+import DialCode from "../components/DialCode";
 
 
 
@@ -39,7 +40,7 @@ function page({ navigation, route }) {
 
     const [flag , setFlag]= useState('🇺🇸') 
     const [Code, setCode] = useState('+1');  ///////////////dail_code
-    const [countrycode, setCountryCode] = useState('US')  
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry())  
 
 
 
@@ -329,6 +330,10 @@ const formik = useFormik({
 console.log('whatelse', mobile)
 
 
+/////////////AUTOMATIC_DEVICE_LOCATION/////
+
+console.log('AUTP_COUNTRY', RNLocalize.getCountry())
+
    
   
     return(
@@ -408,21 +413,25 @@ console.log('whatelse', mobile)
                        error={formik.errors.mobile}
                     
                     />
-                    <TouchableOpacity style={styles.code1} onPress={() => navigation.navigate('dailcode2')}    >
-                        {/* <View style={styles.code2} >
-                            <Text style={styles.code3} >{Code}</Text>
-                            <Text style={styles.code4} >ˇ</Text>
-                        </View> */}
-                            <View style={styles.combtn1view}>
-                        <Text style={styles.combtn1} >{ flag }</Text>
-                  </View>
-                  <View style={styles.combtn2view} > 
-                        <Text style={styles.combtn2} >ˇ</Text>
-                  </View>
-                  <View style={styles.combtnnewview}>
-                      <Text style={styles.combtnnew}>{Code}</Text>
-                  </View>
-                    </TouchableOpacity>
+                    <View style={{top:1, left:159}}>
+                        <DialCode
+                             onPress={()=> navigation.navigate('dailcode2')}
+                             TextFlag={flag}
+                             TextCode={Code}
+                        />
+                       
+                    </View>
+                    {/* <TouchableOpacity style={styles.code1} onPress={() => navigation.navigate('dailcode2')}>
+                        <View style={styles.combtn1view}>
+                           <Text style={styles.combtn1} >{ flag }</Text>
+                        </View>
+                        <View style={styles.combtn2view} > 
+                           <Text style={styles.combtn2} >ˇ</Text>
+                        </View>
+                        <View style={styles.combtnnewview}>
+                           <Text style={styles.combtnnew}>{Code}</Text>
+                        </View>
+                    </TouchableOpacity> */}
                 </View>
 
                 {formik.errors.mobile &&
@@ -608,7 +617,7 @@ const styles = StyleSheet.create({
     resetbtn: {
         width: '80%',
         height: 52,
-        top: 60,
+        top: 70,
         left: 35,
         backgroundColor: "#5382F6",
         borderRadius: 4,
@@ -619,7 +628,7 @@ const styles = StyleSheet.create({
     resetbtndis: {
         width: '80%',
         height: 52,
-        top: 60,
+        top: 70,
         left: 35,
         borderRadius: 4,
         paddingVertical: 5,
@@ -656,17 +665,17 @@ const styles = StyleSheet.create({
 
     },
     textinput3:{
-        width: '58%',
+        width: '53%',
         height: 55,
         top: 62,
-        left: 120,
+        left: 140,
         backgroundColor: '#FFFFFF'
 
     },
     textinput4:{
         width: '80%',
         height: 55,
-        top: 20,
+        top: 17,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -685,7 +694,7 @@ const styles = StyleSheet.create({
     textinput6: {
         width: '80%',
         height: 55,
-        top: 30,
+        top: 32,
         left: 35,
         backgroundColor: '#FFFFFF'
 
@@ -693,7 +702,7 @@ const styles = StyleSheet.create({
     textinput7: {
         width: '80%',
         height: 55,
-        top: 35,
+        top: 39,
         left: 35,
         backgroundColor: '#FFFFFF'
 

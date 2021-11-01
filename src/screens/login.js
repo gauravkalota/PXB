@@ -6,12 +6,16 @@ import AppButton from '../components/AppButton';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import Input from '../components/Input';
-
 import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
 import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
+
+
+
+import * as RNLocalize from "react-native-localize";
+import DialCode from '../components/DialCode';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -27,7 +31,7 @@ export default function login({navigation, route}) {
     const [isValidUser, setisValidUser] = useState(true);
 
     const [Code, setCode] = useState('+1')
-    const [countrycode, setCountryCode] = useState('US') 
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
     const [flag , setFlag]= useState('🇺🇸') 
 
 
@@ -191,7 +195,47 @@ _responseInfoCallBack = async(error, result) => {
 }
 
 
-    
+//////////LOCATION////////////////
+
+console.log("getLocales",RNLocalize.getLocales());
+console.log("getCurrencies",RNLocalize.getCurrencies());
+console.log("getCalender",RNLocalize.getCalendar());
+console.log("getTemperatureUnit",RNLocalize.getTemperatureUnit());
+console.log("TimeZone",RNLocalize.getTimeZone());
+console.log("24HourClock",RNLocalize.uses24HourClock());
+console.log("dialcode",RNLocalize )
+
+console.log("getCountry",RNLocalize.getCountry());
+
+
+
+
+//  const getUserCurrentCountry = () => async (dispatch) => {
+//   let res;
+//   try {
+//     const ACCESS_KEY = 'IPSTACK_ACCESS_KEY_HERE';
+//     const publicIpAddress = await publicIP();
+//     const url = `http://api.ipstack.com/${publicIpAddress}?access_key=${ACCESS_KEY}&format=1`;
+//     res = await fetch(url)
+//     res = await res.json();
+//     return res;
+//   } catch ({message}) {
+//     return null;
+//   }
+// };
+
+
+// GetLocation.getCurrentPosition({
+//     enableHighAccuracy: true,
+//     timeout: 15000,
+// })
+// .then(location => {
+//     console.log(location);
+// })
+// .catch(error => {
+//     const { code, message } = error;
+//     console.warn(code, message);
+// })
 
 
 
@@ -202,9 +246,15 @@ _responseInfoCallBack = async(error, result) => {
     <View style={styles.container}>
             
             <Logo  />
-            <View style={styles.inputViewnew1} >
+            <DialCode
+               onPress={()=> navigation.navigate('country')}
+               TextFlag={flag}
+               TextCode={Code}
+              
+            />
+            {/* <View style={styles.inputViewnew1} >
                 <TouchableOpacity onPress={() => navigation.navigate('country')} color="black" mode="outlined" style={styles.combtn}>  
-                  {/* <View> */}
+ 
                   <View style={styles.combtn1view}>
                         <Text style={styles.combtn1} >{ flag }</Text>
                   </View>
@@ -215,9 +265,9 @@ _responseInfoCallBack = async(error, result) => {
                       <Text style={styles.combtnnew}>{Code}</Text>
                   </View>
 
-                  {/* </View> */}
+                  
                 </TouchableOpacity> 
-            </View>
+            </View> */}
 
 
             <View style={styles.inputViewnew}>   
@@ -362,19 +412,18 @@ const styles = StyleSheet.create({
     },
     inputViewnew: {
 
-        width: "61%",
+        width: "59%",
 
         height: 45,
         marginBottom: 20,
         justifyContent: "center",
         padding: 20,
         top: -50,
-        left: 46
+        left: 51
     },
     inputViewnew1: {
-        right: 105,
-        width: '18%',
-        backgroundColor:'#F9F9F9',
+        right: 115,
+        width: 40,
         top:4,
         
         
@@ -383,7 +432,7 @@ const styles = StyleSheet.create({
     
     inpuText: {
         height: 56,
-        color: "white",
+        backgroundColor:'#ffff'
         
 
     },
@@ -491,9 +540,10 @@ const styles = StyleSheet.create({
     combtn: {
         borderWidth: 0.8,
         height: 57,
-        width:86 ,
-        left:-5,
-        top:1,
+        width:97 ,
+        left:-10,
+        top:0,
+        backgroundColor:'#f9f9f9',
         // position: 'relative',
         // alignItems: 'center',
         // justifyContent: 'center',
@@ -501,30 +551,29 @@ const styles = StyleSheet.create({
     },
     combtn1:{
         right:-29,
-        top:17,
-        fontSize:22
+        top:15,
+        fontSize:22,
 
     },
     combtn2:{
-        left:38,
+        left:50,
         bottom:-5,
         fontSize:25
 
     },
     combtn1view:{
-        top:-3,
-        right:-18
+        top:0,
+        right:-14
 
     },
     combtn2view:{
-        position:'relative',
-        top:-12,
-        left:33
+        top:-10,
+        left:30
 
     },
     combtnnewview:{
-        top:-37, 
-        left:5
+        top:-36, 
+        left:5,
 
     },
     combtnnew:{
@@ -573,3 +622,4 @@ const styles = StyleSheet.create({
     
 
 })
+

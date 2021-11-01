@@ -10,8 +10,9 @@ import { ScrollView } from 'react-native';
 import { isValidNumber } from 'react-native-phone-number-input';
 
 
-
-  
+import * as RNLocalize from "react-native-localize";
+import DialCode from '../components/DialCode';
+ 
 
 
 
@@ -31,7 +32,7 @@ function forgot ({navigation, route}) {
 
 
     const [Code, setCode] = useState('+1');
-    const [countrycode, setCountryCode] = useState('US')  
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry())  
     const [flag , setFlag]= useState('🇺🇸') 
 
 
@@ -142,6 +143,11 @@ const formatPhoneNumber = (val ) => {
         }   
     }
 
+//////////Automatic_Device_Location//////
+
+console.log("GETCountry",RNLocalize.getCountry());
+
+
 
  
     return(
@@ -177,7 +183,18 @@ const formatPhoneNumber = (val ) => {
 
                    error={ formik.errors.Number}
                 />
-                    <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
+                
+                <View style={{top:19, left:168}}>
+                    <DialCode
+                          onPress={()=> navigation.navigate('dailcode')}
+                          TextFlag={flag}
+                          TextCode={Code}
+              
+                    />
+                </View>
+                
+                
+                    {/* <TouchableOpacity style={styles.combtn} onPress = {()=> navigation.navigate('dailcode')} >
                         <View style={styles.combtn1view}>
                         <Text style={styles.combtn1} >{ flag }</Text>
                   </View>
@@ -187,13 +204,11 @@ const formatPhoneNumber = (val ) => {
                   <View style={styles.combtnnewview}>
                       <Text style={styles.combtnnew}>{Code}</Text>
                   </View>
-                        {/* <View style={styles.textv}  >
-                            <Text style={styles.text6}>{ Code }</Text>
-                            <Text style={styles.text7}>ˇ</Text>
-                            <Text style={styles.text8} >{flag}</Text>
-                        </View> */}
-                    </TouchableOpacity>
+                        
+                    </TouchableOpacity> */}
                 </View>
+
+                
 
               
 
@@ -207,6 +222,7 @@ const formatPhoneNumber = (val ) => {
                      <Text style={styles.resettext}>Send Reset code</Text>
                  </TouchableOpacity>
                 </View>
+                
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
                     <TouchableOpacity style={styles.btntext5} onPress={()=> navigation.navigate('resetpassword')} >
@@ -293,10 +309,10 @@ const styles = StyleSheet.create({
             
     },
     textinput:{
-        width:'54%',
+        width:'50%',
         height:57,
         top:80,
-        left:130
+        left:145
     },
     inputViewnew1:{
         width:'18%',
@@ -308,7 +324,7 @@ const styles = StyleSheet.create({
     combtn: {
         borderWidth: 0.8,
         height: 59,
-        width:81 ,
+        width:97 ,
         // position: 'relative',
         // alignItems: 'center',
         // justifyContent: 'center',
@@ -342,14 +358,14 @@ const styles = StyleSheet.create({
 
     },
     combtn2:{
-        left:38,
+        left:50,
         bottom:-5,
         fontSize:25
 
     },
     combtn1view:{
         top:-5,
-        right:-17
+        right:-15
 
     },
     combtn2view:{
@@ -360,7 +376,7 @@ const styles = StyleSheet.create({
     },
     combtnnewview:{
         top:-42, 
-        left:4
+        left:5
 
     },
     combtnnew:{

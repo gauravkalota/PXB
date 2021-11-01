@@ -21,7 +21,6 @@
 		F04268E626F44F83001DBC45 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04268DC26F44F83001DBC45 /* Lato-Light.ttf */; };
 		F04268E726F44F83001DBC45 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04268DD26F44F83001DBC45 /* Lato-Italic.ttf */; };
 		F04268E926F45065001DBC45 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F04268E826F45065001DBC45 /* Lato-Black.ttf */; };
-		F09B4F5C2720344300AD75CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F09B4F5B2720344300AD75CC /* GoogleService-Info.plist */; };
 		F0ECC0B426F36F4300F2E3B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		F0ECC0B526F36F4300F2E3B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		FFBF2ADB1E04CF44DB7DDF02 /* libPods-PBX-PBXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B825ECFCC16B533FCBD3700 /* libPods-PBX-PBXTests.a */; };
@@ -80,7 +79,6 @@
 		F04268DC26F44F83001DBC45 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
 		F04268DD26F44F83001DBC45 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
 		F04268E826F45065001DBC45 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../../../../../Downloads/Lato/Lato-Black.ttf"; sourceTree = "<group>"; };
-		F09B4F5B2720344300AD75CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F4014C2BA494FCDB48969290 /* Pods-PBX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBX.debug.xcconfig"; path = "Target Support Files/Pods-PBX/Pods-PBX.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,7 +128,6 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
-				F09B4F5B2720344300AD75CC /* GoogleService-Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = PBX;
@@ -323,7 +320,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F09B4F5C2720344300AD75CC /* GoogleService-Info.plist in Resources */,
 				F04268E926F45065001DBC45 /* Lato-Black.ttf in Resources */,
 				F04268DE26F44F83001DBC45 /* Lato-BoldItalic.ttf in Resources */,
 				F04268DF26F44F83001DBC45 /* Lato-Thin.ttf in Resources */,
