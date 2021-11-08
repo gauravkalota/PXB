@@ -5,13 +5,24 @@ import {
   DefaultTheme, 
   configureFonts
 } from 'react-native-paper';
+import {Provider} from 'react-redux';
+
 import theme from './src/theme/theme';
+
+import {store} from './src/redux/store';
 
  function App() {
   return(
-    <PaperProvider theme = {theme} >
-      <AppNavigator />
-    </PaperProvider>
+    // <PaperProvider theme = {theme} >
+    //   <AppNavigator />
+    // </PaperProvider>
+
+
+    <Provider store={store} >
+      <PaperProvider theme={theme}>
+         <AppNavigator/>
+      </PaperProvider>
+    </Provider>
 
       
      

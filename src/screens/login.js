@@ -105,7 +105,8 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    Alert.alert('Logged In')
+                    // Alert.alert('Logged In')
+                    navigation.navigate('home')
                 }
 
 }) 
@@ -347,7 +348,7 @@ for (var i = 0; i < Country.length; i++ ){
                         onPress={() => onFbLogin()}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('facebook')}  >
+                <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('home')}  >
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>Alert.alert('Apple LogIn')} style={styles.iconButton}>

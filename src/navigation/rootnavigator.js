@@ -1,8 +1,12 @@
 
 import * as React from 'react';
 import { View, Text } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import login from '../screens/login';
 import selectcountry from '../screens/selectcountry';
 import forgot from '../screens/forgot';
@@ -16,7 +20,37 @@ import mobileverification from '../screens/mobileverification';
 import optionalverification from '../screens/optionalverification';
 import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
-import FaceBook from '../screens/FaceBook';
+import redux1 from '../screens/redux1';
+import redux2 from '../screens/redux2';
+
+const Tab = createBottomTabNavigator();
+
+const tabBarOptions = {
+  showLabel: false,
+  activeTintColor: '#9381ff',
+  style: {
+    height: '10%',
+  },
+};
+
+
+function Home() {
+
+  return (
+    <Tab.Navigator  screenOptions={{ headerShown: false }} >
+      <Tab.Screen name="movies" options={{
+            tabBarIcon: ({color, size}) => (
+              <MaterialIcons name="movie-filter" color={color} size={size} />
+            ),
+          }} component={redux1}  />
+      <Tab.Screen name="favourites"   options={{
+            tabBarIcon: ({color, size}) => (
+              <MaterialIcons name="favorite" color={color} size={size} />
+            ),
+          }} component={redux2} />
+    </Tab.Navigator>
+  );
+}
 
 
 
@@ -31,8 +65,7 @@ function rootnavigator() {
               }} 
               >
                 <Stack.Screen name="login" component={login} />
-                <Stack.Screen name="facebook" component={FaceBook} />
-
+                <Stack.Screen name="home" component={Home} />
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="signup" component={signup} />
                 <Stack.Screen name="dailcode" component={dailcode} />
