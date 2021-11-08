@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {SectionList ,SafeAreaView,View,ScrollView, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity } from 'react-native';
-import { Button , Appbar, Modal,Text, Searchbar, StatusBar, TextInput } from 'react-native-paper';
-
-
+import {SectionList ,SafeAreaView,View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, TextInput } from 'react-native-paper';
 import Country from '../../countries.json';
 import Icons from 'react-native-vector-icons/Feather'
 import IconsS from 'react-native-vector-icons/Fontisto'
-
 import { Fragment } from 'react';
 
 import * as RNLocalize from "react-native-localize";
+//////Device_info//////
+
 
 
 function selectcountry({navigation, route})  {
@@ -19,14 +18,13 @@ function selectcountry({navigation, route})  {
     const [hidecross, setHideCross] = useState(false)
 
 
-     const [Code, setCode] = useState('+1')
-    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
-    const [flag , setFlag]= useState('🇺🇸')
 
-    useEffect (()=> {
+    const [Code, setCode] = useState('')
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
+    const [flag , setFlag]= useState('')
+    const [countryname , setCountryName] = useState('')
+
    
-    
-    },[])
     
 /////////Render for List///////////////////
     const renderCountries = ({item}) => {
@@ -100,20 +98,46 @@ function selectcountry({navigation, route})  {
 
 //////////LOCATION////////////////
 
-console.log("getLocales",RNLocalize.getLocales());
-console.log("getCurrencies",RNLocalize.getCurrencies());
-console.log("getCalender",RNLocalize.getCalendar());
-console.log("getTemperatureUnit",RNLocalize.getTemperatureUnit());
-console.log("TimeZone",RNLocalize.getTimeZone());
-console.log("24HourClock",RNLocalize.uses24HourClock());
-console.log("dialcode",RNLocalize )
-console.log("NUmberSettings", RNLocalize.getNumberFormatSettings())
+// console.log("getLocales",RNLocalize.getLocales());
+// console.log("getCurrencies",RNLocalize.getCurrencies());
+// console.log("getCalender",RNLocalize.getCalendar());
+// console.log("getTemperatureUnit",RNLocalize.getTemperatureUnit());
+// console.log("TimeZone",RNLocalize.getTimeZone());
+// console.log("24HourClock",RNLocalize.uses24HourClock());
+// console.log("dialcode",RNLocalize )
+// console.log("NUmberSettings", RNLocalize.getNumberFormatSettings())
 
-console.log("getCountry",RNLocalize.getCountry());        
+console.log("getCountry",RNLocalize.getCountry()); 
 
-        const buttpress = ()=> {
-            setLoggedIn(false)
-        }
+useEffect(()=>{
+ DeviceInfo()
+},[])
+
+const DeviceInfo =() => {
+const CurrentLocation = RNLocalize.getCountry();
+console.log("CL", CurrentLocation)
+for (var i = 0; i < Country.length; i++ ){
+    const AllData = Country[i];
+    for ( var j = 0; j< AllData.data.length; j++) {
+        const ClassifiedData = AllData.data[j];
+        if(ClassifiedData.code === CurrentLocation){
+        console.log("Current_COUNTRYCODE", ClassifiedData.code)
+        console.log("Current_FLAG",ClassifiedData.flag )
+        console.log("Current_DIALCODE",ClassifiedData.dial_code)
+        setCode(ClassifiedData.dial_code)
+        setFlag(ClassifiedData.flag)
+        setCountryName(ClassifiedData.value)
+        
+        break;
+        } 
+    }
+}
+}
+
+
+const buttpress = ()=> {
+        setLoggedIn(false)
+    }
     
     return (
         <Fragment>
@@ -152,14 +176,14 @@ console.log("getCountry",RNLocalize.getCountry());
                <TouchableOpacity onPress={() => {
                 navigation.navigate({
                     name:"login",
-                    params: { item1: item.dial_code, item2: item.code, item3: item.flag}
+                    params: { item1:Code , item2:RNLocalize.getCountry() , item3:flag}
                     })
                 }
                 
                 } >
                   <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
                       <View style={{height:50,paddingLeft:22 , paddingVertical:10}}>
-                          <Text style={{ fontSize: 16, justifyContent: 'center', alignSelf: 'flex-start', color:'#050505'}} >{flag}     {RNLocalize.getCountry()} ({Code})</Text>
+                          <Text style={{ fontSize: 16, justifyContent: 'center', alignSelf: 'flex-start', color:'#050505'}} >{flag}     {countryname} ({Code})</Text>
                        </View>
                   <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
                 </TouchableOpacity>
@@ -184,8 +208,7 @@ const styles = StyleSheet.create({
     },
     bar1:{
         height:22,
-        left:50,
-        
+        left:50,   
     },
     sectionHeaderContainer: {
         marginVertical: 0,
@@ -193,7 +216,6 @@ const styles = StyleSheet.create({
         height:35,
         marginTop:0
     },
-
     sectionHeaderLabel: {
         fontSize: 14,
         color: "#202020",
@@ -204,15 +226,9 @@ const styles = StyleSheet.create({
     customicon1:{
         color:'white',
         left:5
-
-
-
     },
     customicon2: {
         color: 'white',
-
-        
-
     },
     barS: {
         backgroundColor: '#034C81',
@@ -223,18 +239,13 @@ const styles = StyleSheet.create({
         borderTopLeftRadius:-10,
         borderTopRightRadius:-10,
         paddingBottom:0,
-        color:'white'
-        
+        color:'white'   
     },
     searchButton:{
         color:'black',
         top:100,
         left:100,
-        
-    
     }
-    
-
 });
 
 export default selectcountry;

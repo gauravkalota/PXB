@@ -3,6 +3,7 @@ import {ScrollView, Image, TouchableOpacity, StyleSheet, Text, View, Alert, Keyb
 import { TextInput, Button, Appbar } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Country from '../../countries.json';
 
 import Logo from "../components/logo";
 import { useFormik,  setFieldValue } from 'formik';
@@ -40,7 +41,9 @@ function page({ navigation, route }) {
 
     const [flag , setFlag]= useState('🇺🇸') 
     const [Code, setCode] = useState('+1');  ///////////////dail_code
-    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry())  
+    const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
+    const [countryname , setCountryName] = useState('')
+ 
 
 
 
@@ -333,6 +336,33 @@ console.log('whatelse', mobile)
 /////////////AUTOMATIC_DEVICE_LOCATION/////
 
 console.log('AUTP_COUNTRY', RNLocalize.getCountry())
+
+console.log("GETCountry",RNLocalize.getCountry());
+
+useEffect(()=>{
+ DeviceInfo()
+},[])
+
+const DeviceInfo =() => {
+const CurrentLocation = RNLocalize.getCountry();
+console.log("CL", CurrentLocation)
+for (var i = 0; i < Country.length; i++ ){
+    const AllData = Country[i];
+    for ( var j = 0; j< AllData.data.length; j++) {
+        const ClassifiedData = AllData.data[j];
+        if(ClassifiedData.code === CurrentLocation){
+        console.log("Current_COUNTRYCODE", ClassifiedData.code)
+        console.log("Current_FLAG",ClassifiedData.flag )
+        console.log("Current_DIALCODE",ClassifiedData.dial_code)
+        setCode(ClassifiedData.dial_code)
+        setFlag(ClassifiedData.flag)
+        setCountryName(ClassifiedData.value)
+        
+        break;
+        } 
+    }
+}
+}
 
    
   

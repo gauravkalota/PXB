@@ -6,6 +6,8 @@ import AppButton from '../components/AppButton';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import Input from '../components/Input';
+import Country from '../../countries.json';
+
 import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
@@ -15,6 +17,7 @@ import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManag
 
 
 import * as RNLocalize from "react-native-localize";
+//////Device_info//////
 import DialCode from '../components/DialCode';
 
 
@@ -33,6 +36,7 @@ export default function login({navigation, route}) {
     const [Code, setCode] = useState('+1')
     const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
     const [flag , setFlag]= useState('🇺🇸') 
+    const [countryname , setCountryName] = useState('')
 
 
     const [isSubmitting, isSetSubmitting] = useState(false);
@@ -197,46 +201,32 @@ _responseInfoCallBack = async(error, result) => {
 
 //////////LOCATION////////////////
 
-console.log("getLocales",RNLocalize.getLocales());
-console.log("getCurrencies",RNLocalize.getCurrencies());
-console.log("getCalender",RNLocalize.getCalendar());
-console.log("getTemperatureUnit",RNLocalize.getTemperatureUnit());
-console.log("TimeZone",RNLocalize.getTimeZone());
-console.log("24HourClock",RNLocalize.uses24HourClock());
-console.log("dialcode",RNLocalize )
+console.log("getCountry",RNLocalize.getCountry()); 
 
-console.log("getCountry",RNLocalize.getCountry());
+useEffect(()=>{
+ DeviceInfo()
+},[])
 
-
-
-
-//  const getUserCurrentCountry = () => async (dispatch) => {
-//   let res;
-//   try {
-//     const ACCESS_KEY = 'IPSTACK_ACCESS_KEY_HERE';
-//     const publicIpAddress = await publicIP();
-//     const url = `http://api.ipstack.com/${publicIpAddress}?access_key=${ACCESS_KEY}&format=1`;
-//     res = await fetch(url)
-//     res = await res.json();
-//     return res;
-//   } catch ({message}) {
-//     return null;
-//   }
-// };
-
-
-// GetLocation.getCurrentPosition({
-//     enableHighAccuracy: true,
-//     timeout: 15000,
-// })
-// .then(location => {
-//     console.log(location);
-// })
-// .catch(error => {
-//     const { code, message } = error;
-//     console.warn(code, message);
-// })
-
+const DeviceInfo =() => {
+const CurrentLocation = RNLocalize.getCountry();
+console.log("CL", CurrentLocation)
+for (var i = 0; i < Country.length; i++ ){
+    const AllData = Country[i];
+    for ( var j = 0; j< AllData.data.length; j++) {
+        const ClassifiedData = AllData.data[j];
+        if(ClassifiedData.code === CurrentLocation){
+        console.log("Current_COUNTRYCODE", ClassifiedData.code)
+        console.log("Current_FLAG",ClassifiedData.flag )
+        console.log("Current_DIALCODE",ClassifiedData.dial_code)
+        setCode(ClassifiedData.dial_code)
+        setFlag(ClassifiedData.flag)
+        setCountryName(ClassifiedData.value)
+        
+        break;
+        } 
+    }
+}
+}
 
 
 

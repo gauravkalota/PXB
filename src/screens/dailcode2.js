@@ -9,6 +9,7 @@ import IconsS from 'react-native-vector-icons/Fontisto'
 
 import { Fragment } from 'react';
 
+import * as RNLocalize from "react-native-localize";
 
 
 function dailcode({ navigation, route }) {
@@ -16,6 +17,10 @@ function dailcode({ navigation, route }) {
     const [searchData, setSearchData] = useState(Country);
     const [loggedIn, setLoggedIn] = useState(true);
     const [hidecross, setHideCross] = useState(false)
+
+       const [Code, setCode] = useState('')
+    const  [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
+    const  [flag , setFlag]= useState('🇺')
 
     useEffect(() => {
 
@@ -95,6 +100,35 @@ function dailcode({ navigation, route }) {
         setLoggedIn(false)
     }
 
+
+///////////Location_Device///////////////
+
+console.log("getCountry",RNLocalize.getCountry()); 
+
+useEffect(()=>{
+ DeviceInfo()
+},[])
+
+const DeviceInfo =() => {
+const CurrentLocation = RNLocalize.getCountry();
+console.log("CL", CurrentLocation)
+for (var i = 0; i < Country.length; i++ ){
+    const AllData = Country[i];
+    for ( var j = 0; j< AllData.data.length; j++) {
+        const ClassifiedData = AllData.data[j];
+        if(ClassifiedData.code === CurrentLocation){
+        console.log("Current_COUNTRYCODE", ClassifiedData.code)
+        console.log("Current_FLAG",ClassifiedData.flag )
+        console.log("Current_DIALCODE",ClassifiedData.dial_code)
+        setCode(ClassifiedData.dial_code)
+        setFlag(ClassifiedData.flag)
+        
+        break;
+        } 
+    }
+}
+}
+
     return (
         <Fragment>
             <SafeAreaView style={{ flex: 0, backgroundColor: "#034C81" }} />
@@ -124,6 +158,25 @@ function dailcode({ navigation, route }) {
                     }
 
                 </View>
+                <View>
+               <View style={styles.sectionHeaderContainer}>
+                  <Text style={styles.sectionHeaderLabel}>Current Location</Text>
+               </View>
+               <TouchableOpacity onPress={() => {
+                navigation.navigate({
+                    name:"page",
+                    params: { item1:Code , item2:RNLocalize.getCountry() , item3:flag}
+                    })
+                }
+                
+                } >
+                  <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
+                      <View style={{height:50,paddingLeft:22 , paddingVertical:10}}>
+                          <Text style={{ fontSize: 16, justifyContent: 'center', alignSelf: 'flex-start', color:'#050505'}} >{flag}     {"United States"} ({Code})</Text>
+                       </View>
+                  <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.2 }} ></View>
+                </TouchableOpacity>
+            </View>
                 <SectionList
                     sections={searchData}
                     renderItem={renderCountries}

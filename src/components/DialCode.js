@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,TouchableOpacity, StyleSheet} from "react-native";
+import {View,Text,TouchableOpacity, StyleSheet, Platform} from "react-native";
 
 const DialCode = ({onPress, TextFlag, TextCode}) => {
     return(
@@ -32,44 +32,35 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         height: 57,
         width:97 ,
-        backgroundColor:'#f9f9f9',
-        // position: 'relative',
-        // alignItems: 'center',
-        // justifyContent: 'center',
+        backgroundColor:'#f9f9f9', 
         borderRadius:4,
-        
-
     },
      combtn1:{
         right:-29,
         top:15,
         fontSize:22,
-
     },
     combtn2:{
-        left:50,
-        bottom:-5,
-        fontSize:25
-
+        left:(Platform.OS === 'ios') ? 50  : 55,
+        bottom:(Platform.OS === 'ios') ? -5  : -2,
+        fontSize:25,
     },
     combtn1view:{
-        top:-1,
-        right:-14
-
+        top:(Platform.OS === 'ios') ? 0 : -2,
+        right:-18
     },
     combtn2view:{
         top:-10,
-        left:30
-
+        left:27,
     },
     combtnnewview:{
-        top:-37, 
-        left:5,
+        top: (Platform.OS === 'ios') ? -36.5 : -44,
+        left:8,
+        // width: (Platform.OS === 'ios') ? 80 : 100,
 
     },
     combtnnew:{
         fontSize:14
-
     }   
 })
 

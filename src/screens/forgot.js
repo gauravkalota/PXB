@@ -3,6 +3,7 @@ import { Image,View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { color } from 'react-native-elements/dist/helpers';
 import {  Appbar, Text,  TextInput } from 'react-native-paper';
 
+import Country from '../../countries.json';
 
 import { Formik, useFormik } from 'formik'
 import * as yup from 'yup'
@@ -31,9 +32,10 @@ function forgot ({navigation, route}) {
     const [isSubmitting, isSetSubmitting] = useState(false);
 
 
-    const [Code, setCode] = useState('+1');
+    const [Code, setCode] = useState('');
     const [countrycode, setCountryCode] = useState(RNLocalize.getCountry())  
-    const [flag , setFlag]= useState('🇺🇸') 
+    const [flag , setFlag]= useState('') 
+    const [countryname , setCountryName] = useState('')
 
 
 
@@ -147,7 +149,30 @@ const formatPhoneNumber = (val ) => {
 
 console.log("GETCountry",RNLocalize.getCountry());
 
+useEffect(()=>{
+ DeviceInfo()
+},[])
 
+const DeviceInfo =() => {
+const CurrentLocation = RNLocalize.getCountry();
+console.log("CL", CurrentLocation)
+for (var i = 0; i < Country.length; i++ ){
+    const AllData = Country[i];
+    for ( var j = 0; j< AllData.data.length; j++) {
+        const ClassifiedData = AllData.data[j];
+        if(ClassifiedData.code === CurrentLocation){
+        console.log("Current_COUNTRYCODE", ClassifiedData.code)
+        console.log("Current_FLAG",ClassifiedData.flag )
+        console.log("Current_DIALCODE",ClassifiedData.dial_code)
+        setCode(ClassifiedData.dial_code)
+        setFlag(ClassifiedData.flag)
+        setCountryName(ClassifiedData.value)
+        
+        break;
+        } 
+    }
+}
+}
 
  
     return(
