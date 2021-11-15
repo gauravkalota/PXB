@@ -61,8 +61,8 @@ const Favorites = ({navigation}) => {
                           alignItems: 'center',
                         }}>
                         <IconAntDesign
-                          color="orange"
-                          name="pushpino"
+                          color="#ff1a1a"
+                          name="heart"
                           size={32}
                         />
                         <Text

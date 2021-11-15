@@ -36,7 +36,7 @@ const Movies = ({navigation}) => {
 
   return (
     <View style={{flex: 1, marginTop: 44, paddingHorizontal: 20}}>
-      <Text onPress={()=> navigation.navigate('login')} style={{fontSize: 22}}>Popular Movies</Text>
+      <Text style={{fontSize: 22}}>Popular Movies</Text>
       <View style={{flex: 1, marginTop: 12}}>
         <FlatList
           data={movies}
@@ -66,7 +66,7 @@ const Movies = ({navigation}) => {
                         marginTop: 10,
                         alignItems: 'center',
                       }}>
-                      <IconAntDesign color="green" name="check" size={32} />
+                      <IconAntDesign color="#ff1a1a" name="heart" size={32} />
                       <Text
                         style={{
                           fontSize: 18,
