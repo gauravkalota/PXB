@@ -20,6 +20,13 @@ import * as RNLocalize from "react-native-localize";
 //////Device_info//////
 import DialCode from '../components/DialCode';
 
+import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import PushNotification from "react-native-push-notification";
+import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
+
+import AsyncStorage  from '@react-native-community/async-storage';
+
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
@@ -229,6 +236,131 @@ for (var i = 0; i < Country.length; i++ ){
 }
 }
 
+////////////////////PUSH_NOTIFICATION/////////////////
+
+useEffect(()=>{
+    checkPermission()
+    notifyApp()
+
+ 
+
+
+});
+
+
+const notifyApp = () => {
+        // Must be outside of any component LifeCycle (such as `componentDidMount`).
+PushNotification.configure({
+  // (optional) Called when Token is generated (iOS and Android)
+  onRegister: function (token) {
+    console.log("TOKEN:", token);
+  },
+
+  // (required) Called when a remote is received or opened, or local notification is opened
+  onNotification: function (notification) {
+    console.log("NOTIFICATION:", notification);
+
+    // process the notification
+
+    // (required) Called when a remote is received or opened, or local notification is opened
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
+  },
+
+  // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
+  onAction: function (notification) {
+    console.log("ACTION:", notification.action);
+    console.log("NOTIFICATION:", notification);
+
+    // process the action
+  },
+
+  // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
+  onRegistrationError: function(err) {
+    console.error(err.message, err);
+  },
+
+  // IOS ONLY (optional): default: all - Permissions to register.
+  permissions: {
+    alert: true,
+    badge: true,
+    sound: true,
+  },
+
+  // Should the initial notification be popped automatically
+  // default: true
+  popInitialNotification: true,
+
+  /**
+   * (optional) default: true
+   * - Specified if permissions (ios) and token (android and ios) will requested or not,
+   * - if not, you must call PushNotificationsHandler.requestPermissions() later
+   * - if you are not using remote notification or do not have Firebase installed, use this:
+   *     requestPermissions: Platform.OS === 'ios'
+   */
+  requestPermissions: true,
+});
+
+}
+
+
+const checkPermission = async()=>{
+    const enabled = await firebase.messaging().hasPermission();
+    if(enabled){
+        console.log("Its getting FCM here..........")
+        getToken();
+
+    } else {
+        console.log("Its getting Permissionm here......")
+        requestPermission();
+    }
+}
+
+const getToken = async()=>{
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    if(!fcmToken) {
+        fcmToken = await firebase.messaging().getToken();
+        if(fcmToken) {
+     //user has a device token 
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+        }
+    }
+}
+
+const requestPermission = async()=>{
+    try {
+        await firebase.messaging().requestPermission();
+        ////// user has authorised 
+        this.getToken();
+        
+    } catch (error) {
+        // user has rejected permissions
+        console.log('permission rejected');
+        
+    }
+}
+
+
+
+
+  
+
+
+
+
+
+   
+
+  
+
+
+
+
+
+
+
+
+
+
 
 
     return (
@@ -379,6 +511,7 @@ for (var i = 0; i < Country.length; i++ ){
 
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -613,4 +746,5 @@ const styles = StyleSheet.create({
     
 
 })
+
 
