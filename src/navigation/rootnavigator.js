@@ -22,6 +22,7 @@ import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
 import redux1 from '../screens/redux1';
 import redux2 from '../screens/redux2';
+import notifications from '../screens/notifications'
 
 const Tab = createBottomTabNavigator();
 
@@ -65,6 +66,7 @@ function rootnavigator() {
               }} 
               >
                 <Stack.Screen name="login" component={login} />
+                <Stack.Screen name="notifications" component={notifications} />
                 <Stack.Screen name="home" component={Home} />
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="signup" component={signup} />

@@ -19,6 +19,7 @@ import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManag
 import * as RNLocalize from "react-native-localize";
 //////Device_info//////
 import DialCode from '../components/DialCode';
+import notifications from './notifications';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -348,7 +349,7 @@ for (var i = 0; i < Country.length; i++ ){
                         onPress={() => onFbLogin()}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('home')}  >
+                <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('notifications')}  >
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>Alert.alert('Apple LogIn')} style={styles.iconButton}>
