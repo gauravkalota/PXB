@@ -4,6 +4,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Firebase.h>
+
 
 
 #ifdef FB_SONARKIT_ENABLED
@@ -29,6 +31,8 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
+
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif

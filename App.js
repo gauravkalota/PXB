@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppNavigator from './src/navigation/rootnavigator';
 import {
   Provider as PaperProvider, 
@@ -11,7 +11,18 @@ import theme from './src/theme/theme';
 
 import {store} from './src/redux/store';
 
+import {requestUserPermission, notificationListener} from './src/utils/notificationServices';
+
  function App() {
+
+  useEffect(()=>{
+    requestUserPermission();
+    notificationListener();
+
+  },[])
+  
+
+
   return(
     // <PaperProvider theme = {theme} >
     //   <AppNavigator />
