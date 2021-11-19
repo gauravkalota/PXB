@@ -3,7 +3,7 @@ import {  Image, TouchableOpacity, StyleSheet, Text,ScrollView, View, Alert , Ke
 import { TextInput, Button, DefaultTheme, Colors } from 'react-native-paper';
 import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // import Input from '../components/Input';
 import Country from '../../countries.json';
@@ -19,6 +19,8 @@ import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManag
 import * as RNLocalize from "react-native-localize";
 //////Device_info//////
 import DialCode from '../components/DialCode';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -41,17 +43,19 @@ export default function login({navigation, route}) {
 
     const [isSubmitting, isSetSubmitting] = useState(false);
 
+    const [FCM,SetFCM ] = useState('');
 
-    useEffect(() => {
+
+    // useEffect(() => {
         
-         if(SplashScreen){
-           SplashScreen.hide();
-         } 
-        // SplashScreen && SplashScreen.hide()
-        ///////this will run only first time when app started
+    //      if(SplashScreen){
+    //        SplashScreen.hide();
+    //      } 
+    //     #// SplashScreen && SplashScreen.hide()
+    //     #//////this will run only first time when app started
 
-        (Number && Password) ? setDisable(false) : setDisable(true);
-    }, [Number,Password])
+    //     (Number && Password) ? setDisable(false) : setDisable(true);
+    // }, [Number,Password])
    
 
     useEffect (()=> {
@@ -72,9 +76,7 @@ export default function login({navigation, route}) {
         }
     }, [route.params?.item3])
         
-    console.log('Country', countrycode)
-    console.log('DailCode', Code)
-    console.log('Flag', flag)
+   
 
    
 
@@ -229,6 +231,55 @@ for (var i = 0; i < Country.length; i++ ){
 }
 }
 
+/////////FCM_TOKEN_PUSH_NOTIFICATION/////////////
+   
+// const FCMValue = async () => {
+//     const initialToken = await AsyncStorage.getItem('fcmToken');
+//     return  initialToken;
+// }
+
+// console.log(FCMValue(),'what')
+
+
+
+useEffect(()=>{
+    // async function FCMValue () {
+    //     const initialToken = await AsyncStorage.getItem('fcmToken');
+    //     SetFCM(initialToken)
+    // }
+    const FCMValue = async () => {
+      try {
+       const initialToken = await AsyncStorage.getItem('fcmToken');
+       SetFCM(initialToken)
+       console.log('initialToken', initialToken);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+     
+
+    FCMValue();
+},[]);
+
+// const FCMValue = async () => {
+//       try {
+//        const initialToken = await AsyncStorage.getItem('fcmToken');
+//        SetFCM(initialToken)
+//        console.log('initialToken', initialToken);
+
+
+//        return initialToken;
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+
+
+
+
+    
+
+
 
 
     return (
@@ -365,6 +416,14 @@ for (var i = 0; i < Country.length; i++ ){
             <View style={styles.line}>
                 <View>
                 </View>
+                <TextInput
+                 style={styles.inpuText}
+                 mode="outlined"
+                //  editable={false}
+                 maxLength={300}
+                 value={FCM}
+                />
+                
                 <View style={styles.baseline} >
                     <Text>New to PX Boost?</Text>
                     <TouchableOpacity style={styles.btntext5} onPress={()=> navigation.navigate('signup')} >

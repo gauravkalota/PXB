@@ -17,22 +17,25 @@ export async function requestUserPermission() {
 
 const getFcmToken = async()=>{
     let fcmToken = await AsyncStorage.getItem('fcmToken')
-    console.log(fcmToken,"the old token")
-    if(!fcmToken){
+    console.log(fcmToken," Old Token")
+    // if(!fcmToken){
       try {
         const fcmToken = await messaging().getToken();
         if(fcmToken){
-            console.log(fcmToken,"the new genrated token");
+            // console.log(fcmToken,"the new genrated token");
+            Alert.alert('TOKEN-gaurav', fcmToken)
             await AsyncStorage.setItem('fcmToken', fcmToken)
-        }
-          
+        }  
       } catch (error) {
-          console.log(error, "error raised in fcmToken")
-          Alert.alert(error,"error")
+          await AsyncStorage.setItem('fcmToken','fcm not recieved------------------------------- failed')
+
+          // let newfcmToken = await AsyncStorage.getItem('fcmToken')
+          // console.log('NewToken', newfcmToken)
+          // console.log(error, "error raised in fcmToken")
+          // Alert.alert(error,"error")
           Alert.alert("There is something wrong!!!!", error.message);
-          
       }
-    }
+    // }  
 }
 
 
