@@ -18,7 +18,7 @@ export async function requestUserPermission() {
 const getFcmToken = async()=>{
     let fcmToken = await AsyncStorage.getItem('fcmToken')
     console.log(fcmToken," Old Token")
-    // if(!fcmToken){
+    if(!fcmToken){
       try {
         const fcmToken = await messaging().getToken();
         if(fcmToken){
@@ -35,7 +35,7 @@ const getFcmToken = async()=>{
           // Alert.alert(error,"error")
           Alert.alert("There is something wrong!!!!", error.message);
       }
-    // }  
+    }  
 }
 
 
