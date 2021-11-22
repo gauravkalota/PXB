@@ -105,7 +105,8 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    Alert.alert('Logged In')
+                    //Alert.alert('Logged In')
+                    navigation.navigate('dashboard')
                 }
 
 }) 
