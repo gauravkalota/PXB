@@ -20,6 +20,10 @@ import * as RNLocalize from "react-native-localize";
 //////Device_info//////
 import DialCode from '../components/DialCode';
 
+/////////REDUX_SAGA/////////
+import { useDispatch} from 'react-redux';
+import { setNumbers } from '../redux/actions';
+
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
@@ -37,9 +41,10 @@ export default function login({navigation, route}) {
     const [countrycode, setCountryCode] = useState(RNLocalize.getCountry()) 
     const [flag , setFlag]= useState('🇺🇸') 
     const [countryname , setCountryName] = useState('')
-
-
     const [isSubmitting, isSetSubmitting] = useState(false);
+
+    //////redux-saga////
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -106,7 +111,11 @@ export default function login({navigation, route}) {
                 onSubmit: values => {
                     isSetSubmitting(true);
                     //Alert.alert('Logged In')
-                    navigation.navigate('dashboard')
+
+                    //dispatch(setNumbers(Number));
+                    //navigation.navigate('dashboard')
+
+                    //navigation.navigate('dashboard',{data1:Number, data2:Password})
                 }
 
 }) 
@@ -228,6 +237,14 @@ for (var i = 0; i < Country.length; i++ ){
     }
 }
 }
+
+/////////////REDUX_SAGA//////////
+
+const ForgotPassword =()=>{
+    
+}
+
+
 
 
 
@@ -351,7 +368,7 @@ for (var i = 0; i < Country.length; i++ ){
                 <TouchableOpacity style={styles.iconButton} onPress={()=> navigation.navigate('facebook')}  >
                     <Image source={require('../../assets/images/googleLogo.png')} style={styles.combtn3}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>Alert.alert('Apple LogIn')} style={styles.iconButton}>
+                <TouchableOpacity onPress={()=>navigation.navigate('dashboard1')} style={styles.iconButton}>
                     <Icon
                         name='apple'
                         type='font-awesome'

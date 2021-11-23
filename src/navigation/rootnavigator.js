@@ -17,7 +17,9 @@ import optionalverification from '../screens/optionalverification';
 import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
 import FaceBook from '../screens/FaceBook';
-import dashboard from '../screens/dashboard';
+import dashboard1 from '../screens/dashboard1';
+import dashboard2 from '../screens/dashboard2';
+
 
 
 
@@ -32,7 +34,8 @@ function rootnavigator() {
               }} 
               >
                 <Stack.Screen name="login" component={login} />
-                <Stack.Screen name="dashboard" component={dashboard} />
+                <Stack.Screen name="dashboard1" component={dashboard1} />
+                <Stack.Screen name="dashboard2" component={dashboard2} />
                 <Stack.Screen name="facebook" component={FaceBook} />
                 <Stack.Screen name="country" component={selectcountry} />
                 <Stack.Screen name="signup" component={signup} />
@@ -40,6 +43,7 @@ function rootnavigator() {
                 <Stack.Screen name="dailcode2" component={dailcode2} />
                 <Stack.Screen name="forgot" component={forgot} />
                 <Stack.Screen name="page" component={page} />
+                {/* <Stack.Screen name="dashboard" component={dashboard} /> */}
                 <Stack.Screen name="resetpassword" component={resetpassword} />
                 <Stack.Screen name="mobile" component={mobileverification} />
                 <Stack.Screen name="optional" component={optionalverification} />
