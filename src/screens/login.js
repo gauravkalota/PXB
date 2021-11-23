@@ -54,6 +54,8 @@ export default function login({navigation, route}) {
          } 
         // SplashScreen && SplashScreen.hide()
         ///////this will run only first time when app started
+        
+
 
         (Number && Password) ? setDisable(false) : setDisable(true);
     }, [Number,Password])
@@ -110,7 +112,7 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    //Alert.alert('Logged In')
+                    Alert.alert('Logged In')
 
                     //dispatch(setNumbers(Number));
                     //navigation.navigate('dashboard')
