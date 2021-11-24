@@ -21,8 +21,8 @@ import * as RNLocalize from "react-native-localize";
 import DialCode from '../components/DialCode';
 
 /////////REDUX_SAGA/////////
-import { useDispatch} from 'react-redux';
-import { setNumbers } from '../redux/actions';
+import {useDispatch} from 'react-redux';
+import { setSmurfName } from '../redux/actions';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -112,7 +112,9 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    Alert.alert('Logged In')
+                    dispatch(setSmurfName(Number))
+                    navigation.navigate('dashboard1')
+                    //Alert.alert('Logged In')
 
                     //dispatch(setNumbers(Number));
                     //navigation.navigate('dashboard')

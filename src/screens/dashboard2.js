@@ -21,7 +21,6 @@ const dashboard2 = ({navigation, route}) => {
               onPress={()=> navigation.navigate('dashboard1')}
             />
             <Text style={{top:80,left:-100}}>LoginID-</Text>
-            <Text style={styles.textlogin}  >{smurfName}</Text>
             {/* <Text onPress={()=>Alert.alert("ItemId1-",data1)} style={styles.text1} >Data1: NumberID  {data1}  </Text> */}
             {/* <Text onPress={()=>Alert.alert("ItemId2-",data2)} style={styles.text2} >Data2: PasswordID  {data2}</Text> */}
             {/* <Text style={styles.text1} >Data2: NumberID  {Number}</Text> */}

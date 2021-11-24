@@ -2,17 +2,19 @@
 import React,{useState} from 'react';
 import { View, Text, StyleSheet , Button, Alert} from 'react-native';
 import {TextInput} from 'react-native-paper'
-import {useDispatch} from 'react-redux';
-import { setSmurfName } from '../redux/actions';
+// import {useDispatch} from 'react-redux';
+// import { setSmurfName } from '../redux/actions';
 
+import {useSelector} from 'react-redux';
 
 
 // create a component
 const dashboard1 = ({navigation, route}) => {
     // const Number = useSelector((state)=> state.Number)
     const [enter, setEnter] = useState('')
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
+  const smurfName = useSelector((state)=>state.smurfName)
 
     console.log(enter, 'value')
     //const {data1,data2} = route.params;
@@ -35,7 +37,9 @@ const dashboard1 = ({navigation, route}) => {
              onPress={loginPress}
                 
             />
-            <Text style={styles.textlogin} >Login Here</Text>
+            <Text style={styles.textlogin} >User Mobile Number -</Text>
+            <Text style={styles.smurf}  >{smurfName}</Text>
+
             <TextInput 
                style={{height:55, width:'80%'}} 
                mode="outlined" 
@@ -79,7 +83,13 @@ const styles = StyleSheet.create({
     textlogin:{
         fontSize:18,
         top:-10,
-        left:-110,
+        left:-65,
+
+    },
+    smurf:{
+        fontSize:15,
+        top:-29,
+        left:85
 
     },
     redux:{
