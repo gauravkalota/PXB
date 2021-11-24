@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
         fontSize:16,
     },
     textlogin:{
-        fontSize:25,
-        top:2,
-        left:-90,
+        fontSize:18,
+        top:-10,
+        left:-110,
 
     },
     redux:{
