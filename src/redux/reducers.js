@@ -1,7 +1,8 @@
-import { SET_SMURF_NAME} from './constants';
+import { SET_SMURF_NAME,SET_PASS} from './constants';
 
 const INITIAL_STATE = {
     smurfName: null,
+    smurfName1:null,
     
 };
 
@@ -12,6 +13,11 @@ function reducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 smurfName: action.smurfName,
+            }
+        case SET_PASS:
+            return{
+                ...state,
+                smurfName1:action.smurfName1
             }
         default:
             state;

@@ -22,7 +22,7 @@ import DialCode from '../components/DialCode';
 
 /////////REDUX_SAGA/////////
 import {useDispatch} from 'react-redux';
-import { setSmurfName } from '../redux/actions';
+import { setSmurfName,setPassword } from '../redux/actions';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -112,13 +112,11 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    dispatch(setSmurfName(Number))
-                    navigation.navigate('dashboard1')
+                    dispatch(setSmurfName(Number,Password));
+                    //dispatch(setPassword(Password));
+                    navigation.navigate('dashboard1',{data1:Password})
                     //Alert.alert('Logged In')
-
                     //dispatch(setNumbers(Number));
-                    //navigation.navigate('dashboard')
-
                     //navigation.navigate('dashboard',{data1:Number, data2:Password})
                 }
 

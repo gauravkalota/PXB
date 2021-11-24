@@ -14,19 +14,19 @@ const dashboard1 = ({navigation, route}) => {
     const [enter, setEnter] = useState('')
     //const dispatch = useDispatch();
 
-  const smurfName = useSelector((state)=>state.smurfName)
+  const Id1 = useSelector((state)=>state.smurfName)
+  const Id2 = useSelector((state)=>state.smurfName1)
 
     console.log(enter, 'value')
-    //const {data1,data2} = route.params;
+    const {data1} = route.params;
+    console.log('pass',data1)
+    console.log('pass',Id2)
+
     const loginPress = () => {
         //dispatch(fetchSmurfData());
         dispatch(setSmurfName(enter))
         navigation.navigate('dashboard2');
     }
-
-
-
-
 
     return (
         <View style={styles.container}>
@@ -38,8 +38,10 @@ const dashboard1 = ({navigation, route}) => {
                 
             />
             <Text style={styles.textlogin} >User Mobile Number -</Text>
-            <Text style={styles.smurf}  >{smurfName}</Text>
-
+            <Text style={styles.pass} >User Security No -</Text>
+            <Text style={styles.smurf}  >{Id1}</Text>
+            <Text style={styles.smurf1}  >{data1}</Text>
+            <Text style={styles.smurf1}  >{Id2}</Text>
             <TextInput 
                style={{height:55, width:'80%'}} 
                mode="outlined" 
@@ -86,11 +88,22 @@ const styles = StyleSheet.create({
         left:-65,
 
     },
+    pass:{
+        fontSize:18,
+        top:-10,
+        left: -80
+
+    },
     smurf:{
         fontSize:15,
-        top:-29,
+        top:-51,
         left:85
 
+    },
+    smurf1:{
+        fontSize:15,
+        top:-48,
+        left:85
     },
     redux:{
         bottom:200,
