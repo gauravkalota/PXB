@@ -19,13 +19,70 @@ import profilepicture from '../screens/profilepicture';
 import FaceBook from '../screens/FaceBook';
 import dashboard1 from '../screens/dashboard1';
 import dashboard2 from '../screens/dashboard2';
+import history from '../screens/history';
+import feedback from '../screens/feedback';
+import menu from '../screens/menu';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import {Icon1} from 'react-native-vector-icons/SimpleLineIcons'
 
 
 
-
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function rootnavigator() {
+    
+
+    const MainScreen = () =>{
+        return(
+            <Tab.Navigator >
+                <Tab.Screen 
+                    name="dashboard1" 
+                    component={dashboard1}  
+                    options={{
+                        headerShown: false,
+                        tabBarLabel:"Home",
+                        
+                    }}    
+                />
+                <Tab.Screen 
+                    name="history" 
+                    component={history} 
+                    options={{
+                        headerShown: false,
+                        tabBarLabel:"Hospital History"
+                    }}  
+                />
+                <Tab.Screen 
+                    name="feedback" 
+                    component={feedback} 
+                    options={{
+                        headerShown: false,
+                        tabBarLabel:"feedback",
+                    //     tabBarIcon:({color})=>(
+                    //      <Icon1 name="home" size={20} />
+                    //     ),
+                    }} 
+                />
+                <Tab.Screen 
+                    name="menu" 
+                    component={menu} 
+                    options={{
+                        headerShown: false,
+                    }}  
+                />
+            </Tab.Navigator>
+        )
+    }
+
+
+
+
+
+
+
+
     return (
         <NavigationContainer>
             <Stack.Navigator 
@@ -34,7 +91,8 @@ function rootnavigator() {
               }} 
               >
                 <Stack.Screen name="login" component={login} />
-                <Stack.Screen name="dashboard1" component={dashboard1} />
+                {/* <Stack.Screen name="dashboard1" component={dashboard1} /> */}
+                <Stack.Screen name="dashboard1" component={MainScreen} />
                 <Stack.Screen name="dashboard2" component={dashboard2} />
                 <Stack.Screen name="facebook" component={FaceBook} />
                 <Stack.Screen name="country" component={selectcountry} />
