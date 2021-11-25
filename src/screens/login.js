@@ -22,7 +22,7 @@ import DialCode from '../components/DialCode';
 
 /////////REDUX_SAGA/////////
 import {useDispatch} from 'react-redux';
-import { setSmurfName,setPassword } from '../redux/actions';
+import { setSmurfName,setSmurfPassword } from '../redux/actions';
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -100,7 +100,7 @@ export default function login({navigation, route}) {
 
         Password: yup
             .string()
-            .required(null)
+            .required()
     })
 
 
@@ -112,7 +112,9 @@ export default function login({navigation, route}) {
                 // enableReinitialize={true}
                 onSubmit: values => {
                     isSetSubmitting(true);
-                    dispatch(setSmurfName(Number,Password));
+                    dispatch(setSmurfName(Number));
+                    dispatch(setSmurfPassword(values.Password));
+                    console.log('Value',values.Password)
                     //dispatch(setPassword(Password));
                     navigation.navigate('dashboard1',{data1:Password})
                     //Alert.alert('Logged In')
@@ -141,7 +143,7 @@ export default function login({navigation, route}) {
           try { 
             if (val.length !== 10 ) {
                 setNumber(val)
-                                Formik.setFieldValue('Number', val)
+                Formik.setFieldValue('Number', val)
 
                 // console.log('WIERD', formik.setFieldValue())
             
@@ -150,7 +152,7 @@ export default function login({navigation, route}) {
                 console.log(phoneUtil.formatInOriginalFormat(number, countrycode));
                 const FormattedNumber = phoneUtil.formatInOriginalFormat(number, countrycode);
                 setNumber(FormattedNumber)
-                                Formik.setFieldValue('Number', FormattedNumber)
+                Formik.setFieldValue('Number', FormattedNumber)
 
                 console.log('he', FormattedNumber)
                 console.log('be', Number)

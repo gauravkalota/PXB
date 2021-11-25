@@ -15,7 +15,7 @@ const dashboard1 = ({navigation, route}) => {
     //const dispatch = useDispatch();
 
   const Id1 = useSelector((state)=>state.smurfName)
-  const Id2 = useSelector((state)=>state.smurfName1)
+  const Id2 = useSelector((state)=>state.pass)
 
     console.log(enter, 'value')
     const {data1} = route.params;
@@ -38,10 +38,10 @@ const dashboard1 = ({navigation, route}) => {
                 
             />
             <Text style={styles.textlogin} >User Mobile Number -</Text>
-            <Text style={styles.pass} >User Security No -</Text>
+            <Text style={styles.pass} >User PassCode No -</Text>
             <Text style={styles.smurf}  >{Id1}</Text>
             <Text style={styles.smurf1}  >{data1}</Text>
-            <Text style={styles.smurf1}  >{Id2}</Text>
+            <Text style={styles.smurf2}  >{Id2}</Text>
             <TextInput 
                style={{height:55, width:'80%'}} 
                mode="outlined" 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     pass:{
         fontSize:18,
         top:-10,
-        left: -80
+        left: -74
 
     },
     smurf:{
@@ -104,6 +104,12 @@ const styles = StyleSheet.create({
         fontSize:15,
         top:-48,
         left:85
+    },
+    smurf2:{
+        fontSize:20,
+        top:-70,
+        left:65,
+
     },
     redux:{
         bottom:200,

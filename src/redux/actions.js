@@ -7,9 +7,9 @@ export function setSmurfName(smurfName){
     }
 }
 
-export function setPassword(smurfName1){
+export function setSmurfPassword(pass){
     return {
        type: SET_PASS,
-       smurfName1,
+       pass,
     }
 }
