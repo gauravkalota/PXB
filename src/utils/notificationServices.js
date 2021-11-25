@@ -27,7 +27,7 @@ const getFcmToken = async()=>{
             await AsyncStorage.setItem('fcmToken', fcmToken)
         }  
       } catch (error) {
-          await AsyncStorage.setItem('fcmToken','fcm not recieved------------------------------- failed')
+          await AsyncStorage.setItem('fcmToken','fcm not received------------------------------- failed')
 
           // let newfcmToken = await AsyncStorage.getItem('fcmToken')
           // console.log('NewToken', newfcmToken)

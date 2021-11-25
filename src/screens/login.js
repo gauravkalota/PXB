@@ -232,15 +232,6 @@ for (var i = 0; i < Country.length; i++ ){
 }
 
 /////////FCM_TOKEN_PUSH_NOTIFICATION/////////////
-   
-// const FCMValue = async () => {
-//     const initialToken = await AsyncStorage.getItem('fcmToken');
-//     return  initialToken;
-// }
-
-// console.log(FCMValue(),'what')
-
-
 
 useEffect(()=>{
     // async function FCMValue () {
@@ -257,30 +248,8 @@ useEffect(()=>{
       }
     }
      
-
     FCMValue();
 },[]);
-
-// const FCMValue = async () => {
-//       try {
-//        const initialToken = await AsyncStorage.getItem('fcmToken');
-//        SetFCM(initialToken)
-//        console.log('initialToken', initialToken);
-
-
-//        return initialToken;
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     }
-
-
-
-
-    
-
-
-
 
     return (
 // {/* <ScrollView scrollEnabled={false}  > */}
