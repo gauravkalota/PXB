@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import AppNavigator from './src/navigation/rootnavigator';
 import {
   Provider as PaperProvider, 
@@ -10,6 +10,10 @@ import {Provider} from 'react-redux';
 import theme from './src/theme/theme';
 
 import {store} from './src/redux/store';
+// import PushNotification from 'react-native-push-notification';
+
+
+ 
 
  function App() {
   return(
@@ -22,14 +26,9 @@ import {store} from './src/redux/store';
       <PaperProvider theme={theme}>
          <AppNavigator/>
       </PaperProvider>
-    </Provider>
-
-      
-     
-    
+    </Provider>  
   )
 }
-
 export default App
 
 

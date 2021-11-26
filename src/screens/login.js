@@ -12,6 +12,7 @@ import { useFormik, setFieldValue } from 'formik'
 import * as yup from 'yup'
 
 import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
+import PushNotification from 'react-native-push-notification';
 
 
 
@@ -20,6 +21,9 @@ import * as RNLocalize from "react-native-localize";
 //////Device_info//////
 import DialCode from '../components/DialCode';
 import notifications from './notifications';
+
+import {LocalNotification,ScheduledLocalNotification} from '../services/LocalPushController'
+import RemotePushController from '../services/RemotePushController'
 
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
@@ -231,6 +235,41 @@ for (var i = 0; i < Country.length; i++ ){
 }
 
 
+/////////////////////react-native-push-notifications//////
+
+
+  const handleButtonPress = () => {
+    LocalNotification();
+  };
+
+  const handleScheduleNotification = () => {
+    ScheduledLocalNotification();
+  };
+
+  useEffect(()=>{
+        PushNotification.configure({
+    onNotification: function(notification){
+        console.log("NOTIFICATION:", notification);
+    },
+    onRegister: function (token) {
+        console.log('TOKEN:', token);
+      },
+    onRegistrationError: function(error) {
+      console.log("error",error)
+    } , 
+    requestPermissions: Platform.OS === 'ios'
+});
+
+  },[])
+
+// const createChannels = () => {
+//     PushNotification.createChannel(
+//         {
+//             channelId: " ",
+//             channelName: " "
+//         }
+//     )
+// }
 
     return (
 // {/* <ScrollView scrollEnabled={false}  > */}
@@ -372,9 +411,16 @@ for (var i = 0; i < Country.length; i++ ){
                         <Text style={styles.text5} >Register</Text>
                     </TouchableOpacity>
                 </View>
+                {/* <View>
+                    <Text onPress={handleButtonPress} >Local Push Notification</Text>
+                </View>
+                <TouchableOpacity style={{left:120}}  onPress={handleScheduleNotification}   >
+                    <Text >Scheduled Local Push Notification</Text>
+                </TouchableOpacity> */}
             </View>
     
     </View>
+    <RemotePushController />
 
 </ScrollView>
 
