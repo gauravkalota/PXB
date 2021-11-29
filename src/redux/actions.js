@@ -1,4 +1,4 @@
-import {SET_SMURF_NAME, SET_PASS} from './constants';
+import {SET_SMURF_NAME, SET_PASS, SET_OBJ} from './constants';
 
 export function setSmurfName(smurfName){
     return {
@@ -11,5 +11,12 @@ export function setSmurfPassword(pass){
     return {
        type: SET_PASS,
        pass,
+    }
+}
+
+export function setobject(obj){
+    return {
+       type: SET_OBJ,
+       obj,
     }
 }

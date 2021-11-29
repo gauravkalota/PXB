@@ -1,211 +1,98 @@
-//import liraries
 import React,{useState} from 'react';
-import { View, Text, StyleSheet , Button, Alert, Image, TouchableOpacity} from 'react-native';
-import {TextInput} from 'react-native-paper'
-import { SafeAreaView } from 'react-native-safe-area-context';
-// import {useDispatch} from 'react-redux';
-// import { setSmurfName } from '../redux/actions';
-
+import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} from 'react-native';
+import {Button,} from 'react-native-paper'
 import {useSelector} from 'react-redux';
+import ExceptionCare from '../components/ExceptionCare';
+import ProfilePicture from '../components/ProfilePicture';
 
 
 
-// create a component
-const dashboard1 = ({navigation, route}) => {
-// const Number = useSelector((state)=> state.Number)
+
+function dashboard1  ({navigation, route})  {
 const [enter, setEnter] = useState('')
-//const dispatch = useDispatch();
+const [one,setone] = useState('');
+const [two,settwo] = useState('');
+const Id1 = useSelector((state)=>state.smurfName)
+const Id2 = useSelector((state)=>state.pass)
+const Id3 = useSelector((state)=>state.obj)
 
-  const Id1 = useSelector((state)=>state.smurfName)
-  const Id2 = useSelector((state)=>state.pass)
-  const loginPress = () => {
-//dispatch(fetchSmurfData());
+const loginPress = () => {
     dispatch(setSmurfName(enter))
     navigation.navigate('dashboard2');
-    }
+}
 
-    return (
-        // <View style={styles.container}>
-        //     <Text style={styles.redux} >REDUX SAGA</Text>
-        //     <Text onPress={()=>Alert.alert("Welcome To Dashboard")} style={styles.text}>Dashboard1</Text>
-        //     <Button
-        //      title="Go Forward"
-        //      onPress={loginPress}
-                
-        //     />
-        //     <Text style={styles.textlogin} >User Mobile Number -</Text>
-        //     <Text style={styles.pass} >User PassCode No -</Text>
-        //     <Text style={styles.smurf}  >{Id1}</Text>
-        //     <Text style={styles.smurf2}  >{Id2}</Text>
-        //     <TextInput 
-        //        style={{height:55, width:'80%'}} 
-        //        mode="outlined" 
-        //        label="ENTER USERNAME"
-        //        onChangeText={(val)=> setEnter(val)} 
-        //     />
-        //     <Button 
-        //       title="Go Back"
-        //       onPress={()=> navigation.navigate('login')}
-        //     />
-        // </View>
+const[dis,setDis] = useState(true);
+  
+const dial = () => {
+    setDis(false);
 
-    <SafeAreaView>
-        <View style={{backgroundColor :'#ffff'}} >
-          <View style={styles.header}>
-            <View style={styles.headerContent}>
-                <Image style={styles.avatar} source={{uri:'' }}/>
-                <Text style={styles.name}>
-                  Felix Harder
-                </Text>
-                <Text >Currently not in a hospital</Text>
-            </View>
-          </View>
+}
+//////////GET_DATA///////////
+// console.log(app_version,app_name,'XX')
+// const OsVer = Platform.constants['Release'];
+// console.log(OsVer,'os_version');
+//console.log(" Minimum Android version - Lollipop-5.0, API-level-21")
+//console.log("Minimum OS version ios - platform :ios, '11.0")
+console.log("DATA", Id3 )
 
-         
-         
-
-          <View >
-            <View style={styles.bodyContent}>
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Select Hospital</Text>  
-              </TouchableOpacity> 
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
-            </View>
-        </View>
+    
+return (
+    <ScrollView style={{backgroundColor :'#ffff'}} >
+      <View style={styles.picture} >
+        <ProfilePicture text1={'Felix Harder'} text2={'In Patient'} uri={'https://cdn-icons-png.flaticon.com/128/387/387561.png'} />
+        <View style={{top:-370 ,alignSelf:'center', borderBottomColor:'black', borderBottomWidth:0.3,height:'50%', width:'90%' }}/>
+        <Text style={styles.name} >Carolinas Medical Center</Text>
+        <View style={{top:-710 ,alignSelf:'center', borderBottomColor:'black', borderBottomWidth:0.3,height:'50%', width:'90%' }}/>
       </View>
+      <View>
+        <Button style={styles.butn} mode="contained" onPress={() => console.log('Pressed')}  >
+          <Text style={{color:'white',fontWeight:'700',fontSize:9}} >Change </Text>
+        </Button>
+        <Text style={{ top:-450,left:20,fontSize:12,fontWeight:'500',}}  >Attending Doctor</Text>
+        <Text style={{top:-445,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
+       <Image style={styles.pp} style={styles.pp} source={require('../../assets/images/doctor.png')}/>
+      </View>
+      <View style={{top:-460}}>
+        <ExceptionCare text={'body'} />
+      </View>
+     
 
-        </SafeAreaView>
+           
+        
+   </ScrollView>
     );
 };
 
 // define your styles
 const styles = StyleSheet.create({
-    // container: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     //backgroundColor: '#2c3e50',
-    // },
-    // text:{
-    //     top:-25,
-    //     fontSize:30,
-    //     fontWeight:'700'
-    // },
-    // text1:{
-    //     top:90,
-    //     right:50,
-    //     fontSize:16,
-    // },
-    // text2:{
-    //     top:90,
-    //     right:108,
-    //     fontSize:16,
-    // },
-    // textlogin:{
-    //     fontSize:18,
-    //     top:-10,
-    //     left:-65,
-
-    // },
-    // pass:{
-    //     fontSize:18,
-    //     top:-10,
-    //     left: -74
-
-    // },
-    // smurf:{
-    //     fontSize:15,
-    //     top:-51,
-    //     left:85
-
-    // },
-    // smurf1:{
-    //     fontSize:15,
-    //     top:-48,
-    //     left:85
-    // },
-    // smurf2:{
-    //     fontSize:20,
-    //     top:-70,
-    //     left:65,
-
-    // },
-    // redux:{
-    //     bottom:200,
-    //     fontSize:50,
-    //     fontWeight:'900',
-    //     color:'#86d46b'
-    // }
-    header:{
-    backgroundColor: "#fff",
+  picture:{
+    top:45
   },
-  headerContent:{
-    padding:30,
-    alignItems: 'center',
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 0.4,
-    //borderColor: "white",
-    marginBottom:10,
+  line:{
+    borderBottomWidth:0.1,
+    width:'80%'
   },
   name:{
-    fontSize:22,
-    color:"black",
-    fontWeight:'600',
+    fontSize:14,
+    fontWeight:'500',
+    lineHeight:16.8,
+    top:-355,
+    marginHorizontal:30
   },
-  profileDetail:{
-    alignSelf: 'center',
-    marginTop:200,
-    alignItems: 'center',
-    flexDirection: 'row',
-    position:'absolute',
-    backgroundColor: "#ffffff"
+  butn:{
+    width:79,
+    height:30,
+    backgroundColor:'#5382F6',
+    top:-462,
+    left: 289
   },
-  detailContent:{
-    margin:10,
-    alignItems: 'center'
-  },
-  title:{
-    fontSize:20,
-    color: "#00CED1"
-  },
-  count:{
-    fontSize:18,
-  },
-  bodyContent: {
-    flex: 1,
-    alignItems: 'center',
-    padding:30,
-    marginTop:-30
-  },
-  textInfo:{
-    fontSize:18,
-    marginTop:20,
-    color: "#696969",
-  },
-  buttonContainer: {
-    marginTop:10,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-    backgroundColor: "#5382F6",
-  },
-  description:{
-    fontSize:20,
-    color: "#00CED1",
-    marginTop:10,
-    textAlign: 'center'
-  },
-
-
-
+  pp:{
+    width:40,
+    height:40,
+    borderRadius:18,
+    top:-480,
+    left:316
+  }
 });
 
 //make this component available to the app

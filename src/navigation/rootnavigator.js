@@ -24,7 +24,7 @@ import feedback from '../screens/feedback';
 import menu from '../screens/menu';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import {Icon1} from 'react-native-vector-icons/SimpleLineIcons'
+import {MaterialCommunityIcons} from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 
@@ -36,15 +36,16 @@ function rootnavigator() {
 
     const MainScreen = () =>{
         return(
-            <Tab.Navigator >
+            <Tab.Navigator            
+            >
                 <Tab.Screen 
-                    name="dashboard1" 
+                    name="dashboard1"                     
                     component={dashboard1}  
                     options={{
                         headerShown: false,
-                        tabBarLabel:"Home",
-                        
-                    }}    
+                        tabBarLabel:"Home"  
+                    }}
+    
                 />
                 <Tab.Screen 
                     name="history" 

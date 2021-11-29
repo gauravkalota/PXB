@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Image, TouchableOpacity, StyleSheet, Text,ScrollView, View, Alert , Keyboard, TouchableWithoutFeedback} from 'react-native';
+import { NativeModules ,Image, TouchableOpacity, StyleSheet, Text,ScrollView, View, Platform , Keyboard, TouchableWithoutFeedback} from 'react-native';
 import { TextInput, Button, DefaultTheme, Colors } from 'react-native-paper';
 import Logo from '../components/logo';
 import AppButton from '../components/AppButton';
@@ -13,6 +13,7 @@ import * as yup from 'yup'
 
 import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
+import {name as app_name, version as app_version}  from '../../package-lock.json'
 
 
 
@@ -22,8 +23,9 @@ import DialCode from '../components/DialCode';
 
 /////////REDUX_SAGA/////////
 import {useDispatch} from 'react-redux';
-import { setSmurfName,setSmurfPassword } from '../redux/actions';
-
+import { setobject, setSmurfName,setSmurfPassword } from '../redux/actions';
+//import {DeviceInfo as Info} from 'react-native-device-info';
+import  {getUniqueId} from 'react-native-device-info';
 
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
@@ -114,6 +116,7 @@ export default function login({navigation, route}) {
                     isSetSubmitting(true);
                     dispatch(setSmurfName(Number));
                     dispatch(setSmurfPassword(values.Password));
+                    dispatch(setobject(DATA));
                     console.log('Value',values.Password)
                     //dispatch(setPassword(Password));
                     navigation.navigate('dashboard1',{data1:Password})
@@ -242,11 +245,26 @@ for (var i = 0; i < Country.length; i++ ){
 }
 }
 
-/////////////REDUX_SAGA//////////
+/////////////REDUX_SAGA_APP_DETAILS//////////
 
-const ForgotPassword =()=>{
-    
+const OsVer = Platform.constants['Release'];
+console.log(OsVer,'os_version');
+
+const majorVersionIOS = parseInt(Platform.Version, 10);
+console.log("iOS version " + majorVersionIOS);
+console.log("UID",NativeModules.SettingsManager.clientUniqueId)
+
+let uniqueId = getUniqueId();
+console.log('UID',uniqueId )
+
+const DATA = {
+    "APP_NAME": app_name,
+    "APP_VERSION" : app_version,
+    "OS_VERSION":majorVersionIOS,
+    "UNIQUE_ID":uniqueId,
 }
+
+
 
 
 
