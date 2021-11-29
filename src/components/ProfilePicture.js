@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    width: 110,
-    height: 110,
+    width: 100,
+    height: 100,
     borderRadius: 63,
     borderWidth: 0.4,
     //borderColor: "white",
