@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} from 'react-native';
-import {Button,} from 'react-native-paper'
+import {} from 'react-native-paper'
 import {useSelector} from 'react-redux';
 import ExceptionCare from './comps/ExceptionCare';
 import MyCareTeam from './comps/MyCareTeam';
@@ -39,17 +39,17 @@ console.log("DATA", Id3 )
 return (
     <ScrollView style={{backgroundColor :'#ffff'}} >
       <View style={styles.picture} >
-        <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons-png.flaticon.com/128/387/387561.png'} />
-        <View style={{top:-610 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:'90%' }}/>
+        <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
+        <View style={{top:-615 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <Text style={styles.name} >Carolinas Medical Center</Text>
-        <View style={{top:-1185 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:'90%' }}/>
+        <View style={{top:-1182 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
       </View>
       <View>
-        <Button style={styles.butn} mode="contained" onPress={() => console.log('Pressed')}  >
-          <Text style={{fontFamily:'Lato',color:'white',fontWeight:'700',fontSize:9 , }} >Change</Text>
-        </Button>
+        <TouchableOpacity style={styles.butn} mode="contained" onPress={() => console.log('Pressed')}   >
+          <Text style={{ fontFamily:'Lato',color:'white',fontWeight:'700',fontSize:14 ,alignSelf:'center',top:5 }}  >Change</Text>
+        </TouchableOpacity>
         <Text style={{fontFamily:'Lato', top:-945,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
-        <Text style={{fontFamily:'Lato',top:-940,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
+        <Text style={{fontFamily:'Lato',top:-942,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
        <Image style={styles.pp} style={styles.pp} source={require('../../../assets/images/doctor.png')}/>
       </View>
       <View style={{top:-965}}>
@@ -84,21 +84,22 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     lineHeight:16.8,
     top:-598,
-    marginHorizontal:30,
+    marginHorizontal:20,
     fontFamily:'Lato'
   },
   butn:{
     width:79,
     height:30,
     backgroundColor:'#5382F6',
-    top:-960,
-    left: 289
+    top:-965,
+    left: 289,
+    borderRadius:4,
   },
   pp:{
     width:40,
     height:40,
     borderRadius:18,
-    top:-979,
+    top:-976,
     left:316
   }
 });

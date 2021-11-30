@@ -26,19 +26,20 @@ const styles = StyleSheet.create({
     borderWidth: 0.1,
     //borderColor: "white",
     marginBottom:5,
-    marginTop:-10
+    marginTop:-12
   },
   patient_name:{
-    fontSize:22,
+    fontSize:20,
     color:"black",
-    fontWeight:'600',
+    fontWeight:'700',
     fontFamily:'Lato'
   },
   patient_status:{
     fontSize:14,
     fontWeight:'500',
     color: '#999999',
-    fontFamily:'Lato'
+    fontFamily:'Lato',
+    marginTop:4,
 
   }
 

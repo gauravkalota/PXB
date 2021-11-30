@@ -72,7 +72,7 @@ function rootnavigator() {
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
-                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/chat.png')}  />
+                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/feedback.png')}  />
                             )
                         },
                         
