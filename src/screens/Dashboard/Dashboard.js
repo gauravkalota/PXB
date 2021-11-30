@@ -1,14 +1,14 @@
 import React,{useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} from 'react-native';
 import {} from 'react-native-paper'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import ExceptionCare from './comps/ExceptionCare';
-import MyCareTeam from './comps/MyCareTeam';
-import ProfilePicture from './comps/ProfilePicture';
-import QuestionAnswer from './comps/QuestionAnswer';
+import ExceptionCare from './Components/ExceptionCare';
+import MyCareTeam from './Components/MyCareTeam';
+import ProfilePicture from './Components/ProfilePicture';
+import QuestionAnswer from './Components/QuestionAnswer';
 
-
-function dashboard1  ({navigation, route})  {
+function Dashboard  ({navigation, route})  {
 const [enter, setEnter] = useState('')
 const [one,setone] = useState('');
 const [two,settwo] = useState('');
@@ -37,7 +37,8 @@ console.log("DATA", Id3 )
 
     
 return (
-    <ScrollView style={{backgroundColor :'#ffff'}} >
+  <SafeAreaView style={{flex:1}}>
+    <ScrollView style={{top:-40,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.picture} >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-615 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
@@ -58,15 +59,19 @@ return (
       <View style={{top:25}} >
         <MyCareTeam />
       </View>
-      <View style={{top:-490}} >
+      {/* <View style={{top:-530}} >
         <QuestionAnswer onPress={()=>console.log('Pressed')} />
-      </View>
+      </View> */}
       
      
 
            
-        
+    
    </ScrollView>
+   <View style={{top:485}} >
+        <QuestionAnswer onPress={()=>console.log('Pressed')} />
+      </View>
+  </SafeAreaView>   
     );
 };
 
@@ -105,4 +110,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default dashboard1;
+export default Dashboard;

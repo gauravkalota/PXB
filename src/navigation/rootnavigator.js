@@ -17,7 +17,7 @@ import optionalverification from '../screens/optionalverification';
 import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
 import FaceBook from '../screens/FaceBook';
-import Dashboard1 from '../screens/DashboardScreen/Dashboard1';
+import Dashboard from '../screens/Dashboard/Dashboard';
 import dashboard2 from '../screens/dashboard2';
 import history from '../screens/history';
 import feedback from '../screens/feedback';
@@ -37,12 +37,12 @@ function rootnavigator() {
     const MainScreen = () =>{
         return(
             <Tab.Navigator  
-                 initialRouteName={Dashboard1}
+                 initialRouteName={Dashboard}
                  screenOptions={{headerShown:false}}          
             >
                 <Tab.Screen 
-                    name="dashboard1"                     
-                    component={Dashboard1}  
+                    name="dashboard"                     
+                    component={Dashboard}  
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
