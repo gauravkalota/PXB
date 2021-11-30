@@ -3,12 +3,12 @@ import React from 'react';
 import { View, Text, StyleSheet,Image } from 'react-native';
 
 // create a component
-const ProfilePicture = ({uri,text1,text2}) => {
+const ProfilePicture = ({uri,patient_name,patient_status}) => {
     return (
         <View style={styles.headerContent}>
             <Image resizeMode='contain' style={styles.avatar} source={{uri:uri}}/>
-            <Text style={styles.name}>{text1}</Text>
-            <Text >{text2}</Text>
+            <Text style={styles.patient_name}>{patient_name}</Text>
+            <Text style={styles.patient_status} >{patient_status}</Text>
       </View>
     );
 };
@@ -22,15 +22,24 @@ const styles = StyleSheet.create({
   avatar: {
     width: 100,
     height: 100,
-    borderRadius: 63,
-    borderWidth: 0.4,
+    borderRadius: 57,
+    borderWidth: 0.1,
     //borderColor: "white",
-    marginBottom:10,
+    marginBottom:5,
+    marginTop:-10
   },
-  name:{
+  patient_name:{
     fontSize:22,
     color:"black",
     fontWeight:'600',
+    fontFamily:'Lato'
+  },
+  patient_status:{
+    fontSize:14,
+    fontWeight:'500',
+    color: '#999999',
+    fontFamily:'Lato'
+
   }
 
 });

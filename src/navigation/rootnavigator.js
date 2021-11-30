@@ -17,7 +17,7 @@ import optionalverification from '../screens/optionalverification';
 import verificationsuccessful from '../screens/verificationsuccessful';
 import profilepicture from '../screens/profilepicture';
 import FaceBook from '../screens/FaceBook';
-import dashboard1 from '../screens/dashboard1';
+import Dashboard1 from '../screens/DashboardScreen/Dashboard1';
 import dashboard2 from '../screens/dashboard2';
 import history from '../screens/history';
 import feedback from '../screens/feedback';
@@ -40,7 +40,7 @@ function rootnavigator() {
             >
                 <Tab.Screen 
                     name="dashboard1"                     
-                    component={dashboard1}  
+                    component={Dashboard1}  
                     options={{
                         headerShown: false,
                         tabBarLabel:"Home"  
