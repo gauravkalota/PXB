@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import login from '../screens/login';
@@ -36,13 +36,19 @@ function rootnavigator() {
 
     const MainScreen = () =>{
         return(
-            <Tab.Navigator            
+            <Tab.Navigator  
+                 initialRouteName={Dashboard1}
+                 screenOptions={{headerShown:false}}          
             >
                 <Tab.Screen 
                     name="dashboard1"                     
                     component={Dashboard1}  
                     options={{
-                        headerShown: false,
+                        tabBarIcon:( {focused} )=>{
+                            return(
+                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/home.png')}  />
+                            )
+                        },
                         tabBarLabel:"Home"  
                     }}
     
@@ -51,7 +57,12 @@ function rootnavigator() {
                     name="history" 
                     component={history} 
                     options={{
-                        headerShown: false,
+                        tabBarIcon:( {focused} )=>{
+                            return(
+                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/history.png')}  />
+                            )
+                        },
+            
                         tabBarLabel:"Hospital History"
                     }}  
                 />
@@ -59,7 +70,12 @@ function rootnavigator() {
                     name="feedback" 
                     component={feedback} 
                     options={{
-                        headerShown: false,
+                        tabBarIcon:( {focused} )=>{
+                            return(
+                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/chat.png')}  />
+                            )
+                        },
+                        
                         tabBarLabel:"feedback",
                     //     tabBarIcon:({color})=>(
                     //      <Icon1 name="home" size={20} />
@@ -70,7 +86,13 @@ function rootnavigator() {
                     name="menu" 
                     component={menu} 
                     options={{
-                        headerShown: false,
+                        tabBarIcon:( {focused} )=>{
+                            return(
+                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/menu.png')}  />
+                            )
+                        },
+                        tabBarLabel:"Menu"
+                        
                     }}  
                 />
             </Tab.Navigator>
