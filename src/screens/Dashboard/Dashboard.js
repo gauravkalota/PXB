@@ -38,25 +38,25 @@ console.log("DATA", Id3 )
     
 return (
   <SafeAreaView style={{flex:1}}>
-    <ScrollView style={{top:-40,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+    <ScrollView style={{top:-10,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.picture} >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
-        <View style={{top:-615 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
+        <View style={{top:-600 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <Text style={styles.name} >Carolinas Medical Center</Text>
-        <View style={{top:-1182 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
+        <View style={{top:-1155 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
       </View>
       <View>
         <TouchableOpacity style={styles.butn} mode="contained" onPress={() => console.log('Pressed')}   >
           <Text style={{ fontFamily:'Lato',color:'white',fontWeight:'700',fontSize:14 ,alignSelf:'center',top:5 }}  >Change</Text>
         </TouchableOpacity>
-        <Text style={{fontFamily:'Lato', top:-945,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
-        <Text style={{fontFamily:'Lato',top:-942,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
+        <Text style={{fontFamily:'Lato', top:-940,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
+        <Text style={{fontFamily:'Lato',top:-937,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
        <Image style={styles.pp} style={styles.pp} source={require('../../../assets/images/doctor.png')}/>
       </View>
-      <View style={{top:-965}}>
+      <View style={{top:-955}}>
         <ExceptionCare card_text1={'//body//'} card_text2={'//body//'} />
       </View>
-      <View style={{top:25}} >
+      <View style={{top:34}} >
         <MyCareTeam />
       </View>
       {/* <View style={{top:-530}} >
@@ -78,7 +78,7 @@ return (
 // define your styles
 const styles = StyleSheet.create({
   picture:{
-    top:45
+    top:20
   },
   line:{
     borderBottomWidth:0.1,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontWeight:'500',
     lineHeight:16.8,
-    top:-598,
+    top:-582,
     marginHorizontal:20,
     fontFamily:'Lato'
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     width:79,
     height:30,
     backgroundColor:'#5382F6',
-    top:-965,
+    top:-959,
     left: 289,
     borderRadius:4,
   },
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     width:40,
     height:40,
     borderRadius:18,
-    top:-976,
+    top:-974,
     left:316
   }
 });
