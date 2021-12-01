@@ -58,15 +58,7 @@ return (
       </View>
       <View style={{top:60}} >
         <MyCareTeam />
-      </View>
-      {/* <View style={{top:-530}} >
-        <QuestionAnswer onPress={()=>console.log('Pressed')} />
-      </View> */}
-      
-     
-
-           
-    
+      </View>  
    </ScrollView>
    <View style={{top:485}} >
         <QuestionAnswer onPress={()=>console.log('Pressed')} />

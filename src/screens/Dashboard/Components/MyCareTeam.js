@@ -7,9 +7,12 @@ const MyCareTeam = () => {
   const [isValid,setIsValid] = useState(true);
   const [bordervisible , setBorderVisible] = useState(true);
 
+//When Nurses TAB Clicked 
   const NurBtnClicked = () =>{
     setIsValid(false);
   }
+   
+//When Clinicians TAB Clicked 
   const ClinicBtnClicked = () => {
     setIsValid(true);
   }
@@ -19,9 +22,9 @@ const MyCareTeam = () => {
     return (
       <View style={styles.container} >
         <Text style={styles.mycareText} >My Care Team</Text>
-        <Text style={styles.cliniciansText} onPress={()=>ClinicBtnClicked()} >Clinicians</Text>
-        <View style={styles.cliniciansBorder} ></View>
-        <Text style={styles.nursesText} onPress={()=>NurBtnClicked()}  >Nurses</Text>
+        <Text style={ isValid ?  styles.cliniciansText : styles.cliniciansTextDIS} onPress={()=>ClinicBtnClicked()} >Clinicians</Text>
+        <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT} ></View>
+        <Text style={ isValid ? styles.nursesTextDIS : styles.nursesText} onPress={()=>NurBtnClicked()}  >Nurses</Text>
       {isValid ? (
         <View style={styles.nextcontainer} >
             <View style={styles.card1View} >
@@ -29,12 +32,12 @@ const MyCareTeam = () => {
               <Text style={styles.drname} >Ardit Sulce</Text>
               <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
             </View>
-            <View style={{marginTop:10,left:17, width:360,height:100,backgroundColor:'#FFFFFF',shadowOpacity:0.1}} >
+            <View style={styles.card2View} >
               <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Jonas Schmedtmann</Text>
               <Text style={styles.occupation} >Neurologist</Text>
             </View>
-            <View style={{marginTop:10,left:17, width:360,height:100,backgroundColor:'#FFFFFF',shadowOpacity:0.1}} >
+            <View style={styles.card2View} >
               <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Brent Eviston</Text>
               <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
@@ -42,7 +45,23 @@ const MyCareTeam = () => {
         </View>
 
       ) : (
-        <View style={styles.nextcontainer} ></View>
+          <View style={styles.nextcontainer} >
+            <View style={styles.card1View} >
+              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <Text style={styles.drname} >Nurse 1</Text>
+              <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
+            </View>
+            <View style={styles.card2View} >
+              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <Text style={styles.drname} >Nurse 2</Text>
+              <Text style={styles.occupation} >Neurologist</Text>
+            </View>
+            <View style={styles.card2View} >
+              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <Text style={styles.drname} >Nurse 3</Text>
+              <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
+            </View>
+        </View>
       ) }  
         
       </View>
@@ -51,6 +70,8 @@ const MyCareTeam = () => {
 export default MyCareTeam;
 
 const styles = StyleSheet.create({
+
+
   container: {
     top:-980
   },
@@ -67,13 +88,41 @@ const styles = StyleSheet.create({
     fontSize:16,
     fontWeight:'700',
     fontFamily:'Lato', 
-    color: '#034C81'
+    color:   '#034C81'
+  },
+  cliniciansTextDIS:{
+    top:22,
+    left:30,
+    fontSize:16,
+    fontWeight:'700',
+    fontFamily:'Lato', 
+    color:   '#999999'
   },
   cliniciansBorder:{
     top:29, 
     left:15,
     width:110,
-    borderWidth:1
+    height:2,
+    //borderWidth:1,
+    backgroundColor:'#034C81'
+  
+    
+  },
+  cliniciansBorderSHIFT:{
+    top:29, 
+    left:145,
+    width:110,
+    //borderWidth:1
+    height:2,
+    backgroundColor:'#034C81'
+  },
+  nursesTextDIS:{
+    top:0, 
+    left:150,
+    fontSize:16,
+    fontWeight:'700',
+    fontFamily:'Lato', 
+    color: '#999999'
   },
   nursesText:{
     top:0, 
@@ -81,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize:16,
     fontWeight:'700',
     fontFamily:'Lato', 
-    color:'#999999'
+    color: '#034C81'
   },
   nextcontainer:{
     top:10 ,
@@ -95,7 +144,17 @@ const styles = StyleSheet.create({
     width:360,
     height:100,
     backgroundColor:'#FFFFFF', 
-    shadowOpacity:0.1
+    shadowOpacity:0.08,
+    
+  },
+  card2View:{
+    marginTop:10,
+    left:17, 
+    width:360,
+    height:100,
+    backgroundColor:'#FFFFFF',
+    shadowOpacity:0.08
+
   },
   drpicture:{
     top:20,
