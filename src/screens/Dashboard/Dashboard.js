@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} 
 import {} from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import ExceptionCare from './Components/ExceptionCare';
-import MyCareTeam from './Components/MyCareTeam';
-import ProfilePicture from './Components/ProfilePicture';
-import QuestionAnswer from './Components/QuestionAnswer';
+import MyCareTeam from './components/MyCareTeam';
+import ProfilePicture from './components/ProfilePicture';
+import QuestionAnswer from './components/QuestionAnswer';
+import ExceptionCare from './components/ExceptionCare';
 
 function Dashboard  ({navigation, route})  {
 const [enter, setEnter] = useState('')
@@ -37,8 +37,8 @@ console.log("DATA", Id3 )
 
     
 return (
-  <SafeAreaView style={{flex:1}}>
-    <ScrollView style={{top:-10,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+  <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
+    <ScrollView style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.picture} >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-600 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
@@ -54,9 +54,9 @@ return (
        <Image style={styles.pp} style={styles.pp} source={require('../../../assets/images/doctor.png')}/>
       </View>
       <View style={{top:-955}}>
-        <ExceptionCare card_text1={'//body//'} card_text2={'//body//'} />
+        <ExceptionCare card_text1={'Write statements //body//'} card_text2={'//body//'} />
       </View>
-      <View style={{top:34}} >
+      <View style={{top:60}} >
         <MyCareTeam />
       </View>
       {/* <View style={{top:-530}} >
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontWeight:'500',
     lineHeight:16.8,
-    top:-582,
+    top:-580,
     marginHorizontal:20,
     fontFamily:'Lato'
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     width:79,
     height:30,
     backgroundColor:'#5382F6',
-    top:-959,
+    top:-962,
     left: 289,
     borderRadius:4,
   },

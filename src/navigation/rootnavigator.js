@@ -32,13 +32,14 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function rootnavigator() {
+    const[tabenable,setTabEnable] = React.useState(true)
     
 
     const MainScreen = () =>{
         return(
             <Tab.Navigator  
                  initialRouteName={Dashboard}
-                 screenOptions={{headerShown:false}}          
+                 screenOptions={{headerShown:false, tabBarActiveTintColor:'#034C81', tabBarInactiveTintColor:'#999999'}}          
             >
                 <Tab.Screen 
                     name="dashboard"                     
@@ -46,10 +47,12 @@ function rootnavigator() {
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
-                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/home.png')}  />
+                                <Image resizeMode="contain" style={{height:25,width:24, tintColor: focused ? '#034C81' : '#999999' }} source={require('../../assets/images/home.png')}  />
                             )
                         },
-                        tabBarLabel:"Home"  
+                        tabBarLabel:"Home" ,
+                        //tabBarActiveTintColor:'#034C81' ,
+                        
                     }}
     
                 />
@@ -59,11 +62,12 @@ function rootnavigator() {
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
-                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/history.png')}  />
+                                <Image resizeMode="contain" style={{height:20,width:25, tintColor: focused ? '#034C81' : '#999999' }} source={require('../../assets/images/history.png')}  />
                             )
                         },
             
-                        tabBarLabel:"Hospital History"
+                        tabBarLabel:"Hospital History",
+                        //tabBarActiveTintColor:'#034C81'
                     }}  
                 />
                 <Tab.Screen 
@@ -72,14 +76,13 @@ function rootnavigator() {
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
-                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/feedback.png')}  />
+                                <Image resizeMode="contain" style={{height:20,width:25,tintColor: focused ? '#034C81' : '#999999'}} source={require('../../assets/images/feedback.png')}  />
                             )
                         },
                         
                         tabBarLabel:"feedback",
-                    //     tabBarIcon:({color})=>(
-                    //      <Icon1 name="home" size={20} />
-                    //     ),
+                        //tabBarActiveTintColor:'#034C81',
+                        
                     }} 
                 />
                 <Tab.Screen 
@@ -88,10 +91,11 @@ function rootnavigator() {
                     options={{
                         tabBarIcon:( {focused} )=>{
                             return(
-                                <Image resizeMode="contain" style={{height:25,width:25}} source={require('../../assets/images/menu.png')}  />
+                                <Image resizeMode="contain" style={{height:20,width:25,tintColor: focused ? '#034C81' : '#999999'}} source={require('../../assets/images/menu.png')}  />
                             )
                         },
-                        tabBarLabel:"Menu"
+                        tabBarLabel:"Menu",
+                        //tabBarActiveTintColor:'#034C81'
                         
                     }}  
                 />
