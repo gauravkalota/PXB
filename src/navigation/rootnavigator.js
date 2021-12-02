@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image,TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import login from '../screens/login';
@@ -36,6 +36,21 @@ function rootnavigator() {
     
 
     const MainScreen = () =>{
+
+        const CustomTabButton = (props) => (
+            <TouchableOpacity
+                {...props}
+                style={
+                        props.accessibilityState.selected
+                        ? [props.style, { borderTopColor: '#034C81', borderTopWidth: 2 }]
+                        : props.style
+                }
+            />
+        );
+
+
+
+
         return(
             <Tab.Navigator  
                  initialRouteName={Dashboard}
@@ -53,6 +68,8 @@ function rootnavigator() {
                             )
                         },
                         tabBarLabel:"Home" ,
+                        tabBarButton: CustomTabButton
+                        //tabBarStyle:{borderTopWidth:3,borderTopColor:'#034C81'}
                         //tabBarActiveTintColor:'#034C81' ,
                         
                     }}
@@ -70,6 +87,7 @@ function rootnavigator() {
                         
             
                         tabBarLabel:"Hospital History",
+                        tabBarButton: CustomTabButton
                         
                         //tabBarActiveTintColor:'#034C81'
                     }}  
@@ -85,6 +103,7 @@ function rootnavigator() {
                         },
                         
                         tabBarLabel:"feedback",
+                        tabBarButton: CustomTabButton
                         //tabBarActiveTintColor:'#034C81',
                         
                     }} 
@@ -99,6 +118,7 @@ function rootnavigator() {
                             )
                         },
                         tabBarLabel:"Menu",
+                        tabBarButton: CustomTabButton
                         //tabBarActiveTintColor:'#034C81'
                         
                     }}  

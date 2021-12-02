@@ -1,12 +1,13 @@
 import React,{useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} from 'react-native';
-import {} from 'react-native-paper'
+import {Avatar} from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import MyCareTeam from './components/MyCareTeam';
 import ProfilePicture from './components/ProfilePicture';
 import QuestionAnswer from './components/QuestionAnswer';
 import ExceptionCare from './components/ExceptionCare';
+import ImageComp from './components/ImageComp';
 
 function Dashboard  ({navigation, route})  {
 const [enter, setEnter] = useState('')
@@ -51,7 +52,8 @@ return (
         </TouchableOpacity>
         <Text style={{fontFamily:'Lato', top:-940,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
         <Text style={{fontFamily:'Lato',top:-937,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
-       <Image style={styles.pp} style={styles.pp} source={require('../../../assets/images/doctor.png')}/>
+        <ImageComp size={45} label="XD" source={require('../../../assets/images/doctor.png')} />
+       {/* <Avatar.Image  size={45} style={styles.pp} source={require('../../../assets/images/doctor.png')}/> */}
       </View>
       <View style={{top:-955}}>
         <ExceptionCare card_text1={'Write statements //body//'} card_text2={'//body//'} />
@@ -93,9 +95,9 @@ const styles = StyleSheet.create({
     borderRadius:4,
   },
   pp:{
-    width:40,
+    width:0,
     height:40,
-    borderRadius:18,
+    //borderRadius:18,
     top:-974,
     left:316
   }
