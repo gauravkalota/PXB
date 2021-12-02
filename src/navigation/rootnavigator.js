@@ -39,7 +39,9 @@ function rootnavigator() {
         return(
             <Tab.Navigator  
                  initialRouteName={Dashboard}
-                 screenOptions={{headerShown:false, tabBarActiveTintColor:'#034C81', tabBarInactiveTintColor:'#999999'}}          
+                 screenOptions={{headerShown:false, tabBarActiveTintColor:'#034C81', tabBarInactiveTintColor:'#999999'}}
+                 tabBarOptions={{indicatorStyle:{backgroundColor:'#034C81'}}}     
+                      
             >
                 <Tab.Screen 
                     name="dashboard"                     
@@ -65,8 +67,10 @@ function rootnavigator() {
                                 <Image resizeMode="contain" style={{height:20,width:25, tintColor: focused ? '#034C81' : '#999999' }} source={require('../../assets/images/history.png')}  />
                             )
                         },
+                        
             
                         tabBarLabel:"Hospital History",
+                        
                         //tabBarActiveTintColor:'#034C81'
                     }}  
                 />
