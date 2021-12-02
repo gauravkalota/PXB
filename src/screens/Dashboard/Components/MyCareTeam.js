@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     width:360,
     height:100,
     backgroundColor:'#FFFFFF', 
-    shadowOpacity:0.08,
+    shadowOpacity:0.03,
     
   },
   card2View:{
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     width:360,
     height:100,
     backgroundColor:'#FFFFFF',
-    shadowOpacity:0.08
+    shadowOpacity:0.03
 
   },
   drpicture:{
