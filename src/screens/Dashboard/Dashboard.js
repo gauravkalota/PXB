@@ -38,7 +38,7 @@ console.log("DATA", Id3 )
 
 
 //////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
-function IsProfilePictureGiven({style,size,lable,source}) {
+function IsProfilePictureGiven({style,size,source}) {
   const [isgiven, setIsGiven] = useState(true);
   return (
     <View>
