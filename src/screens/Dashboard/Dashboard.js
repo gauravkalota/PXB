@@ -62,7 +62,7 @@ function NoProfilePictureGiven ({style,size,lable}){
     
 return (
   <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
-    <ScrollView style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+    <ScrollView  contentContainerStyle={{paddingBottom:80}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.picture}  >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-670 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
@@ -85,7 +85,7 @@ return (
       </View>
       <View style={{marginTop:5}} >
         <MyCareTeam />
-      </View>  
+      </View>
    </ScrollView>
    <View style={{top:485}} >
         <QuestionAnswer onPress={()=>console.log('Pressed')} />
