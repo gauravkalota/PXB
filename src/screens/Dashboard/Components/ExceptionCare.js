@@ -1,12 +1,13 @@
 //import liraries
-import React from 'react';
+import React,{useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MainButton from './MainButton';
 // create a component
-const ExceptionCare = ({card_text1,card_text2,card_text3}) => {
+const ExceptionCare = ({card_text1,card_text2,card_text3,card_text4,card_text5}) => {
+  const[more, setMore] =useState(true);
     return (
         <View style={styles.container} >
-          <Text style={styles.maintext} >My Exceptional Care</Text>
+          <Text style={styles.maintext} onPress={()=>setMore(true)} >My Exceptional Care</Text>
           <TouchableOpacity style={styles.editbtn} onPress={() => console.log('Pressed')}  >
             <Text style={styles.edittext} >Edit</Text>
           </TouchableOpacity>
@@ -19,9 +20,18 @@ const ExceptionCare = ({card_text1,card_text2,card_text3}) => {
           <View style={styles.cardview2} >
             <Text style={styles.cardtext} >{card_text3}</Text>
           </View>
+          { more ? null : (
+            <>
+            <View style={styles.cardview2}>
+              <Text style={styles.cardtext} >{card_text4}</Text>
+            </View>
+            <View style={styles.cardview2}>
+              <Text style={styles.cardtext} >{card_text5}</Text>
+            </View>
+            </>
+          ) }
           <View>
-            <MainButton text="Show more"/>
-            
+            <MainButton text="Show more" onPress={()=> setMore(false)}/>
           </View>
         </View>
     );
