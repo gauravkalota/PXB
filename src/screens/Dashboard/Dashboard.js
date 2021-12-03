@@ -50,7 +50,7 @@ function IsProfilePictureGiven({style,size,lable,source}) {
 function NoProfilePictureGiven ({style,size,lable}){
   return(
     <View>
-      <Avatar.Text style={style} size={size} label={lable} />
+      <Avatar.Text style={style} color="white" size={size} label={lable} />
     </View>
   )
 }
@@ -63,7 +63,7 @@ function NoProfilePictureGiven ({style,size,lable}){
 return (
   <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
     <ScrollView style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
-      <View style={styles.picture} >
+      <View style={styles.picture}  >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-670 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <Text style={styles.name} >Carolinas Medical Center</Text>
@@ -76,14 +76,14 @@ return (
         <Text style={{fontFamily:'Lato', top:-1085,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
         <Text style={{fontFamily:'Lato',top:-1082,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
         <View style={{top:-145}} >
-            <ImageComp size={45} label="XD" source={require('../../../assets/images/doctor.png')} />
+          <NoProfilePictureGiven  style={styles.pp}  size={40} lable="J" />
         </View>
        {/* <Avatar.Image  size={45} style={styles.pp} source={require('../../../assets/images/doctor.png')}/> */}
       </View>
       <View style={{top:-1100}}>
         <ExceptionCare card_text1={'Write statements //body//'} card_text2={'//body//'} card_text3={"TEXT_TEXT_TEXT_TEXT"} />
       </View>
-      <View style={{top:-100}} >
+      <View style={{marginTop:5}} >
         <MyCareTeam />
       </View>  
    </ScrollView>
@@ -120,11 +120,12 @@ const styles = StyleSheet.create({
     borderRadius:4,
   },
   pp:{
-    width:0,
+    width:40,
     height:40,
     //borderRadius:18,
     top:-974,
-    left:316
+    left:316,
+    backgroundColor:'#A479E2'
   }
 });
 

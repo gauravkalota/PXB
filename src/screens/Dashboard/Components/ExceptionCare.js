@@ -6,8 +6,8 @@ import MainButton from './MainButton';
 const ExceptionCare = ({card_text1,card_text2,card_text3,card_text4,card_text5}) => {
   const[more, setMore] =useState(true);
     return (
-        <View style={styles.container} >
-          <Text style={styles.maintext} onPress={()=>setMore(true)} >My Exceptional Care</Text>
+        <View style={{width:364, height: more ? 365 :515 ,left:13,borderRadius:4,backgroundColor:'rgba(83,130,246,0.08)'}} >
+          <Text style={styles.maintext} >My Exceptional Care</Text>
           <TouchableOpacity style={styles.editbtn} onPress={() => console.log('Pressed')}  >
             <Text style={styles.edittext} >Edit</Text>
           </TouchableOpacity>
@@ -31,7 +31,7 @@ const ExceptionCare = ({card_text1,card_text2,card_text3,card_text4,card_text5})
             </>
           ) }
           <View>
-            <MainButton text="Show more" onPress={()=> setMore(false)}/>
+            <MainButton text={more ? "Show more" : "Show less"} onPress={()=> more ? setMore(false) : setMore(true) }/>
           </View>
         </View>
     );
@@ -40,13 +40,13 @@ const ExceptionCare = ({card_text1,card_text2,card_text3,card_text4,card_text5})
 export default ExceptionCare;
 
 const styles = StyleSheet.create({ 
-  container :{
-    width:364,
-    height:365,
-    left:13,
-    borderRadius:4,
-    backgroundColor:'rgba(83,130,246,0.08)'
-  },
+  // container :{
+  //   width:364, 
+  //   height:365,
+  //   left:13,
+  //   borderRadius:4,
+  //   backgroundColor:'rgba(83,130,246,0.08)'
+  // },
   maintext:{
     fontSize:18,
     fontWeight:'700', 

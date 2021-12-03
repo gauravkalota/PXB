@@ -18,7 +18,7 @@ function IsProfilePictureGiven({style,size,lable,source}) {
 function NoProfilePictureGiven ({style,size,lable}){
   return(
     <View>
-      <Avatar.Text style={style} size={size} label={lable} />
+      <Avatar.Text style={style} color="white" size={size} label={lable} />
     </View>
   )
 }
@@ -57,13 +57,13 @@ const MyCareTeam = () => {
             </View>
             <View style={styles.card2View} >
               {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
-              <NoProfilePictureGiven style={styles.drpicture} size={55} lable="J" />
+              <NoProfilePictureGiven style={styles.drpicture1} size={55} lable="J" />
               <Text style={styles.drname} >Jonas Schmedtmann</Text>
               <Text style={styles.occupation} >Neurologist</Text>
             </View>
             <View style={styles.card2View} >
               {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
-              <NoProfilePictureGiven style={styles.drpicture} size={55} lable="B" />
+              <NoProfilePictureGiven style={styles.drpicture2} size={55} lable="B" />
               <Text style={styles.drname} >Brent Eviston</Text>
               <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
             </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
 
   container: {
-    top:-980
+    top:-1070
   },
   mycareText:{
     left:15,
@@ -185,7 +185,22 @@ const styles = StyleSheet.create({
     top:20,
     marginLeft:10,
     height:60, 
-    width:60
+    width:60,
+    backgroundColor: '#FF8A65'
+  },
+  drpicture1:{
+    top:20,
+    marginLeft:10,
+    height:60, 
+    width:60,
+    backgroundColor: '#4EC4F6'
+  },
+  drpicture2:{
+    top:20,
+    marginLeft:10,
+    height:60, 
+    width:60,
+    backgroundColor: '#4DB6AC'
   },
   drname:{
     fontSize:16,
