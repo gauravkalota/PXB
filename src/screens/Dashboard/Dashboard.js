@@ -36,29 +36,54 @@ const dial = () => {
 //console.log("Minimum OS version ios - platform :ios, '11.0")
 console.log("DATA", Id3 )
 
+
+//////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
+function IsProfilePictureGiven({style,size,lable,source}) {
+  const [isgiven, setIsGiven] = useState(true);
+  return (
+    <View>
+      <Avatar.Image  style={style} size={size} source={source} />
+    </View>
+    
+  );
+}
+function NoProfilePictureGiven ({style,size,lable}){
+  return(
+    <View>
+      <Avatar.Text style={style} size={size} label={lable} />
+    </View>
+  )
+}
+
+
+
+
+
     
 return (
   <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
     <ScrollView style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.picture} >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
-        <View style={{top:-600 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
+        <View style={{top:-670 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <Text style={styles.name} >Carolinas Medical Center</Text>
-        <View style={{top:-1155 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
+        <View style={{top:-1300 ,alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
       </View>
       <View>
         <TouchableOpacity style={styles.butn} mode="contained" onPress={() => console.log('Pressed')}   >
           <Text style={{ fontFamily:'Lato',color:'white',fontWeight:'700',fontSize:14 ,alignSelf:'center',top:5 }}  >Change</Text>
         </TouchableOpacity>
-        <Text style={{fontFamily:'Lato', top:-940,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
-        <Text style={{fontFamily:'Lato',top:-937,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
-        <ImageComp size={45} label="XD" source={require('../../../assets/images/doctor.png')} />
+        <Text style={{fontFamily:'Lato', top:-1085,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
+        <Text style={{fontFamily:'Lato',top:-1082,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
+        <View style={{top:-145}} >
+            <ImageComp size={45} label="XD" source={require('../../../assets/images/doctor.png')} />
+        </View>
        {/* <Avatar.Image  size={45} style={styles.pp} source={require('../../../assets/images/doctor.png')}/> */}
       </View>
-      <View style={{top:-955}}>
-        <ExceptionCare card_text1={'Write statements //body//'} card_text2={'//body//'} />
+      <View style={{top:-1100}}>
+        <ExceptionCare card_text1={'Write statements //body//'} card_text2={'//body//'} card_text3={"TEXT_TEXT_TEXT_TEXT"} />
       </View>
-      <View style={{top:60}} >
+      <View style={{top:-100}} >
         <MyCareTeam />
       </View>  
    </ScrollView>
@@ -82,7 +107,7 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontWeight:'500',
     lineHeight:16.8,
-    top:-580,
+    top:-655,
     marginHorizontal:20,
     fontFamily:'Lato'
   },
@@ -90,7 +115,7 @@ const styles = StyleSheet.create({
     width:79,
     height:30,
     backgroundColor:'#5382F6',
-    top:-962,
+    top:-1104,
     left: 289,
     borderRadius:4,
   },

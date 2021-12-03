@@ -1,11 +1,33 @@
+import { sortBy } from 'lodash';
 import React,{useState,useEffect} from 'react';
 import { Alert } from 'react-native';
 import { View, Text, ScrollView,Image, StyleSheet } from 'react-native';
+import { Avatar } from 'react-native-paper';
+
+
+//////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
+function IsProfilePictureGiven({style,size,lable,source}) {
+  const [isgiven, setIsGiven] = useState(true);
+  return (
+    <View>
+      <Avatar.Image  style={style} size={size} source={source} />
+    </View>
+    
+  );
+}
+function NoProfilePictureGiven ({style,size,lable}){
+  return(
+    <View>
+      <Avatar.Text style={style} size={size} label={lable} />
+    </View>
+  )
+}
 
 const MyCareTeam = () => {
 
   const [isValid,setIsValid] = useState(true);
   const [bordervisible , setBorderVisible] = useState(true);
+  const [imagelink, setImageLink] = useState(true)
 
 //When Nurses TAB Clicked 
   const NurBtnClicked = () =>{
@@ -28,17 +50,20 @@ const MyCareTeam = () => {
       {isValid ? (
         <View style={styles.nextcontainer} >
             <View style={styles.card1View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <NoProfilePictureGiven style={styles.drpicture} size={55} lable="A" />
+              {/* <Avatar.Text style={styles.drpicture} label="A" size={55} /> */}
               <Text style={styles.drname} >Ardit Sulce</Text>
               <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
             </View>
             <View style={styles.card2View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
+              <NoProfilePictureGiven style={styles.drpicture} size={55} lable="J" />
               <Text style={styles.drname} >Jonas Schmedtmann</Text>
               <Text style={styles.occupation} >Neurologist</Text>
             </View>
             <View style={styles.card2View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
+              <NoProfilePictureGiven style={styles.drpicture} size={55} lable="B" />
               <Text style={styles.drname} >Brent Eviston</Text>
               <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
             </View>

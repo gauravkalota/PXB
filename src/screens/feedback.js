@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import { Avatar } from 'react-native-paper';
+
 
 // create a component
 const feedback = () => {
@@ -13,6 +15,7 @@ const feedback = () => {
             <View style={{alignItems:'center',top:15,left:8 ,width:374,height:369,backgroundColor:'#FFFF'}} >
               <Text style={{marginTop:24 ,fontSize:16,fontWeight:'600'}} >Rate the Hospital</Text>
               <Text style={{marginTop:8, fontSize:14,fontWeight:'400'}} >Carolinas Medical Center</Text>
+              
               <TextInput mode="outlined" placeholder="Share your feedback"   style={{color:'#FFFF', top:90,width:334,height:110}} />
               <TouchableOpacity style={{top:105,backgroundColor:'#e6e6e6', width:334,height:56,borderRadius:4}} >
                   <Text style={{alignSelf:'center',top:15, fontFamily:'Lato', fontWeight:'700', fontSize:16, color:'white'}} >Submit</Text>

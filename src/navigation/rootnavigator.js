@@ -36,7 +36,8 @@ function rootnavigator() {
     
 
     const MainScreen = () =>{
-
+         
+        //////Custom_Button_For_Bottom_Tabs//////
         const CustomTabButton = (props) => (
             <TouchableOpacity
                 {...props}

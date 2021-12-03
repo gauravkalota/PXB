@@ -12,18 +12,20 @@ const [imagePresent, setImagePresent] = useState(true);
 
 
     return (
-    <View>
+        <>
         {imagePresent ? (
-            <View>
-              <Avatar.Image size={size} style={styles.pp} source={source}/>
+            <View >
+               <Avatar.Image size={size} style={styles.pp} source={source}/>
            </View>
         ) : (
-               <View>
-                   <Avatar.Text size={size} style={styles.pk} color="white" label={label} source={require('../../../../assets/images/menu.png')} />
-             </View>
+            <View >
+              <Avatar.Text size={size} style={styles.pk} color="white" label="XX"  />
+            </View>
+            
+            
         )}
-
-    </View>
+          
+        </>
     );
 };
 
