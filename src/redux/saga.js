@@ -3,15 +3,15 @@ import {call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import {SET_PASS, SET_SMURF_NAME, SET_OBJ} from './constants';
 
 function* fetchNumber(){
-    alert('this function invoked')
+    //alert('this function invoked')
 }
 
 function* fetchNumber1(){
-    alert('this function2 invoked')
+    //alert('this function2 invoked')
 }
 
 function* fetchNumber2(){
-    alert('this function3 invoked')
+    //alert('this function3 invoked')
 }
 
 

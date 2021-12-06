@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 123
     },
     appButtonText: {
-        fontSize: 16,
+        fontSize: 14,
         color: "#fff",
-        fontWeight: "bold",
-        top:3
+        fontWeight: "500",
+        top:5,
+        left:12,
         // textTransform: "uppercase"
     }
 })
