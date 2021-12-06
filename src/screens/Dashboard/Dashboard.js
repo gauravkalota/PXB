@@ -87,6 +87,7 @@ useEffect(()=>{
 },[]);
 
  console.log("DATA",(data))
+ console.log("DATANEW", data.data.careteam[0].profile_info.active_status )
 
 
 
@@ -122,7 +123,7 @@ return (
       </View>
       <View style={{top:1100}} >
         <MyCareTeam 
-           drname={"Ardit Sulce"}
+           drname={data.data.careteam[0].profile_info.first_name  + data.data.careteam[0].profile_info.last_name   } 
            drwork={'Cardiologist, Interventional Cardiologist'}
          
          
