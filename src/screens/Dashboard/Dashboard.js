@@ -121,7 +121,13 @@ return (
         />
       </View>
       <View style={{top:1100}} >
-         <MyCareTeam />
+        <MyCareTeam 
+           drname={"Ardit Sulce"}
+           drwork={'Cardiologist, Interventional Cardiologist'}
+         
+         
+         
+        />
       </View>
     </ScrollView>
    <View style={{top:485}} >

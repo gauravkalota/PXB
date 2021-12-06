@@ -21,7 +21,7 @@ function NoProfilePictureGiven ({style,size,lable}){
   )
 }
 
-const MyCareTeam = () => {
+const MyCareTeam = ({drname,drwork}) => {
 
   const [isValid,setIsValid] = useState(true);
   const [bordervisible , setBorderVisible] = useState(true);
@@ -50,8 +50,8 @@ const MyCareTeam = () => {
             <View style={styles.card1View} >
               <NoProfilePictureGiven style={styles.drpicture} size={55} lable="A" />
               {/* <Avatar.Text style={styles.drpicture} label="A" size={55} /> */}
-              <Text style={styles.drname} >Ardit Sulce</Text>
-              <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
+              <Text style={styles.drname} >{drname}</Text>
+              <Text style={styles.occupation} >{drwork}</Text>
             </View>
             <View style={styles.card2View} >
               {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
