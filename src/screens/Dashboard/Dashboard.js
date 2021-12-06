@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { View, Text, StyleSheet, ScrollView, Platform ,Image, TouchableOpacity} from 'react-native';
-import {Avatar, DefaultTheme} from 'react-native-paper'
+import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import {Avatar} from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import MyCareTeam from './components/MyCareTeam';
@@ -62,7 +62,7 @@ function NoProfilePictureGiven ({style,size,lable}){
     
 return (
   <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
-    <ScrollView  contentContainerStyle={{paddingBottom:80}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+    <ScrollView  contentContainerStyle={{paddingBottom:60}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.container1}  >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-170, alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>

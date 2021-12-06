@@ -72,17 +72,17 @@ const MyCareTeam = () => {
       ) : (
           <View style={styles.nextcontainer} >
             <View style={styles.card1View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 1</Text>
               <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
             </View>
             <View style={styles.card2View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 2</Text>
               <Text style={styles.occupation} >Neurologist</Text>
             </View>
             <View style={styles.card2View} >
-              <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
+              <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 3</Text>
               <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
             </View>
