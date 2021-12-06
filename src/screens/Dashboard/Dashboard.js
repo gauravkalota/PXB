@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator} from 'react-native';
 import {Avatar,withTheme} from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
@@ -11,6 +11,11 @@ import AppButton from '../../components/AppButton';
 import theme from '../../theme/theme';
 
 
+/////API_CALL/////////////
+const API = "";
+
+
+
 function Dashboard  ({navigation, routes})  {
 const [enter, setEnter] = useState('')
 const [one,setone] = useState('');
@@ -18,7 +23,8 @@ const [two,settwo] = useState('');
 const Id1 = useSelector((state)=>state.smurfName)
 const Id2 = useSelector((state)=>state.pass)
 const Id3 = useSelector((state)=>state.obj)
-
+const [isLoading, setLoading] = useState(true);
+const [data, setData] = useState([]);
 
 const loginPress = () => {
     dispatch(setSmurfName(enter))
@@ -37,12 +43,18 @@ const dial = () => {
 // console.log(OsVer,'os_version');
 //console.log(" Minimum Android version - Lollipop-5.0, API-level-21")
 //console.log("Minimum OS version ios - platform :ios, '11.0")
-console.log("DATA", Id3 )
+//console.log("DATA", Id3 )
+
+
+
+
+
 
 
 //////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
 function IsProfilePictureGiven({style,size,source}) {
   const [isgiven, setIsGiven] = useState(true);
+  
   return (
     <View>
       <Avatar.Image  style={style} size={size} source={source} />
@@ -58,6 +70,30 @@ function NoProfilePictureGiven ({style,size,lable}){
   )
 }
 
+/////////////FETCH_DATA_FROM_AN_API///////
+
+function getAllDATA () {
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization','eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImJpcnRoZGF0ZSI6IjA3LTA3LTE5NDgiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9CUzh5eHlWOTgiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86dXNlcm5hbWUiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJnaXZlbl9uYW1lIjoiVGhlb2RvcmUiLCJhdWQiOiI3ZW41bTlxZm9na21tNjg0cm5vMm1wY2JwayIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjM4NTEyNTA1LCJwaG9uZV9udW1iZXIiOiIrOTE4NDEwNTM0MzA2IiwiZXhwIjoxNjM4ODU1MjA0LCJpYXQiOjE2Mzg3Njg4MDQsImZhbWlseV9uYW1lIjoiTXljaGFydCIsImVtYWlsIjoidGhlb2RvckB5b3BtYWlsLmNvbSJ9.p6Pv7ZFeTlhb3A7kSvqQnQERenDW4k0DTis556SlIVuZN7qMqn32BqGlI4NoEiwsQtqGSKaC3W7grDrIvZDabFgnmhaGPkGEvm5LempF1QTt5-LQKq-uDz3kHIChYWhT-Voyr91dqtiCbVtA3XR9mR1iRvF2fXegClKU5qOs6pZ_2JRl5v6m6SAQRFlcssK89fWPWlGWJdF8va4cicdMePr9-l2_wU16DvuRab1X-m85Bf8FdiIRwUsKYP1NVODPP6luYKw1LpxKckXooHPsomy3uWbi8N7bdJ4CqXoNYX1CgPxHqoxBNaC_ZyR2n2dDI9uhsh7LsyVW6D_6pNM9nQ');
+
+  return fetch("https://dev-patientapi.pxboost.io/patient/homescreen",{
+    method:'GET',
+    headers:myHeaders,
+  })
+    .then((response)=> response.json())
+    .then((json)=> setData(json))
+    .catch((error)=> console.error(error))
+    .finally(()=>setLoading(false))
+}
+
+
+useEffect(()=>{
+   getAllDATA();  
+  
+},[]);
+
+ console.log("DATA",(data))
+
 
 
 
@@ -65,13 +101,18 @@ function NoProfilePictureGiven ({style,size,lable}){
     
 return (
   <SafeAreaView style={{flex:1,backgroundColor:'#ffff'}}>
-    <ScrollView  contentContainerStyle={{paddingBottom:60}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+    {isLoading ? (
+      <ActivityIndicator/>
+    ) : (
+
+
+        <ScrollView  contentContainerStyle={{paddingBottom:60}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.container1}  >
         <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-170, alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <Text style={styles.name} >Carolinas Medical Center</Text>
         <View style={{top:-289, alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
-        <AppButton style={styles.butn} title={"change"} onpress={()=>console.warn("Pressed")} /> 
+        <AppButton style={styles.butn} title={"Change"} onpress={()=>console.warn("Pressed")} /> 
         <Text style={{fontFamily:'Lato', top:-305,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
         <Text style={{fontFamily:'Lato',top:-300,left:20,fontSize:14,fontWeight:'700', color:'#5382F6'}}  >Dr Jose Portilla</Text>
         <NoProfilePictureGiven  style={styles.pp}  size={40} lable="J" />
@@ -89,8 +130,10 @@ return (
          <MyCareTeam />
       </View>
    </ScrollView>
+    )}
+  
    <View style={{top:485}} >
-        <QuestionAnswer onPress={()=>console.log('Pressed')} />
+        <QuestionAnswer onPress={()=>navigation.navigate('login')} />
       </View>
   </SafeAreaView>   
     );
@@ -111,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontWeight:'500',
     lineHeight:16.8,
-    top:-158,
+    top:-155,
     marginHorizontal:20,
     fontFamily:'Lato'
   },
