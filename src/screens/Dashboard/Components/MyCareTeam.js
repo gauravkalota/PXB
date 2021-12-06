@@ -1,7 +1,5 @@
-import { sortBy } from 'lodash';
 import React,{useState,useEffect} from 'react';
-import { Alert } from 'react-native';
-import { View, Text, ScrollView,Image, StyleSheet } from 'react-native';
+import { View, Text, Alert, StyleSheet } from 'react-native';
 import { Avatar } from 'react-native-paper';
 
 
@@ -44,7 +42,7 @@ const MyCareTeam = () => {
     return (
       <View style={styles.container} >
         <Text style={styles.mycareText} >My Care Team</Text>
-        <Text style={ isValid ?  styles.cliniciansText : styles.cliniciansTextDIS} onPress={()=>ClinicBtnClicked()} >Clinicians</Text>
+        <Text style={ isValid ?  styles.cliniciansText : styles.cliniciansTextDIS} onPress={()=>ClinicBtnClicked()} >Doctors</Text>
         <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT} ></View>
         <Text style={ isValid ? styles.nursesTextDIS : styles.nursesText} onPress={()=>NurBtnClicked()}  >Nurses</Text>
       {isValid ? (
@@ -74,17 +72,17 @@ const MyCareTeam = () => {
             <View style={styles.card1View} >
               <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 1</Text>
-              <Text style={styles.occupation} >Cardiologist,Interventional Cardiologist</Text>
+              <Text style={styles.occupation} >Nurse</Text>
             </View>
             <View style={styles.card2View} >
               <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 2</Text>
-              <Text style={styles.occupation} >Neurologist</Text>
+              <Text style={styles.occupation} >Nurse</Text>
             </View>
             <View style={styles.card2View} >
               <IsProfilePictureGiven style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} />
               <Text style={styles.drname} >Nurse 3</Text>
-              <Text style={styles.occupation} >Dentist, Prosthodontist, Implantologist</Text>
+              <Text style={styles.occupation}>Nurse</Text>
             </View>
         </View>
       ) }  

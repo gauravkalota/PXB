@@ -10,12 +10,6 @@ import ExceptionCare from './components/ExceptionCare';
 import AppButton from '../../components/AppButton';
 import theme from '../../theme/theme';
 
-
-/////API_CALL/////////////
-const API = "";
-
-
-
 function Dashboard  ({navigation, routes})  {
 const [enter, setEnter] = useState('')
 const [one,setone] = useState('');
@@ -105,12 +99,12 @@ return (
       <ActivityIndicator/>
     ) : (
 
-
-        <ScrollView  contentContainerStyle={{paddingBottom:60}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
+      <>
+    <ScrollView  contentContainerStyle={{paddingBottom:60}} style={{top:-12,marginBottom:-74 ,backgroundColor :'#ffff'}} >
       <View style={styles.container1}  >
-        <ProfilePicture patient_name={'Felix Harder'} patient_status={'In Patient'} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
+        <ProfilePicture patient_name={'Felix Harder'} patient_status={data.data.patient_status} uri={'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'} />
         <View style={{top:-170, alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
-        <Text style={styles.name} >Carolinas Medical Center</Text>
+        <Text style={styles.name} >{data.data.hospital_name}</Text>
         <View style={{top:-289, alignSelf:'center', borderBottomColor:'#999999', borderBottomWidth:0.3,height:'50%', width:374 }}/>
         <AppButton style={styles.butn} title={"Change"} onpress={()=>console.warn("Pressed")} /> 
         <Text style={{fontFamily:'Lato', top:-305,left:20,fontSize:12,fontWeight:'500',color:'#999999'}}  >Attending Doctor</Text>
@@ -129,12 +123,14 @@ return (
       <View style={{top:1100}} >
          <MyCareTeam />
       </View>
-   </ScrollView>
-    )}
-  
+    </ScrollView>
    <View style={{top:485}} >
         <QuestionAnswer onPress={()=>navigation.navigate('login')} />
       </View>
+    </> 
+    )}
+  
+      
   </SafeAreaView>   
     );
 };
