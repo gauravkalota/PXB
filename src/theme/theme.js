@@ -27,7 +27,7 @@ const theme = {
         primary: '#5382F6',       ///// primary
         accent: '#f1c40f',
         surface: '#618CEF',    //////containertype
-        error: '#CC1414',
+        error: '#CC1414'
         // text:'white'         //////text input colour 
     },
     fonts: configureFonts(fontConfig)

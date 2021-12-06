@@ -2,6 +2,9 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity,View,Text } from 'react-native'
 
 const AppButton = ({onpress,title,style,disabled}) => {
+
+     
+
     return (
         <TouchableOpacity disabled={disabled}    onPress={onpress} style={style}  >
             <Text style={styles.appButtonText}>{title}</Text>
@@ -11,6 +14,7 @@ const AppButton = ({onpress,title,style,disabled}) => {
 export default AppButton;
 
 const styles = StyleSheet.create({
+    
     appButtonContainer: {
         top:15,
         height:50,
@@ -25,6 +29,6 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         top:5,
         left:12,
-        // textTransform: "uppercase"
+        //textTransform: "uppercase"
     }
 })

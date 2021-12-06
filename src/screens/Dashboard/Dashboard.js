@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View, Text, StyleSheet, ScrollView} from 'react-native';
-import {Avatar} from 'react-native-paper'
+import {Avatar,withTheme} from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import MyCareTeam from './components/MyCareTeam';
@@ -8,14 +8,17 @@ import ProfilePicture from './components/ProfilePicture';
 import QuestionAnswer from './components/QuestionAnswer';
 import ExceptionCare from './components/ExceptionCare';
 import AppButton from '../../components/AppButton';
+import theme from '../../theme/theme';
 
-function Dashboard  ({navigation, route})  {
+
+function Dashboard  ({navigation, routes})  {
 const [enter, setEnter] = useState('')
 const [one,setone] = useState('');
 const [two,settwo] = useState('');
 const Id1 = useSelector((state)=>state.smurfName)
 const Id2 = useSelector((state)=>state.pass)
 const Id3 = useSelector((state)=>state.obj)
+
 
 const loginPress = () => {
     dispatch(setSmurfName(enter))
@@ -115,7 +118,8 @@ const styles = StyleSheet.create({
   butn:{
     width:79,
     height:30,
-    backgroundColor:'#5382F6',
+    //backgroundColor:'#5382F6',
+    backgroundColor:theme.colors.primary,
     top:-327,
     left: 289,
     borderRadius:4,
