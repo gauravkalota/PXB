@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
-import { View, Text, Alert, StyleSheet } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import React,{useState} from 'react';
+import {View,Text,StyleSheet} from 'react-native';
+import {Avatar} from 'react-native-paper';
 
 
 //////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
@@ -9,8 +9,7 @@ function IsProfilePictureGiven({style,size,lable,source}) {
   return (
     <View>
       <Avatar.Image  style={style} size={size} source={source} />
-    </View>
-    
+    </View> 
   );
 }
 function NoProfilePictureGiven ({style,size,lable}){
@@ -40,7 +39,7 @@ const MyCareTeam = ({drname,drwork}) => {
   
 
     return (
-      <View style={styles.container} >
+      <View >
         <Text style={styles.mycareText} >My Care Team</Text>
         <Text style={ isValid ?  styles.cliniciansText : styles.cliniciansTextDIS} onPress={()=>ClinicBtnClicked()} >Doctors</Text>
         <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT} ></View>
@@ -93,11 +92,6 @@ const MyCareTeam = ({drname,drwork}) => {
 export default MyCareTeam;
 
 const styles = StyleSheet.create({
-
-
-  container: {
-    top:-1070
-  },
   mycareText:{
     left:15,
     fontSize:20,
@@ -156,7 +150,6 @@ const styles = StyleSheet.create({
     color: '#034C81'
   },
   nextcontainer:{
-    top:10 ,
     width:414,
     height:360, 
     backgroundColor:"#F7F7F7"

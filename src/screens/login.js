@@ -363,7 +363,7 @@ const DATA = {
                     <Text style={styles.forgot}>Forgot password?</Text>
                 </TouchableOpacity>
             </View> 
-                        <AppButton  onpress={Formik.handleSubmit} title="Log In" style={!Formik.values.Number || !Formik.values.Password  ? styles.disablebtn : styles.appButtonContainer} />
+                        <AppButton style1={styles.appButtonText}  onpress={Formik.handleSubmit} title="Log In" style={!Formik.values.Number || !Formik.values.Password  ? styles.disablebtn : styles.appButtonContainer} />
                     {/* </>
                 )}
             </Formik> */}
@@ -648,7 +648,15 @@ const styles = StyleSheet.create({
         color: '#5382F6',
         fontSize: 14,
         fontWeight: '600'
+    },
+    appButtonText:{
+        fontSize: 16,
+        color: "#fff",
+        fontWeight: "700",
+        top:6,
+        textAlign:'center'
     }
+    
     
 
 })
