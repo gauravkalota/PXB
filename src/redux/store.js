@@ -8,4 +8,5 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 export default store;
+
 sagaMiddleware.run(saga);
