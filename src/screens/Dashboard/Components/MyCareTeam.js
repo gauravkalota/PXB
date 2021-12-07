@@ -46,7 +46,8 @@ const MyCareTeam = ({drname, drwork}) => {
         <View
           style={
             isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT
-          }></View>
+          }
+        />
         <Text
           style={isValid ? styles.nursesTextDIS : styles.nursesText}
           onPress={() => NurBtnClicked()}>
@@ -63,8 +64,17 @@ const MyCareTeam = ({drname, drwork}) => {
               lable="A"
             />
             {/* <Avatar.Text style={styles.drpicture} label="A" size={55} /> */}
-            <Text style={styles.drname}>{drname}</Text>
-            <Text style={styles.occupation}>{drwork}</Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>{drname}</Text>
+              <Text style={styles.occupation}>{drwork}</Text>
+            </View>
           </View>
           <View style={styles.card2View}>
             {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
@@ -73,8 +83,17 @@ const MyCareTeam = ({drname, drwork}) => {
               size={55}
               lable="J"
             />
-            <Text style={styles.drname}>Jonas Schmedtmann</Text>
-            <Text style={styles.occupation}>Neurologist</Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>Jonas Schmedtmann</Text>
+              <Text style={styles.occupation}>Neurologist</Text>
+            </View>
           </View>
           <View style={styles.card2View}>
             {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
@@ -83,10 +102,19 @@ const MyCareTeam = ({drname, drwork}) => {
               size={55}
               lable="B"
             />
-            <Text style={styles.drname}>Brent Eviston</Text>
-            <Text style={styles.occupation}>
-              Dentist, Prosthodontist, Implantologist
-            </Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>Brent Eviston</Text>
+              <Text style={styles.occupation}>
+                Dentist, Prosthodontist, Implantologist
+              </Text>
+            </View>
           </View>
         </View>
       ) : (
@@ -96,24 +124,51 @@ const MyCareTeam = ({drname, drwork}) => {
               style={styles.drpicture}
               source={require('../../../../assets/images/doctor.png')}
             />
-            <Text style={styles.drname}>Nurse 1</Text>
-            <Text style={styles.occupation}>Nurse</Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>Nurse 1</Text>
+              <Text style={styles.occupation}>Nurse</Text>
+            </View>
           </View>
           <View style={styles.card2View}>
             <IsProfilePictureGiven
               style={styles.drpicture}
               source={require('../../../../assets/images/doctor.png')}
             />
-            <Text style={styles.drname}>Nurse 2</Text>
-            <Text style={styles.occupation}>Nurse</Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>Nurse 2</Text>
+              <Text style={styles.occupation}>Nurse</Text>
+            </View>
           </View>
           <View style={styles.card2View}>
             <IsProfilePictureGiven
               style={styles.drpicture}
               source={require('../../../../assets/images/doctor.png')}
             />
-            <Text style={styles.drname}>Nurse 3</Text>
-            <Text style={styles.occupation}>Nurse</Text>
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                marginLeft: 75,
+                justifyContent: 'center',
+                top: -25,
+              }}>
+              <Text style={styles.drname}>Nurse 3</Text>
+              <Text style={styles.occupation}>Nurse</Text>
+            </View>
           </View>
         </View>
       )}
@@ -188,6 +243,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
+    justifyContent: 'center',
   },
   card2View: {
     marginTop: 10,
@@ -221,14 +277,14 @@ const styles = StyleSheet.create({
   drname: {
     fontSize: 16,
     fontWeight: '700',
-    left: 85,
-    top: -30,
+    //left: 85,
+    //top: -30,
   },
   occupation: {
     fontSize: 14,
     fontWeight: '400',
-    left: 85,
-    top: -30,
+    //left: 85,
+    //top: -30,
     color: '#999999',
   },
 });

@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar, ActivityIndicator} from 'react-native-paper';
@@ -90,27 +92,19 @@ function Dashboard({navigation, routes}) {
       ) : (
         <>
           <ScrollView
-            contentContainerStyle={{paddingBottom: 10}}
+            contentContainerStyle={{paddingBottom: 70}}
             style={{backgroundColor: '#ffff'}}>
-            <View>
+            <View style={styles.profilepictureView}>
               <ProfilePicture
                 patient_name={'Felix Harder'}
-                patient_status={data.data.patient_status}
+                patient_status={'In Patient'}
                 uri={
                   'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'
                 }
               />
             </View>
-            <View
-              style={{
-                borderBottomColor: '#999999',
-                borderBottomWidth: 0.3,
-                borderTopWidth: 0.3,
-                borderTopColor: '#999999',
-                marginLeft: 10,
-                marginRight: 10,
-              }}>
-              <Text style={styles.hospname}>{data.data.hospital_name}</Text>
+            <View style={styles.ViewunderProfilePicture}>
+              <Text style={styles.hospname}>{'ABC Hospital'}</Text>
               <AppButton
                 style1={styles.butntext}
                 style={styles.butn}
@@ -118,8 +112,7 @@ function Dashboard({navigation, routes}) {
                 onpress={() => console.warn('Pressed')}
               />
             </View>
-            <View
-              style={{flexDirection: 'column', paddingLeft: 20, marginTop: 10}}>
+            <View style={styles.ViewforAttendingdr}>
               <Text style={styles.attendingdr}>Attending Doctor</Text>
               <Text style={styles.attendingdrname}>Dr Jose Portilla</Text>
             </View>
@@ -148,9 +141,10 @@ function Dashboard({navigation, routes}) {
             <View style={styles.mycareteam}>
               <MyCareTeam
                 drname={
-                  data.data.careteam[0].profile_info.first_name +
-                  ' ' +
-                  data.data.careteam[0].profile_info.last_name
+                  'Dr. Abc'
+                  // data.data.careteam[0].profile_info.first_name +
+                  // ' ' +
+                  // data.data.careteam[0].profile_info.last_name
                 }
                 drwork={'Cardiologist, Interventional Cardiologist'}
               />
@@ -168,10 +162,30 @@ function Dashboard({navigation, routes}) {
 // define your styles
 const styles = StyleSheet.create({
   container1: {},
+  profilepictureView: {
+    paddingTop: 20,
+  },
+  ViewunderProfilePicture: {
+    borderBottomColor: '#999999',
+    borderBottomWidth: 0.3,
+    borderTopWidth: 0.3,
+    borderTopColor: '#999999',
+    marginLeft: 20,
+    marginRight: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  ViewforAttendingdr: {
+    flexDirection: 'column',
+    paddingLeft: 20,
+    marginTop: 10,
+  },
   butn: {
     width: 79,
     height: 30,
-    //backgroundColor:'#5382F6',
     backgroundColor: theme.colors.primary,
     borderRadius: 4,
     justifyContent: 'center',
@@ -209,9 +223,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   myQAcomp: {
-    marginBottom: -34,
+    marginVertical: -35,
   },
 });
 
-//make this component available to the app
 export default Dashboard;
