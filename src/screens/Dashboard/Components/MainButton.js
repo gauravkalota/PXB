@@ -7,6 +7,7 @@ const MainButton = ({text, onPress}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      // eslint-disable-next-line react-native/no-inline-styles
       style={{
         top: 16,
         left: 11,
@@ -18,6 +19,7 @@ const MainButton = ({text, onPress}) => {
         backgroundColor: '#FFFFFF',
       }}>
       <Text
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           textAlign: 'center',
           top: 13,

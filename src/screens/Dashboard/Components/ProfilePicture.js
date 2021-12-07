@@ -10,22 +10,6 @@ const ProfilePicture = ({uri, patient_name, patient_status}) => {
       <Image resizeMode="contain" style={styles.avatar} source={{uri: uri}} />
       <Text style={styles.patient_name}>{patient_name}</Text>
       <Text style={styles.patient_status}>{patient_status}</Text>
-      <View
-        style={{
-          marginTop: 10,
-          borderBottomColor: '#999999',
-          borderBottomWidth: 0.3,
-          width: 374,
-        }}
-      />
-      <View
-        style={{
-          marginTop: 55,
-          borderBottomColor: '#999999',
-          borderBottomWidth: 0.3,
-          width: 374,
-        }}
-      />
     </View>
   );
 };
@@ -42,8 +26,6 @@ const styles = StyleSheet.create({
     borderRadius: 57,
     borderWidth: 0.1,
     //borderColor: "white",
-    marginBottom: 5,
-    marginTop: -12,
   },
   patient_name: {
     fontSize: 20,

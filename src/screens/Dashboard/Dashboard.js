@@ -90,9 +90,9 @@ function Dashboard({navigation, routes}) {
       ) : (
         <>
           <ScrollView
-            contentContainerStyle={{paddingBottom: 60}}
-            style={{top: -12, marginBottom: -74, backgroundColor: '#ffff'}}>
-            <View style={styles.container1}>
+            contentContainerStyle={{paddingBottom: 10}}
+            style={{backgroundColor: '#ffff'}}>
+            <View>
               <ProfilePicture
                 patient_name={'Felix Harder'}
                 patient_status={data.data.patient_status}
@@ -100,17 +100,42 @@ function Dashboard({navigation, routes}) {
                   'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'
                 }
               />
+            </View>
+            <View
+              style={{
+                borderBottomColor: '#999999',
+                borderBottomWidth: 0.3,
+                borderTopWidth: 0.3,
+                borderTopColor: '#999999',
+                marginLeft: 10,
+                marginRight: 10,
+              }}>
               <Text style={styles.hospname}>{data.data.hospital_name}</Text>
               <AppButton
-                style1={styles.changetext}
+                style1={styles.butntext}
                 style={styles.butn}
                 title={'Change'}
                 onpress={() => console.warn('Pressed')}
               />
+            </View>
+            <View
+              style={{flexDirection: 'column', paddingLeft: 20, marginTop: 10}}>
               <Text style={styles.attendingdr}>Attending Doctor</Text>
               <Text style={styles.attendingdrname}>Dr Jose Portilla</Text>
-              <NoProfilePictureGiven style={styles.pp} size={40} lable="J" />
             </View>
+            <View
+              style={{
+                flexDirection: 'row-reverse',
+                marginLeft: 20,
+                marginTop: -35,
+              }}>
+              <NoProfilePictureGiven
+                style={styles.ProfilePictureSmall}
+                size={40}
+                lable="J"
+              />
+            </View>
+
             <View style={styles.myexcepcare}>
               <ExceptionCare
                 card_text1={'STATEMENT//'}
@@ -142,55 +167,41 @@ function Dashboard({navigation, routes}) {
 
 // define your styles
 const styles = StyleSheet.create({
-  container1: {
-    top: 20,
-    //backgroundColor:"blue",
-    height: 300,
-  },
+  container1: {},
   butn: {
     width: 79,
     height: 30,
     //backgroundColor:'#5382F6',
     backgroundColor: theme.colors.primary,
     borderRadius: 4,
-    top: -90,
-    left: 290,
     justifyContent: 'center',
   },
-  hospname: {
-    fontSize: 14,
-    fontWeight: '500',
-    fontFamily: 'Lato',
-    top: -67,
-    marginLeft: 24,
-  },
-  attendingdr: {
-    fontFamily: 'Lato',
-    fontSize: 12,
-    fontWeight: '500',
-    color: '#999999',
-    top: -70,
-    marginLeft: 25,
-  },
-  attendingdrname: {
-    fontFamily: 'Lato',
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#5382F6',
-    top: -70,
-    marginLeft: 25,
-  },
-  pp: {
-    top: -104,
-    left: 320,
-  },
-  changetext: {
+  butntext: {
     color: '#ffffff',
     fontSize: 14,
     fontWeight: '400',
     fontFamily: 'Lato',
     textAlign: 'center',
   },
+  hospname: {
+    fontSize: 14,
+    fontWeight: '500',
+    fontFamily: 'Lato',
+  },
+  attendingdr: {
+    fontFamily: 'Lato',
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#999999',
+  },
+  attendingdrname: {
+    fontFamily: 'Lato',
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#5382F6',
+  },
+  ProfilePictureSmall: {},
+
   myexcepcare: {
     marginTop: 10,
   },

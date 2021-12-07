@@ -37,20 +37,23 @@ const MyCareTeam = ({drname, drwork}) => {
   return (
     <View>
       <Text style={styles.mycareText}>My Care Team</Text>
-      <Text
-        style={isValid ? styles.cliniciansText : styles.cliniciansTextDIS}
-        onPress={() => ClinicBtnClicked()}>
-        Doctors
-      </Text>
-      <View
-        style={
-          isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT
-        }></View>
-      <Text
-        style={isValid ? styles.nursesTextDIS : styles.nursesText}
-        onPress={() => NurBtnClicked()}>
-        Nurses
-      </Text>
+      <View style={{}}>
+        <Text
+          style={isValid ? styles.cliniciansText : styles.cliniciansTextDIS}
+          onPress={() => ClinicBtnClicked()}>
+          Doctors
+        </Text>
+        <View
+          style={
+            isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT
+          }></View>
+        <Text
+          style={isValid ? styles.nursesTextDIS : styles.nursesText}
+          onPress={() => NurBtnClicked()}>
+          Nurses
+        </Text>
+      </View>
+
       {isValid ? (
         <View style={styles.nextcontainer}>
           <View style={styles.card1View}>
@@ -121,78 +124,76 @@ export default MyCareTeam;
 
 const styles = StyleSheet.create({
   mycareText: {
-    left: 15,
+    paddingLeft: 15,
     fontSize: 20,
     fontWeight: '700',
     lineHeight: 24,
     fontFamily: 'Lato',
   },
   cliniciansText: {
-    top: 22,
-    left: 30,
     fontSize: 16,
     fontWeight: '700',
     fontFamily: 'Lato',
     color: '#034C81',
+    marginTop: 20,
+    marginLeft: 25,
   },
   cliniciansTextDIS: {
-    top: 22,
-    left: 30,
     fontSize: 16,
     fontWeight: '700',
     fontFamily: 'Lato',
     color: '#999999',
+    marginTop: 20,
+    marginLeft: 25,
   },
   cliniciansBorder: {
-    top: 29,
-    left: 15,
-    width: 110,
+    width: '30%',
     height: 2,
-    //borderWidth:1,
+    borderWidth: 1,
     backgroundColor: '#034C81',
+    marginLeft: 15,
   },
   cliniciansBorderSHIFT: {
-    top: 29,
-    left: 145,
-    width: 110,
-    //borderWidth:1
+    width: '30%',
+    borderWidth: 1,
     height: 2,
     backgroundColor: '#034C81',
+    marginLeft: 145,
   },
   nursesTextDIS: {
-    top: 0,
-    left: 150,
     fontSize: 16,
     fontWeight: '700',
     fontFamily: 'Lato',
     color: '#999999',
+    marginLeft: 150,
+    marginTop: -18,
   },
   nursesText: {
-    top: 0,
-    left: 150,
     fontSize: 16,
     fontWeight: '700',
     fontFamily: 'Lato',
     color: '#034C81',
+    marginLeft: 150,
+    marginTop: -18,
   },
   nextcontainer: {
-    width: 414,
-    height: 360,
+    width: '100%',
+    height: '65%',
     backgroundColor: '#F7F7F7',
   },
   card1View: {
     marginTop: 25,
-    left: 17,
-    width: 360,
-    height: 100,
+    width: '92%',
+    height: '28%',
+    marginLeft: 15,
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
   },
   card2View: {
     marginTop: 10,
-    left: 17,
-    width: 360,
-    height: 100,
+    width: '92%',
+    height: '28%',
+    marginLeft: 15,
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
   },
