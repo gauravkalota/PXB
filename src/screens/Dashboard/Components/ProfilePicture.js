@@ -1,7 +1,6 @@
 //import liraries
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import AppButton from '../../../components/AppButton';
 
 // create a component
 const ProfilePicture = ({uri, patient_name, patient_status}) => {
