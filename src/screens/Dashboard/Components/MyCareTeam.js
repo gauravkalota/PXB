@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-paper';
@@ -77,7 +79,6 @@ const MyCareTeam = ({drname, drwork}) => {
             </View>
           </View>
           <View style={styles.card2View}>
-            {/* <Image style={styles.drpicture} source={require('../../../../assets/images/doctor.png')} /> */}
             <NoProfilePictureGiven
               style={styles.drpicture1}
               size={55}
@@ -87,9 +88,9 @@ const MyCareTeam = ({drname, drwork}) => {
               style={{
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                marginLeft: 75,
+                //marginLeft: 75,
                 justifyContent: 'center',
-                top: -25,
+                //top: -25,
               }}>
               <Text style={styles.drname}>Jonas Schmedtmann</Text>
               <Text style={styles.occupation}>Neurologist</Text>
@@ -252,6 +253,8 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   drpicture: {
     top: 20,
@@ -261,7 +264,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8A65',
   },
   drpicture1: {
-    top: 20,
+    //top: 20,
     marginLeft: 10,
     height: 60,
     width: 60,

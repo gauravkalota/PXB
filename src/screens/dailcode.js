@@ -1,4 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import {
   SectionList,
@@ -34,7 +37,7 @@ function dailcode({navigation, route}) {
   const [loggedIn, setLoggedIn] = useState(true);
   const [hidecross, setHideCross] = useState(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  
   const [Code, setCode] = useState('');
   const [countrycode, setCountryCode] = useState(RNLocalize.getCountry());
   const [flag, setFlag] = useState('');
