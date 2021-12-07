@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState, useEffect} from 'react';
 import {
@@ -36,8 +38,7 @@ function selectcountry({navigation, route}) {
             params: {item1: item.dial_code, item2: item.code, item3: item.flag},
           });
         }}>
-        <View
-          style={{borderBottomColor: 'gray', borderBottomWidth: 0.2}}></View>
+        <View style={{borderBottomColor: 'gray', borderBottomWidth: 0.2}} />
         <View style={{height: 50, paddingLeft: 22, paddingVertical: 10}}>
           <Text
             style={{
@@ -49,8 +50,7 @@ function selectcountry({navigation, route}) {
             {item.flag} {item.value} ({item.dial_code})
           </Text>
         </View>
-        <View
-          style={{borderBottomColor: 'gray', borderBottomWidth: 0.2}}></View>
+        <View style={{borderBottomColor: 'gray', borderBottomWidth: 0.2}} />
       </TouchableOpacity>
     );
   };
@@ -237,7 +237,8 @@ function selectcountry({navigation, route}) {
               style={{
                 borderBottomColor: 'gray',
                 borderBottomWidth: 0.2,
-              }}></View>
+              }}
+            />
             <View style={{height: 50, paddingLeft: 22, paddingVertical: 10}}>
               <Text
                 style={{
@@ -253,7 +254,8 @@ function selectcountry({navigation, route}) {
               style={{
                 borderBottomColor: 'gray',
                 borderBottomWidth: 0.2,
-              }}></View>
+              }}
+            />
           </TouchableOpacity>
         </View>
         <SectionList

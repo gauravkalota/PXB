@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, Button} from 'react-native-paper';
 
 function verificationsuccessful({navigation}) {
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <Image
         resizeMode="contain"
