@@ -7,45 +7,58 @@ import {Avatar} from 'react-native-paper';
 import {IsProfilePictureGiven,NoProfilePictureGiven} from './ImageComp';
 
 const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,nurse2,nurse3}) => {
-  const [isValid, setIsValid] = useState(true);
+  const [Border, setBorder] = useState(true);
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
 
   //When Nurses TAB Clicked
   const NurBtnClicked = () => {
-    setIsValid(false);
+    setBorder(false);
   };
 
   //When Clinicians TAB Clicked
   const ClinicBtnClicked = () => {
-    setIsValid(true);
+    setBorder(true);
   };
+  const CardArray = [1,2,3,4];
 
   return (
     <View>
       <Text style={styles.mycareText}>My Care Team</Text>
       <View style={{ justifyContent:'flex-start',alignItems:'center',flexDirection:'row',marginTop:20}}>
         <Text
-          style={isValid ? styles.cliniciansText : styles.cliniciansTextDIS}
+          style={Border ? styles.cliniciansText : styles.cliniciansTextDIS}
           onPress={() => ClinicBtnClicked()}>
           Doctors
         </Text>
-        {/* <View
-          style={
-            isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT
-          }
-        /> */}
         <Text
-          style={isValid ? styles.nursesTextDIS : styles.nursesText}
+          style={Border ? styles.nursesTextDIS : styles.nursesText}
           onPress={() => NurBtnClicked()}>
           Nurses
         </Text>
       </View>
-      <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
+      <View style={Border ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
 
-      {isValid ? (
+      {Border ? (
         <View style={styles.nextcontainer}>
-          <View style={styles.card2View}>
+          {CardArray.map((item, index) => (
+        <View style={styles.card2View} key={index} >
+            <NoProfilePictureGiven
+              style={styles.drpicture}
+              size={55}
+              lable="A"
+            />
+            <View
+              style={{  flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+              }}>
+              <Text style={styles.drname}>{dr1name}</Text>
+              <Text style={styles.occupation}>{item}</Text>
+            </View>
+          </View>
+      ))}
+           {/* <View style={styles.card2View}>
             <NoProfilePictureGiven
               style={styles.drpicture}
               size={55}
@@ -91,7 +104,7 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
               <Text style={styles.drname}>{dr3name}</Text>
               <Text style={styles.occupation}>{dr3work}</Text>
             </View>
-          </View>
+          </View> */}
         </View>
       ) : (
         <View style={styles.nextcontainer}>

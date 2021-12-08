@@ -3,7 +3,6 @@ import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {IsProfilePictureGiven, NoProfilePictureGiven} from './ImageComp';
 
-// create a component
 const ProfilePicture = ({uri, patient_name, patient_status}) => {
   return (
     <View style={styles.headerContent}>
@@ -15,7 +14,6 @@ const ProfilePicture = ({uri, patient_name, patient_status}) => {
   );
 };
 
-// define your styles
 const styles = StyleSheet.create({
   headerContent: {
     padding: 30,
@@ -27,7 +25,6 @@ const styles = StyleSheet.create({
     borderRadius: 57,
     borderWidth: 0.1,
     backgroundColor: 'mediumturquoise',
-    //borderColor: "white",
   },
   patient_name: {
     fontSize: 20,

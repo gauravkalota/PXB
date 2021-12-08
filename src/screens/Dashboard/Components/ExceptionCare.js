@@ -1,11 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
-
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MainButton from './MainButton';
-
 const ExceptionCare = ({
   card_text1,
   card_text2,
@@ -14,8 +12,7 @@ const ExceptionCare = ({
   card_text5,
 }) => {
   const [more, setMore] = useState(true);
-
-  const CardArray = [(card_text1), (card_text2) ,(card_text3)];
+  const CardArray = [card_text1, card_text2 ,card_text3];
 
   return (
     <View style={styles.Maincontainer}>

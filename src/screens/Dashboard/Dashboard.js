@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
@@ -21,7 +23,7 @@ function Dashboard({navigation, routes}) {
   const Id2 = useSelector(state => state.pass);
   const Id3 = useSelector(state => state.obj);
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [HomeScreenData, setHomeScreenData] = useState([]);
   const loginPress = () => {
     // eslint-disable-next-line no-undef
     dispatch(setSmurfName(enter));
@@ -62,7 +64,7 @@ function Dashboard({navigation, routes}) {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
-      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImJpcnRoZGF0ZSI6IjA3LTA3LTE5NDgiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9CUzh5eHlWOTgiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86dXNlcm5hbWUiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJnaXZlbl9uYW1lIjoiVGhlb2RvcmUiLCJhdWQiOiI3ZW41bTlxZm9na21tNjg0cm5vMm1wY2JwayIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjM4ODY5ODIwLCJwaG9uZV9udW1iZXIiOiIrOTE4NDEwNTM0MzA2IiwiZXhwIjoxNjM4OTU2MjIwLCJpYXQiOjE2Mzg4Njk4MjAsImZhbWlseV9uYW1lIjoiTXljaGFydCIsImVtYWlsIjoidGhlb2RvckB5b3BtYWlsLmNvbSJ9.DKTTt2QCUDA1LqazuHS4n_gy3168WzXq31vWf3i-IOIFM_WMpcJEap2MKaRSMFsLW_9Wr7QRJ7uvjM3ctkANRikA2NILUDlrIeU_-Vn20lpnLT1Rnfe6Up1IZaTSNPbjyF-5mPivHWmAJF5lYOrXFB50JT9Snqmtl7fgJto1jId8MtxOkjEojftF687FZPk9XSK8tFxZRF59AH3erqllQyCEjx_0HzzQdfy49tqONCpuxs0e0Z_rDTd8S8EwVIffyFmZrOmQF96J0Du6Zml0FxC0csTFpe5z8vOLTh2McTExWj0_53ds4Yq8XkFXB888Rx0nPu2JSmofXzM3gp5xRg',
+      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYmlydGhkYXRlIjoiMDctMDctMTk0OCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JTOHl4eVY5OCIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImFiZmVkOTBhLTgzODctNGMxYi04ZmM5LTYyNjBhYzA1MGJjNSIsImdpdmVuX25hbWUiOiJUaGVvZG9yZSIsImF1ZCI6IjdlbjVtOXFmb2drbW02ODRybm8ybXBjYnBrIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2Mzg5NTQxNjksInBob25lX251bWJlciI6Iis5MTg0MTA1MzQzMDYiLCJleHAiOjE2MzkwNDA1NjksImlhdCI6MTYzODk1NDE2OSwiZmFtaWx5X25hbWUiOiJNeWNoYXJ0IiwiZW1haWwiOiJ0aGVvZG9yQHlvcG1haWwuY29tIn0.CbafVHXQpgbblm4E1KsEXinCnBpjfEactVKx0-ChiBK-ea2dXdS_4EFe8j-XYDz7ZnTkkCmNL0sP1GW5h00--1qhjBAipCeljcyJ7KL1Xv2H-51PcFup1z6h5QMUlrwgTGCTc5KSo9frFazL_QUip0HK_Fis-I34AYPdLCkNTLn_4aF1QLJyzN1Up6paD8Edhlm6I-QdEGlWp489kVC9RzceQdOAs-_nUQxg1rCdWWVy2lavNvCAjZElNBMxFFyXJ5NDDjFwB3AYCBpC20nt_D6zz4rR98Inu05Yrm2c0cuelEKuxLOp4OLMbAEATUsxq1aezrgMNYmUAPFET2482Q',
     );
 
     return fetch('https://dev-patientapi.pxboost.io/patient/homescreen', {
@@ -70,7 +72,7 @@ function Dashboard({navigation, routes}) {
       headers: myHeaders,
     })
       .then(response => response.json())
-      .then(json => setData(json))
+      .then(json => setHomeScreenData(json))
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }
@@ -80,79 +82,96 @@ function Dashboard({navigation, routes}) {
     getAllDATA();
   }, []);
 
-  //console.log('DATA', data);
-
   ////////////Data_Binding////////////
-  const HospitalName = get(data, 'data.hospital_name', '');
-  const PatientStatus = get(data, 'data.patient_status', '');
+  const HospitalName = get(HomeScreenData, 'data.hospital_name', '');
+  const PatientStatus = get(HomeScreenData, 'data.patient_status', '');
   const Dr1FirstName = get(
-    data,
+    HomeScreenData,
     'data.careteam[2].profile_info.first_name',
     '',
   );
-  const Dr1LastName = get(data, 'data.careteam[2].profile_info.last_name', '');
+  const Dr1LastName = get(
+    HomeScreenData,
+    'data.careteam[2].profile_info.last_name',
+    '',
+  );
   const Dr1specialtyOne = get(
-    data,
+    HomeScreenData,
     'data.careteam[2].profile_info.specialty[0].specialty',
     '',
   );
   const Dr1specialtyTwo = get(
-    data,
+    HomeScreenData,
     'data.careteam[2].profile_info.specialty[1].specialty',
     '',
   );
   const Dr2FirstName = get(
-    data,
+    HomeScreenData,
     'data.careteam[3].profile_info.first_name',
     '',
   );
-  const Dr2LastName = get(data, 'data.careteam[3].profile_info.last_name', '');
+  const Dr2LastName = get(
+    HomeScreenData,
+    'data.careteam[3].profile_info.last_name',
+    '',
+  );
   const Dr2specialtyOne = get(
-    data,
+    HomeScreenData,
     'data.careteam[3].profile_info.specialty[0].specialty',
     '',
   );
   const Dr2specialtyTwo = get(
-    data,
+    HomeScreenData,
     'data.careteam[3].profile_info.specialty[1].specialty',
     '',
   );
   const Dr2specialtyThree = get(
-    data,
+    HomeScreenData,
     'data.careteam[3].profile_info.specialty[2].specialty',
     '',
   );
   const Nurse1FirstName = get(
-    data,
+    HomeScreenData,
     'data.careteam[0].profile_info.first_name',
     '',
   );
   const Nurse1LastName = get(
-    data,
+    HomeScreenData,
     'data.careteam[0].profile_info.last_name',
     '',
   );
   const Nurse2FirstName = get(
-    data,
+    HomeScreenData,
     'data.careteam[1].profile_info.first_name',
     '',
   );
   const Nurse2LastName = get(
-    data,
+    HomeScreenData,
     'data.careteam[1].profile_info.last_name',
     '',
   );
   const AttendingDrF_Name = get(
-    data,
+    HomeScreenData,
     'data.careteam[2].profile_info.first_name',
     '',
   );
   const AttendingDrL_Name = get(
-    data,
+    HomeScreenData,
     'data.careteam[2].profile_info.last_name',
     '',
   );
 
+  ///////Filter_DrArray_NurseArray_from_HOMESCREENDATA////////
+
+  const CareTeamDATA = get(HomeScreenData,'data.careteam','');
+  const DoctorArray = CareTeamDATA.filter(x=>{
+    return x.profile_info.designation === 'DOCTOR';
+  });
+  const NurseArray = CareTeamDATA.filter(x=>{
+    return x.profile_info.designation === 'NURSE';
+  });
+  console.log('DR',DoctorArray);
+  console.log('NURSE',NurseArray);
   return (
     <SafeAreaView style={styles.MainContainer}>
       {isLoading ? (
@@ -183,19 +202,14 @@ function Dashboard({navigation, routes}) {
             <View style={styles.ViewforAttendingdr}>
               <Text style={styles.attendingdr}>Attending Doctor</Text>
               <Text style={styles.attendingdrname}>
-                {'Dr.' + AttendingDrF_Name + ' ' + AttendingDrL_Name}
+                {'Dr.' + ' ' + AttendingDrF_Name + ' ' + AttendingDrL_Name}
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: 'row-reverse',
-                marginLeft: 20,
-                marginTop: -35,
-              }}>
+            <View style={styles.attendingDRprofileView}>
               <NoProfilePictureGiven
                 style={styles.attendingDRprofileP}
                 size={40}
-                lable="J"
+                lable="M"
               />
             </View>
 
@@ -298,6 +312,11 @@ const styles = StyleSheet.create({
     color: '#5382F6',
     marginLeft: 8,
     marginTop: 3,
+  },
+  attendingDRprofileView: {
+    flexDirection: 'row-reverse',
+    marginLeft: 20,
+    marginTop: -35,
   },
   attendingDRprofileP: {
     marginRight: 10,

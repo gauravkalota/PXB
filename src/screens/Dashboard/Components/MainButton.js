@@ -1,8 +1,7 @@
-//import liraries
+/* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-// create a component
 const MainButton = ({text, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.ShowMoreBtn}>
@@ -10,11 +9,8 @@ const MainButton = ({text, onPress}) => {
     </TouchableOpacity>
   );
 };
-
-// define your styles
 const styles = StyleSheet.create({
   ShowMoreBtn: {
-    //width: 342,
     height: 48,
     borderRadius: 4,
     borderWidth: 1,
@@ -31,5 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default MainButton;
