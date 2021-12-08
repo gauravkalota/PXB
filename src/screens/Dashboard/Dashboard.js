@@ -92,7 +92,7 @@ function Dashboard({navigation, routes}) {
       ) : (
         <>
           <ScrollView
-            contentContainerStyle={{paddingBottom: 70}}
+            contentContainerStyle={{paddingBottom: 100}}
             style={{backgroundColor: '#ffff'}}>
             <View style={styles.profilepictureView}>
               <ProfilePicture
@@ -223,7 +223,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   myQAcomp: {
-    marginVertical: -35,
+    justifyContent: 'center',
+    flex: 1,
   },
 });
 
