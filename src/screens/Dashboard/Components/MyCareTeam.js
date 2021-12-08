@@ -57,7 +57,7 @@ const MyCareTeam = ({drname, drwork}) => {
           Nurses
         </Text>
       </View>
-      <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT} ></View>
+      <View style={isValid ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
 
       {isValid ? (
         <View style={styles.nextcontainer}>
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: '#034C81',
     marginLeft: 25,
+    padding: 5,
   },
   cliniciansTextDIS: {
     fontSize: 16,
@@ -187,6 +188,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: '#999999',
     marginLeft: 25,
+    padding: 5,
   },
   cliniciansBorder: {
     width: '26%',
@@ -200,7 +202,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 2,
     backgroundColor: '#034C81',
-    marginLeft: 120,
+    marginLeft: 140,
   },
   nursesTextDIS: {
     fontSize: 16,
@@ -208,6 +210,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: '#999999',
     marginLeft: 55,
+    padding: 5,
   },
   nursesText: {
     fontSize: 16,
@@ -215,9 +218,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: '#034C81',
     marginLeft: 55,
+    padding: 5,
   },
   nextcontainer: {
-    //width: '100%',
     height: '65%',
     backgroundColor: '#F7F7F7',
     paddingVertical: 10,
@@ -229,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
     borderRadius: 4,
-    justifyContent:'flex-start'
+    justifyContent:'flex-start',
   },
   card2View: {
     marginTop: 10,
@@ -248,7 +251,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8A65',
   },
   drpicture1: {
-    //top: 20,
     marginLeft: 10,
     height: 60,
     width: 60,

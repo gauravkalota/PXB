@@ -29,8 +29,8 @@ const ExceptionCare = ({
       </View>
 
       {CardArray.map((item, key) => (
-        <View style={styles.cardMAP} >
-          <Text style={styles.cardtext} key={key}>
+        <View style={styles.cardMAP} key={key} >
+          <Text style={styles.cardtext} >
             {item}
           </Text>
         </View>

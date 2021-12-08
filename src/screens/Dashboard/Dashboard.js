@@ -60,12 +60,11 @@ function Dashboard({navigation, routes}) {
   }
 
   /////////////FETCH_DATA_FROM_AN_API///////
-
   function getAllDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
-      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImJpcnRoZGF0ZSI6IjA3LTA3LTE5NDgiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9CUzh5eHlWOTgiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86dXNlcm5hbWUiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJnaXZlbl9uYW1lIjoiVGhlb2RvcmUiLCJhdWQiOiI3ZW41bTlxZm9na21tNjg0cm5vMm1wY2JwayIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjM4NTEyNTA1LCJwaG9uZV9udW1iZXIiOiIrOTE4NDEwNTM0MzA2IiwiZXhwIjoxNjM4ODU1MjA0LCJpYXQiOjE2Mzg3Njg4MDQsImZhbWlseV9uYW1lIjoiTXljaGFydCIsImVtYWlsIjoidGhlb2RvckB5b3BtYWlsLmNvbSJ9.p6Pv7ZFeTlhb3A7kSvqQnQERenDW4k0DTis556SlIVuZN7qMqn32BqGlI4NoEiwsQtqGSKaC3W7grDrIvZDabFgnmhaGPkGEvm5LempF1QTt5-LQKq-uDz3kHIChYWhT-Voyr91dqtiCbVtA3XR9mR1iRvF2fXegClKU5qOs6pZ_2JRl5v6m6SAQRFlcssK89fWPWlGWJdF8va4cicdMePr9-l2_wU16DvuRab1X-m85Bf8FdiIRwUsKYP1NVODPP6luYKw1LpxKckXooHPsomy3uWbi8N7bdJ4CqXoNYX1CgPxHqoxBNaC_ZyR2n2dDI9uhsh7LsyVW6D_6pNM9nQ',
+      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImJpcnRoZGF0ZSI6IjA3LTA3LTE5NDgiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9CUzh5eHlWOTgiLCJwaG9uZV9udW1iZXJfdmVyaWZpZWQiOnRydWUsImNvZ25pdG86dXNlcm5hbWUiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJnaXZlbl9uYW1lIjoiVGhlb2RvcmUiLCJhdWQiOiI3ZW41bTlxZm9na21tNjg0cm5vMm1wY2JwayIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjM4ODY5ODIwLCJwaG9uZV9udW1iZXIiOiIrOTE4NDEwNTM0MzA2IiwiZXhwIjoxNjM4OTU2MjIwLCJpYXQiOjE2Mzg4Njk4MjAsImZhbWlseV9uYW1lIjoiTXljaGFydCIsImVtYWlsIjoidGhlb2RvckB5b3BtYWlsLmNvbSJ9.DKTTt2QCUDA1LqazuHS4n_gy3168WzXq31vWf3i-IOIFM_WMpcJEap2MKaRSMFsLW_9Wr7QRJ7uvjM3ctkANRikA2NILUDlrIeU_-Vn20lpnLT1Rnfe6Up1IZaTSNPbjyF-5mPivHWmAJF5lYOrXFB50JT9Snqmtl7fgJto1jId8MtxOkjEojftF687FZPk9XSK8tFxZRF59AH3erqllQyCEjx_0HzzQdfy49tqONCpuxs0e0Z_rDTd8S8EwVIffyFmZrOmQF96J0Du6Zml0FxC0csTFpe5z8vOLTh2McTExWj0_53ds4Yq8XkFXB888Rx0nPu2JSmofXzM3gp5xRg',
     );
 
     return fetch('https://dev-patientapi.pxboost.io/patient/homescreen', {
@@ -78,6 +77,7 @@ function Dashboard({navigation, routes}) {
       .finally(() => setLoading(false));
   }
 
+  //////API_DATA////////
   useEffect(() => {
     getAllDATA();
   }, []);
@@ -86,13 +86,13 @@ function Dashboard({navigation, routes}) {
   //  console.log("DATANEW", data.data.careteam[0].profile_info.active_status )
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffff'}}>
+    <SafeAreaView style={styles.MainContainer}>
       {isLoading ? (
         <ActivityIndicator style={{flex: 1}} size={'large'} color={'#5382F6'} />
       ) : (
         <>
           <ScrollView
-            contentContainerStyle={{paddingBottom: 100}}
+            contentContainerStyle={{paddingBottom: 140}}
             style={{backgroundColor: '#ffff'}}>
             <View style={styles.profilepictureView}>
               <ProfilePicture
@@ -123,7 +123,7 @@ function Dashboard({navigation, routes}) {
                 marginTop: -35,
               }}>
               <NoProfilePictureGiven
-                style={styles.ProfilePictureSmall}
+                style={styles.attendingDRprofileP}
                 size={40}
                 lable="J"
               />
@@ -161,6 +161,10 @@ function Dashboard({navigation, routes}) {
 
 // define your styles
 const styles = StyleSheet.create({
+  MainContainer: {
+    flex: 1,
+    backgroundColor: '#ffff',
+  },
   container1: {},
   profilepictureView: {
     paddingTop: 20,
@@ -178,17 +182,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
   },
-  ViewforAttendingdr: {
-    flexDirection: 'column',
-    paddingLeft: 20,
-    marginTop: 10,
-  },
   butn: {
     width: 79,
     height: 30,
     backgroundColor: theme.colors.primary,
     borderRadius: 4,
     justifyContent: 'center',
+    marginRight: 10,
   },
   butntext: {
     color: '#ffffff',
@@ -201,20 +201,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     fontFamily: 'Lato',
+    marginLeft: 10,
+  },
+  ViewforAttendingdr: {
+    flexDirection: 'column',
+    paddingLeft: 20,
+    marginTop: 10,
   },
   attendingdr: {
     fontFamily: 'Lato',
     fontSize: 12,
     fontWeight: '500',
     color: '#999999',
+    marginLeft: 8,
   },
   attendingdrname: {
     fontFamily: 'Lato',
     fontSize: 14,
     fontWeight: '700',
     color: '#5382F6',
+    marginLeft: 8,
   },
-  ProfilePictureSmall: {},
+  attendingDRprofileP: {
+    marginRight: 10,
+  },
 
   myexcepcare: {
     marginTop: 10,
