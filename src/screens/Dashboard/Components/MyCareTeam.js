@@ -4,23 +4,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-paper';
-
-//////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
-function IsProfilePictureGiven({style, size, lable, source}) {
-  const [isgiven, setIsGiven] = useState(true);
-  return (
-    <View>
-      <Avatar.Image style={style} size={size} source={source} />
-    </View>
-  );
-}
-function NoProfilePictureGiven({style, size, lable}) {
-  return (
-    <View>
-      <Avatar.Text style={style} color="white" size={size} label={lable} />
-    </View>
-  );
-}
+import {IsProfilePictureGiven,NoProfilePictureGiven} from './ImageComp';
 
 const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,nurse2,nurse3}) => {
   const [isValid, setIsValid] = useState(true);
@@ -219,7 +203,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   nextcontainer: {
-    height: '65%',
+    height: '64%',
     backgroundColor: '#F7F7F7',
     paddingVertical: 10,
   },

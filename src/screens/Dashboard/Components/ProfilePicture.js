@@ -1,12 +1,14 @@
-//import liraries
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import {IsProfilePictureGiven, NoProfilePictureGiven} from './ImageComp';
 
 // create a component
 const ProfilePicture = ({uri, patient_name, patient_status}) => {
   return (
     <View style={styles.headerContent}>
-      <Image resizeMode="contain" style={styles.avatar} source={{uri: uri}} />
+      {/* <Image resizeMode="contain" style={styles.avatar} source={{uri: uri}} /> */}
+      <NoProfilePictureGiven style={styles.avatar} lable="F" />
       <Text style={styles.patient_name}>{patient_name}</Text>
       <Text style={styles.patient_status}>{patient_status}</Text>
     </View>
@@ -24,6 +26,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 57,
     borderWidth: 0.1,
+    backgroundColor: 'mediumturquoise',
     //borderColor: "white",
   },
   patient_name: {

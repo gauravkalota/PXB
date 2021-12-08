@@ -22,15 +22,12 @@ function Dashboard({navigation, routes}) {
   const Id3 = useSelector(state => state.obj);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
   const loginPress = () => {
     // eslint-disable-next-line no-undef
     dispatch(setSmurfName(enter));
     navigation.navigate('dashboard2');
   };
-
   const [dis, setDis] = useState(true);
-
   const dial = () => {
     setDis(false);
   };
@@ -83,8 +80,7 @@ function Dashboard({navigation, routes}) {
     getAllDATA();
   }, []);
 
-  console.log('DATA', data);
-  //  console.log("DATANEW", data.data.careteam[0].profile_info.active_status )
+  //console.log('DATA', data);
 
   ////////////Data_Binding////////////
   const HospitalName = get(data, 'data.hospital_name', '');
@@ -126,6 +122,36 @@ function Dashboard({navigation, routes}) {
     'data.careteam[3].profile_info.specialty[2].specialty',
     '',
   );
+  const Nurse1FirstName = get(
+    data,
+    'data.careteam[0].profile_info.first_name',
+    '',
+  );
+  const Nurse1LastName = get(
+    data,
+    'data.careteam[0].profile_info.last_name',
+    '',
+  );
+  const Nurse2FirstName = get(
+    data,
+    'data.careteam[1].profile_info.first_name',
+    '',
+  );
+  const Nurse2LastName = get(
+    data,
+    'data.careteam[1].profile_info.last_name',
+    '',
+  );
+  const AttendingDrF_Name = get(
+    data,
+    'data.careteam[2].profile_info.first_name',
+    '',
+  );
+  const AttendingDrL_Name = get(
+    data,
+    'data.careteam[2].profile_info.last_name',
+    '',
+  );
 
   return (
     <SafeAreaView style={styles.MainContainer}>
@@ -156,7 +182,9 @@ function Dashboard({navigation, routes}) {
             </View>
             <View style={styles.ViewforAttendingdr}>
               <Text style={styles.attendingdr}>Attending Doctor</Text>
-              <Text style={styles.attendingdrname}>Dr Jose Portilla</Text>
+              <Text style={styles.attendingdrname}>
+                {'Dr.' + AttendingDrF_Name + ' ' + AttendingDrL_Name}
+              </Text>
             </View>
             <View
               style={{
@@ -189,9 +217,12 @@ function Dashboard({navigation, routes}) {
                   Dr2specialtyOne +
                   ',' +
                   Dr2specialtyTwo +
-                  ',' + '\n' +
+                  ',' +
+                  '\n' +
                   Dr2specialtyThree
                 }
+                nurse1={Nurse1FirstName + ' ' + Nurse1LastName}
+                nurse2={Nurse2FirstName + ' ' + Nurse2LastName}
               />
             </View>
           </ScrollView>
@@ -266,6 +297,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#5382F6',
     marginLeft: 8,
+    marginTop: 3,
   },
   attendingDRprofileP: {
     marginRight: 10,
