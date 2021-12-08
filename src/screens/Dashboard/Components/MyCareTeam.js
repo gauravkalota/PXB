@@ -22,7 +22,7 @@ function NoProfilePictureGiven({style, size, lable}) {
   );
 }
 
-const MyCareTeam = ({drname, drwork}) => {
+const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,nurse2,nurse3}) => {
   const [isValid, setIsValid] = useState(true);
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
@@ -72,8 +72,8 @@ const MyCareTeam = ({drname, drwork}) => {
                 alignItems: 'flex-start',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.drname}>{drname}</Text>
-              <Text style={styles.occupation}>{drwork}</Text>
+              <Text style={styles.drname}>{dr1name}</Text>
+              <Text style={styles.occupation}>{dr1work}</Text>
             </View>
           </View>
           <View style={styles.card2View}>
@@ -88,8 +88,8 @@ const MyCareTeam = ({drname, drwork}) => {
                 alignItems: 'flex-start',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.drname}>Jonas Schmedtmann</Text>
-              <Text style={styles.occupation}>Neurologist</Text>
+              <Text style={styles.drname}>{dr2name}</Text>
+              <Text style={styles.occupation}>{dr2work}</Text>
             </View>
           </View>
           <View style={styles.card2View}>
@@ -104,10 +104,8 @@ const MyCareTeam = ({drname, drwork}) => {
                 alignItems: 'flex-start',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.drname}>Brent Eviston</Text>
-              <Text style={styles.occupation}>
-                Dentist, Prosthodontist, Implantologist
-              </Text>
+              <Text style={styles.drname}>{dr3name}</Text>
+              <Text style={styles.occupation}>{dr3work}</Text>
             </View>
           </View>
         </View>
@@ -124,7 +122,7 @@ const MyCareTeam = ({drname, drwork}) => {
                 alignItems: 'flex-start',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.drname}>Nurse 1</Text>
+              <Text style={styles.drname}>{nurse1}</Text>
               <Text style={styles.occupation}>Nurse</Text>
             </View>
           </View>
@@ -140,7 +138,7 @@ const MyCareTeam = ({drname, drwork}) => {
                 justifyContent: 'center',
 
               }}>
-              <Text style={styles.drname}>Nurse 2</Text>
+              <Text style={styles.drname}>{nurse2}</Text>
               <Text style={styles.occupation}>Nurse</Text>
             </View>
           </View>
@@ -155,7 +153,7 @@ const MyCareTeam = ({drname, drwork}) => {
                 alignItems: 'flex-start',
                 justifyContent: 'center',
               }}>
-              <Text style={styles.drname}>Nurse 3</Text>
+              <Text style={styles.drname}>{nurse3}</Text>
               <Text style={styles.occupation}>Nurse</Text>
             </View>
           </View>

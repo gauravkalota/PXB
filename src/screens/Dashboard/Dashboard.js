@@ -11,6 +11,7 @@ import QuestionAnswer from './components/QuestionAnswer';
 import ExceptionCare from './components/ExceptionCare';
 import AppButton from '../../components/AppButton';
 import theme from '../../theme/theme';
+import get from 'lodash/get';
 
 function Dashboard({navigation, routes}) {
   const [enter, setEnter] = useState('');
@@ -85,6 +86,47 @@ function Dashboard({navigation, routes}) {
   console.log('DATA', data);
   //  console.log("DATANEW", data.data.careteam[0].profile_info.active_status )
 
+  ////////////Data_Binding////////////
+  const HospitalName = get(data, 'data.hospital_name', '');
+  const PatientStatus = get(data, 'data.patient_status', '');
+  const Dr1FirstName = get(
+    data,
+    'data.careteam[2].profile_info.first_name',
+    '',
+  );
+  const Dr1LastName = get(data, 'data.careteam[2].profile_info.last_name', '');
+  const Dr1specialtyOne = get(
+    data,
+    'data.careteam[2].profile_info.specialty[0].specialty',
+    '',
+  );
+  const Dr1specialtyTwo = get(
+    data,
+    'data.careteam[2].profile_info.specialty[1].specialty',
+    '',
+  );
+  const Dr2FirstName = get(
+    data,
+    'data.careteam[3].profile_info.first_name',
+    '',
+  );
+  const Dr2LastName = get(data, 'data.careteam[3].profile_info.last_name', '');
+  const Dr2specialtyOne = get(
+    data,
+    'data.careteam[3].profile_info.specialty[0].specialty',
+    '',
+  );
+  const Dr2specialtyTwo = get(
+    data,
+    'data.careteam[3].profile_info.specialty[1].specialty',
+    '',
+  );
+  const Dr2specialtyThree = get(
+    data,
+    'data.careteam[3].profile_info.specialty[2].specialty',
+    '',
+  );
+
   return (
     <SafeAreaView style={styles.MainContainer}>
       {isLoading ? (
@@ -97,14 +139,14 @@ function Dashboard({navigation, routes}) {
             <View style={styles.profilepictureView}>
               <ProfilePicture
                 patient_name={'Felix Harder'}
-                patient_status={'In Patient'}
+                patient_status={PatientStatus}
                 uri={
                   'https://cdn-icons.flaticon.com/png/512/3024/premium/3024605.png?token=exp=1638269673~hmac=bcdf1b520fdb3a426eda766fc65570c2'
                 }
               />
             </View>
             <View style={styles.ViewunderProfilePicture}>
-              <Text style={styles.hospname}>{'ABC Hospital'}</Text>
+              <Text style={styles.hospname}>{HospitalName}</Text>
               <AppButton
                 style1={styles.butntext}
                 style={styles.butn}
@@ -140,13 +182,16 @@ function Dashboard({navigation, routes}) {
             </View>
             <View style={styles.mycareteam}>
               <MyCareTeam
-                drname={
-                  'Dr. Abc'
-                  // data.data.careteam[0].profile_info.first_name +
-                  // ' ' +
-                  // data.data.careteam[0].profile_info.last_name
+                dr1name={Dr1FirstName + ' ' + Dr1LastName}
+                dr1work={Dr1specialtyOne + ',' + Dr1specialtyTwo}
+                dr2name={Dr2FirstName + ' ' + Dr2LastName}
+                dr2work={
+                  Dr2specialtyOne +
+                  ',' +
+                  Dr2specialtyTwo +
+                  ',' + '\n' +
+                  Dr2specialtyThree
                 }
-                drwork={'Cardiologist, Interventional Cardiologist'}
               />
             </View>
           </ScrollView>

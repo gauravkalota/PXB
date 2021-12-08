@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: '700',
     fontFamily: 'Lato',
+    marginTop: 10,
   },
   patient_status: {
     fontSize: 14,
