@@ -20,9 +20,9 @@ function Dashboard({navigation, routes}) {
   const [enter, setEnter] = useState('');
   const [one, setone] = useState('');
   const [two, settwo] = useState('');
-  const Id1 = useSelector(state => state.smurfName);
-  const Id2 = useSelector(state => state.pass);
-  const Id3 = useSelector(state => state.obj);
+  // const Id1 = useSelector(state => state.smurfName);
+  // const Id2 = useSelector(state => state.pass);
+  // const Id3 = useSelector(state => state.obj);
   const [isLoading, setLoading] = useState(true);
   const [HomeScreenData, setHomeScreenData] = useState([]);
   const loginPress = () => {

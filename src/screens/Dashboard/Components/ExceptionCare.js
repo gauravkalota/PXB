@@ -1,9 +1,12 @@
+/* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MainButton from './MainButton';
+import get from 'lodash/get';
+
 const ExceptionCare = ({
   card_text1,
   card_text2,
@@ -12,7 +15,48 @@ const ExceptionCare = ({
   card_text5,
 }) => {
   const [more, setMore] = useState(true);
+  const [ExceptData, setExceptData] = useState([]);
   const CardArray = [card_text1, card_text2 ,card_text3];
+
+
+////////Fetch_ExceptionalCare_Data_from_API/////////
+    async function getDATA() {
+    const myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYmlydGhkYXRlIjoiMDctMDctMTk0OCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JTOHl4eVY5OCIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImFiZmVkOTBhLTgzODctNGMxYi04ZmM5LTYyNjBhYzA1MGJjNSIsImdpdmVuX25hbWUiOiJUaGVvZG9yZSIsImF1ZCI6IjdlbjVtOXFmb2drbW02ODRybm8ybXBjYnBrIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2Mzg5NTQxNjksInBob25lX251bWJlciI6Iis5MTg0MTA1MzQzMDYiLCJleHAiOjE2MzkwNDA1NjksImlhdCI6MTYzODk1NDE2OSwiZmFtaWx5X25hbWUiOiJNeWNoYXJ0IiwiZW1haWwiOiJ0aGVvZG9yQHlvcG1haWwuY29tIn0.CbafVHXQpgbblm4E1KsEXinCnBpjfEactVKx0-ChiBK-ea2dXdS_4EFe8j-XYDz7ZnTkkCmNL0sP1GW5h00--1qhjBAipCeljcyJ7KL1Xv2H-51PcFup1z6h5QMUlrwgTGCTc5KSo9frFazL_QUip0HK_Fis-I34AYPdLCkNTLn_4aF1QLJyzN1Up6paD8Edhlm6I-QdEGlWp489kVC9RzceQdOAs-_nUQxg1rCdWWVy2lavNvCAjZElNBMxFFyXJ5NDDjFwB3AYCBpC20nt_D6zz4rR98Inu05Yrm2c0cuelEKuxLOp4OLMbAEATUsxq1aezrgMNYmUAPFET2482Q',
+    );
+
+    try {
+        const response = await fetch('https://dev-patientapi.pxboost.io/patient/abfed90a-8387-4c1b-8fc9-6260ac050bc5/exceptionalCare', {
+          method: 'GET',
+          headers: myHeaders,
+        });
+        const json = await response.json();
+        return setExceptData(json);
+      } catch (error) {
+        return console.error(error);
+      }
+      //.finally(() => setLoading(false));
+  }
+  console.log('EXDATA',ExceptData);
+
+  //////API_DATA////////
+  useEffect(() => {
+    getDATA();
+  }, []);
+
+  //////Create_new_array_from_api_data_whose_ispatientmapped=true///////
+  const NEW = get(ExceptData,'data',[]);
+  //console.log("object,",NEW);
+  const FilterData = NEW.filter((x)=>{
+    return x.ispatientmapped === true;
+  });
+  //console.log('filter',FilterData);
+
+
+
+
 
   return (
     <View style={styles.Maincontainer}>
@@ -25,11 +69,9 @@ const ExceptionCare = ({
         </TouchableOpacity>
       </View>
 
-      {CardArray.map((item, key) => (
-        <View style={styles.cardMAP} key={key} >
-          <Text style={styles.cardtext} >
-            {item}
-          </Text>
+      {FilterData.map((FilterData, index) => (
+        <View style={styles.cardMAP} key={index} >
+          <Text style={styles.cardtext}>{FilterData.parameter}</Text>
         </View>
       ))}
 

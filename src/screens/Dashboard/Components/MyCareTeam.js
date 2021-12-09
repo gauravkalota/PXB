@@ -53,13 +53,18 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
   }, []);
 
 
-  const CareTeamDATA = get(DATA,'data.careteam','');
-  const DoctorArray = CareTeamDATA.filter(x=>{
-    return x.profile_info.designation === 'DOCTOR';
+  const CareTeamDATA = get(DATA,'data.careteam',[]);
+  DoctorArray = CareTeamDATA.filter((item)=>{
+    return item.profile_info.designation === 'DOCTOR';
   });
-  const NurseArray = CareTeamDATA.filter(x=>{
-    return x.profile_info.designation === 'NURSE';
+  const NurseArray = CareTeamDATA.filter((item)=>{
+    return item.profile_info.designation === 'NURSE';
   });
+
+
+  console.log("QQQQQ",CareTeamDATA);
+  // console.log('dr', DoctorArray);
+  //console.log('nu',NurseArray);
 
   /////DummyArray/////
   const DrArray = [1,2,3,4];
@@ -94,7 +99,7 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
             />
             <View style={styles.InsideCardView} >
               <Text style={styles.drname}>{DoctorArray.profile_info.first_name + ' ' + DoctorArray.profile_info.last_name}</Text>
-              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty}</Text>
+              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty+ "," +DoctorArray.profile_info.specialty[index+1].specialty}</Text>
 
               {/* <Text style={styles.occupation}>{DoctorArray.profile_info.specialty.specialtyId}</Text> */}
             </View>
@@ -222,13 +227,13 @@ const styles = StyleSheet.create({
   drname: {
     fontSize: 16,
     fontWeight: '700',
-    marginLeft: 16,
+    marginLeft: 12,
   },
   occupation: {
     fontSize: 14,
     fontWeight: '400',
     color: '#999999',
-    marginLeft: 16,
+    marginLeft: 12,
   },
   InsideCardView:{
     flexDirection: 'column',

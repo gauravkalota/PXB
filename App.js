@@ -1,51 +1,26 @@
 import React from 'react';
 import AppNavigator from './src/navigation/rootnavigator';
 import {
-  Provider as PaperProvider, 
-  DefaultTheme, 
-  configureFonts
+  Provider as PaperProvider,
+  DefaultTheme,
+  configureFonts,
 } from 'react-native-paper';
-import { Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 import theme from './src/theme/theme';
 import store from './src/redux/store';
+import Dashboard from './src/screens/Dashboard/Dashboard';
 
- function App() {
-  return(
-    <Provider store={store} >
-      <PaperProvider theme = {theme} >
-        <AppNavigator />
+function App() {
+  return (
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <Dashboard />
       </PaperProvider>
     </Provider>
-  )
+  );
 }
 
-export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default App;
 
 // import React, {useState, useEffect} from 'react';
 // import {  TouchableHighlight,Image, TouchableOpacity,StyleSheet, Text, View } from 'react-native';
@@ -65,11 +40,10 @@ export default App
 //   useEffect(()=>{
 //   //  if(SplashScreen){
 //   //    SplashScreen.hide();
-//   //  } 
+//   //  }
 //    SplashScreen && SplashScreen.hide()
 //      ///////this will run only first time when app started
 //   },[])
-  
 
 //   const onButtonPressed = () => {
 //     //////body//////
@@ -130,10 +104,10 @@ export default App
 
 //       <View style={styles.loginWithBar}>
 //         <TouchableOpacity style={styles.iconButton}>
-//           <Icon 
-//             name='facebook' 
-//             type='font-awesome' 
-//             size={50} 
+//           <Icon
+//             name='facebook'
+//             type='font-awesome'
+//             size={50}
 //             color='#1877F2'
 //          />
 //         </TouchableOpacity>
@@ -146,10 +120,10 @@ export default App
 //           />
 //         </TouchableOpacity>
 //         <TouchableOpacity style={styles.iconButton}>
-//           <Icon 
-//            name='apple' 
-//            type='font-awesome' 
-//            size={50} 
+//           <Icon
+//            name='apple'
+//            type='font-awesome'
+//            size={50}
 //            color='black' />
 //         </TouchableOpacity>
 //       </View>
@@ -159,7 +133,7 @@ export default App
 //       {/* <Text style={styles.iconline}>–––––––––––––––––––––––––––––––––––––––––––––––––––</Text> */}
 //     <View style={styles.line}>
 //     <View>
-//     </View>  
+//     </View>
 //       <Text style={styles.lastline1}>New to PX Boost?</Text>
 //       <TouchableOpacity>
 //           <Text style={styles.lastline2}>Register</Text>
@@ -182,7 +156,7 @@ export default App
 //    marginBottom:490
 //   },
 //   inputView: {
-    
+
 //     width: "85%",
 //     height: 45,
 //     marginBottom: 20,
@@ -193,7 +167,7 @@ export default App
 //   inputViewnew: {
 
 //     width: "65%",
-    
+
 //     height: 45,
 //     marginBottom: 20,
 //     justifyContent: "center",
@@ -206,7 +180,6 @@ export default App
 //     top:1,
 //     width:'12%'
 
-
 //   },
 //   combtn:{
 //     borderWidth:1.2,
@@ -215,7 +188,6 @@ export default App
 //   inpuText: {
 //     height: 50,
 //     color: "white"
-   
 
 //   },
 //   forgotPassword: {
@@ -246,7 +218,7 @@ export default App
 //   },
 //   orlogintext:{
 //     fontSize:13,
-  
+
 //   },
 //   loginWithBar: {
 //     display: 'flex',
@@ -264,7 +236,7 @@ export default App
 //   iconline: {
 //     top:90,
 //     fontSize:9,
-    
+
 //   },
 //   lastline1:{
 //     top:97,
@@ -315,5 +287,5 @@ export default App
 //     right:110,
 //     top:80
 //   }
-  
+
 // })
