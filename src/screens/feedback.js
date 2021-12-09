@@ -1,86 +1,108 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-//import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {TextInput} from 'react-native-paper';
-import {Avatar} from 'react-native-paper';
-
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import {Appbar, TextInput, Button} from 'react-native-paper';
+import StarRating from 'react-native-star-rating-widget';
 // create a component
 const feedback = () => {
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          alignItems: 'center',
-          width: 414,
-          height: 102,
-          backgroundColor: '#034C81',
-        }}>
-        <Text
-          style={{
-            top: 60,
-            fontSize: 20,
-            fontWeight: '600',
-            fontFamily: 'Lato',
-            color: 'white',
-          }}>
-          Feedback
-        </Text>
-      </View>
-      <View
-        style={{
-          alignItems: 'center',
-          top: 15,
-          left: 8,
-          width: 374,
-          height: 369,
-          backgroundColor: '#FFFF',
-        }}>
-        <Text style={{marginTop: 24, fontSize: 16, fontWeight: '600'}}>
-          Rate the Hospital
-        </Text>
-        <Text style={{marginTop: 8, fontSize: 14, fontWeight: '400'}}>
-          Carolinas Medical Center
-        </Text>
+  const [rating, setRating] = useState(0);
 
-        <TextInput
-          mode="outlined"
-          placeholder="Share your feedback"
-          style={{color: '#FFFF', top: 90, width: 334, height: 110}}
-        />
-        <TouchableOpacity
-          style={{
-            top: 105,
-            backgroundColor: '#e6e6e6',
-            width: 334,
-            height: 56,
-            borderRadius: 4,
-          }}>
-          <Text
-            style={{
-              alignSelf: 'center',
-              top: 15,
-              fontFamily: 'Lato',
-              fontWeight: '700',
-              fontSize: 16,
-              color: 'white',
-            }}>
-            Submit
-          </Text>
-        </TouchableOpacity>
+  return (
+    <SafeAreaView style={styles.screen}>
+      <View>
+        <Appbar.Header style={styles.appBarHead}>
+          <Appbar.Content
+            color="#F7F7F7"
+            style={styles.appBarText}
+            title="Feedback"
+          />
+        </Appbar.Header>
       </View>
-    </View>
+      <View style={{paddingHorizontal: 20, paddingVertical: 19}}>
+        <View style={styles.nextContainer}>
+          <Text style={styles.textHeading}>Rate the Hospital</Text>
+          <Text style={styles.textSubHeading}>Carolinas Medical Center</Text>
+          <StarRating
+            rating={rating}
+            onChange={setRating}
+            style={styles.stars}
+            color="#034C81"
+            starSize={36}
+            starStyle={styles.STAR}
+          />
+          <TextInput
+            style={styles.feedbackTextinput}
+            mode="outlined"
+            placeholder="Share your feedback"
+            placeholderTextColor={'#666666'}
+          />
+          <Button mode="contained" uppercase={false}>
+            <Text style={styles.btnTXT}>Submit</Text>
+          </Button>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
 // define your styles
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    //backgroundColor: '#FFFF',
+    backgroundColor: '#FFFF',
   },
+  appBarHead: {
+    backgroundColor: '#034C81',
+  },
+  appBarText: {
+    fontSize: 20,
+    fontWeight: '600',
+    fontFamily: 'Lato',
+  },
+  nextContainer: {
+    height: '78%',
+    borderRadius: 4,
+    backgroundColor: '#FFFFFF',
+    shadowOpacity: 0.3,
+    alignItems: 'center',
+  },
+  textHeading: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Lato',
+    marginTop: 24,
+  },
+  textSubHeading: {
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'Lato',
+    marginTop: 8,
+  },
+  stars: {
+    alignSelf: 'center',
+    marginTop: 24,
+  },
+  feedbackTextinput: {
+    width: '100%',
+    // height: '58%',
+    marginTop: 25,
+    paddingHorizontal: 20,
+    backgroundColor: '#FFFFFF',
+  },
+  BTN: {
+    backgroundColor: '#5382F6',
+    color: '#5382F6',
+  },
+  btnTXT: {},
 });
 
-//make this component available to the app
 export default feedback;

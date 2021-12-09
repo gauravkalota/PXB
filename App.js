@@ -8,13 +8,13 @@ import {
 import {Provider} from 'react-redux';
 import theme from './src/theme/theme';
 import store from './src/redux/store';
-import Dashboard from './src/screens/Dashboard/Dashboard';
+//import Dashboard from './src/screens/Dashboard/Dashboard';
 
 function App() {
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
-        <Dashboard />
+        <AppNavigator />
       </PaperProvider>
     </Provider>
   );

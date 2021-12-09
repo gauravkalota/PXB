@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
@@ -53,11 +54,6 @@ const ExceptionCare = ({
     return x.ispatientmapped === true;
   });
   //console.log('filter',FilterData);
-
-
-
-
-
   return (
     <View style={styles.Maincontainer}>
       <View style={styles.container1}>

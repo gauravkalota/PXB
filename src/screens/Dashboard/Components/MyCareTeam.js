@@ -62,9 +62,9 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
   });
 
 
-  console.log("QQQQQ",CareTeamDATA);
+  console.log('QQQQQ',CareTeamDATA);
   // console.log('dr', DoctorArray);
-  //console.log('nu',NurseArray);
+  console.log('nu',NurseArray);
 
   /////DummyArray/////
   const DrArray = [1,2,3,4];
@@ -99,7 +99,7 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
             />
             <View style={styles.InsideCardView} >
               <Text style={styles.drname}>{DoctorArray.profile_info.first_name + ' ' + DoctorArray.profile_info.last_name}</Text>
-              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty+ "," +DoctorArray.profile_info.specialty[index+1].specialty}</Text>
+              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty + ',' + DoctorArray.profile_info.specialty[index + 1].specialty}</Text>
 
               {/* <Text style={styles.occupation}>{DoctorArray.profile_info.specialty.specialtyId}</Text> */}
             </View>
