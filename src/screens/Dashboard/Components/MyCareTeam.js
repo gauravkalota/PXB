@@ -93,8 +93,8 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
               lable="A"
             />
             <View style={styles.InsideCardView} >
-              <Text style={styles.drname}>{dr1name}</Text>
-              <Text style={styles.occupation}>{DoctorArray.profile_info.designation}</Text>
+              <Text style={styles.drname}>{DoctorArray.profile_info.first_name + ' ' + DoctorArray.profile_info.last_name}</Text>
+              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty}</Text>
 
               {/* <Text style={styles.occupation}>{DoctorArray.profile_info.specialty.specialtyId}</Text> */}
             </View>
@@ -110,7 +110,7 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
               source={require('../../../../assets/images/doctor.png')}
             />
             <View style={styles.InsideCardView} >
-              <Text style={styles.drname}>{nurse1}</Text>
+              <Text style={styles.drname}>{NurseArray.profile_info.first_name + ' ' +  NurseArray.profile_info.first_name }</Text>
               <Text style={styles.occupation}>{NurseArray.profile_info.designation}</Text>
             </View>
           </View>

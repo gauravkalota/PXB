@@ -145,13 +145,13 @@ function Dashboard({navigation, routes}) {
   );
 
   ///////Filter_DrArray_NurseArray_from_HOMESCREENDATA////////
-  const CareTeamDATA = get(HomeScreenData,'data.careteam','');
-  const DoctorArray = CareTeamDATA.filter(x=>{
-    return x.profile_info.designation === 'DOCTOR';
-  });
-  const NurseArray = CareTeamDATA.filter(x=>{
-    return x.profile_info.designation === 'NURSE';
-  });
+  // const CareTeamDATA = get(HomeScreenData,'data.careteam','');
+  // const DoctorArray = CareTeamDATA.filter(x=>{
+  //   return x.profile_info.designation === 'DOCTOR';
+  // });
+  // const NurseArray = CareTeamDATA.filter(x=>{
+  //   return x.profile_info.designation === 'NURSE';
+  // });
   // console.log('DR',DoctorArray);
   // console.log('NURSE',NurseArray);
 
