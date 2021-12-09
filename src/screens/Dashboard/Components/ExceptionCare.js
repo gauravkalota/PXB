@@ -8,16 +8,10 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MainButton from './MainButton';
 import get from 'lodash/get';
 
-const ExceptionCare = ({
-  card_text1,
-  card_text2,
-  card_text3,
-  card_text4,
-  card_text5,
-}) => {
+const ExceptionCare = ( ) => {
   const [more, setMore] = useState(true);
   const [ExceptData, setExceptData] = useState([]);
-  const CardArray = [card_text1, card_text2 ,card_text3];
+  //const CardArray = [card_text1, card_text2 ,card_text3];
 
 
 ////////Fetch_ExceptionalCare_Data_from_API/////////

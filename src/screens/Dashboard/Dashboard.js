@@ -20,13 +20,12 @@ function Dashboard({navigation, routes}) {
   const [enter, setEnter] = useState('');
   const [one, setone] = useState('');
   const [two, settwo] = useState('');
-  // const Id1 = useSelector(state => state.smurfName);
-  // const Id2 = useSelector(state => state.pass);
-  // const Id3 = useSelector(state => state.obj);
+  const Id1 = useSelector(state => state.smurfName);
+  const Id2 = useSelector(state => state.pass);
+  const Id3 = useSelector(state => state.obj);
   const [isLoading, setLoading] = useState(true);
   const [HomeScreenData, setHomeScreenData] = useState([]);
   const loginPress = () => {
-    // eslint-disable-next-line no-undef
     dispatch(setSmurfName(enter));
     navigation.navigate('dashboard2');
   };
@@ -144,22 +143,10 @@ function Dashboard({navigation, routes}) {
     '',
   );
 
-  console.log("HN",HomeScreenData);
-  ///////Filter_DrArray_NurseArray_from_HOMESCREENDATA////////
-  // const CareTeamDATA = get(HomeScreenData,'data.careteam','');
-  // const DoctorArray = CareTeamDATA.filter(x=>{
-  //   return x.profile_info.designation === 'DOCTOR';
-  // });
-  // const NurseArray = CareTeamDATA.filter(x=>{
-  //   return x.profile_info.designation === 'NURSE';
-  // });
-  // console.log('DR',DoctorArray);
-  // console.log('NURSE',NurseArray);
-
   return (
     <SafeAreaView style={styles.MainContainer}>
       {isLoading ? (
-        <ActivityIndicator style={{flex: 1}} size={'large'} color={'#5382F6'} />
+        <ActivityIndicator style={styles.activityindicatorstyle} size={'large'} color={'#5382F6'} />
       ) : (
         <>
           <ScrollView
@@ -198,30 +185,10 @@ function Dashboard({navigation, routes}) {
             </View>
 
             <View style={styles.myexcepcare}>
-              <ExceptionCare
-                card_text1={'STATEMENT//'}
-                card_text2={'STATEMENT//'}
-                card_text3={'STATEMENT//'}
-                card_text4={'STATEMENT//'}
-                card_text5={'STATEMENT//'}
-              />
+              <ExceptionCare />
             </View>
             <View style={styles.mycareteam}>
-              <MyCareTeam
-                dr1name={Dr1FirstName + ' ' + Dr1LastName}
-                dr1work={Dr1specialtyOne + ',' + Dr1specialtyTwo}
-                dr2name={Dr2FirstName + ' ' + Dr2LastName}
-                dr2work={
-                  Dr2specialtyOne +
-                  ',' +
-                  Dr2specialtyTwo +
-                  ',' +
-                  '\n' +
-                  Dr2specialtyThree
-                }
-                nurse1={Nurse1FirstName + ' ' + Nurse1LastName}
-                nurse2={Nurse2FirstName + ' ' + Nurse2LastName}
-              />
+              <MyCareTeam />
             </View>
           </ScrollView>
           <View style={styles.myQAcomp}>
@@ -239,7 +206,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffff',
   },
-  container1: {},
+  activityindicatorstyle: {flex: 1},
   profilepictureView: {
     paddingTop: 20,
   },

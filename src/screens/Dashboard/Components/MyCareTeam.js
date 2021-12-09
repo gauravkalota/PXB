@@ -10,7 +10,7 @@ import {IsProfilePictureGiven,NoProfilePictureGiven} from './ImageComp';
 import get from 'lodash/get';
 
 
-const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,nurse2,nurse3}) => {
+const MyCareTeam = ( ) => {
   const [Border, setBorder] = useState(true);
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
@@ -95,13 +95,11 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
             <NoProfilePictureGiven
               style={styles.drpicture}
               size={55}
-              lable="A"
+              lable="M"
             />
             <View style={styles.InsideCardView} >
               <Text style={styles.drname}>{DoctorArray.profile_info.first_name + ' ' + DoctorArray.profile_info.last_name}</Text>
               <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty + ',' + DoctorArray.profile_info.specialty[index + 1].specialty}</Text>
-
-              {/* <Text style={styles.occupation}>{DoctorArray.profile_info.specialty.specialtyId}</Text> */}
             </View>
           </View>
           ))}
