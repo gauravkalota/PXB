@@ -7,6 +7,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar, ActivityIndicator} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
+import {IsProfilePictureGiven,NoProfilePictureGiven} from './components/ImageComp';
 import MyCareTeam from './components/MyCareTeam';
 import ProfilePicture from './components/ProfilePicture';
 import QuestionAnswer from './components/QuestionAnswer';
@@ -41,25 +42,7 @@ function Dashboard({navigation, routes}) {
   //console.log("Minimum OS version ios - platform :ios, '11.0")
   //console.log("DATA", Id3 )
 
-  //////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
-  function IsProfilePictureGiven({style, size, source}) {
-    const [isgiven, setIsGiven] = useState(true);
-
-    return (
-      <View>
-        <Avatar.Image style={style} size={size} source={source} />
-      </View>
-    );
-  }
-  function NoProfilePictureGiven({style, size, lable}) {
-    return (
-      <View>
-        <Avatar.Text style={style} color="white" size={size} label={lable} />
-      </View>
-    );
-  }
-
-  /////////////FETCH_DATA_FROM_AN_API///////
+  /////////////FETCH_HOMESCREEN_Data_FROM_API///////
   function getAllDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
@@ -169,8 +152,9 @@ function Dashboard({navigation, routes}) {
   const NurseArray = CareTeamDATA.filter(x=>{
     return x.profile_info.designation === 'NURSE';
   });
-  console.log('DR',DoctorArray);
-  console.log('NURSE',NurseArray);
+  // console.log('DR',DoctorArray);
+  // console.log('NURSE',NurseArray);
+
   return (
     <SafeAreaView style={styles.MainContainer}>
       {isLoading ? (

@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
@@ -50,19 +52,19 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
     AllDATA();
   }, []);
 
-  /////////////////////
-  // const CareTeamDATA = get(DATA,'data.careteam','');
-  // const DoctorArray = CareTeamDATA.filter(x=>{
-  //   return x.profile_info.designation === 'DOCTOR';
-  // });
-  // const NurseArray = CareTeamDATA.filter(x=>{
-  //   return x.profile_info.designation === 'NURSE';
-  // });
-  // console.log('DR',DoctorArray);
-  // console.log('NURSE',NurseArray);
 
+  const CareTeamDATA = get(DATA,'data.careteam','');
+  const DoctorArray = CareTeamDATA.filter(x=>{
+    return x.profile_info.designation === 'DOCTOR';
+  });
+  const NurseArray = CareTeamDATA.filter(x=>{
+    return x.profile_info.designation === 'NURSE';
+  });
 
-  const CardArray = [1,2,3,4];
+  /////DummyArray/////
+  const DrArray = [1,2,3,4];
+  const NuArray = [10,20,30 ];
+
 
   return (
     <View>
@@ -83,8 +85,8 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
 
       {Border ? (
         <View style={styles.nextcontainer}>
-          {CardArray.map((item, index) => (
-        <View style={styles.card2View} key={index} >
+          {DoctorArray.map((DoctorArray, index) => (
+          <View style={styles.card2View} key={index} >
             <NoProfilePictureGiven
               style={styles.drpicture}
               size={55}
@@ -92,106 +94,27 @@ const MyCareTeam = ({dr1name, dr1work,dr2name, dr2work,dr3name, dr3work,nurse1,n
             />
             <View style={styles.InsideCardView} >
               <Text style={styles.drname}>{dr1name}</Text>
-              <Text style={styles.occupation}>{item}</Text>
+              <Text style={styles.occupation}>{DoctorArray.profile_info.designation}</Text>
+
+              {/* <Text style={styles.occupation}>{DoctorArray.profile_info.specialty.specialtyId}</Text> */}
             </View>
           </View>
-      ))}
-           {/* <View style={styles.card2View}>
-            <NoProfilePictureGiven
-              style={styles.drpicture}
-              size={55}
-              lable="A"
-            />
-            <View
-              style={{  flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
-              <Text style={styles.drname}>{dr1name}</Text>
-              <Text style={styles.occupation}>{dr1work}</Text>
-            </View>
-          </View>
-          <View style={styles.card2View}>
-            <NoProfilePictureGiven
-              style={styles.drpicture1}
-              size={55}
-              lable="J"
-            />
-            <View
-              style={{
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
-              <Text style={styles.drname}>{dr2name}</Text>
-              <Text style={styles.occupation}>{dr2work}</Text>
-            </View>
-          </View>
-          <View style={styles.card2View}>
-            <NoProfilePictureGiven
-              style={styles.drpicture1}
-              size={55}
-              lable="B"
-            />
-            <View
-              style={{
-                 flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
-              <Text style={styles.drname}>{dr3name}</Text>
-              <Text style={styles.occupation}>{dr3work}</Text>
-            </View>
-          </View> */}
+          ))}
         </View>
       ) : (
         <View style={styles.nextcontainer}>
-          <View style={styles.card2View}>
+          {NurseArray.map((NurseArray, index) => (
+          <View style={styles.card2View} key={index} >
             <IsProfilePictureGiven
               style={styles.drpicture}
               source={require('../../../../assets/images/doctor.png')}
             />
-            <View
-              style={{
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
+            <View style={styles.InsideCardView} >
               <Text style={styles.drname}>{nurse1}</Text>
-              <Text style={styles.occupation}>Nurse</Text>
+              <Text style={styles.occupation}>{NurseArray.profile_info.designation}</Text>
             </View>
           </View>
-          <View style={styles.card2View}>
-            <IsProfilePictureGiven
-              style={styles.drpicture}
-              source={require('../../../../assets/images/doctor.png')}
-            />
-            <View
-              style={{
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-
-              }}>
-              <Text style={styles.drname}>{nurse2}</Text>
-              <Text style={styles.occupation}>Nurse</Text>
-            </View>
-          </View>
-          <View style={styles.card2View}>
-            <IsProfilePictureGiven
-              style={styles.drpicture}
-              source={require('../../../../assets/images/doctor.png')}
-            />
-            <View
-              style={{
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-              }}>
-              <Text style={styles.drname}>{nurse3}</Text>
-              <Text style={styles.occupation}>Nurse</Text>
-            </View>
-          </View>
+            ))}
         </View>
       )}
     </View>
@@ -313,3 +236,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   } ,
 });
+
+
+
+
