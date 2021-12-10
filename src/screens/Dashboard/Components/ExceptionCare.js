@@ -34,7 +34,7 @@ const ExceptionCare = ( ) => {
       }
       //.finally(() => setLoading(false));
   }
-  console.log('EXDATA',ExceptData);
+  //console.log('EXDATA',ExceptData);
 
   //////API_DATA////////
   useEffect(() => {
@@ -58,11 +58,15 @@ const ExceptionCare = ( ) => {
           <Text style={styles.EditBtntext}>Edit</Text>
         </TouchableOpacity>
       </View>
-      {FilterData.map((FilterData, index) => (
-        <View style={styles.cardMAP} key={index} >
-          <Text style={styles.cardtext}>{FilterData.parameter}</Text>
-        </View>
-      ))}
+      {FilterData.map((item, index) => {
+        const exceptionalData = get(item,'parameter','');
+
+        return (
+          <View style={styles.cardMAP} key={index} >
+            <Text style={styles.cardtext}>{exceptionalData}</Text>
+          </View>
+        );
+})}
 
       <View style={styles.container2}>
         {more ? null : (

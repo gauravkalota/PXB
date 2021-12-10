@@ -20,9 +20,9 @@ function Dashboard({navigation, routes}) {
   const [enter, setEnter] = useState('');
   const [one, setone] = useState('');
   const [two, settwo] = useState('');
-  const Id1 = useSelector(state => state.smurfName);
-  const Id2 = useSelector(state => state.pass);
-  const Id3 = useSelector(state => state.obj);
+  // const Id1 = useSelector(state => state.smurfName);
+  // const Id2 = useSelector(state => state.pass);
+  // const Id3 = useSelector(state => state.obj);
   const [isLoading, setLoading] = useState(true);
   const [HomeScreenData, setHomeScreenData] = useState([]);
   const loginPress = () => {
@@ -63,7 +63,7 @@ function Dashboard({navigation, routes}) {
   useEffect(() => {
     getAllDATA();
   }, []);
-console.log("object",HomeScreenData);
+//console.log("object",HomeScreenData);
   ////////////Data_Binding////////////
   const HospitalName = get(HomeScreenData, 'data.hospital_name', '');
   const PatientStatus = get(HomeScreenData, 'data.patient_status', '');

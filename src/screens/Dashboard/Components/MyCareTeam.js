@@ -61,21 +61,6 @@ const MyCareTeam = ( ) => {
     return item.profile_info.designation === 'NURSE';
   });
 
-
-
-   const DrFirstName = get(
-    DoctorArray,'[0].profile_info.first_name','');
-   const DrLastName = get(DoctorArray,'[0].profile_info.last_name','');
-
-  //console.log('QQQQQ',CareTeamDATA);
-  console.log('dr', DrLastName);
-  //console.log('nu',NurseArray);
-
-  /////DummyArray/////
-  const DrArray = [1,2,3,4];
-  const NuArray = [10,20,30 ];
-
-
   return (
     <View>
       <Text style={styles.mycareText}>My Care Team</Text>
@@ -98,7 +83,7 @@ const MyCareTeam = ( ) => {
           {DoctorArray.map((item, index) => {
             const FirstName = get(item,'profile_info.first_name', '');
             const LastName = get(item,'profile_info.last_name', '');
-            const Specialities = get(item,'profile_info.specialty',[]);
+            const Specialities = get(item,'profile_info.specialty',[]); 
             const StringArray = Specialities.map((value,index) =>{
               return get(value,'specialty','');
             });
@@ -111,7 +96,7 @@ const MyCareTeam = ( ) => {
                 />
                 <View style={styles.InsideCardView} >
                   <Text style={styles.drname}>{FirstName + ' ' + LastName}</Text>
-                  <Text style={styles.occupation}>{StringArray.join( ', ')}</Text>
+                  <Text style={styles.occupation}>{StringArray.join( ', \n') }</Text>
                 </View>
               </View>
              );
