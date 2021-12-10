@@ -12,8 +12,6 @@ import get from 'lodash/get';
 const ExceptionCare = ( ) => {
   const [more, setMore] = useState(true);
   const [ExceptData, setExceptData] = useState([]);
-  //const CardArray = [card_text1, card_text2 ,card_text3];
-  const [Add,setAdd] = useState([]);
 
 ////////Fetch_ExceptionalCare_Data_from_API/////////
     async function getDATA() {
@@ -33,10 +31,7 @@ const ExceptionCare = ( ) => {
       } catch (error) {
         return console.error(error);
       }
-      //.finally(() => setLoading(false));
   }
-  //console.log('EXDATA',ExceptData);
-
   //////API_DATA////////
   useEffect(() => {
     getDATA();
@@ -49,7 +44,7 @@ const ExceptionCare = ( ) => {
     return x.ispatientmapped === true;
   });
 
-
+  /////////////ShowMoreData_ShowLessData///////////////////
   FilterData.splice(more ? 3 : FilterData.length);
 
   return (
