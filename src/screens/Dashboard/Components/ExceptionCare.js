@@ -58,7 +58,6 @@ const ExceptionCare = ( ) => {
           <Text style={styles.EditBtntext}>Edit</Text>
         </TouchableOpacity>
       </View>
-
       {FilterData.map((FilterData, index) => (
         <View style={styles.cardMAP} key={index} >
           <Text style={styles.cardtext}>{FilterData.parameter}</Text>

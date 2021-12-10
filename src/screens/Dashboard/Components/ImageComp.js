@@ -16,7 +16,12 @@ export function IsProfilePictureGiven({style, size, lable, source}) {
 export function NoProfilePictureGiven({style, size, lable}) {
   return (
     <View>
-      <Avatar.Text style={style} color="white" size={size} label={lable} />
+      <Avatar.Text
+        style={style}
+        color="white"
+        size={size}
+        label={lable.charAt(0).toUpperCase()}
+      />
     </View>
   );
 }

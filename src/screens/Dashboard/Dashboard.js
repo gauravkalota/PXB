@@ -63,7 +63,7 @@ function Dashboard({navigation, routes}) {
   useEffect(() => {
     getAllDATA();
   }, []);
-
+console.log("object",HomeScreenData);
   ////////////Data_Binding////////////
   const HospitalName = get(HomeScreenData, 'data.hospital_name', '');
   const PatientStatus = get(HomeScreenData, 'data.patient_status', '');

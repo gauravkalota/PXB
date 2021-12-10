@@ -62,9 +62,14 @@ const MyCareTeam = ( ) => {
   });
 
 
-  console.log('QQQQQ',CareTeamDATA);
-  // console.log('dr', DoctorArray);
-  console.log('nu',NurseArray);
+
+   const DrFirstName = get(
+    DoctorArray,'[0].profile_info.first_name','');
+   const DrLastName = get(DoctorArray,'[0].profile_info.last_name','');
+
+  //console.log('QQQQQ',CareTeamDATA);
+  console.log('dr', DrLastName);
+  //console.log('nu',NurseArray);
 
   /////DummyArray/////
   const DrArray = [1,2,3,4];
@@ -90,34 +95,50 @@ const MyCareTeam = ( ) => {
 
       {Border ? (
         <View style={styles.nextcontainer}>
-          {DoctorArray.map((DoctorArray, index) => (
-          <View style={styles.card2View} key={index} >
-            <NoProfilePictureGiven
-              style={styles.drpicture}
-              size={55}
-              lable="M"
-            />
-            <View style={styles.InsideCardView} >
-              <Text style={styles.drname}>{DoctorArray.profile_info.first_name + ' ' + DoctorArray.profile_info.last_name}</Text>
-              <Text style={styles.occupation}>{DoctorArray.profile_info.specialty[index].specialty + ',' + DoctorArray.profile_info.specialty[index + 1].specialty}</Text>
-            </View>
-          </View>
-          ))}
+          {DoctorArray.map((item, index) => {
+            const FirstName = get(item,'profile_info.first_name', '');
+            const LastName = get(item,'profile_info.last_name', '');
+            const Specialities = get(item,'profile_info.specialty',[]);
+            const StringArray = Specialities.map((value,index) =>{
+              return get(value,'specialty','');
+            });
+              return (
+              <View style={styles.card2View} key={index} >
+                <NoProfilePictureGiven
+                  style={styles.drpicture}
+                  size={65}
+                  lable={FirstName}
+                />
+                <View style={styles.InsideCardView} >
+                  <Text style={styles.drname}>{FirstName + ' ' + LastName}</Text>
+                  <Text style={styles.occupation}>{StringArray.join( ', ')}</Text>
+                </View>
+              </View>
+             );
+          }
+          )}
         </View>
       ) : (
         <View style={styles.nextcontainer}>
-          {NurseArray.map((NurseArray, index) => (
-          <View style={styles.card2View} key={index} >
-            <IsProfilePictureGiven
-              style={styles.drpicture}
-              source={require('../../../../assets/images/doctor.png')}
-            />
-            <View style={styles.InsideCardView} >
-              <Text style={styles.drname}>{NurseArray.profile_info.first_name + ' ' +  NurseArray.profile_info.first_name }</Text>
-              <Text style={styles.occupation}>{NurseArray.profile_info.designation}</Text>
+          {NurseArray.map((ChildValue, index) => {
+            const FirstName = get(ChildValue,'profile_info.first_name', '');
+            const LastName = get(ChildValue,'profile_info.last_name', '');
+            const Specialities = get(ChildValue,'profile_info.designation','');
+            return (
+            <View style={styles.card2View} key={index} >
+                <NoProfilePictureGiven
+                  style={styles.drpicture}
+                  size={65}
+                  lable={FirstName}
+                />
+                <View style={styles.InsideCardView} >
+                  <Text style={styles.drname}>{FirstName + ' ' + LastName}</Text>
+                  <Text style={styles.occupation}>{Specialities}</Text>
+                </View>
             </View>
-          </View>
-            ))}
+            );
+          }
+          )}
         </View>
       )}
     </View>

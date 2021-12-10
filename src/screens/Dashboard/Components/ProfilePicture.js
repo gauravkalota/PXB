@@ -7,7 +7,7 @@ const ProfilePicture = ({uri, patient_name, patient_status}) => {
   return (
     <View style={styles.headerContent}>
       {/* <Image resizeMode="contain" style={styles.avatar} source={{uri: uri}} /> */}
-      <NoProfilePictureGiven style={styles.avatar} lable="F" />
+      <NoProfilePictureGiven style={styles.avatar} size={100} lable="F" />
       <Text style={styles.patient_name}>{patient_name}</Text>
       <Text style={styles.patient_status}>{patient_status}</Text>
     </View>
