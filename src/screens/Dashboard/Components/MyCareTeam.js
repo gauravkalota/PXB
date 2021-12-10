@@ -5,7 +5,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState,useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Avatar} from 'react-native-paper';
 import {IsProfilePictureGiven,NoProfilePictureGiven} from './ImageComp';
 import get from 'lodash/get';
 
@@ -15,18 +14,7 @@ const MyCareTeam = ( ) => {
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
   const [DATA, setDATA] = useState([]);
-
-  //When Nurses TAB Clicked
-  const NurBtnClicked = () => {
-    setBorder(false);
-  };
-
-  //When Clinicians TAB Clicked
-  const ClinicBtnClicked = () => {
-    setBorder(true);
-  };
-
-  ////////////////////
+  ///////API_Fetch_Data////////
     async function AllDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
@@ -44,15 +32,13 @@ const MyCareTeam = ( ) => {
       } catch (error) {
         return console.error(error);
       }
-      //.finally(() => setLoading(false));
   }
-
   //////API_DATA////////
   useEffect(() => {
     AllDATA();
   }, []);
 
-
+  ////////Filter_array_/////////
   const CareTeamDATA = get(DATA,'data.careteam',[]);
   DoctorArray = CareTeamDATA.filter((item)=>{
     return item.profile_info.designation === 'DOCTOR';
@@ -67,23 +53,22 @@ const MyCareTeam = ( ) => {
       <View style={{ justifyContent:'flex-start',alignItems:'center',flexDirection:'row',marginTop:20}}>
         <Text
           style={Border ? styles.cliniciansText : styles.cliniciansTextDIS}
-          onPress={() => ClinicBtnClicked()}>
+          onPress={() => setBorder(true)}>
           Doctors
         </Text>
         <Text
           style={Border ? styles.nursesTextDIS : styles.nursesText}
-          onPress={() => NurBtnClicked()}>
+          onPress={() => setBorder(false)}>
           Nurses
         </Text>
       </View>
       <View style={Border ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
-
       {Border ? (
         <View style={styles.nextcontainer}>
           {DoctorArray.map((item, index) => {
             const FirstName = get(item,'profile_info.first_name', '');
             const LastName = get(item,'profile_info.last_name', '');
-            const Specialities = get(item,'profile_info.specialty',[]); 
+            const Specialities = get(item,'profile_info.specialty',[]);
             const StringArray = Specialities.map((value,index) =>{
               return get(value,'specialty','');
             });
@@ -100,7 +85,7 @@ const MyCareTeam = ( ) => {
                 </View>
               </View>
              );
-          }
+            }
           )}
         </View>
       ) : (

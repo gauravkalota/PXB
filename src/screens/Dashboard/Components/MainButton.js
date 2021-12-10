@@ -4,20 +4,20 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const MainButton = ({text, onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.ShowMoreBtn}>
-      <Text style={styles.ShowMoreBtnText}>{text}</Text>
+    <TouchableOpacity onPress={onPress} style={styles.showmoreBtn}>
+      <Text style={styles.showmoreBtnText}>{text}</Text>
     </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
-  ShowMoreBtn: {
+  showmoreBtn: {
     height: 48,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#5382F6',
     backgroundColor: '#FFFFFF',
   },
-  ShowMoreBtnText: {
+  showmoreBtnText: {
     textAlign: 'center',
     top: 13,
     fontSize: 14,

@@ -5,11 +5,13 @@ import {View, Text, StyleSheet} from 'react-native';
 const QuestionAnswer = ({onPress}) => {
   return (
     <View>
-      <View style={styles.container}>
+      <View style={styles.Maincontainer}>
         <View style={styles.border} />
         <View style={styles.itemcontainer}>
-          <Text style={styles.text1}>Have any questions? Ask away</Text>
-          <Text onPress={onPress} style={styles.text2btn}>
+          <Text style={styles.questions_text}>
+            Have any questions? Ask away
+          </Text>
+          <Text onPress={onPress} style={styles.answersBtn}>
             {'  '} Get your Answers
           </Text>
         </View>
@@ -19,7 +21,7 @@ const QuestionAnswer = ({onPress}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  Maincontainer: {
     height: 40,
     backgroundColor: '#F9F9F9',
   },
@@ -34,12 +36,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text1: {
+  questions_text: {
     fontSize: 12,
     fontWeight: '600',
     fontFamily: 'Lato',
   },
-  text2btn: {
+  answersBtn: {
     fontSize: 12,
     fontWeight: '700',
     color: '#5382F6',

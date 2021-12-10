@@ -42,21 +42,27 @@ function Dashboard({navigation, routes}) {
   //console.log("DATA", Id3 )
 
   /////////////FETCH_HOMESCREEN_Data_FROM_API///////
-  function getAllDATA() {
+  async function getAllDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
       'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYmlydGhkYXRlIjoiMDctMDctMTk0OCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JTOHl4eVY5OCIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImFiZmVkOTBhLTgzODctNGMxYi04ZmM5LTYyNjBhYzA1MGJjNSIsImdpdmVuX25hbWUiOiJUaGVvZG9yZSIsImF1ZCI6IjdlbjVtOXFmb2drbW02ODRybm8ybXBjYnBrIiwiZXZlbnRfaWQiOiIwMjlmNTQyOS1iNjMwLTQyMDctODlmYi04YTgxNTkxNzIwZDQiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTYzOTA0NzY5NywicGhvbmVfbnVtYmVyIjoiKzkxODQxMDUzNDMwNiIsImV4cCI6MTYzOTEzNDA5NywiaWF0IjoxNjM5MDQ3Njk3LCJmYW1pbHlfbmFtZSI6Ik15Y2hhcnQiLCJlbWFpbCI6InRoZW9kb3JAeW9wbWFpbC5jb20ifQ.mpqG9Qr3tWSqO03wI6PyvYwjLYjpbr17ONtXB-iDttsLnUybbJ43T-O3PquLZG60s0G8pd-pkIG3TWJKLUKwtJiK4wvKv8mRt71nobNuE7yMm7Ecr19D4ztdhUbS0tnCkLivRAX1vNStxVCshElr6YUwoS9shmT3bJV48Kug6iVJ2PNgLd0kS1RZAImuL9wAGCVwMBeyVDU13QxwPoT3-qVHtxT2ia8EiSvLIilBPwpbQqTTJ0AsyHORJlMCQk0r-zFKp_ffD9CS9wzF-lbbJiIvhiiU2dT4BYwO1DIWzt-fhgF8SmZRIqfZXq3Bd9LucxwO_pVU-cgUgU3ZT_lbqg',
     );
 
-    return fetch('https://dev-patientapi.pxboost.io/patient/homescreen', {
-      method: 'GET',
-      headers: myHeaders,
-    })
-      .then(response => response.json())
-      .then(json => setHomeScreenData(json))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    try {
+      try {
+        const response = await fetch('https://dev-patientapi.pxboost.io/patient/homescreen', {
+          method: 'GET',
+          headers: myHeaders,
+        });
+        const json = await response.json();
+        return setHomeScreenData(json);
+      } catch (error) {
+        return console.error(error);
+      }
+    } finally {
+      return setLoading(false);
+    }
   }
 
   //////API_DATA////////
