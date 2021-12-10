@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
@@ -12,7 +13,7 @@ const ExceptionCare = ( ) => {
   const [more, setMore] = useState(true);
   const [ExceptData, setExceptData] = useState([]);
   //const CardArray = [card_text1, card_text2 ,card_text3];
-
+  const [Add,setAdd] = useState([]);
 
 ////////Fetch_ExceptionalCare_Data_from_API/////////
     async function getDATA() {
@@ -39,7 +40,7 @@ const ExceptionCare = ( ) => {
   //////API_DATA////////
   useEffect(() => {
     getDATA();
-  }, []);
+  },);
 
   //////Create_new_array_from_api_data_whose_ispatientmapped=true///////
   const NEW = get(ExceptData,'data',[]);
@@ -47,7 +48,10 @@ const ExceptionCare = ( ) => {
   const FilterData = NEW.filter((x)=>{
     return x.ispatientmapped === true;
   });
-  //console.log('filter',FilterData);
+
+
+  FilterData.splice(more ? 3 : FilterData.length);
+
   return (
     <View style={styles.Maincontainer}>
       <View style={styles.container1}>
@@ -60,7 +64,6 @@ const ExceptionCare = ( ) => {
       </View>
       {FilterData.map((item, index) => {
         const exceptionalData = get(item,'parameter','');
-
         return (
           <View style={styles.cardMAP} key={index} >
             <Text style={styles.cardtext}>{exceptionalData}</Text>
@@ -69,20 +72,10 @@ const ExceptionCare = ( ) => {
 })}
 
       <View style={styles.container2}>
-        {more ? null : (
-          <>
-            {/* <View style={styles.cardview1}>
-              <Text style={styles.cardtext}>{card_text4}</Text>
-            </View>
-            <View style={styles.cardview1}>
-              <Text style={styles.cardtext}>{card_text5}</Text>
-            </View> */}
-          </>
-        )}
         <View style={styles.ShowMoreBtnView}>
           <MainButton
             text={more ? 'Show more' : 'Show less'}
-            onPress={() => (more ? setMore(false) : setMore(true))}
+            onPress={() => {setMore(!more);}}
           />
         </View>
       </View>
