@@ -5,12 +5,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState,useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {IsProfilePictureGiven,NoProfilePictureGiven} from './ImageComp';
+import {NoProfilePictureGiven} from './ImageComp';
 import get from 'lodash/get';
 
 
 const MyCareTeam = ( ) => {
-  const [Border, setBorder] = useState(true);
+  const [Drborder, setDrborder] = useState(true);
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
   const [DATA, setDATA] = useState([]);
@@ -52,18 +52,18 @@ const MyCareTeam = ( ) => {
       <Text style={styles.mycareText}>My Care Team</Text>
       <View style={{ justifyContent:'flex-start',alignItems:'center',flexDirection:'row',marginTop:20}}>
         <Text
-          style={Border ? styles.cliniciansText : styles.cliniciansTextDIS}
-          onPress={() => setBorder(true)}>
+          style={Drborder ? styles.cliniciansText : styles.cliniciansTextDIS}
+          onPress={() => setDrborder(true)}>
           Doctors
         </Text>
         <Text
-          style={Border ? styles.nursesTextDIS : styles.nursesText}
-          onPress={() => setBorder(false)}>
+          style={Drborder ? styles.nursesTextDIS : styles.nursesText}
+          onPress={() => setDrborder(false)}>
           Nurses
         </Text>
       </View>
-      <View style={Border ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
-      {Border ? (
+      <View style={Drborder ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
+      {Drborder ? (
         <View style={styles.nextcontainer}>
           {DoctorArray.map((item, index) => {
             const FirstName = get(item,'profile_info.first_name', '');

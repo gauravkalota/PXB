@@ -2,12 +2,12 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {Avatar, ActivityIndicator} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useSelector} from 'react-redux';
-import {IsProfilePictureGiven,NoProfilePictureGiven} from './components/ImageComp';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Avatar, ActivityIndicator } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import { NoProfilePictureGiven } from './components/ImageComp';
 import MyCareTeam from './components/MyCareTeam';
 import ProfilePicture from './components/ProfilePicture';
 import QuestionAnswer from './components/QuestionAnswer';
@@ -16,7 +16,7 @@ import AppButton from '../../components/AppButton';
 import theme from '../../theme/theme';
 import get from 'lodash/get';
 
-function Dashboard({navigation, routes}) {
+function Dashboard({ navigation, routes }) {
   const [enter, setEnter] = useState('');
   const [one, setone] = useState('');
   const [two, settwo] = useState('');
@@ -69,7 +69,7 @@ function Dashboard({navigation, routes}) {
   useEffect(() => {
     getAllDATA();
   }, []);
-//console.log("object",HomeScreenData);
+  //console.log("object",HomeScreenData);
   ////////////Data_Binding////////////
   const HospitalName = get(HomeScreenData, 'data.hospital_name', '');
   const PatientStatus = get(HomeScreenData, 'data.patient_status', '');
@@ -150,14 +150,14 @@ function Dashboard({navigation, routes}) {
   );
 
   //////Attending_DR//////////
-  const CareTeamDATA = get(HomeScreenData,'data.careteam',[]);
-  AttendingDrArray = CareTeamDATA.filter((item)=>{
+  const CareTeamDATA = get(HomeScreenData, 'data.careteam', []);
+  AttendingDrArray = CareTeamDATA.filter((item) => {
     return item.is_attender === true;
   });
-  const AttendingDrFirstName = get(AttendingDrArray,'[0].profile_info.first_name','');
-  const AttendingDrLastName = get(AttendingDrArray,'[0].profile_info.last_name','');
+  const AttendingDrFirstName = get(AttendingDrArray, '[0].profile_info.first_name', '');
+  const AttendingDrLastName = get(AttendingDrArray, '[0].profile_info.last_name', '');
 
-  console.log('object',AttendingDrFirstName);
+  console.log('object', AttendingDrFirstName);
 
   return (
     <SafeAreaView style={styles.MainContainer}>
@@ -166,8 +166,8 @@ function Dashboard({navigation, routes}) {
       ) : (
         <>
           <ScrollView
-            contentContainerStyle={{paddingBottom: 140}}
-            style={{backgroundColor: '#ffff'}}>
+            contentContainerStyle={{ paddingBottom: 140 }}
+            style={{ backgroundColor: '#ffff' }}>
             <View style={styles.profilepictureView}>
               <ProfilePicture
                 patient_name={'Felix Harder'}
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffff',
   },
-  activityindicatorstyle: {flex: 1},
+  activityindicatorstyle: { flex: 1 },
   profilepictureView: {
     paddingTop: 20,
   },
