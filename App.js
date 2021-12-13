@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
-        <Dashboard />
+        <AppNavigator />
       </PaperProvider>
     </Provider>
   );
