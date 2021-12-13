@@ -9,12 +9,12 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import MainButton from './MainButton';
 import get from 'lodash/get';
 
-const ExceptionCare = ( ) => {
+const ExceptionCare = () => {
   const [more, setMore] = useState(true);
   const [ExceptData, setExceptData] = useState([]);
 
-////////Fetch_ExceptionalCare_Data_from_API/////////
-    async function getDATA() {
+  ////////Fetch_ExceptionalCare_Data_from_API/////////
+  async function getDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
@@ -22,25 +22,28 @@ const ExceptionCare = ( ) => {
     );
 
     try {
-        const response = await fetch('https://dev-patientapi.pxboost.io/patient/abfed90a-8387-4c1b-8fc9-6260ac050bc5/exceptionalCare', {
+      const response = await fetch(
+        'https://dev-patientapi.pxboost.io/patient/abfed90a-8387-4c1b-8fc9-6260ac050bc5/exceptionalCare',
+        {
           method: 'GET',
           headers: myHeaders,
-        });
-        const json = await response.json();
-        return setExceptData(json);
-      } catch (error) {
-        return console.error(error);
-      }
+        },
+      );
+      const json = await response.json();
+      return setExceptData(json);
+    } catch (error) {
+      return console.error(error);
+    }
   }
   //////API_DATA////////
   useEffect(() => {
     getDATA();
-  },);
+  });
 
   //////Create_new_array_from_api_data_whose_ispatientmapped=true///////
-  const NEW = get(ExceptData,'data',[]);
+  const NEW = get(ExceptData, 'data', []);
   //console.log("object,",NEW);
-  const FilterData = NEW.filter((x)=>{
+  const FilterData = NEW.filter(x => {
     return x.ispatientmapped === true;
   });
 
@@ -58,19 +61,21 @@ const ExceptionCare = ( ) => {
         </TouchableOpacity>
       </View>
       {FilterData.map((item, index) => {
-        const exceptionalData = get(item,'parameter','');
+        const exceptionalData = get(item, 'parameter', '');
         return (
-          <View style={styles.cardMAP} key={index} >
+          <View style={styles.cardMAP} key={index}>
             <Text style={styles.cardtext}>{exceptionalData}</Text>
           </View>
         );
-})}
+      })}
 
       <View style={styles.container2}>
         <View style={styles.ShowMoreBtnView}>
           <MainButton
             text={more ? 'Show more' : 'Show less'}
-            onPress={() => {setMore(!more);}}
+            onPress={() => {
+              setMore(!more);
+            }}
           />
         </View>
       </View>
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
   container2: {
     paddingBottom: 25,
   },
-  cardMAP:{
+  cardMAP: {
     flex: 1,
     borderRadius: 4,
     width: '90%',

@@ -3,19 +3,18 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState,useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {ProfilePictureIcon} from './ImageComp';
 import get from 'lodash/get';
 
-
-const MyCareTeam = ( ) => {
+const MyCareTeam = () => {
   const [Drborder, setDrborder] = useState(true);
   const [bordervisible, setBorderVisible] = useState(true);
   const [imagelink, setImageLink] = useState(true);
   const [DATA, setDATA] = useState([]);
   ///////API_Fetch_Data////////
-    async function AllDATA() {
+  async function AllDATA() {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
@@ -23,15 +22,18 @@ const MyCareTeam = ( ) => {
     );
 
     try {
-        const response = await fetch('https://dev-patientapi.pxboost.io/patient/homescreen', {
+      const response = await fetch(
+        'https://dev-patientapi.pxboost.io/patient/homescreen',
+        {
           method: 'GET',
           headers: myHeaders,
-        });
-        const json = await response.json();
-        return setDATA(json);
-      } catch (error) {
-        return console.error(error);
-      }
+        },
+      );
+      const json = await response.json();
+      return setDATA(json);
+    } catch (error) {
+      return console.error(error);
+    }
   }
   //////API_DATA////////
   useEffect(() => {
@@ -39,18 +41,26 @@ const MyCareTeam = ( ) => {
   }, []);
 
   ////////Filter_array_/////////
-  const CareTeamDATA = get(DATA,'data.careteam',[]);
-  DoctorArray = CareTeamDATA.filter((item)=>{
+  const CareTeamDATA = get(DATA, 'data.careteam', []);
+  DoctorArray = CareTeamDATA.filter(item => {
     return item.profile_info.designation === 'DOCTOR';
   });
-  const NurseArray = CareTeamDATA.filter((item)=>{
+  const NurseArray = CareTeamDATA.filter(item => {
     return item.profile_info.designation === 'NURSE';
   });
+
+  let fullWidth = Dimensions.get('window').width;
 
   return (
     <View>
       <Text style={styles.mycareText}>My Care Team</Text>
-      <View style={{ justifyContent:'flex-start',alignItems:'center',flexDirection:'row',marginTop:20}}>
+      <View
+        style={{
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          flexDirection: 'row',
+          marginTop: 20,
+        }}>
         <Text
           style={Drborder ? styles.cliniciansText : styles.cliniciansTextDIS}
           onPress={() => setDrborder(true)}>
@@ -62,53 +72,65 @@ const MyCareTeam = ( ) => {
           Nurses
         </Text>
       </View>
-      <View style={Drborder ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT}  />
+      <View
+        style={
+          Drborder ? styles.cliniciansBorder : styles.cliniciansBorderSHIFT
+        }
+      />
       {Drborder ? (
         <View style={styles.nextcontainer}>
           {DoctorArray.map((item, index) => {
-            const FirstName = get(item,'profile_info.first_name', '');
-            const LastName = get(item,'profile_info.last_name', '');
-            const Specialities = get(item,'profile_info.specialty',[]);
-            const StringArray = Specialities.map((value,index) =>{
-              return get(value,'specialty','');
+            const FirstName = get(item, 'profile_info.first_name', '');
+            const LastName = get(item, 'profile_info.last_name', '');
+            const Specialities = get(item, 'profile_info.specialty', []);
+            const StringArray = Specialities.map((value, index) => {
+              return get(value, 'specialty', '');
             });
-              return (
-              <View style={styles.card2View} key={index} >
+            return (
+              <View style={styles.card2View} key={index}>
                 <ProfilePictureIcon
                   style={styles.drpicture}
                   size={65}
                   lable={FirstName}
                 />
-                <View style={styles.InsideCardView} >
-                  <Text style={styles.drname}>{FirstName + ' ' + LastName}</Text>
-                  <Text style={styles.occupation}>{StringArray.join( ', ') }</Text>
+                <View style={styles.InsideCardView}>
+                  <Text style={styles.drname}>
+                    {FirstName + ' ' + LastName}
+                  </Text>
+                  <Text style={styles.occupation}>
+                    {StringArray.join(', ')}
+                  </Text>
                 </View>
               </View>
-             );
-            }
-          )}
+            );
+          })}
         </View>
       ) : (
         <View style={styles.nextcontainer}>
           {NurseArray.map((ChildValue, index) => {
-            const FirstName = get(ChildValue,'profile_info.first_name', '');
-            const LastName = get(ChildValue,'profile_info.last_name', '');
-            const Specialities = get(ChildValue,'profile_info.designation','');
+            const FirstName = get(ChildValue, 'profile_info.first_name', '');
+            const LastName = get(ChildValue, 'profile_info.last_name', '');
+            const Specialities = get(
+              ChildValue,
+              'profile_info.designation',
+              '',
+            );
             return (
-            <View style={styles.card2View} key={index} >
+              <View style={styles.card2View} key={index}>
                 <ProfilePictureIcon
                   style={styles.drpicture}
                   size={65}
                   lable={FirstName}
                 />
-                <View style={styles.InsideCardView} >
-                  <Text style={styles.drname}>{FirstName + ' ' + LastName}</Text>
+                <View style={styles.InsideCardView}>
+                  <Text style={styles.drname}>
+                    {FirstName + ' ' + LastName}
+                  </Text>
                   <Text style={styles.occupation}>{Specialities}</Text>
                 </View>
-            </View>
+              </View>
             );
-          }
-          )}
+          })}
         </View>
       )}
     </View>
@@ -182,7 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.03,
     borderRadius: 4,
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
   },
   card2View: {
     marginTop: 10,
@@ -199,19 +221,6 @@ const styles = StyleSheet.create({
     width: 60,
     backgroundColor: '#FF8A65',
   },
-  drpicture1: {
-    marginLeft: 10,
-    height: 60,
-    width: 60,
-    backgroundColor: '#4EC4F6',
-  },
-  drpicture2: {
-    top: 20,
-    marginLeft: 10,
-    height: 60,
-    width: 60,
-    backgroundColor: '#4DB6AC',
-  },
   drname: {
     fontSize: 16,
     fontWeight: '700',
@@ -222,14 +231,10 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#999999',
     marginLeft: 12,
+    width: '70%',
   },
-  InsideCardView:{
-    flexDirection: 'column',
+  InsideCardView: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-  } ,
+  },
 });
-
-
-
-
