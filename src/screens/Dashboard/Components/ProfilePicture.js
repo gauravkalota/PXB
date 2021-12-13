@@ -1,16 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {IsProfilePictureGiven, NoProfilePictureGiven} from './ImageComp';
+import {ProfilePictureIcon} from './ImageComp';
 
 const ProfilePicture = ({uri, patient_name, patient_status}) => {
   return (
     <View style={styles.mainContainer}>
-      <NoProfilePictureGiven
-        style={styles.profilePicture}
-        size={100}
-        lable="F"
-      />
+      <ProfilePictureIcon style={styles.profilePicture} size={100} lable="F" />
       <Text style={styles.patient_nameText}>{patient_name}</Text>
       <Text style={styles.patient_statusText}>{patient_status}</Text>
     </View>

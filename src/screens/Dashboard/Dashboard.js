@@ -7,7 +7,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Avatar, ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import { NoProfilePictureGiven } from './components/ImageComp';
+import { ProfilePictureIcon } from './components/ImageComp';
 import MyCareTeam from './components/MyCareTeam';
 import ProfilePicture from './components/ProfilePicture';
 import QuestionAnswer from './components/QuestionAnswer';
@@ -46,7 +46,7 @@ function Dashboard({ navigation, routes }) {
     const myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
-      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYmlydGhkYXRlIjoiMDctMDctMTk0OCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JTOHl4eVY5OCIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImFiZmVkOTBhLTgzODctNGMxYi04ZmM5LTYyNjBhYzA1MGJjNSIsImdpdmVuX25hbWUiOiJUaGVvZG9yZSIsImF1ZCI6IjdlbjVtOXFmb2drbW02ODRybm8ybXBjYnBrIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2Mzc5MjQ1MjQsInBob25lX251bWJlciI6Iis5MTg0MTA1MzQzMDYiLCJleHAiOjE2MzkyMTQ4OTMsImlhdCI6MTYzOTEyODQ5MywiZmFtaWx5X25hbWUiOiJNeWNoYXJ0IiwiZW1haWwiOiJ0aGVvZG9yQHlvcG1haWwuY29tIn0.YA6jJ-JdDJMI3kUDJqU8bzuZJI7zUXZp3Pqp5Kj4bkNY5F1G1jwmMq_6Wm3E4-KjhA_9GIKHMg1gV95kzeCOZvd3JD9Jyltr3UVp-ACht9XiNHK16n40iGpZKgzeieSyPXjXlGcTQ5sQkaYb15EjPHJlv5rETuIYUaexD0lW7vS4PxL4B4AJZIXwpE_GlA8xq6JkF4dim-nPmlwRXf_ZuojucCj3QGZDi_qRyLJX-bU5GuPBU-KUUk01zf3qP76GesDc2r7sSlXFkK7qwpAszuv5wtX5tXQBaa-9QlWWlKBBd1UaOftfqLaYJ8ISz0m_LZKZisfe3Tzt4Bt6BQ-uvg',
+      'eyJraWQiOiJaNk1CWjY2cWt3NEJBTm1zUFAxUFJYTWVpbGNYcEVuQlpFYUFHMDB2dXBvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYmZlZDkwYS04Mzg3LTRjMWItOGZjOS02MjYwYWMwNTBiYzUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYmlydGhkYXRlIjoiMDctMDctMTk0OCIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JTOHl4eVY5OCIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImFiZmVkOTBhLTgzODctNGMxYi04ZmM5LTYyNjBhYzA1MGJjNSIsImdpdmVuX25hbWUiOiJUaGVvZG9yZSIsImF1ZCI6IjdlbjVtOXFmb2drbW02ODRybm8ybXBjYnBrIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2Mzg5NTQxNjksInBob25lX251bWJlciI6Iis5MTg0MTA1MzQzMDYiLCJleHAiOjE2Mzk0NTczNDEsImlhdCI6MTYzOTM3MDk0MSwiZmFtaWx5X25hbWUiOiJNeWNoYXJ0IiwiZW1haWwiOiJ0aGVvZG9yQHlvcG1haWwuY29tIn0.OD0FZZnQ-jc15KEx7mylc6pqvud_zCjLPmkpBARdaFdo_oXBpku8d_BSWwS8uMZWtVMXeOF9y4l4bbE8YhrtC_GhLW_J9ySlg-nIwymPcbhiZuZZ2mbo09ZnYF506EStU4C5QmJZZAtn4nK4vsPLoU759cULcBfi_lpRAcu3h08q7DjyPdLPxwpLKaLEw3PnZiDkzOT4MGTXI52jjU6h5dnVpnODFq5SMn6O6Qh13mAmSTUN03Qw4r6U9H1vjZ-m8uCdfGyC18h7Z1n3YWhW_LN1-gm-M6cwWrn1uEQ7BQOOxsF6e9shpNpL6JOorVemse9TVRcgxG0l9NlTPvN5Fw',
     );
 
     try {
@@ -193,10 +193,10 @@ function Dashboard({ navigation, routes }) {
               </Text>
             </View>
             <View style={styles.attendingDRprofileView}>
-              <NoProfilePictureGiven
+              <ProfilePictureIcon
                 style={styles.attendingDRprofileP}
                 size={40}
-                lable="M"
+                lable={AttendingDrFirstName}
               />
             </View>
 

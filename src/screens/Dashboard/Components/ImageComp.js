@@ -5,23 +5,20 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-paper';
 
 //////AVATAR_ICON_IF_SOURCE_IS_MENTION/NOT_MENTION
-export function IsProfilePictureGiven({style, size, lable, source}) {
-  const [isgiven, setIsGiven] = useState(true);
+
+export function ProfilePictureIcon({style, size, lable, source}) {
   return (
     <View>
-      <Avatar.Image style={style} size={size} source={source} />
-    </View>
-  );
-}
-export function NoProfilePictureGiven({style, size, lable}) {
-  return (
-    <View>
-      <Avatar.Text
-        style={style}
-        color="white"
-        size={size}
-        label={lable.charAt(0).toUpperCase()}
-      />
+      {source ? (
+        <Avatar.Image style={style} color="white" size={size} source={source} />
+      ) : (
+        <Avatar.Text
+          style={style}
+          color="white"
+          size={size}
+          label={lable.charAt(0).toUpperCase()}
+        />
+      )}
     </View>
   );
 }
